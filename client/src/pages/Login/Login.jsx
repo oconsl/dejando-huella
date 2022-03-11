@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,47 +11,50 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 
-// TEST DATA 
+// TEST DATA
 import { users } from '../../TestData/user';
 
 const Login = () => {
-  const [values, setValues] = useState({
-    username: '',
-    password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
-  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
+    console.log({
+      username: data.get('username'),
+      password: data.get('password'),
     });
   };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  const handleChangeUsername = (event) => {
+    setUsername(event.target.value);
   };
 
+  const handleChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // MODIFY WHEN USER DB IS UP
   const handleLogIn = () => {
-    const logUsername = users.filter(user => user.username === values.username);
-    
-    if(!logUsername.length > 0){
-      alert('Wrong credentials 1');
+    const logUsername = users.filter((user) => user.username === username);
+
+    if (!logUsername.length > 0) {
+      alert('Wrong credentials');
       return;
     }
 
-    if(values.password !== logUsername[0].password){
-      alert('Wrong credentials 2');
+    if (password !== logUsername[0].password) {
+      alert('Wrong credentials');
       return;
     }
 
@@ -55,49 +62,73 @@ const Login = () => {
     setTimeout(() => {
       setSuccess(false);
     }, 3000);
-  }
+  };
 
   return (
-    <Box
-      component='form'
-      sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}
-      noValidate
-      autoComplete='off'
-    >
-      <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-        <InputLabel htmlFor='outlined-adornment-username'>username</InputLabel>
-        <OutlinedInput
-          id='outlined-adornment-username'
-          value={values.username}
-          onChange={handleChange('username')}
-          label='Username'
-        />        
-      </FormControl>
-      <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
-        <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
-        <OutlinedInput
-          id='outlined-adornment-password'
-          type={values.showPassword ? 'text' : 'password'}
-          value={values.password}
-          onChange={handleChange('password')}
-          endAdornment={
-            <InputAdornment position='end'>
-              <IconButton
-                aria-label='toggle password visibility'
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge='end'
-              >
-                {values.showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label='Password'
-        />
-      </FormControl>
-      <Button onClick={handleLogIn} variant="contained" sx={{width: '5%'}}>Log In</Button>
-      {success && <Alert severity="success">Log In successful</Alert>}
-    </Box>
+    <Container component='main' maxWidth='xs'>
+      <Box
+        component='form'
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          mt: 8,
+        }}
+        autoComplete='off'
+        onSubmit={handleSubmit}
+      >
+        <Avatar sx={{ m: 1, backgroundColor: 'lightcoral' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Log in
+        </Typography>
+        <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
+          <InputLabel htmlFor='outlined-adornment-username'>
+            Username
+          </InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-username'
+            name='username'
+            value={username}
+            onChange={handleChangeUsername}
+            label='Username'
+          />
+        </FormControl>
+        <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
+          <InputLabel htmlFor='outlined-adornment-password'>
+            Password
+          </InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-password'
+            name='password'
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={handleChangePassword}
+            endAdornment={
+              <InputAdornment position='end'>
+                <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleClickShowPassword}
+                  edge='end'
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label='Password'
+          />
+        </FormControl>
+        <Button
+          type='submit'
+          variant='contained'
+          fullWidth
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Log In
+        </Button>
+      </Box>
+    </Container>
   );
 };
 
