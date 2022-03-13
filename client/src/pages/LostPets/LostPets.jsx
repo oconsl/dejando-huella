@@ -1,12 +1,11 @@
 import React from 'react';
 import CardsPet from '../../components/CardsPage/CardsPage';
-import { Box, Container } from '@mui/material';
-import './FoundPets.css';
+import { Container, Box } from '@mui/material';
 
-const FoundPets = () => {
+const LostPets = () => {
   return (
     <>
-      <Box><h1>FOUND PETS</h1></Box>
+      <Box><h1>LOST PETS</h1></Box>
       <Container
         maxWidth="lg"
         sx={{
@@ -18,7 +17,7 @@ const FoundPets = () => {
       >
         <CardsPet
           title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
+          description={'Perdido el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
             'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
@@ -26,7 +25,7 @@ const FoundPets = () => {
         />
         <CardsPet
           title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
+          description={'Perdido el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
             'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
@@ -34,7 +33,7 @@ const FoundPets = () => {
         />
         <CardsPet
           title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
+          description={'Perdido el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
             'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
@@ -42,7 +41,7 @@ const FoundPets = () => {
         />
         <CardsPet
           title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
+          description={'Perdido el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
             'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
@@ -50,7 +49,7 @@ const FoundPets = () => {
         />
         <CardsPet
           title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
+          description={'Perdido el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
             'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
@@ -58,7 +57,7 @@ const FoundPets = () => {
         />
         <CardsPet
           title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
+          description={'Perdido el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
             'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
@@ -69,4 +68,4 @@ const FoundPets = () => {
   );
 };
 
-export default FoundPets;
+export default LostPets;

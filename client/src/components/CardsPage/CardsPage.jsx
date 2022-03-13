@@ -4,7 +4,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import './CardsPet.css'
+import './CardsPage.css';
+import { Link } from 'react-router-dom';
+
+import Dialog from '../../TestData/pruebaModal'
 
 const CardsPet = (props) => {
   return (
@@ -26,9 +29,11 @@ const CardsPet = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          {props.button}
-        </Button>
+        <Link className='link-button' to={`/${props.title.replace(' ', '-').toLowerCase()}`}>
+          <Button size="small" color="primary" >
+            {props.button}
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

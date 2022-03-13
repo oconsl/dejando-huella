@@ -1,12 +1,11 @@
 import React from 'react';
 import CardsPet from '../../components/CardsPage/CardsPage';
-import { Box, Container } from '@mui/material';
-import './FoundPets.css';
+import { Container, Box } from '@mui/material';
 
-const FoundPets = () => {
+const Adoption = () => {
   return (
     <>
-      <Box><h1>FOUND PETS</h1></Box>
+      <Box><h1>ADOPTION</h1></Box>
       <Container
         maxWidth="lg"
         sx={{
@@ -69,4 +68,4 @@ const FoundPets = () => {
   );
 };
 
-export default FoundPets;
+export default Adoption;
