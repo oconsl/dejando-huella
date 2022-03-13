@@ -10,14 +10,21 @@ import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { CardActionArea, Card, CardMedia } from '@mui/material';
+import CropEasy from '../Crop/CropEasy';
+import MapView from '../MapView/MapView';
+import Dialog from '@mui/material/Dialog';
+import default_dog from './assets/default_dog.png';
 
 const AddPet = () => {
+  const [openCrop, setOpenCrop] = useState(false);
+  const [openMap, setOpenMap] = useState(false);
   const [petName, setPetName] = useState('');
   const [map, setMap] = useState('');
   const [phone, setPhone] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState('');
   const [filters, setFilters] = useState([]);
+  const [photoURL, setPhotoURL] = useState(default_dog); // URL subida
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,22 +37,31 @@ const AddPet = () => {
     });
   };
 
+  const handleOpen = () => setOpenCrop(true);
+  const handleClose = () => setOpenCrop(false);
+  const handleOpenMap = () => setOpenMap(true);
+  const handleCloseMap = () => setOpenMap(false);
+
   const handleChangePetName = (event) => {
     setPetName(event.target.value);
   };
 
   const handleChangeDescription = (event) => {
     setDescription(event.target.value);
-  }
+  };
 
   const handleChangePhone = (event) => {
     setPhone(event.target.value);
-  }
+  };
+
+  const handlePhotoClick = () => {
+    handleOpen();
+  };
 
   const handleChangeFile = (event) => {
     const url = URL.createObjectURL(event.target.files[0]);
     setFile(url);
-    console.log(url);
+    setPhotoURL(url);
   };
 
   return (
@@ -109,20 +125,46 @@ const AddPet = () => {
                 label='Phone'
                 inputProps={{
                   inputMode: 'numeric',
-                  pattern: '[0-9]*' 
+                  pattern: '[0-9]*',
                 }}
                 onChange={handleChangePhone}
               />
             </Grid>
-            <Grid item xs={12} sm={11} sx={{display: 'flex', alignItems: 'center'}}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
               <TextField
                 required
                 fullWidth
-                id='map'
-                label='Map'
-                name='map'
+                id='addressNumber'
+                label='Address Number'
+                name='addressNumber'
               />
-              <LocationIcon sx={{color: 'red'}}/>
+              <LocationIcon
+                sx={{
+                  color: 'green',
+                  margin: '0 1em',
+                  cursor: 'pointer',
+                  transform: 'scale(2)',
+                }}
+                onClick={handleOpenMap}
+              />
+              {openMap && (
+                <Dialog
+                  open={true}
+                  onClose={handleCloseMap}
+                  fullWidth={true}
+                  maxWidth={'md'}
+                >
+                  <MapView />
+                </Dialog>
+              )}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -165,20 +207,29 @@ const AddPet = () => {
             shrink: true,
           }}
           onChange={handleChangeFile}
-          sx={{mb: 3, mt: 2}}
+          sx={{ mb: 3, mt: 2 }}
         />
-        {file.length > 0 && (
-          <Card sx={{mb: 3}}>
-            <CardActionArea>
-              <CardMedia
-                component='img'
-                alt='New Pet Image'
-                image={file}
-                title='New Pet Image'
-              />
-            </CardActionArea>
-          </Card>
+        {(file.length > 0 || openCrop) && (
+          <Dialog
+            open={true}
+            onClose={handleClose}
+            fullWidth={true}
+            maxWidth={'md'}
+          >
+            <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
+          </Dialog>
         )}
+        <Card sx={{ mb: 3, width: '90%'}}>
+          <CardActionArea>
+            <CardMedia
+              component='img'
+              alt='New Pet Image'
+              image={photoURL}
+              title='New Pet Image'
+              onClick={handlePhotoClick}
+            />
+          </CardActionArea>
+        </Card>
       </Box>
     </Container>
   );

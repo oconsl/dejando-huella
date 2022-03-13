@@ -10,13 +10,11 @@ import MapView from './components/MapView/MapView';
 
 function App() {
   const [open, setOpen] = useState(false);
-  const [flag, setFlag] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleChange = () => {
-    setFlag(!flag);
-  };
+  const [openCrop, setOpenCrop] = useState(false);
+  const [photo, setPhoto] = useState(null);
 
   return (
     <div className='App'>
@@ -24,14 +22,13 @@ function App() {
       <Button variant='contained' onClick={handleOpen}>
         Open Dialog
       </Button>
-      <Switch value={flag} onChange={handleChange} />
       <Dialog
         open={open}
         onClose={handleClose}
         fullWidth={true}
-        maxWidth={'lg'}
+        maxWidth={'md'}
       >
-        <MapView />
+        <AddPet />
       </Dialog>
     </div>
   );
