@@ -3,9 +3,32 @@ const usersController = (User) => {
   // POST
   const postUser = async (req, res, next) => {
     try{
-      const user = new User(req.body);
-      await user.save();
-      res.status(200).json(user);
+      // const user = new User(req.body);
+      // await user.save();
+      // res.status(200).json(user);
+      const {
+        firstName,
+        lastName,
+        email,
+        userName,
+        password
+      } = req.body;
+
+      const user = User({
+        firstName,
+        lastName,
+        email,
+        userName,
+        password
+      });
+
+      if ( req.file) {
+        const {filename} = req.file;
+        user.imgURL = user.setImgUrl(filename);
+      }
+
+      const userStored = await user.save();
+      res.send({userStored});
     }catch(err){
       res.status(500).json(err);
     }
@@ -22,6 +45,18 @@ const usersController = (User) => {
   const putUser = async (req, res, next) => {
     try{
       const {body} = req;
+      const filename = req.file.filename;
+      const user = await User.findById(req.params.userId);
+      const url = user.setImgUrl(filename);
+      // const response = await User.findByIdAndUpdate(req.params.userId,
+      //   {
+      //     firstName: body.firstName,
+      //     lastName: body.lastName,
+      //     email: body.email,
+      //     username: body.username,
+      //     password: body.password,
+      //     imgURL: url
+      // });
       const response = await User.updateOne({
         _id: req.params.userId
       },
@@ -32,7 +67,7 @@ const usersController = (User) => {
           email: body.email,
           username: body.username,
           password: body.password,
-          avatar: body.avatar,
+          imgURL: url,
         }
       })
       res.json(response);

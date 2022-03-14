@@ -8,7 +8,13 @@ const userModel = new Schema({
   email:{type: 'string', required: true},
   userName:{type: 'string', required: true},
   password:{type: 'string', required: true},
-  avatar:{type: 'string', required: false},
+  imgURL: {type: 'string'},
 });
+
+userModel.methods.setImgUrl = function setImgUrl (filename) {
+  // this.imgURL = `http://localhost:${process.env.PORT}/public/${filename}`;
+  return `http://localhost:${process.env.PORT}/public/${filename}`;
+  // console.log('hi');
+}
 
 module.exports = mongoose.model('User', userModel);
