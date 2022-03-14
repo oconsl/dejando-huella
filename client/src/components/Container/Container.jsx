@@ -9,10 +9,10 @@ const Information = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{marginTop: '20px'}}>
         <Box
           className="info-cards"
-          sx={{ bgcolor: 'rgba(188, 255, 182, 0.61)', height: '300vh' }}
+          sx={{ bgcolor: 'rgba(188, 255, 182, 0.61)', height: '100%', marginBottom: '20px' }}
         >
           <div>
             <h1 className='title'>About us?</h1>

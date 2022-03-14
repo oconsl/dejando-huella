@@ -2,11 +2,11 @@
   text-decoration: none;
 }
 
-.nav-link:hover {
+/* .nav-link:hover {
   background-color: red;
   min-width: 64px;
   border-radius: 4px;
-}
+} */
 
 .login-reg-button > Button {
   margin: 10px;
