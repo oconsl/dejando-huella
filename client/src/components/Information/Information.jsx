@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CardsPage from '../CardsPage/CardsPage';
-import './Container.css';
+import './Information.css';
 
 const Information = () => {
   return (

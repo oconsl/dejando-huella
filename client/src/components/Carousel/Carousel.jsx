@@ -36,6 +36,8 @@ function Hero(props) {
       stopAutoPlayOnHover={false}
       sx={{height: '36vw'}}
       indicators={false}
+      duration={500}
+      interval={5000}
     >
       {items.map((item, i) => (
         <Item key={i} item={item} />

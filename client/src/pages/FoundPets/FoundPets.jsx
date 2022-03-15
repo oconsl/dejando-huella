@@ -1,5 +1,5 @@
 import React from 'react';
-import CardsPet from '../../components/CardsPage/CardsPage';
+import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container } from '@mui/material';
 import './FoundPets.css';
 
@@ -21,47 +21,47 @@ const FoundPets = () => {
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
+            'https://www.vitake.net/wp-content/uploads/2015/04/ny6-300x300.jpg'
           }
         />
         <CardsPet
-          title={'Firulais'}
+          title={'Toto'}
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
+            'https://www.vitake.net/wp-content/uploads/2015/04/ny8-300x300.jpg'
           }
         />
         <CardsPet
-          title={'Firulais'}
+          title={'Homer'}
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
+            'https://www.vitake.net/wp-content/uploads/2015/04/ny3-300x300.jpg'
           }
         />
         <CardsPet
-          title={'Firulais'}
+          title={'Michi'}
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
+            'https://smylepets.com/wp-content/uploads/2021/04/dragon-li-gato-300x300.jpg'
           }
         />
         <CardsPet
-          title={'Firulais'}
+          title={'Negrita'}
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
+            'https://lealcan.com/wp-content/uploads/2021/12/PerroConMiedoAPetardosOFuegosArtificiales-300x300.jpg'
           }
         />
         <CardsPet
-          title={'Firulais'}
+          title={'Tom'}
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREtlldYkYu2uL4lBd3R9EPmeH_mRvl3UrSRJV7K5uwniw2A7DOaruTtDHlwRDqLEL0o3Q&usqp=CAU'
           }
         />
       </Container>

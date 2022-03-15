@@ -4,13 +4,17 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import './CardsPage.css';
-import { Link } from 'react-router-dom';
+import Modal from '../Modal/Modal'
+// import './CardsPets.css';
 
 const CardsPet = (props) => {
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <Card className='card' sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+    <Card className="card" sx={{ maxWidth: 345 }}>
+      <CardActionArea onClick={handleOpen}>
         <CardMedia
           component="img"
           height="140"
@@ -27,14 +31,19 @@ const CardsPet = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link className='link-button' to={`/${props.title.replace(' ', '-').toLowerCase()}`}>
-          <Button size="small" color="primary" >
-            {props.button}
-          </Button>
-        </Link>
+        <Button size="small" color="primary" onClick={handleOpen} >
+          {props.button}
+        </Button>
+        <Modal
+        open={open}
+        close={handleClose}
+        title={props.title}
+        description={props.description}
+        img_src={props.img_src}
+        />
       </CardActions>
     </Card>
   );
-}
+};
 
 export default CardsPet;

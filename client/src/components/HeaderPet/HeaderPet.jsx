@@ -36,13 +36,17 @@ const HeaderPet = (props) => {
     setAnchorElUser(null);
   };
 
-  const LoginButton = () => {
+  /*   const LoginButton = () => {
     return (
-      <div className='login-reg-button'>
-        <Button color='secondary' variant='contained'>Login</Button>
-        <Button color='secondary' variant='contained'>Register</Button>
+      <div className="login-reg-button">
+        <Button color="secondary" variant="contained">
+          Login
+        </Button>
+        <Button color="secondary" variant="contained">
+          Register
+        </Button>
       </div>
-    )
+    );
   };
 
   const ProfileIco = (props) => {
@@ -85,7 +89,7 @@ const HeaderPet = (props) => {
     } else {
       return <ProfileIco />;
     }
-  };
+  }; */
 
   return (
     <AppBar position="sticky">
@@ -137,7 +141,14 @@ const HeaderPet = (props) => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link
+                      className="nav-link"
+                      to={`/${page.replace(' ', '-').toLocaleLowerCase()}`}
+                    >
+                      {page}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -148,7 +159,13 @@ const HeaderPet = (props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            <Link to="/">
+              <img
+                width={'45px'}
+                height={'45px'}
+                src="https://cdn-icons-png.flaticon.com/512/1076/1076826.png"
+              />
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -168,9 +185,35 @@ const HeaderPet = (props) => {
             ))}
           </Box>
 
-          <Conditional status={props.authentication} />
-
-          
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px', float: 'right' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
