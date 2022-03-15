@@ -9,6 +9,7 @@ const userModel = new Schema({
   userName:{type: 'string', required: true},
   password:{type: 'string', required: true},
   imgURL: {type: 'string'},
+  public_id: {type: 'string'},
 });
 
 userModel.methods.setImgUrl = function setImgUrl (filename) {
