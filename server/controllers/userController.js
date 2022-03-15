@@ -1,4 +1,4 @@
-const { unlink } = require('fs-extra');//para borrar las imagenes guardadas de la carpeta storage
+const { unlink } = require('fs-extra');
 const path = require('path');
 
 const cloudinary =require('cloudinary');
@@ -15,9 +15,7 @@ const usersController = (User) => {
     try{
       const result = await cloudinary.v2.uploader.upload(req.file.path);
       console.log(result);
-      // const user = new User(req.body);
-      // await user.save();
-      // res.status(200).json(user);
+
       const {
         firstName,
         lastName,
@@ -34,18 +32,12 @@ const usersController = (User) => {
         password,
         imgURL: result.url,
         public_id: result.public_id
-      });//puedo agregar key identicas a las de file para poder usarlas como por ejemplo el path
-
-      // if ( req.file) {
-      //   const {filename} = req.file;
-      //   user.imgURL = user.setImgUrl(filename);
-      // }
+      });
 
       const userStored = await user.save();
       // console.log(req.file);
       await unlink(req.file.path);
       res.send({userStored});
-      // res.send('received');
     }catch(err){
       res.status(500).json(err);
     }
