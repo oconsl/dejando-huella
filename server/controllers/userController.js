@@ -18,31 +18,34 @@ const usersController = (User) => {
       // const user = new User(req.body);
       // await user.save();
       // res.status(200).json(user);
-      // const {
-      //   firstName,
-      //   lastName,
-      //   email,
-      //   userName,
-      //   password
-      // } = req.body;
+      const {
+        firstName,
+        lastName,
+        email,
+        userName,
+        password
+      } = req.body;
 
-      // const user = User({
-      //   firstName,
-      //   lastName,
-      //   email,
-      //   userName,
-      //   password
-      // });//puedo agregar key identicas a las de file para poder usarlas como por ejemplo el path
+      const user = User({
+        firstName,
+        lastName,
+        email,
+        userName,
+        password,
+        imgURL: result.url,
+        public_id: result.public_id
+      });//puedo agregar key identicas a las de file para poder usarlas como por ejemplo el path
 
-      // // if ( req.file) {
-      // //   const {filename} = req.file;
-      // //   user.imgURL = user.setImgUrl(filename);
-      // // }
+      // if ( req.file) {
+      //   const {filename} = req.file;
+      //   user.imgURL = user.setImgUrl(filename);
+      // }
 
-      // const userStored = await user.save();
+      const userStored = await user.save();
       // console.log(req.file);
-      // res.send({userStored});
-      res.send('received');
+      await unlink(req.file.path);
+      res.send({userStored});
+      // res.send('received');
     }catch(err){
       res.status(500).json(err);
     }
