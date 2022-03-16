@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 // BREEDS
-import { catBreeds } from './utils/petBreeds';
-import { dogBreeds } from './utils/petBreeds';
+import { catBreeds } from '../../../utils/utils/petBreeds';
+import { dogBreeds } from '../../../utils/utils/petBreeds';
 
 const Breeds = ({saveBreed, isADog}) => {
   const [options, setOptions] = useState(isADog ? dogBreeds : catBreeds);

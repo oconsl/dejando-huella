@@ -26,7 +26,7 @@ import {
   ageCatOptions,
   ageDogOptions,
   furOptions,
-} from '../FormComponents/CustomForm/utils/petOptions';
+} from '../../utils/petOptions';
 
 const AddPet = () => {
   //PET
@@ -45,6 +45,7 @@ const AddPet = () => {
   const [number, setNumber] = useState('');
   const [date, setDate] = useState('');
   const [file, setFile] = useState('');
+  //FORM-FILTERS
   const [breed, setBreed] = useState('');
   const [size, setSize] = useState('');
   const [sex, setSex] = useState('');
