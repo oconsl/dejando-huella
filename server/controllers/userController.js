@@ -55,32 +55,36 @@ const usersController = (User) => {
   const putUser = async (req, res, next) => {
     try{
       const {body} = req;
-      const filename = req.file.filename;
-      const user = await User.findById(req.params.userId);
-      const url = user.setImgUrl(filename);
-      // const response = await User.findByIdAndUpdate(req.params.userId,
-      //   {
-      //     firstName: body.firstName,
-      //     lastName: body.lastName,
-      //     email: body.email,
-      //     username: body.username,
-      //     password: body.password,
-      //     imgURL: url
-      // });
-      const response = await User.updateOne({
-        _id: req.params.userId
-      },
-      {
-        $set:{
+
+      const result = await cloudinary.v2.uploader.upload(req.file.path)
+      const updatedUser = await User.findByIdAndUpdate(req.params.userId,
+        {
           firstName: body.firstName,
           lastName: body.lastName,
           email: body.email,
           username: body.username,
           password: body.password,
-          imgURL: url,
-        }
-      })
-      res.json(response);
+          imgURL: result.url,
+          public_id: result.public_id
+      });
+      cloudinary.v2.uploader.destroy(updatedUser.public_id);
+      await unlink(req.file.path);
+
+      // const response = await User.updateOne({
+      //   _id: req.params.userId
+      // },
+      // {
+      //   $set:{
+      //     firstName: body.firstName,
+      //     lastName: body.lastName,
+      //     email: body.email,
+      //     username: body.username,
+      //     password: body.password,
+      //     imgURL: url,
+      //     public_id
+      //   }
+      // })
+      res.json(updatedUser);
     }catch(err){
       res.status(500).json("Mongo's error");
     }
@@ -90,7 +94,8 @@ const usersController = (User) => {
   const deleteUser = async (req, res, next) => {
     try{  
       const id = req.params.userId; 
-      await User.findByIdAndDelete(id);
+      const user = await User.findByIdAndDelete(id);
+      cloudinary.v2.uploader.destroy(user.public_id);
       res.json('Deleted');
     }catch(err){
       res.status(500).json("Mongo's error");
