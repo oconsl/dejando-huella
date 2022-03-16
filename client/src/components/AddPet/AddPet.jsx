@@ -16,8 +16,17 @@ import MapView from '../MapView/MapView';
 import Dialog from '@mui/material/Dialog';
 import default_dog from './assets/default_dog.svg';
 import default_cat from './assets/default_cat.svg';
-import Breeds from '../Breeds/Breeds';
+import Breeds from '../FormComponents/Breeds/Breeds';
 import DatePick from '../DatePick/DatePick';
+import CustomForm from '../FormComponents/CustomForm/CustomForm';
+import {
+  sizeOptions,
+  sexOptions,
+  colorOptions,
+  ageCatOptions,
+  ageDogOptions,
+  furOptions,
+} from '../FormComponents/CustomForm/utils/petOptions';
 
 const AddPet = () => {
   //PET
@@ -34,9 +43,14 @@ const AddPet = () => {
   const [latLng, setLatLng] = useState({});
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
-  const [breed, setBreed] = useState('');
   const [date, setDate] = useState('');
   const [file, setFile] = useState('');
+  const [breed, setBreed] = useState('');
+  const [size, setSize] = useState('');
+  const [sex, setSex] = useState('');
+  const [color, setColor] = useState('');
+  const [age, setAge] = useState('');
+  const [fur, setFur] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,16 +59,21 @@ const AddPet = () => {
       petName: petName,
       description: description,
       phone: phone,
-      image: file,      
+      image: file,
       date: date,
       location: {
         latLng: latLng,
         address: address,
         number: number,
-      },      
+      },
       filters: {
         breed: breed,
-      }
+        size: size,
+        sex: sex,
+        color: color,
+        age: age,
+        fur: fur,
+      },
     });
   };
 
@@ -87,15 +106,15 @@ const AddPet = () => {
   };
 
   const handlePetSwitchChange = () => {
-    setDogPet(!dogPet);    
-  }
+    setDogPet(!dogPet);
+  };
 
   const handlePhotoClick = () => {
     handleOpenCrop();
   };
 
   useEffect(() => {
-    switch(dogPet){
+    switch (dogPet) {
       case true:
         setPhotoURL(default_dog);
         return;
@@ -105,7 +124,7 @@ const AddPet = () => {
       default:
         return;
     }
-  },[dogPet]);
+  }, [dogPet]);
 
   return (
     <Container component='main' sx={{ display: 'flex' }}>
@@ -136,12 +155,17 @@ const AddPet = () => {
         </div>
         <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
           <Grid container spacing={2}>
-            <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
               <Typography>Cat</Typography>
-              <Switch
-                onChange={handlePetSwitchChange}
-                defaultChecked
-              />
+              <Switch onChange={handlePetSwitchChange} defaultChecked />
               <Typography>Dog</Typography>
             </Grid>
             <Grid item xs={12}>
@@ -202,7 +226,7 @@ const AddPet = () => {
                   pattern: '[0-9]*',
                 }}
                 onChange={handleAddressNumberChange}
-                sx={{width: '50%', ml: 3}}
+                sx={{ width: '50%', ml: 3 }}
               />
               <LocationIcon
                 sx={{
@@ -228,9 +252,25 @@ const AddPet = () => {
                 </Dialog>
               )}
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={9}>
               {dogPet && <Breeds saveBreed={setBreed} isADog={dogPet} />}
               {!dogPet && <Breeds saveBreed={setBreed} isADog={dogPet} />}
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <CustomForm saveValue={setSex} options={sexOptions} label='sex'/>
+            </Grid>  
+            {dogPet && <Grid item xs={12} sm={6}>
+              <CustomForm saveValue={setSize} options={sizeOptions} label='size'/>
+            </Grid>}
+            <Grid item xs={12} sm={6}>
+              {dogPet && <CustomForm saveValue={setAge} options={ageDogOptions} label='age'/>}
+              {!dogPet && <CustomForm saveValue={setAge} options={ageCatOptions} label='age'/>}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <CustomForm saveValue={setColor} options={colorOptions} label='color'/>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <CustomForm saveValue={setFur} options={furOptions} label='fur'/>
             </Grid>
           </Grid>
           <Button
@@ -264,7 +304,7 @@ const AddPet = () => {
             shrink: true,
           }}
           onChange={handleFileChange}
-          sx={{ mb: 3, mt: 2 }}
+          sx={{ mt: 2 }}
         />
         {openCrop && (
           <Dialog
@@ -276,7 +316,7 @@ const AddPet = () => {
             <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
           </Dialog>
         )}
-        <Card sx={{ maxHeight: 450}}>
+        <Card sx={{ maxHeight: 450, margin: 'auto' }}>
           <CardActionArea>
             <CardMedia
               component='img'
@@ -285,7 +325,7 @@ const AddPet = () => {
               title='New Pet Image'
               height='450'
               onClick={handlePhotoClick}
-              sx={{ bgcolor: 'grey', objectFit: 'contain'}}
+              sx={{ bgcolor: 'grey', objectFit: 'contain' }}
             />
           </CardActionArea>
         </Card>

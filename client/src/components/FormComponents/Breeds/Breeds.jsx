@@ -8,7 +8,7 @@ import { dogBreeds } from './utils/petBreeds';
 const Breeds = ({saveBreed, isADog}) => {
   const [options, setOptions] = useState(isADog ? dogBreeds : catBreeds);
 
-  const handleTagsChange = (event,newValue) => {
+  const handleBreedChange = (event,newValue) => {
     saveBreed(newValue);
   }
 
@@ -19,10 +19,10 @@ const Breeds = ({saveBreed, isADog}) => {
   return (
       <Autocomplete
         // multiple
-        id="tags-standard"
+        id="breeds-standard"
         options={options}
         // value={value}
-        onChange={handleTagsChange}
+        onChange={handleBreedChange}
         getOptionLabel={(option) => option}
         renderInput={(params) => (
           <TextField

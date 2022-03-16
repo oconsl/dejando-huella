@@ -4,11 +4,7 @@ import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import AddPet from './components/AddPet/AddPet';
 import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
 import Dialog from '@mui/material/Dialog';
-import MapView from './components/MapView/MapView';
-import MapStatic from './components/MapView/MapStatic';
-import Breeds from './components/Breeds/Breeds';
 
 function App() {
   const [open, setOpen] = useState(false);
