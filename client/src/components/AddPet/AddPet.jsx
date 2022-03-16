@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -9,14 +9,19 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
 import { CardActionArea, Card, CardMedia } from '@mui/material';
 import CropEasy from '../Crop/CropEasy';
 import MapView from '../MapView/MapView';
 import Dialog from '@mui/material/Dialog';
 import default_dog from './assets/default_dog.svg';
-import Tags from '../Tags/Tags';
+import default_cat from './assets/default_cat.svg';
+import Breeds from '../Breeds/Breeds';
+import DatePick from '../DatePick/DatePick';
 
 const AddPet = () => {
+  //PET
+  const [dogPet, setDogPet] = useState(true);
   //CROP
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState(default_dog);
@@ -26,10 +31,11 @@ const AddPet = () => {
   const [petName, setPetName] = useState('');
   const [description, setDescription] = useState('');
   const [phone, setPhone] = useState('');
-  const [location, setLocation] = useState({});
+  const [latLng, setLatLng] = useState({});
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
-  const [tags, setTags] = useState([]);
+  const [breed, setBreed] = useState('');
+  const [date, setDate] = useState('');
   const [file, setFile] = useState('');
 
   const handleSubmit = (event) => {
@@ -38,12 +44,17 @@ const AddPet = () => {
     console.log({
       petName: petName,
       description: description,
-      location: location,
-      address: address,
-      number: number,
       phone: phone,
-      image: file,
-      tags: tags,
+      image: file,      
+      date: date,
+      location: {
+        latLng: latLng,
+        address: address,
+        number: number,
+      },      
+      filters: {
+        breed: breed,
+      }
     });
   };
 
@@ -52,32 +63,49 @@ const AddPet = () => {
   const handleOpenMap = () => setOpenMap(true);
   const handleCloseMap = () => setOpenMap(false);
 
-  const handleChangePetName = (event) => {
+  const handlePetNameChange = (event) => {
     setPetName(event.target.value);
   };
 
-  const handleChangeDescription = (event) => {
+  const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
 
-  const handleChangePhone = (event) => {
+  const handlePhoneChange = (event) => {
     setPhone(event.target.value);
   };
 
-  const handleChangeNumber = (event) => {
+  const handleAddressNumberChange = (event) => {
     setNumber(event.target.value);
   };
 
-  const handlePhotoClick = () => {
-    handleOpenCrop();
-  };
-
-  const handleChangeFile = (event) => {
+  const handleFileChange = (event) => {
     const url = URL.createObjectURL(event.target.files[0]);
     setFile(url);
     setPhotoURL(url);
     handleOpenCrop();
   };
+
+  const handlePetSwitchChange = () => {
+    setDogPet(!dogPet);    
+  }
+
+  const handlePhotoClick = () => {
+    handleOpenCrop();
+  };
+
+  useEffect(() => {
+    switch(dogPet){
+      case true:
+        setPhotoURL(default_dog);
+        return;
+      case false:
+        setPhotoURL(default_cat);
+        return;
+      default:
+        return;
+    }
+  },[dogPet]);
 
   return (
     <Container component='main' sx={{ display: 'flex' }}>
@@ -108,6 +136,14 @@ const AddPet = () => {
         </div>
         <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
           <Grid container spacing={2}>
+            <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <Typography>Cat</Typography>
+              <Switch
+                onChange={handlePetSwitchChange}
+                defaultChecked
+              />
+              <Typography>Dog</Typography>
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 required
@@ -115,7 +151,7 @@ const AddPet = () => {
                 name='petName'
                 id='petName'
                 label='Pet Name'
-                onChange={handleChangePetName}
+                onChange={handlePetNameChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -128,7 +164,7 @@ const AddPet = () => {
                 name='description'
                 id='description'
                 label='Description'
-                onChange={handleChangeDescription}
+                onChange={handleDescriptionChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -142,7 +178,7 @@ const AddPet = () => {
                   inputMode: 'numeric',
                   pattern: '[0-9]*',
                 }}
-                onChange={handleChangePhone}
+                onChange={handlePhoneChange}
               />
             </Grid>
             <Grid
@@ -154,17 +190,19 @@ const AddPet = () => {
                 justifyContent: 'center',
               }}
             >
+              <DatePick saveDate={setDate} />
               <TextField
                 required
                 fullWidth
-                id='addressNumber'
-                label='Address Number'
-                name='addressNumber'
+                id='addressNum'
+                label='Address Num'
+                name='addressNum'
                 inputProps={{
                   inputMode: 'numeric',
                   pattern: '[0-9]*',
                 }}
-                onChange={handleChangeNumber}
+                onChange={handleAddressNumberChange}
+                sx={{width: '50%', ml: 3}}
               />
               <LocationIcon
                 sx={{
@@ -183,7 +221,7 @@ const AddPet = () => {
                   maxWidth={'md'}
                 >
                   <MapView
-                    saveLocation={setLocation}
+                    saveLocation={setLatLng}
                     closeMap={handleCloseMap}
                     saveAddress={setAddress}
                   />
@@ -191,14 +229,8 @@ const AddPet = () => {
               )}
             </Grid>
             <Grid item xs={12}>
-              {/* <TextField
-                required
-                fullWidth
-                name='filters'
-                label='Filters'
-                id='filters'
-              /> */}
-              <Tags setTags={setTags}/>
+              {dogPet && <Breeds saveBreed={setBreed} isADog={dogPet} />}
+              {!dogPet && <Breeds saveBreed={setBreed} isADog={dogPet} />}
             </Grid>
           </Grid>
           <Button
@@ -231,7 +263,7 @@ const AddPet = () => {
           InputLabelProps={{
             shrink: true,
           }}
-          onChange={handleChangeFile}
+          onChange={handleFileChange}
           sx={{ mb: 3, mt: 2 }}
         />
         {openCrop && (
@@ -244,15 +276,16 @@ const AddPet = () => {
             <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
           </Dialog>
         )}
-        <Card sx={{ mb: 3, width: '90%' }}>
+        <Card sx={{ maxHeight: 450}}>
           <CardActionArea>
             <CardMedia
               component='img'
               alt='New Pet Image'
               image={photoURL}
               title='New Pet Image'
+              height='450'
               onClick={handlePhotoClick}
-              sx={{ bgcolor: 'grey' }}
+              sx={{ bgcolor: 'grey', objectFit: 'contain'}}
             />
           </CardActionArea>
         </Card>
