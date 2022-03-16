@@ -2,11 +2,13 @@ import React from 'react';
 import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container } from '@mui/material';
 import './FoundPets.css';
+import Filter from '../../components/Filters/Filters';
 
 const FoundPets = () => {
   return (
     <>
       <Box><h1>FOUND PETS</h1></Box>
+      <Filter/>
       <Container
         maxWidth="lg"
         sx={{
