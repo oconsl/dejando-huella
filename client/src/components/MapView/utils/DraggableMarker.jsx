@@ -2,7 +2,7 @@ import { useMemo, useRef, useState, useEffect } from 'react';
 import { Marker, Popup, Circle } from 'react-leaflet';
 import axios from 'axios';
 
-const DraggableMarker = ({center, icon}) => {
+const DraggableMarker = ({ center, icon, saveMarkerLocation, saveAddress }) => {
   const [position, setPosition] = useState(center);
   const [street, setStreet] = useState('');
   const markerRef = useRef(null);
@@ -20,10 +20,23 @@ const DraggableMarker = ({center, icon}) => {
   );
 
   useEffect(() => {
+    saveMarkerLocation(position);
+  }, [position, saveMarkerLocation]);
+
+  useEffect(() => {
+    let street = '';
+    
     axios
-      .get(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.lat}&lon=${position.lng}&zoom=16`)
-      .then(response => setStreet(response.data.address.road))
-  },);
+      .get(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.lat}&lon=${position.lng}&zoom=16`
+      )
+      .then((response) => {
+        street = response.data.address.road;
+        console.log(street);
+        saveAddress(street);
+        setStreet(street);
+      });      
+  },[position, saveAddress]);
 
   return (
     <Marker
@@ -31,11 +44,10 @@ const DraggableMarker = ({center, icon}) => {
       eventHandlers={eventHandlers}
       position={position}
       icon={icon}
-      ref={markerRef}>
-      <Popup minWidth={90}>
-        {`${street}`}
-      </Popup>
-      <Circle center={position} radius={1000}/>
+      ref={markerRef}
+    >
+      <Popup minWidth={90}>{`${street}`}</Popup>
+      <Circle center={position} radius={1000} />
     </Marker>
   );
 };

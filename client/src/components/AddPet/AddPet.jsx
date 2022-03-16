@@ -13,18 +13,24 @@ import { CardActionArea, Card, CardMedia } from '@mui/material';
 import CropEasy from '../Crop/CropEasy';
 import MapView from '../MapView/MapView';
 import Dialog from '@mui/material/Dialog';
-import default_dog from './assets/default_dog.png';
+import default_dog from './assets/default_dog.svg';
+import Tags from '../Tags/Tags';
 
 const AddPet = () => {
+  //CROP
   const [openCrop, setOpenCrop] = useState(false);
+  const [photoURL, setPhotoURL] = useState(default_dog);
+  //MAP
   const [openMap, setOpenMap] = useState(false);
+  //FORM
   const [petName, setPetName] = useState('');
-  const [map, setMap] = useState('');
-  const [phone, setPhone] = useState('');
   const [description, setDescription] = useState('');
+  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState({});
+  const [address, setAddress] = useState('');
+  const [number, setNumber] = useState('');
+  const [tags, setTags] = useState([]);
   const [file, setFile] = useState('');
-  const [filters, setFilters] = useState([]);
-  const [photoURL, setPhotoURL] = useState(default_dog); // URL subida
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,13 +38,17 @@ const AddPet = () => {
     console.log({
       petName: petName,
       description: description,
+      location: location,
+      address: address,
+      number: number,
       phone: phone,
       image: file,
+      tags: tags,
     });
   };
 
-  const handleOpen = () => setOpenCrop(true);
-  const handleClose = () => setOpenCrop(false);
+  const handleOpenCrop = () => setOpenCrop(true);
+  const handleCloseCrop = () => setOpenCrop(false);
   const handleOpenMap = () => setOpenMap(true);
   const handleCloseMap = () => setOpenMap(false);
 
@@ -54,14 +64,19 @@ const AddPet = () => {
     setPhone(event.target.value);
   };
 
+  const handleChangeNumber = (event) => {
+    setNumber(event.target.value);
+  };
+
   const handlePhotoClick = () => {
-    handleOpen();
+    handleOpenCrop();
   };
 
   const handleChangeFile = (event) => {
     const url = URL.createObjectURL(event.target.files[0]);
     setFile(url);
     setPhotoURL(url);
+    handleOpenCrop();
   };
 
   return (
@@ -145,6 +160,11 @@ const AddPet = () => {
                 id='addressNumber'
                 label='Address Number'
                 name='addressNumber'
+                inputProps={{
+                  inputMode: 'numeric',
+                  pattern: '[0-9]*',
+                }}
+                onChange={handleChangeNumber}
               />
               <LocationIcon
                 sx={{
@@ -162,18 +182,23 @@ const AddPet = () => {
                   fullWidth={true}
                   maxWidth={'md'}
                 >
-                  <MapView />
+                  <MapView
+                    saveLocation={setLocation}
+                    closeMap={handleCloseMap}
+                    saveAddress={setAddress}
+                  />
                 </Dialog>
               )}
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              {/* <TextField
                 required
                 fullWidth
                 name='filters'
                 label='Filters'
                 id='filters'
-              />
+              /> */}
+              <Tags setTags={setTags}/>
             </Grid>
           </Grid>
           <Button
@@ -209,17 +234,17 @@ const AddPet = () => {
           onChange={handleChangeFile}
           sx={{ mb: 3, mt: 2 }}
         />
-        {(file.length > 0 || openCrop) && (
+        {openCrop && (
           <Dialog
             open={true}
-            onClose={handleClose}
+            onClose={handleCloseCrop}
             fullWidth={true}
             maxWidth={'md'}
           >
             <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
           </Dialog>
         )}
-        <Card sx={{ mb: 3, width: '90%'}}>
+        <Card sx={{ mb: 3, width: '90%' }}>
           <CardActionArea>
             <CardMedia
               component='img'
@@ -227,6 +252,7 @@ const AddPet = () => {
               image={photoURL}
               title='New Pet Image'
               onClick={handlePhotoClick}
+              sx={{ bgcolor: 'grey' }}
             />
           </CardActionArea>
         </Card>

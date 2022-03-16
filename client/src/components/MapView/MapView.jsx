@@ -1,41 +1,81 @@
 import React from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import LocationIcon from './utils/LocationIcon';
 import DraggableMarker from './utils/DraggableMarker';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import DialogTitle from '@mui/material/DialogTitle';
 
-const MapView = () => {
+const MapView = ({ saveLocation, closeMap, saveAddress }) => {
   const center = { lat: -26.829901, lng: -65.203667 };
   const zoom = 13;
 
   return (
-    <Container component='main' sx={{ display: 'flex' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '80vw',
-          height: '80vh',
-          mt: 3,
-          mb: 3,
-        }}
-      >
-        <MapContainer
-          center={center}
-          zoom={zoom}
-          style={{ height: '100%', width: '100%' }}
+    <>
+      <DialogContent>
+        <DialogTitle
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
         >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          />
-          <DraggableMarker center={center} icon={LocationIcon}/>
-        </MapContainer>
-      </Box>
-    </Container>
+          Move the marker
+          <IconButton
+            aria-label='close'
+            sx={{
+              position: 'absolute',
+              right: 20,
+              transform: 'scale(1.5)',
+            }}
+            onClick={closeMap}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '50vh',
+          }}
+        >
+          <MapContainer
+            center={center}
+            zoom={zoom}
+            style={{ height: '100%', width: '100%' }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
+            <DraggableMarker
+              center={center}
+              icon={LocationIcon}
+              saveMarkerLocation={saveLocation}
+              saveAddress={saveAddress}
+            />
+          </MapContainer>
+        </Box>
+        <DialogActions>
+          <Button
+            autoFocus
+            sx={{ margin: 'auto' }}
+            variant='contained'
+            onClick={closeMap}
+          >
+            Save Location
+          </Button>
+        </DialogActions>
+      </DialogContent>
+    </>
   );
 };
 

@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
 import Dialog from '@mui/material/Dialog';
 import MapView from './components/MapView/MapView';
+import MapStatic from './components/MapView/MapStatic';
+import Tags from './components/Tags/Tags';
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -30,6 +32,7 @@ function App() {
       >
         <AddPet />
       </Dialog>
+      <hr />
     </div>
   );
 }
