@@ -1,21 +1,26 @@
 import { useEffect, useState } from 'react';
 //MATERIAL UI
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Dialog from '@mui/material/Dialog';
-import Avatar from '@mui/material/Avatar';
-import { CardActionArea, Card, CardMedia } from '@mui/material';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import {
+  CssBaseline,
+  Container,
+  Box,
+  Grid,
+  Dialog,
+  Avatar,
+  CardActionArea,
+  Card,
+  CardMedia,
+  Button,
+  Switch,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from '@mui/material';
+//MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-//DEFAULT IMAGE
+//DEFAULT IMAGES
 import default_dog from '../../assets/default_dog.svg';
 import default_cat from '../../assets/default_cat.svg';
 //COMPONENTS
@@ -43,47 +48,43 @@ const AddAdoptionPet = () => {
   //MAP
   const [openMap, setOpenMap] = useState(false);
   //FORM
-  const [petName, setPetName] = useState('');
-  const [description, setDescription] = useState('');
-  const [phone, setPhone] = useState('');
-  const [latLng, setLatLng] = useState({});
+  const [textData, setTextData] = useState({
+    petName: '',
+    description: '',
+    phone: '',
+    addressNumber: '',
+  });
+  const [date, setDate] = useState({});
   const [address, setAddress] = useState('');
-  const [number, setNumber] = useState('');
-  const [date, setDate] = useState('');
+  const [latLng, setLatLng] = useState({});
   const [file, setFile] = useState('');
-  //FORM-FILTERS
-  const [breed, setBreed] = useState('');
-  const [size, setSize] = useState('');
-  const [sex, setSex] = useState('');
-  const [color, setColor] = useState('');
-  const [age, setAge] = useState('');
-  const [fur, setFur] = useState('');
-  const [vaccinated, setVaccinated] = useState(false);
-  const [sterilized, setSterilized] = useState(false);
-  const [dewormed, setDewormed] = useState(false);
+  const [optionData, setOptionData] = useState({
+    breed: '',
+    sex: '',
+    size: '',
+    age: '',
+    color: '',
+    fur: '',
+  });
+  const [boolData, setBoolData] = useState({
+    vaccinated: false,
+    sterilized: false,
+    dewormed: false,
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     console.log({
-      petName: petName,
-      description: description,
-      phone: phone,
-      image: file,
-      date: date,
-      latLng: latLng,
-      address: `${address} ${number}`,
+      ...textData,
       filters: {
-        breed: breed,
-        size: size,
-        sex: sex,
-        color: color,
-        age: age,
-        fur: fur,
-        vaccinated: vaccinated,
-        sterilized: sterilized,
-        dewormed: dewormed,
+        ...optionData,
+        ...boolData,
       },
+      latLng: latLng,
+      image: file,
+      addressRoad: address,
+      date: date,
     });
   };
 
@@ -92,20 +93,8 @@ const AddAdoptionPet = () => {
   const handleOpenMap = () => setOpenMap(true);
   const handleCloseMap = () => setOpenMap(false);
 
-  const handlePetNameChange = (event) => {
-    setPetName(event.target.value);
-  };
-
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
-  };
-
-  const handleAddressNumberChange = (event) => {
-    setNumber(event.target.value);
+  const handleTextDataChange = (key) => (event) => {
+    setTextData({ ...textData, [key]: event.target.value });
   };
 
   const handleFileChange = (event) => {
@@ -119,20 +108,16 @@ const AddAdoptionPet = () => {
     setDogPet(!dogPet);
   };
 
-  const handleVaccinatedChange = () => {
-    setVaccinated(!vaccinated);
-  };
-
-  const handleSterilizedChange = () => {
-    setSterilized(!sterilized);
-  };
-
-  const handleDewormedChange = () => {
-    setDewormed(!dewormed);
-  };
-
   const handlePhotoClick = () => {
     handleOpenCrop();
+  };
+
+  const handleBoolDataChange = (key) => () => {
+    setBoolData({ ...boolData, [key]: !boolData[key] });
+  };
+
+  const handleOptionDataChange = (key) => (event) => {
+    setOptionData({ ...optionData, [key]: event.target.innerText });
   };
 
   useEffect(() => {
@@ -197,7 +182,7 @@ const AddAdoptionPet = () => {
                 name='petName'
                 id='petName'
                 label='Pet Name'
-                onChange={handlePetNameChange}
+                onChange={handleTextDataChange('petName')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -206,11 +191,10 @@ const AddAdoptionPet = () => {
                 fullWidth
                 multiline
                 rows={4}
-                value={description}
                 name='description'
                 id='description'
                 label='Description'
-                onChange={handleDescriptionChange}
+                onChange={handleTextDataChange('description')}
               />
             </Grid>
             <Grid item xs={12}>
@@ -224,7 +208,7 @@ const AddAdoptionPet = () => {
                   inputMode: 'numeric',
                   pattern: '[0-9]*',
                 }}
-                onChange={handlePhoneChange}
+                onChange={handleTextDataChange('phone')}
               />
             </Grid>
             <Grid
@@ -247,7 +231,7 @@ const AddAdoptionPet = () => {
                   inputMode: 'numeric',
                   pattern: '[0-9]*',
                 }}
-                onChange={handleAddressNumberChange}
+                onChange={handleTextDataChange('addressNumber')}
                 sx={{ width: '50%', ml: 3 }}
               />
               <LocationIcon
@@ -275,16 +259,30 @@ const AddAdoptionPet = () => {
               )}
             </Grid>
             <Grid item xs={12} sm={9}>
-              {dogPet && <Breeds saveBreed={setBreed} isADog={dogPet} />}
-              {!dogPet && <Breeds saveBreed={setBreed} isADog={dogPet} />}
+              {dogPet && (
+                <Breeds
+                  onChange={handleOptionDataChange('breed')}
+                  isADog={dogPet}
+                />
+              )}
+              {!dogPet && (
+                <Breeds
+                  onChange={handleOptionDataChange('breed')}
+                  isADog={dogPet}
+                />
+              )}
             </Grid>
             <Grid item xs={12} sm={3}>
-              <CustomForm saveValue={setSex} options={sexOptions} label='sex' />
+              <CustomForm
+                onChange={handleOptionDataChange('sex')}
+                options={sexOptions}
+                label='sex'
+              />
             </Grid>
             {dogPet && (
               <Grid item xs={12} sm={6}>
                 <CustomForm
-                  saveValue={setSize}
+                  onChange={handleOptionDataChange('size')}
                   options={sizeOptions}
                   label='size'
                 />
@@ -293,14 +291,14 @@ const AddAdoptionPet = () => {
             <Grid item xs={12} sm={6}>
               {dogPet && (
                 <CustomForm
-                  saveValue={setAge}
+                  onChange={handleOptionDataChange('age')}
                   options={ageDogOptions}
                   label='age'
                 />
               )}
               {!dogPet && (
                 <CustomForm
-                  saveValue={setAge}
+                  onChange={handleOptionDataChange('age')}
                   options={ageCatOptions}
                   label='age'
                 />
@@ -308,18 +306,25 @@ const AddAdoptionPet = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <CustomForm
-                saveValue={setColor}
+                onChange={handleOptionDataChange('color')}
                 options={colorOptions}
                 label='color'
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <CustomForm saveValue={setFur} options={furOptions} label='fur' />
+              <CustomForm
+                onChange={handleOptionDataChange('fur')}
+                options={furOptions}
+                label='fur'
+              />
             </Grid>
             <Grid item xs={12} sm={4}>
               <FormControlLabel
                 control={
-                  <Checkbox checked={vaccinated} onChange={handleVaccinatedChange} />
+                  <Checkbox
+                    checked={boolData.vaccinated}
+                    onChange={handleBoolDataChange('vaccinated')}
+                  />
                 }
                 label='Vaccinated'
               />
@@ -327,7 +332,10 @@ const AddAdoptionPet = () => {
             <Grid item xs={12} sm={4}>
               <FormControlLabel
                 control={
-                  <Checkbox checked={sterilized} onChange={handleSterilizedChange} />
+                  <Checkbox
+                    checked={boolData.sterilized}
+                    onChange={handleBoolDataChange('sterilized')}
+                  />
                 }
                 label='Sterilized'
               />
@@ -335,7 +343,10 @@ const AddAdoptionPet = () => {
             <Grid item xs={12} sm={4}>
               <FormControlLabel
                 control={
-                  <Checkbox checked={dewormed} onChange={handleDewormedChange} />
+                  <Checkbox
+                    checked={boolData.dewormed}
+                    onChange={handleBoolDataChange('dewormed')}
+                  />
                 }
                 label='Dewormed'
               />

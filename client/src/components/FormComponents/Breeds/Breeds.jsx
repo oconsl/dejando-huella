@@ -5,12 +5,8 @@ import TextField from '@mui/material/TextField';
 import { catBreeds } from '../../../utils/petBreeds';
 import { dogBreeds } from '../../../utils/petBreeds';
 
-const Breeds = ({saveBreed, isADog}) => {
+const Breeds = ({ onChange, isADog }) => {
   const [options, setOptions] = useState(isADog ? dogBreeds : catBreeds);
-
-  const handleBreedChange = (event,newValue) => {
-    saveBreed(newValue);
-  }
 
   useEffect(() => {    
     isADog ? setOptions(dogBreeds) : setOptions(catBreeds);
@@ -22,7 +18,7 @@ const Breeds = ({saveBreed, isADog}) => {
         id="breeds-standard"
         options={options}
         // value={value}
-        onChange={handleBreedChange}
+        onChange={onChange}
         getOptionLabel={(option) => option}
         renderInput={(params) => (
           <TextField
