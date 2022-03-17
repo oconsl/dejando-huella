@@ -13,9 +13,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 
-// TEST DATA
-import { users } from '../../TestData/user';
-
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -46,22 +43,22 @@ const Login = () => {
 
   // MODIFY WHEN USER DB IS UP
   const handleLogIn = () => {
-    const logUsername = users.filter((user) => user.username === username);
+    // const logUsername = users.filter((user) => user.username === username);
 
-    if (!logUsername.length > 0) {
-      alert('Wrong credentials');
-      return;
-    }
+    // if (!logUsername.length > 0) {
+    //   alert('Wrong credentials');
+    //   return;
+    // }
 
-    if (password !== logUsername[0].password) {
-      alert('Wrong credentials');
-      return;
-    }
+    // if (password !== logUsername[0].password) {
+    //   alert('Wrong credentials');
+    //   return;
+    // }
 
-    setSuccess(true);
-    setTimeout(() => {
-      setSuccess(false);
-    }, 3000);
+    // setSuccess(true);
+    // setTimeout(() => {
+    //   setSuccess(false);
+    // }, 3000);
   };
 
   return (

@@ -2,7 +2,9 @@ import './App.css';
 import { useState } from 'react';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-import AddPet from './components/AddPet/AddPet';
+import AddLostPet from './components/AddLostPet/AddLostPet';
+import AddFoundPet from './components/AddFoundPet/AddFoundPet';
+import AddAdoptionPet from './components/AddAdoptionPet/AddAdoptionPet';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 
@@ -26,7 +28,7 @@ function App() {
         fullWidth={true}
         maxWidth={'lg'}
       >
-        <AddPet />
+        <AddAdoptionPet />
       </Dialog>
       <hr />
     </div>

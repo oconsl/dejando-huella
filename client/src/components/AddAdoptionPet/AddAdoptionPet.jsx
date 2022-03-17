@@ -1,24 +1,30 @@
 import { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
+//MATERIAL UI
 import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Dialog from '@mui/material/Dialog';
+import Avatar from '@mui/material/Avatar';
+import { CardActionArea, Card, CardMedia } from '@mui/material';
+import Button from '@mui/material/Button';
+import Switch from '@mui/material/Switch';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Switch from '@mui/material/Switch';
-import { CardActionArea, Card, CardMedia } from '@mui/material';
-import CropEasy from '../Crop/CropEasy';
+//DEFAULT IMAGE
+import default_dog from '../../assets/default_dog.svg';
+import default_cat from '../../assets/default_cat.svg';
+//COMPONENTS
 import MapView from '../MapView/MapView';
-import Dialog from '@mui/material/Dialog';
-import default_dog from './assets/default_dog.svg';
-import default_cat from './assets/default_cat.svg';
-import Breeds from '../FormComponents/Breeds/Breeds';
+import CropEasy from '../Crop/CropEasy';
 import DatePick from '../DatePick/DatePick';
+import Breeds from '../FormComponents/Breeds/Breeds';
 import CustomForm from '../FormComponents/CustomForm/CustomForm';
+//INPUT DATA
 import {
   sizeOptions,
   sexOptions,
@@ -28,7 +34,7 @@ import {
   furOptions,
 } from '../../utils/petOptions';
 
-const AddPet = () => {
+const AddAdoptionPet = () => {
   //PET
   const [dogPet, setDogPet] = useState(true);
   //CROP
@@ -52,6 +58,9 @@ const AddPet = () => {
   const [color, setColor] = useState('');
   const [age, setAge] = useState('');
   const [fur, setFur] = useState('');
+  const [vaccinated, setVaccinated] = useState(false);
+  const [sterilized, setSterilized] = useState(false);
+  const [dewormed, setDewormed] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -62,11 +71,8 @@ const AddPet = () => {
       phone: phone,
       image: file,
       date: date,
-      location: {
-        latLng: latLng,
-        address: address,
-        number: number,
-      },
+      latLng: latLng,
+      address: `${address} ${number}`,
       filters: {
         breed: breed,
         size: size,
@@ -74,6 +80,9 @@ const AddPet = () => {
         color: color,
         age: age,
         fur: fur,
+        vaccinated: vaccinated,
+        sterilized: sterilized,
+        dewormed: dewormed,
       },
     });
   };
@@ -108,6 +117,18 @@ const AddPet = () => {
 
   const handlePetSwitchChange = () => {
     setDogPet(!dogPet);
+  };
+
+  const handleVaccinatedChange = () => {
+    setVaccinated(!vaccinated);
+  };
+
+  const handleSterilizedChange = () => {
+    setSterilized(!sterilized);
+  };
+
+  const handleDewormedChange = () => {
+    setDewormed(!dewormed);
   };
 
   const handlePhotoClick = () => {
@@ -151,7 +172,7 @@ const AddPet = () => {
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Add New Pet
+            Add Adoption Pet
           </Typography>
         </div>
         <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
@@ -258,20 +279,66 @@ const AddPet = () => {
               {!dogPet && <Breeds saveBreed={setBreed} isADog={dogPet} />}
             </Grid>
             <Grid item xs={12} sm={3}>
-              <CustomForm saveValue={setSex} options={sexOptions} label='sex'/>
-            </Grid>  
-            {dogPet && <Grid item xs={12} sm={6}>
-              <CustomForm saveValue={setSize} options={sizeOptions} label='size'/>
-            </Grid>}
+              <CustomForm saveValue={setSex} options={sexOptions} label='sex' />
+            </Grid>
+            {dogPet && (
+              <Grid item xs={12} sm={6}>
+                <CustomForm
+                  saveValue={setSize}
+                  options={sizeOptions}
+                  label='size'
+                />
+              </Grid>
+            )}
             <Grid item xs={12} sm={6}>
-              {dogPet && <CustomForm saveValue={setAge} options={ageDogOptions} label='age'/>}
-              {!dogPet && <CustomForm saveValue={setAge} options={ageCatOptions} label='age'/>}
+              {dogPet && (
+                <CustomForm
+                  saveValue={setAge}
+                  options={ageDogOptions}
+                  label='age'
+                />
+              )}
+              {!dogPet && (
+                <CustomForm
+                  saveValue={setAge}
+                  options={ageCatOptions}
+                  label='age'
+                />
+              )}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <CustomForm saveValue={setColor} options={colorOptions} label='color'/>
+              <CustomForm
+                saveValue={setColor}
+                options={colorOptions}
+                label='color'
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <CustomForm saveValue={setFur} options={furOptions} label='fur'/>
+              <CustomForm saveValue={setFur} options={furOptions} label='fur' />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={vaccinated} onChange={handleVaccinatedChange} />
+                }
+                label='Vaccinated'
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={sterilized} onChange={handleSterilizedChange} />
+                }
+                label='Sterilized'
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={dewormed} onChange={handleDewormedChange} />
+                }
+                label='Dewormed'
+              />
             </Grid>
           </Grid>
           <Button
@@ -335,4 +402,4 @@ const AddPet = () => {
   );
 };
 
-export default AddPet;
+export default AddAdoptionPet;
