@@ -10,27 +10,46 @@ import Dialog from '@mui/material/Dialog';
 
 function App() {
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const handleOpen = () => setOpen(true);
+  const handleOpen2 = () => setOpen2(true);
   const handleClose = () => setOpen(false);
-
-  const [openCrop, setOpenCrop] = useState(false);
-  const [photo, setPhoto] = useState(null);
+  const handleClose2 = () => setOpen2(false);
 
   return (
     <div className='App'>
       <h1>Test</h1>
       <Button variant='contained' onClick={handleOpen}>
-        Open Dialog
+        Open Sign Up
       </Button>
-      <Dialog
+      <hr />
+      <Button variant='contained' onClick={handleOpen2}>
+        Open Log In
+      </Button>
+      {/* <Dialog
         open={open}
         onClose={handleClose}
         fullWidth={true}
         maxWidth={'lg'}
       >
         <AddAdoptionPet />
+      </Dialog> */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth={true}
+        maxWidth={'xs'}
+      >
+        <SignUp />
       </Dialog>
-      <hr />
+      <Dialog
+        open={open2}
+        onClose={handleClose2}
+        fullWidth={true}
+        maxWidth={'xs'}
+      >
+        <Login />
+      </Dialog>
     </div>
   );
 }
