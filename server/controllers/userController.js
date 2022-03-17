@@ -1,7 +1,6 @@
-const { unlink } = require('fs-extra');
-const path = require('path');
+const fs = require('fs-extra');
 
-const cloudinary =require('cloudinary');
+const cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -14,7 +13,7 @@ const usersController = (User) => {
   const postUser = async (req, res, next) => {
     try{
       const result = await cloudinary.v2.uploader.upload(req.file.path);
-      console.log(result);
+      console.log(req.file);
 
       const {
         firstName,
@@ -36,9 +35,10 @@ const usersController = (User) => {
 
       const userStored = await user.save();
       // console.log(req.file);
-      await unlink(req.file.path);
+      await fs.unlink(req.file.path);
       res.send({userStored});
     }catch(err){
+      console.log(req.file);
       res.status(500).json(err);
     }
   }
@@ -47,7 +47,6 @@ const usersController = (User) => {
   const getUsers = async (req, res, next) => {
     const {query} = req;
     const response = await User.find(query);
-    console.log(path.resolve()) 
     res.json(response);
   }
 
@@ -68,7 +67,6 @@ const usersController = (User) => {
           public_id: result.public_id
       });
       cloudinary.v2.uploader.destroy(updatedUser.public_id);
-      await unlink(req.file.path);
 
       // const response = await User.updateOne({
       //   _id: req.params.userId
@@ -86,7 +84,7 @@ const usersController = (User) => {
       // })
       res.json(updatedUser);
     }catch(err){
-      res.status(500).json("Mongo's error");
+      res.status(500).json(err);
     }
   }
 

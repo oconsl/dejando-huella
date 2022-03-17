@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const bodyParser = require('body-parser');
 const User = require('./models/userModel');
+const deleteFiles = require('./middleware/deleteFiles');
 const PORT = process.env.PORT || 8080;
 const userRouter = require('./routes/userRouter')(User);
 
@@ -14,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(db => console.log('DB is connected'))
   .catch(err => console.log(err));
 
-app.use('/public', express.static(`${__dirname}/storage/imgs`)); 
+// app.use('/public', express.static(`${__dirname}/storage/imgs`)); 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -24,8 +25,11 @@ const storage = multer.diskStorage({
     cb(null, new Date().getTime() + path.extname(file.originalname));
   }
 });
+app.use(deleteFiles);
 app.use(multer({storage: storage}).single('image'));//min43
+
 
 app.use('/api', userRouter);
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+
