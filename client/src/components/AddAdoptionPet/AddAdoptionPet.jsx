@@ -54,10 +54,6 @@ const AddAdoptionPet = () => {
     phone: '',
     addressNumber: '',
   });
-  const [date, setDate] = useState({});
-  const [address, setAddress] = useState('');
-  const [latLng, setLatLng] = useState({});
-  const [file, setFile] = useState('');
   const [optionData, setOptionData] = useState({
     breed: '',
     sex: '',
@@ -71,6 +67,10 @@ const AddAdoptionPet = () => {
     sterilized: false,
     dewormed: false,
   });
+  const [date, setDate] = useState({});
+  const [address, setAddress] = useState('');
+  const [latLng, setLatLng] = useState({});
+  const [file, setFile] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -80,6 +80,7 @@ const AddAdoptionPet = () => {
       filters: {
         ...optionData,
         ...boolData,
+        specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,
       image: file,
@@ -404,7 +405,7 @@ const AddAdoptionPet = () => {
               title='New Pet Image'
               height='450'
               onClick={handlePhotoClick}
-              sx={{ bgcolor: 'grey', objectFit: 'contain' }}
+              sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
             />
           </CardActionArea>
         </Card>
