@@ -22,7 +22,7 @@ async function loginUser(credentials) {
       username: credentials.username,
       password: credentials.password,
     })
-    .then(response => console.log(response.json()));
+    .then(response => response.json());
 }
 
 const Login = ({setToken}) => {
@@ -43,8 +43,7 @@ const Login = ({setToken}) => {
     setShowPassword(!showPassword);
   };
 
-  // MODIFY WHEN USER CONTROLLER IS READY
-  const handleLogIn = (event) => {
+  const handleLogIn = async (event) => {
     event.preventDefault();
 
     const token = await loginUser({

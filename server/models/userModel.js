@@ -12,6 +12,7 @@ const userModel = new Schema({
   public_id: {type: 'string'},
 });
 
+<<<<<<< HEAD
 userModel.methods.setImgUrl = function setImgUrl (filename) {
   // this.imgURL = `http://localhost:${process.env.PORT}/public/${filename}`;
   return `http://localhost:${process.env.PORT}/public/${filename}`;
@@ -19,3 +20,6 @@ userModel.methods.setImgUrl = function setImgUrl (filename) {
 }
 
 module.exports = mongoose.model('User', userModel);
+=======
+module.exports = mongoose.model('User', userModel);
+>>>>>>> 84466b996e8836f2e8e0c1583ee308464d93aa74
