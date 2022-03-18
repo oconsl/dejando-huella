@@ -19,10 +19,12 @@ import axios from 'axios';
 async function loginUser(credentials) {
   return axios
     .post('http://localhost:5001/api/users/login', {
-      username: credentials.username,
-      password: credentials.password,
+      body: {
+        username: credentials.username,
+        password: credentials.password,
+      }
     })
-    .then(response => response.json());
+    .then(response => response.data);
 }
 
 const Login = ({setToken}) => {

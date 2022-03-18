@@ -9,12 +9,10 @@ cloudinary.config({
 });
 
 const usersController = (User) => {
-
   // POST
   const postUser = async (req, res, next) => {
     try {
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-      console.log(req.file);
+      // const result = await cloudinary.v2.uploader.upload(req.file.path);
 
       const { firstName, lastName, email, username, password } = req.body;
 
@@ -24,15 +22,13 @@ const usersController = (User) => {
         email,
         username,
         password,
-        imgURL: result.url,
-        public_id: result.public_id,
       });
 
       await user.save();
 
       res.status(200).json('Signed up successfully');
     } catch (err) {
-      console.log(req.file);
+      console.log(err);
       res.status(500).json(err);
     }
   };
@@ -83,13 +79,14 @@ const usersController = (User) => {
   const login = async (req, res) => {
     try {
       const { body } = req.body;
-      const response = await User.findOne({ userName: body.userName });
+      const response = await User.findOne({ username: body.username });
 
       if (response === null || body.password !== response.password) {
+        console.log('fallo');
         return res.status(401).json('Invalid credentials');
       }
       const token = generateToken(response);
-      res.status(200).json({ token: token });
+      res.status(200).json(token);
     } catch (err) {
       res.status(400).json(err);
     }
@@ -99,10 +96,23 @@ const usersController = (User) => {
     const tokenPayload = {
       username: user.username,
     };
-    return jwt.sign(tokenPayload, process.env.TOKEN_SECRET,{expiresIn: '3m'});
+    return jwt.sign(tokenPayload, process.env.TOKEN_SECRET, {
+      expiresIn: '10s',
+    });
   };
 
-  return { postUser, getUsers, putUser, deleteUser, login };
+  // Verify Token
+  const verifyToken = (req, res) => {
+    try {
+      const { body } = req.body;
+      jwt.verify(body.token, process.env.TOKEN_SECRET);
+      res.status(200).json(true);
+    } catch (error) {
+      res.json(false);
+    }
+  };
+
+  return { postUser, getUsers, putUser, deleteUser, login, verifyToken };
 };
 
 module.exports = usersController;
