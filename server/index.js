@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const User = require('./models/userModel');
 const deleteFiles = require('./middleware/deleteFiles');
 const PORT = process.env.PORT || 8080;
@@ -15,7 +16,8 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(db => console.log('DB is connected'))
   .catch(err => console.log(err));
 
-// app.use('/public', express.static(`${__dirname}/storage/imgs`)); 
+app.use(cors());
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -26,7 +28,7 @@ const storage = multer.diskStorage({
   }
 });
 app.use(deleteFiles);
-app.use(multer({storage: storage}).single('image'));//min43
+app.use(multer({storage: storage}).single('image'));
 
 
 app.use('/api', userRouter);

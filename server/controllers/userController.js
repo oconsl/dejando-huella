@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const jwt = require('jsonwebtoken');
 
 const cloudinary = require('cloudinary');
 cloudinary.config({
@@ -19,7 +20,7 @@ const usersController = (User) => {
         firstName,
         lastName,
         email,
-        userName,
+        username,
         password
       } = req.body;
 
@@ -27,7 +28,7 @@ const usersController = (User) => {
         firstName,
         lastName,
         email,
-        userName,
+        username,
         password,
         imgURL: result.url,
         public_id: result.public_id
@@ -68,20 +69,6 @@ const usersController = (User) => {
       });
       cloudinary.v2.uploader.destroy(updatedUser.public_id);
 
-      // const response = await User.updateOne({
-      //   _id: req.params.userId
-      // },
-      // {
-      //   $set:{
-      //     firstName: body.firstName,
-      //     lastName: body.lastName,
-      //     email: body.email,
-      //     username: body.username,
-      //     password: body.password,
-      //     imgURL: url,
-      //     public_id
-      //   }
-      // })
       res.json(updatedUser);
     }catch(err){
       res.status(500).json(err);
@@ -100,8 +87,27 @@ const usersController = (User) => {
     }
   }
 
+  // LOGIN
+  const login = async (req, res) => {
+    const { body } = req.body;
+    const response = await User.findOne({userName: body.userName});
 
-  return {postUser, getUsers, putUser, deleteUser}
+    if(response === null || body.password !== response.password){
+      return res.status(401).json('Invalid credentials');
+    }
+    const token = generateToken(response);
+    res.status(200).json({token: token});
+  }
+
+  const generateToken = (user) => {
+    const tokenPayload = {
+      username: user.username
+    };
+    return jwt.sign(tokenPayload, process.env.TOKEN_SECRET);
+  } 
+
+
+  return {postUser, getUsers, putUser, deleteUser, login}
 };
 
 module.exports = usersController;
