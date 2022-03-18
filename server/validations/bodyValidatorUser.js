@@ -1,10 +1,10 @@
 const Joi = require('joi');
 
 const bodySchema = Joi.object({
-  firstName: Joi.array().items(Joi.object()).required(),
+  firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   email: Joi.string().required(),
-  userName: Joi.string().required(),
+  username: Joi.string().required(),
   password: Joi.string().required(),
 });
 

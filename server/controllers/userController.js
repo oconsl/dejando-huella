@@ -9,7 +9,6 @@ cloudinary.config({
 });
 
 const usersController = (User) => {
-
   // POST
   const postUser = async (req, res, next) => {
     try {
@@ -83,7 +82,7 @@ const usersController = (User) => {
   const login = async (req, res) => {
     try {
       const { body } = req.body;
-      const response = await User.findOne({ userName: body.userName });
+      const response = await User.findOne({ username: body.username });
 
       if (response === null || body.password !== response.password) {
         return res.status(401).json('Invalid credentials');
@@ -102,7 +101,18 @@ const usersController = (User) => {
     return jwt.sign(tokenPayload, process.env.TOKEN_SECRET,{expiresIn: '3m'});
   };
 
-  return { postUser, getUsers, putUser, deleteUser, login };
+  // VERIFY TOKEN
+  const verifyToken = (req, res) => {
+    try{
+      const {body} = req.body;
+      jwt.verify(body.token, process.env.TOKEN_SECRET);
+      res.status(200).json(true);
+    }catch(err){
+      res.json(false)
+    }
+  }
+
+  return { postUser, getUsers, putUser, deleteUser, login, verifyToken };
 };
 
 module.exports = usersController;
