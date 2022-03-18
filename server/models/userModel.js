@@ -12,10 +12,4 @@ const userModel = new Schema({
   public_id: {type: 'string'},
 });
 
-userModel.methods.setImgUrl = function setImgUrl (filename) {
-  // this.imgURL = `http://localhost:${process.env.PORT}/public/${filename}`;
-  return `http://localhost:${process.env.PORT}/public/${filename}`;
-  // console.log('hi');
-}
-
 module.exports = mongoose.model('User', userModel);
