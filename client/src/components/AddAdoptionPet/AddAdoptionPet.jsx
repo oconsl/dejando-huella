@@ -26,7 +26,6 @@ import default_cat from '../../assets/default_cat.svg';
 //COMPONENTS
 import MapView from '../MapView/MapView';
 import CropEasy from '../Crop/CropEasy';
-import DatePick from '../DatePick/DatePick';
 import Breeds from '../FormComponents/Breeds/Breeds';
 import CustomForm from '../FormComponents/CustomForm/CustomForm';
 //INPUT DATA
@@ -67,7 +66,6 @@ const AddAdoptionPet = () => {
     sterilized: false,
     dewormed: false,
   });
-  const [date, setDate] = useState({});
   const [address, setAddress] = useState('');
   const [latLng, setLatLng] = useState({});
   const [file, setFile] = useState('');
@@ -85,7 +83,6 @@ const AddAdoptionPet = () => {
       latLng: latLng,
       image: file,
       addressRoad: address,
-      date: date,
     });
   };
 
@@ -118,7 +115,12 @@ const AddAdoptionPet = () => {
   };
 
   const handleOptionDataChange = (key) => (event) => {
-    setOptionData({ ...optionData, [key]: event.target.innerText });
+    key !== 'size'
+      ? setOptionData({ ...optionData, [key]: event.target.innerText })
+      : setOptionData({
+          ...optionData,
+          [key]: event.target.innerText.split('(')[0].trim(),
+        });
   };
 
   useEffect(() => {
@@ -221,7 +223,6 @@ const AddAdoptionPet = () => {
                 justifyContent: 'center',
               }}
             >
-              <DatePick saveDate={setDate} />
               <TextField
                 required
                 fullWidth

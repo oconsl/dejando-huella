@@ -13,9 +13,19 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const Login = () => {
+async function loginUser(credentials) {
+  return axios
+    .post('http://localhost:5001/api/users/login', {
+      username: credentials.username,
+      password: credentials.password,
+    })
+    .then(response => console.log(response.json()));
+}
+
+const Login = ({setToken}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -37,18 +47,11 @@ const Login = () => {
   const handleLogIn = (event) => {
     event.preventDefault();
 
-    axios.get('http://localhost:5001/api/users')
-      .then(res => {
-        if(res.data.some(user => user.username === username)){
-          if(res.data.some(user => user.password === password)){
-            setSuccess(true);
-
-            setTimeout(() => {
-              setSuccess(false);
-            }, 3000)
-          }
-        }
-      })
+    const token = await loginUser({
+      username: username,
+      password: password,
+    });
+    setToken(token);
   };
 
   return (
@@ -136,5 +139,9 @@ const Login = () => {
     </Container>
   );
 };
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
 
 export default Login;

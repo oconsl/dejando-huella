@@ -36,8 +36,10 @@ import {
   ageDogOptions,
   furOptions,
 } from '../../utils/petOptions';
+//UTIL FUNCTION
+import formatDate from '../../utils/formatDate';
 
-const AddLostPet = () => {
+const AddFoundPet = () => {
   //PET
   const [dogPet, setDogPet] = useState(true);
   //CROP
@@ -76,7 +78,7 @@ const AddLostPet = () => {
       latLng: latLng,
       image: file,
       addressRoad: address,
-      date: date,
+      date: formatDate(date),
     });
   };
 
@@ -358,4 +360,4 @@ const AddLostPet = () => {
   );
 };
 
-export default AddLostPet;
+export default AddFoundPet;

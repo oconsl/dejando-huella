@@ -36,6 +36,8 @@ import {
   ageDogOptions,
   furOptions,
 } from '../../utils/petOptions';
+//UTIL FUNCTION
+import formatDate from '../../utils/formatDate';
 
 const AddLostPet = () => {
   //PET
@@ -77,7 +79,7 @@ const AddLostPet = () => {
       latLng: latLng,
       image: file,
       addressRoad: address,
-      date: date,
+      date: formatDate(date),
     });
   };
 
