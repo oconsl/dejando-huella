@@ -11,11 +11,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './HeaderPet.css';
 
 const pages = ['Found Pets', 'Lost Pets', 'Adoption'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 
 const HeaderPet = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,61 +35,6 @@ const HeaderPet = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  /*   const LoginButton = () => {
-    return (
-      <div className="login-reg-button">
-        <Button color="secondary" variant="contained">
-          Login
-        </Button>
-        <Button color="secondary" variant="contained">
-          Register
-        </Button>
-      </div>
-    );
-  };
-
-  const ProfileIco = (props) => {
-    return (
-      <Box sx={{ flexGrow: 0 }}>
-        <Tooltip title="Open settings">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-          </IconButton>
-        </Tooltip>
-        <Menu
-          sx={{ mt: '45px', float: 'right' }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{setting}</Typography>
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
-    );
-  };
-
-  const Conditional = (props) => {
-    if (!props.status) {
-      return <LoginButton />;
-    } else {
-      return <ProfileIco />;
-    }
-  }; */
 
   return (
     <AppBar position="sticky">
@@ -139,10 +84,11 @@ const HeaderPet = (props) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <Link
+                      key={index}
                       className="nav-link"
                       to={`/${page.replace(' ', '-').toLocaleLowerCase()}`}
                     >
@@ -168,8 +114,9 @@ const HeaderPet = (props) => {
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Link
+              key={index}
                 className="nav-link"
                 to={`/${page.replace(' ', '-').toLocaleLowerCase()}`}
               >
@@ -185,7 +132,19 @@ const HeaderPet = (props) => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          { !props.authentication && (
+            <Box>
+              <Button sx={{m:1}} color="secondary" variant="contained">
+                Login
+              </Button>
+              <Button sx={{m:1}} color="secondary" variant="contained">
+                Register
+              </Button>
+            </Box>   
+          )}
+
+          { props.authentication && (
+            <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -207,13 +166,15 @@ const HeaderPet = (props) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings.map((setting, index) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography key={index} textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+          )}
+
         </Toolbar>
       </Container>
     </AppBar>

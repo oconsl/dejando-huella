@@ -6,7 +6,7 @@ import { makeStyles } from "@mui/styles";
 import Icon from "@mui/material/Icon";
 import './Carousel.css'
 
-function Hero(props) {
+function MyCarousel() {
   var items = [
     {
       name: "Be the person",
@@ -57,19 +57,31 @@ const useStyles = makeStyles({
   },
   sec: {
     position: "absolute",
-    top: "30%",
-    left: "10%",
-    color: "#fff"
+   /*  top: "6em",
+    left: "2em", */
+    marginTop: '6em',
+    marginLeft: '2em',
+    color: "#fff",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  name: {
+    fontSize: '6vw'
+  },
+  description: {
+    fontSize: '4vw'
   }
+
 });
 
 function Item(props) {
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
-      <div className={classes.sec}>
-        <Typography sx={{fontWeight: '900', textShadow: '2px 2px 2px black'}} variant="h2">{props.item.name}</Typography>
-        <Typography sx={{textShadow: '2px 2px 2px black'}} variant="h5">{props.item.description}</Typography>
+      <div className={classes.sec} >
+        <Typography className={classes.name} sx={{fontWeight: '900', textShadow: '2px 2px 2px black'}} variant="h2">{props.item.name}</Typography>
+        <Typography className={classes.description} sx={{textShadow: '2px 2px 2px black'}} variant="h5">{props.item.description}</Typography>
       </div>
 
       <img className={classes.img_responsive} src={props.item.img_src} />
@@ -77,4 +89,4 @@ function Item(props) {
   );
 }
 
-export default Hero;
+export default MyCarousel;

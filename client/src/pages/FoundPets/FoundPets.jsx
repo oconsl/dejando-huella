@@ -8,7 +8,7 @@ const FoundPets = () => {
   return (
     <>
       <Box><h1>FOUND PETS</h1></Box>
-      <Filter/>
+      <Filter a={true}/>
       <Container
         maxWidth="lg"
         sx={{
@@ -55,7 +55,7 @@ const FoundPets = () => {
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
           img_src={
-            'https://lealcan.com/wp-content/uploads/2021/12/PerroConMiedoAPetardosOFuegosArtificiales-300x300.jpg'
+            'https://fordogtrainers.es/images/razas-de-perros/C/perro-de-raza-cazador-de-mapaches-negro-y-bronce.jpg'
           }
         />
         <CardsPet
