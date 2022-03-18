@@ -68,32 +68,37 @@ const ModalFoundPets = (props) => {
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Especie: Perro
+                    Specie: {props.filter.specie}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Color: Negro
+                    Breed: {props.filter.breed}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Raza: Salchicha
+                    Color: {props.filter.color}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Sexo: Macho
+                    Sex: {props.filter.sex}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Tamaño: Chico
+                    Size: {props.filter.size}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Edad: 3 años
+                    Age: {props.filter.age}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Fur: {props.filter.fur}
                   </Typography>
                 </Box>
               </Grid>
@@ -104,7 +109,7 @@ const ModalFoundPets = (props) => {
                     variant="h6"
                     component="h2"
                   >
-                    Ubicacion
+                    Location
                   </Typography>
                 </Box>
                 <Box>
@@ -115,12 +120,15 @@ const ModalFoundPets = (props) => {
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Calle Falsa 123 - Tucuman
+                    Address Road: {props.addressRoad}
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Address Number : {props.addressNumber}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Cel: 3815521987
+                    Phone: {props.phone}
                   </Typography>
                 </Box>
               </Grid>

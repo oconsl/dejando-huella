@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardsPet from '../../components/CardsPage/CardsPage';
 import { Container, Box } from '@mui/material';
 
 const Adoption = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
-      <Box><h1>ADOPTION</h1></Box>
+      <Box>
+        <h1>ADOPTION</h1>
+      </Box>
       <Container
         maxWidth="lg"
         sx={{
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
       >
         <CardsPet

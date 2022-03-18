@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Modal from '../Modal/Modal'
+import ModalImagePets from '../ModalImagePets/ModalImagePet';
 // import './CardsPets.css';
 
 const CardsPet = (props) => {
@@ -12,9 +13,18 @@ const CardsPet = (props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [openImage, setOpenImage] = React.useState(false)
+  const handleOpenImage = () => setOpenImage(true);
+  const handleCloseImage = () => setOpenImage(false);
+
   return (
     <Card className="card" sx={{ maxWidth: 345 }}>
-      <CardActionArea onClick={handleOpen}>
+      <ModalImagePets 
+          openImg={openImage}
+          closeImg={handleCloseImage}
+          img_src={props.img_src}
+        />
+      <CardActionArea onClick={handleOpenImage}>
         <CardMedia
           component="img"
           height="140"
@@ -40,6 +50,10 @@ const CardsPet = (props) => {
         title={props.title}
         description={props.description}
         img_src={props.img_src}
+        filter={props.filter}
+        addressRoad={props.addressRoad}
+        addressNumber={props.addressNumber}
+        phone={props.phone}
         />
       </CardActions>
     </Card>

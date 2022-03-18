@@ -1,24 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container } from '@mui/material';
 import './FoundPets.css';
 import Filter from '../../components/Filters/Filters';
+import { lostPets } from '../../TestData/dataBaseLostPets';
 
 const FoundPets = () => {
+  const [filter, setFilter] = useState(false);
+  const [parameter, setParameter] = useState({})
+
+  const handleOnFilter = (value) => {
+    setFilter(true);
+    setParameter(value)
+  };
+
+  const filterLess = () => {
+    setFilter(false)
+  }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <>
-      <Box><h1>FOUND PETS</h1></Box>
-      <Filter a={true}/>
+    <> 
+      <Box>
+        <h1>FOUND PETS</h1>
+      </Box>
+      <Filter buttonFilter={handleOnFilter} filterLess={filterLess}/>
       <Container
         maxWidth="lg"
         sx={{
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
       >
-        <CardsPet
+        {!filter &&
+          lostPets.map((item) => (
+            <CardsPet
+              description={item.date + ' - \n' + item.description}
+              button={'More Details'}
+              img_src={item.image}
+              filter={item.filter}
+              addressRoad={item.addressRoad}
+              addressNumber={item.addressNumber}
+              phone={item.phone}
+            />
+          ))}
+
+        {filter &&
+          lostPets
+            .filter((item) => {
+              const keys = Object.keys(parameter)
+
+              return keys.every(key => item.filter[key] === parameter[key])
+            }
+              )
+            .map((item) => (
+              <CardsPet
+                description={item.date + ' - \n' + item.description}
+                button={'More Details'}
+                img_src={item.image}
+                filter={item.filter}
+                addressRoad={item.addressRoad}
+                addressNumber={item.addressNumber}
+                phone={item.phone}
+              />
+            ))}
+
+        {/* <CardsPet
           title={'Firulais'}
           description={'Encontrado el dia 22-02-2022'}
           button={'Más Detalles'}
@@ -65,7 +117,7 @@ const FoundPets = () => {
           img_src={
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREtlldYkYu2uL4lBd3R9EPmeH_mRvl3UrSRJV7K5uwniw2A7DOaruTtDHlwRDqLEL0o3Q&usqp=CAU'
           }
-        />
+        /> */}
       </Container>
     </>
   );
