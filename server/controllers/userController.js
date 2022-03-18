@@ -83,12 +83,12 @@ const usersController = (User) => {
 
       if (response === null || body.password !== response.password) {
         console.log('fallo');
-        return res.status(401).json('Invalid credentials');
+        return res.json('Invalid credentials');
       }
       const token = generateToken(response);
       res.status(200).json(token);
     } catch (err) {
-      res.status(400).json(err);
+      res.json(err);
     }
   };
 

@@ -1,18 +1,23 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
+//MATERIAL UI
+import { 
+  Box,
+  Avatar,
+  Typography,
+  Container,
+  OutlinedInput,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  InputAdornment,
+  Button, 
+  IconButton,
+} from '@mui/material';
+//MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Button from '@mui/material/Button';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Visibility from '@mui/icons-material/Visibility';
+//UTILS 
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -28,17 +33,16 @@ async function loginUser(credentials) {
 }
 
 const Login = ({setToken}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState({
+    username: '',
+    password: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleChangeUsername = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
+  const handleUserDataChange = (key) => (event) => {
+    setError(false);
+    setUserData({...userData,[key]: event.target.value});
   };
 
   const handleClickShowPassword = () => {
@@ -48,16 +52,13 @@ const Login = ({setToken}) => {
   const handleLogIn = async (event) => {
     event.preventDefault();
 
-    const token = await loginUser({
-      username: username,
-      password: password,
-    });
-    setToken(token);
+    const response = await loginUser(userData);
+    
+    response === 'Invalid credentials' ? setError(true) : setToken(response);    
   };
 
   return (
     <Container component='main' maxWidth='xs'>
-      {!success && (
         <Box
           component='form'
           sx={{
@@ -76,27 +77,33 @@ const Login = ({setToken}) => {
             Log in
           </Typography>
           <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
-            <InputLabel htmlFor='outlined-adornment-username'>
+            <InputLabel htmlFor='username-component' error={error}>
               Username
             </InputLabel>
             <OutlinedInput
-              id='outlined-adornment-username'
+              error={error}
+              id='username-component'
               name='username'
-              value={username}
-              onChange={handleChangeUsername}
+              value={userData.username}
+              onChange={handleUserDataChange('username')}
               label='Username'
+              inputProps={{
+                inputMode: 'text',
+                pattern: '^[A-Za-z0-9]*$',
+              }}
             />
           </FormControl>
           <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
-            <InputLabel htmlFor='outlined-adornment-password'>
+            <InputLabel htmlFor='password-component-password' error={error}>
               Password
             </InputLabel>
             <OutlinedInput
-              id='outlined-adornment-password'
+              error={error}
+              id='password-component'
               name='password'
               type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={handleChangePassword}
+              value={userData.password}
+              onChange={handleUserDataChange('password')}
               endAdornment={
                 <InputAdornment position='end'>
                   <IconButton
@@ -110,6 +117,7 @@ const Login = ({setToken}) => {
               }
               label='Password'
             />
+            {error && <FormHelperText id="password-component-error-text" error>Invalid credentials.</FormHelperText>}
           </FormControl>
           <Button
             type='submit'
@@ -120,23 +128,6 @@ const Login = ({setToken}) => {
             Log In
           </Button>
         </Box>
-      )}
-      {success && (
-        <Box
-          sx={{
-            mt: 8,
-            mb: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography sx={{ fontWeight: 'bold', fontSize: '1.5em', mb: 4 }}>
-            Logged In Successfully
-          </Typography>
-          <CheckCircleIcon sx={{ color: 'green', transform: 'scale(3)' }} />
-        </Box>
-      )}
     </Container>
   );
 };

@@ -21,7 +21,7 @@ const useToken = () => {
 
   const verifyToken = async () => {
     return axios
-      .post('http://localhost:5001/api/users/verify',{
+      .post('http://localhost:5001/api/users/auth',{
         body: {
           token: token
         }

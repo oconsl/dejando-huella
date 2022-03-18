@@ -22,7 +22,7 @@ const routes = (User) => {
 
   userRouter.route('/users/login').post(login);
 
-  userRouter.route('/users/verify').post(verifyToken);
+  userRouter.route('/users/auth').post(verifyToken);
 
   return userRouter;
 };
