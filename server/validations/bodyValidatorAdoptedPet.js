@@ -19,7 +19,13 @@ const bodySchemaFilter = Joi.object({
   color: Joi.string().required(),
   size: Joi.string().required(),
   fur: Joi.string().required(),
+  castrated: Joi.boolean().required(),
+  dewormed: Joi.boolean().required(),
+  vaccinated: Joi.boolean().required(),
 });
+
+
+
 
 const bodySchema = Joi.object({
   petName: Joi.string().required(),
