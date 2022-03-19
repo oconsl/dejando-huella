@@ -1,18 +1,22 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
+//MATERIAL UI
+import {
+  Box,
+  Container,
+  CssBaseline,
+  Typography,
+  Avatar,
+  Grid,
+  TextField,
+} from '@mui/material';
+//MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+//UTILS
 import axios from 'axios';
 
 const SignUp = () => {
-  const [userData, serUserData] = useState({
+  const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -22,7 +26,7 @@ const SignUp = () => {
   const [success, setSuccess] = useState(false);
 
   const handleUserDataChange = (key) => (event) => {
-    setUserDate({...userDate,[key]: event.target.value});
+    setUserData({ ...userData, [key]: event.target.value });
   };
 
   const handleSignUp = (event) => {
