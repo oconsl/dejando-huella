@@ -1,8 +1,22 @@
-import React, { useEffect } from 'react';
-import CardsPet from '../../components/CardsPage/CardsPage';
-import { Container, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import CardsPet from '../../components/CardsPets/CardsPets';
+import { Box, Container } from '@mui/material';
+import Filter from '../../components/Filters/Filters';
+import { lostPets } from '../../TestData/dataBaseLostPets';
 
 const Adoption = () => {
+  const [filter, setFilter] = useState(false);
+  const [parameter, setParameter] = useState({});
+
+  const handleOnFilter = (value) => {
+    setFilter(true);
+    setParameter(value);
+  };
+
+  const filterLess = () => {
+    setFilter(false);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -12,6 +26,7 @@ const Adoption = () => {
       <Box>
         <h1>ADOPTION</h1>
       </Box>
+      <Filter buttonFilter={handleOnFilter} filterLess={filterLess} />
       <Container
         maxWidth="lg"
         sx={{
@@ -21,54 +36,43 @@ const Adoption = () => {
           justifyContent: 'center',
         }}
       >
-        <CardsPet
-          title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
-          }
-        />
-        <CardsPet
-          title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
-          }
-        />
-        <CardsPet
-          title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
-          }
-        />
-        <CardsPet
-          title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
-          }
-        />
-        <CardsPet
-          title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
-          }
-        />
-        <CardsPet
-          title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
-          }
-        />
+        {!filter &&
+          lostPets.map((item, index) => (
+            <CardsPet
+              key={index}
+              title={item.name}
+              description={item.date + ' - \n' + item.description}
+              button={'More Details'}
+              img_src={item.image}
+              filter={item.filter}
+              addressRoad={item.addressRoad}
+              addressNumber={item.addressNumber}
+              phone={item.phone}
+            />
+          ))
+        }
+
+        {filter &&
+          lostPets
+            .filter((item) => {
+              const keys = Object.keys(parameter);
+
+              return keys.every((key) => item.filter[key] === parameter[key]);
+            })
+            .map((item, index) => (
+              <CardsPet
+                key={index}
+                title={item.name}
+                description={item.date + ' - \n' + item.description}
+                button={'More Details'}
+                img_src={item.image}
+                filter={item.filter}
+                addressRoad={item.addressRoad}
+                addressNumber={item.addressNumber}
+                phone={item.phone}
+              />
+            ))
+        }
       </Container>
     </>
   );

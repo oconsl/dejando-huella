@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import { Container, Grid } from '@mui/material';
-import './Modal.css';
 
 const style = {
   position: 'absolute',
@@ -37,7 +36,7 @@ const ModalFoundPets = (props) => {
               <CloseIcon />
             </Button>
             <Grid container spacing={5}>
-              <Grid className='grid-item' item xs={12} md={4} direction='column'>
+              <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                 <Box>
                   <Typography
                     id="modal-modal-title"
@@ -56,7 +55,7 @@ const ModalFoundPets = (props) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid className='grid-item' item xs={12} md={4} direction='column'>
+              <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                 <Box>
                   <Typography
                     id="modal-modal-title"
@@ -102,7 +101,7 @@ const ModalFoundPets = (props) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid className='grid-item' item xs={12} md={4} direction='column'>
+              <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
                 <Box>
                   <Typography
                     id="modal-modal-title"

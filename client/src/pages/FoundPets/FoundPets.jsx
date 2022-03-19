@@ -4,30 +4,46 @@ import { Box, Container } from '@mui/material';
 import './FoundPets.css';
 import Filter from '../../components/Filters/Filters';
 import { lostPets } from '../../TestData/dataBaseLostPets';
+import Pagination from '@mui/material/Pagination';
 
 const FoundPets = () => {
-  const [filter, setFilter] = useState(false);
-  const [parameter, setParameter] = useState({})
+  const [cards, setCards] = useState(lostPets);
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 9;
+  const [filterCards, setFilterCards] = useState(lostPets);
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = filterCards.slice(indexOfFirstCard, indexOfLastCard);
+  const [totalCards, setTotalCards] = useState(cards.length);
+  const lastPage = Math.ceil(totalCards / cardsPerPage);
 
   const handleOnFilter = (value) => {
-    setFilter(true);
-    setParameter(value)
-  };
+    if (Object.keys(value).length !== 0) {
+      const cardsFilter = cards.filter((item) => {
+        const keys = Object.keys(value);
+        return keys.every((key) => item.filter[key] === value[key]);
+      });
 
-  const filterLess = () => {
-    setFilter(false)
-  }
+      setFilterCards(cardsFilter);
+      setTotalCards(cardsFilter.length);
+      setCurrentPage(1);
+    } else {
+      setFilterCards(lostPets);
+      setTotalCards(lostPets.length);
+      setCurrentPage(1);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <> 
+    <>
       <Box>
         <h1>FOUND PETS</h1>
       </Box>
-      <Filter buttonFilter={handleOnFilter} filterLess={filterLess}/>
+      <Filter buttonFilter={handleOnFilter} />
       <Container
         maxWidth="lg"
         sx={{
@@ -37,87 +53,28 @@ const FoundPets = () => {
           justifyContent: 'center',
         }}
       >
-        {!filter &&
-          lostPets.map((item) => (
-            <CardsPet
-              description={item.date + ' - \n' + item.description}
-              button={'More Details'}
-              img_src={item.image}
-              filter={item.filter}
-              addressRoad={item.addressRoad}
-              addressNumber={item.addressNumber}
-              phone={item.phone}
-            />
-          ))}
+        {currentCards.map((item, index) => (
+          <CardsPet
+            key={index}
+            description={item.date + ' - \n' + item.description}
+            button={'More Details'}
+            img_src={item.image}
+            filter={item.filter}
+            addressRoad={item.addressRoad}
+            addressNumber={item.addressNumber}
+            phone={item.phone}
+          />
+        ))}
 
-        {filter &&
-          lostPets
-            .filter((item) => {
-              const keys = Object.keys(parameter)
-
-              return keys.every(key => item.filter[key] === parameter[key])
-            }
-              )
-            .map((item) => (
-              <CardsPet
-                description={item.date + ' - \n' + item.description}
-                button={'More Details'}
-                img_src={item.image}
-                filter={item.filter}
-                addressRoad={item.addressRoad}
-                addressNumber={item.addressNumber}
-                phone={item.phone}
-              />
-            ))}
-
-        {/* <CardsPet
-          title={'Firulais'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.vitake.net/wp-content/uploads/2015/04/ny6-300x300.jpg'
-          }
+        <Pagination
+          page={currentPage}
+          count={lastPage}
+          color="primary"
+          onChange={(event, value) => {
+            setCurrentPage(value);
+            window.scrollTo(0, 0);
+          }}
         />
-        <CardsPet
-          title={'Toto'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.vitake.net/wp-content/uploads/2015/04/ny8-300x300.jpg'
-          }
-        />
-        <CardsPet
-          title={'Homer'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://www.vitake.net/wp-content/uploads/2015/04/ny3-300x300.jpg'
-          }
-        />
-        <CardsPet
-          title={'Michi'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://smylepets.com/wp-content/uploads/2021/04/dragon-li-gato-300x300.jpg'
-          }
-        />
-        <CardsPet
-          title={'Negrita'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://fordogtrainers.es/images/razas-de-perros/C/perro-de-raza-cazador-de-mapaches-negro-y-bronce.jpg'
-          }
-        />
-        <CardsPet
-          title={'Tom'}
-          description={'Encontrado el dia 22-02-2022'}
-          button={'Más Detalles'}
-          img_src={
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREtlldYkYu2uL4lBd3R9EPmeH_mRvl3UrSRJV7K5uwniw2A7DOaruTtDHlwRDqLEL0o3Q&usqp=CAU'
-          }
-        /> */}
       </Container>
     </>
   );
