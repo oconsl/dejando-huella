@@ -1,6 +1,6 @@
 import { useState } from 'react';
 //MATERIAL UI
-import { 
+import {
   Box,
   Avatar,
   Typography,
@@ -10,14 +10,14 @@ import {
   FormHelperText,
   InputLabel,
   InputAdornment,
-  Button, 
+  Button,
   IconButton,
 } from '@mui/material';
 //MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-//UTILS 
+//UTILS
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -27,12 +27,12 @@ async function loginUser(credentials) {
       body: {
         username: credentials.username,
         password: credentials.password,
-      }
+      },
     })
-    .then(response => response.data);
+    .then((response) => response.data);
 }
 
-const Login = ({setToken}) => {
+const Login = ({ setToken }) => {
   const [userData, setUserData] = useState({
     username: '',
     password: '',
@@ -42,7 +42,7 @@ const Login = ({setToken}) => {
 
   const handleUserDataChange = (key) => (event) => {
     setError(false);
-    setUserData({...userData,[key]: event.target.value});
+    setUserData({ ...userData, [key]: event.target.value });
   };
 
   const handleClickShowPassword = () => {
@@ -53,87 +53,91 @@ const Login = ({setToken}) => {
     event.preventDefault();
 
     const response = await loginUser(userData);
-    
-    response === 'Invalid credentials' ? setError(true) : setToken(response);    
+
+    response === 'Invalid credentials' ? setError(true) : setToken(response);
   };
 
   return (
     <Container component='main' maxWidth='xs'>
-        <Box
-          component='form'
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            mt: 8,
-          }}
-          autoComplete='off'
-          onSubmit={handleLogIn}
+      <Box
+        component='form'
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          mt: 8,
+        }}
+        autoComplete='off'
+        onSubmit={handleLogIn}
+      >
+        <Avatar sx={{ m: 1, backgroundColor: 'lightcoral' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component='h1' variant='h5'>
+          Log in
+        </Typography>
+        <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
+          <InputLabel htmlFor='username-component' error={error}>
+            Username
+          </InputLabel>
+          <OutlinedInput
+            error={error}
+            id='username-component'
+            name='username'
+            value={userData.username}
+            onChange={handleUserDataChange('username')}
+            label='Username'
+            inputProps={{
+              inputMode: 'text',
+              pattern: '^[A-Za-z0-9]*$',
+            }}
+          />
+        </FormControl>
+        <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
+          <InputLabel htmlFor='password-component-password' error={error}>
+            Password
+          </InputLabel>
+          <OutlinedInput
+            error={error}
+            id='password-component'
+            name='password'
+            type={showPassword ? 'text' : 'password'}
+            value={userData.password}
+            onChange={handleUserDataChange('password')}
+            endAdornment={
+              <InputAdornment position='end'>
+                <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleClickShowPassword}
+                  edge='end'
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label='Password'
+          />
+          {error && (
+            <FormHelperText id='password-component-error-text' error>
+              Invalid credentials.
+            </FormHelperText>
+          )}
+        </FormControl>
+        <Button
+          type='submit'
+          variant='contained'
+          fullWidth
+          sx={{ mt: 3, mb: 2 }}
         >
-          <Avatar sx={{ m: 1, backgroundColor: 'lightcoral' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component='h1' variant='h5'>
-            Log in
-          </Typography>
-          <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
-            <InputLabel htmlFor='username-component' error={error}>
-              Username
-            </InputLabel>
-            <OutlinedInput
-              error={error}
-              id='username-component'
-              name='username'
-              value={userData.username}
-              onChange={handleUserDataChange('username')}
-              label='Username'
-              inputProps={{
-                inputMode: 'text',
-                pattern: '^[A-Za-z0-9]*$',
-              }}
-            />
-          </FormControl>
-          <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
-            <InputLabel htmlFor='password-component-password' error={error}>
-              Password
-            </InputLabel>
-            <OutlinedInput
-              error={error}
-              id='password-component'
-              name='password'
-              type={showPassword ? 'text' : 'password'}
-              value={userData.password}
-              onChange={handleUserDataChange('password')}
-              endAdornment={
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='toggle password visibility'
-                    onClick={handleClickShowPassword}
-                    edge='end'
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label='Password'
-            />
-            {error && <FormHelperText id="password-component-error-text" error>Invalid credentials.</FormHelperText>}
-          </FormControl>
-          <Button
-            type='submit'
-            variant='contained'
-            fullWidth
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Log In
-          </Button>
-        </Box>
+          Log In
+        </Button>
+      </Box>
     </Container>
   );
 };
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-}
+  setToken: PropTypes.func.isRequired,
+};
 
 export default Login;

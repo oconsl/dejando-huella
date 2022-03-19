@@ -12,34 +12,19 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import axios from 'axios';
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [userData, serUserData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    username: '',
+    password: '',
+  });
   const [success, setSuccess] = useState(false);
 
-  const handleChangeFirstName = (event) => {
-    setFirstName(event.target.value);
+  const handleUserDataChange = (key) => (event) => {
+    setUserDate({...userDate,[key]: event.target.value});
   };
 
-  const handleChangeLastName = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleChangeUsername = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  // MODIFY WHEN USER DB IS UP
   const handleSignUp = (event) => {
     event.preventDefault();
 
@@ -84,13 +69,17 @@ const SignUp = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete='given-name'
-                  name='firstName'
                   required
                   fullWidth
-                  id='firstName'
+                  name='firstName'
                   label='First Name'
-                  onChange={handleChangeFirstName}
+                  id='firstName'
+                  autoComplete='given-name'
+                  onChange={handleUserDataChange('firstName')}
+                  inputProps={{
+                    inputMode: 'text',
+                    pattern: '^[a-zA-Z\\s]+$',
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -101,7 +90,11 @@ const SignUp = () => {
                   label='Last Name'
                   name='lastName'
                   autoComplete='family-name'
-                  onChange={handleChangeLastName}
+                  onChange={handleUserDataChange('lastName')}
+                  inputProps={{
+                    inputMode: 'text',
+                    pattern: '^[a-zA-Z\\s]+$',
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -112,7 +105,11 @@ const SignUp = () => {
                   label='User Name'
                   name='username'
                   autoComplete='family-name'
-                  onChange={handleChangeUsername}
+                  onChange={handleUserDataChange('username')}
+                  inputProps={{
+                    inputMode: 'text',
+                    pattern: '^[a-zA-Z0-9]+$',
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -123,7 +120,11 @@ const SignUp = () => {
                   label='Email Address'
                   name='email'
                   autoComplete='email'
-                  onChange={handleChangeEmail}
+                  onChange={handleUserDataChange('email')}
+                  inputProps={{
+                    inputMode: 'text',
+                    pattern: '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,3}$',
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -135,7 +136,7 @@ const SignUp = () => {
                   type='password'
                   id='password'
                   autoComplete='new-password'
-                  onChange={handleChangePassword}
+                  onChange={handleUserDataChange('password')}
                 />
               </Grid>
             </Grid>
