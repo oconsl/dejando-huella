@@ -101,17 +101,6 @@ const usersController = (User) => {
     });
   };
 
-  // Verify Token
-  const verifyToken = (req, res) => {
-    try {
-      const { body } = req.body;
-      jwt.verify(body.token, process.env.TOKEN_SECRET);
-      res.status(200).json(true);
-    } catch (error) {
-      res.json(false);
-    }
-  };
-
   return { postUser, getUsers, putUser, deleteUser, login, verifyToken };
 };
 

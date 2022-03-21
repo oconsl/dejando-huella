@@ -7,14 +7,16 @@ const idValidator = require('../validations/idValidator');
 const routes = (User) => {
   const userRouter = express.Router();
 
-  const { getUsers, postUser, putUser, deleteUser, login, verifyToken } =
+  const { getUsers, postUser, putUser, deleteUser, login } =
     usersController(User);
 
   userRouter.route('/users').get(getUsers);
 
-  userRouter.route('/users/login').post(login);
+  userRouter
+    .route('/users/signup')
+    .post(validator.body(bodyValidator), postUser);
 
-  userRouter.route('/users/auth').post(verifyToken);
+  userRouter.route('/users/login').post(login);
 
   userRouter
     .route('/users/signup')

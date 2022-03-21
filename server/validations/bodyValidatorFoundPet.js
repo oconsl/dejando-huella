@@ -23,7 +23,6 @@ const bodySchemaFilter = Joi.object({
 
 const bodySchema = Joi.object({
   username: Joi.string().required(),
-  petName: Joi.string().required(),
   description: Joi.string().required(),
   phone: Joi.string().required(),
   addressNumber: Joi.string().required(),
