@@ -10,19 +10,20 @@ const routes = (User) => {
   const { getUsers, postUser, putUser, deleteUser, login, verifyToken } =
     usersController(User);
 
+  userRouter.route('/users').get(getUsers);
+
+  userRouter.route('/users/login').post(login);
+
+  userRouter.route('/users/auth').post(verifyToken);
+
   userRouter
-    .route('/users')
-    .get(getUsers)
+    .route('/users/signup')
     .post(validator.body(bodyValidator), postUser);
 
   userRouter
     .route('/users/:userId')
     .put(validator.params(idValidator), validator.body(bodyValidator), putUser)
     .delete(validator.params(idValidator), deleteUser);
-
-  userRouter.route('/users/login').post(login);
-
-  userRouter.route('/users/auth').post(verifyToken);
 
   return userRouter;
 };

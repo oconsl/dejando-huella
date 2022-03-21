@@ -37,7 +37,9 @@ app.all(
   expressJwt({
     secret: process.env.TOKEN_SECRET,
     algorithms: ['HS256'],
-  }).unless({ path: ['/api/users/login', '/api/users/auth'] })
+  }).unless({
+    path: ['/api/users/login', '/api/users/auth', '/api/users/signup'],
+  })
 );
 
 app.use('/api', userRouter);
