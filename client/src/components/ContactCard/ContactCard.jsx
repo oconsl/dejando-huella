@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, IconButton } from '@mui/material';
+import { CardActions, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { fetchGithubData } from '../../services';
 
@@ -25,7 +25,7 @@ const ContactCard = ({user}) => {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+      <CardContent>
         <CardMedia
           component="img"
           height="300"
@@ -45,7 +45,7 @@ const ContactCard = ({user}) => {
             <GitHubIcon />
           </IconButton>
         </CardActions>
-      </CardActionArea>
+      </CardContent>
     </Card>
   );
 };

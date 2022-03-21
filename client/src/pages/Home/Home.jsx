@@ -1,8 +1,12 @@
 import React from 'react'
+import SignUp from '../../components/SignUp/SignUp';
+import Login from '../../components/Login/Login';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      HOME
+    </div>
   )
 }
 

@@ -27,9 +27,7 @@ const MatchPet = ({ testimonyData, flexVariant }) => {
             {`"${testimonyData.petName}" & ${testimonyData.username}`}
           </Typography>
           <Typography variant='body2' color='text.primary'>
-            {
-              testimonyData.testimony
-            }
+            {testimonyData.testimony}
           </Typography>
         </CardContent>
       </CardContent>

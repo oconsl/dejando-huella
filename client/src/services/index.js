@@ -10,3 +10,9 @@ export const fetchGithubData = ({ setUserData, user }) => {
     });
   });
 };
+
+export const fetchMatchPetsData = ({ setMatchPets }) => {
+  return axios.get('http://localhost:5001/match-pets').then((res) => {
+    setMatchPets(res.data);
+  });
+};

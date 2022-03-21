@@ -4,11 +4,9 @@ import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 import MatchPet from '../../components/MatchPet/MatchPet';
 import MatchPetSkeleton from '../../components/MatchPet/utils/MatchPetSkeleton';
+import { fetchMatchPetsData } from '../../services';
 
-//DELETE THIS
-// const matchPets = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
-const matchPets = [
+const matchPetsData = [
   {
     username: 'Ryan',
     image: 'https://i.ytimg.com/vi/RKBcs9tNWg8/maxresdefault.jpg',
@@ -49,11 +47,12 @@ const matchPets = [
   },
 ];
 
-const Opinions = () => {
+const MatchPets = () => {
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
+  const [matchPets, setMatchPets] = useState(matchPetsData);
   const [matchPetsGroups, setMatchPetsGroups] = useState([[1]]);
-  const skeletonCount = new Array(4 - matchPets.length % 4).fill(false);
+  const skeletonCount = new Array(4 - (matchPets.length % 4)).fill(false);
   const navigate = useNavigate();
 
   const handleChange = (event, value) => {
@@ -61,8 +60,7 @@ const Opinions = () => {
   };
 
   useEffect(() => {
-    navigate(`/match-pet/${page}`);
-    console.log(skeletonCount)
+    navigate(`/match-pets/${page}`);
   }, [page]);
 
   useEffect(() => {
@@ -79,9 +77,10 @@ const Opinions = () => {
 
     const subArray = splitArrayIntoSubArrays();
 
+    fetchMatchPetsData({ setMatchPets });
     setMatchPetsGroups(subArray);
     setMaxPage(subArray.length);
-  }, []);
+  }, [matchPets]);
 
   return (
     <>
@@ -95,26 +94,34 @@ const Opinions = () => {
         {matchPetsGroups &&
           matchPetsGroups[page - 1].map((item, index) => {
             if (page === maxPage && index === 3 - skeletonCount.length) {
-              if(skeletonCount.length === 3){
+              if (skeletonCount.length === 3) {
                 skeletonCount[0] = true;
               }
 
               return (
-              <>
-                <MatchPet testimonyData={item}
-                  flexVariant={index === 0 || index === 1}/>
-                {
-                  skeletonCount.map((content) => {
-                    return <MatchPetSkeleton flexVariant={content}/>
-                  })                  
-                }
-              </>)
+                <>
+                  <MatchPet
+                    testimonyData={item}
+                    key={`${page}-${index}`}
+                    flexVariant={index === 0 || index === 1}
+                  />
+                  {skeletonCount.map((content, subIndex) => {
+                    return (
+                      <MatchPetSkeleton
+                        key={`${page}${subIndex}`}
+                        flexVariant={content}
+                      />
+                    );
+                  })}
+                </>
+              );
             }
 
             return (
               <>
                 <MatchPet
                   testimonyData={item}
+                  key={`${page}-${index}`}
                   flexVariant={index === 0 || index === 1}
                 />
               </>
@@ -131,9 +138,4 @@ const Opinions = () => {
   );
 };
 
-export default Opinions;
-
-
-// 3 2 1 0
-// V F F   F F   F
-// 
+export default MatchPets;

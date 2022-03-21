@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 
 const useToken = () => {
   const getToken = () => {
@@ -19,21 +18,20 @@ const useToken = () => {
     setToken(getToken());
   };
 
-  const verifyToken = async () => {
-    return axios
-      .post('http://localhost:5001/api/users/auth',{
-        body: {
-          token: token
-        }
-      })
-      .then((response) => response.data);
-  };
+  // const verifyToken = async () => {
+  //   return axios
+  //     .post('http://localhost:5001/api/users/auth',{
+  //       body: {
+  //         token: token
+  //       }
+  //     })
+  //     .then((response) => response.data);
+  // };
 
   return {
     setToken: saveToken,
     token,
     logOut,
-    verifyToken,
   };
 };
 

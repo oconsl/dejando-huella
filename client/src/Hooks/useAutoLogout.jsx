@@ -1,23 +1,27 @@
 import { useEffect, useState } from 'react';
+import useToken from './useToken';
 
-const useLogout = (startTime) => {
+const useAutoLogout = (startTime) => {
   const [timer, setTimer] = useState(startTime);
+  const { token, logOut } = useToken();
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
       if (timer > 0) {
         setTimer(timer - 1);
+      } else if (timer === 0) {
+        logOut();
       }
-    }, 5000);
+    }, 1000);
 
     const resetTimeout = () => {
-      setTimer(startTime);
+      if(token) setTimer(startTime);
     };
 
     const events = [
       'load',
-      'mousemove',
       'mousedown',
+      'mousemove',
       'click',
       'scroll',
       'keypress',
@@ -34,4 +38,4 @@ const useLogout = (startTime) => {
   return timer;
 };
 
-export default useLogout;
+export default useAutoLogout;

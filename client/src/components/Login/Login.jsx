@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 //MATERIAL UI
 import {
   Box,
@@ -12,6 +13,7 @@ import {
   InputAdornment,
   Button,
   IconButton,
+  Dialog,
 } from '@mui/material';
 //MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -39,6 +41,7 @@ const Login = ({ setToken }) => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const handleUserDataChange = (key) => (event) => {
     setError(false);
@@ -54,7 +57,11 @@ const Login = ({ setToken }) => {
 
     const response = await loginUser(userData);
 
-    response === 'Invalid credentials' ? setError(true) : setToken(response);
+    if (response === 'Invalid credentials') setError(true);
+    else {
+      setToken(response);
+      navigate('/');
+    }
   };
 
   return (
