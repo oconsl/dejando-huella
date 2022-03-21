@@ -8,18 +8,17 @@ const cors = require('cors');
 const expressJwt = require('express-jwt');
 
 const User = require('./models/userModel');
-const AdoptedPet = require('./models/adoptedPetModel');
-const FoundPet = require('./models/foundPetModel');
 const LostPet = require('./models/lostPetModel');
+const FoundPet = require('./models/foundPetModel');
+const AdoptedPet = require('./models/adoptedPetModel');
 const MatchPet = require('./models/matchPetModel');
-
 
 const deleteFiles = require('./middleware/deleteFiles');
 const PORT = process.env.PORT || 8080;
 const userRouter = require('./routes/userRouter')(User);
-const adoptedPetRouter = require('./routes/adoptedPetRouter')(AdoptedPet);
-const foundPetRouter = require('./routes/foundPetRouter')(FoundPet);
 const lostPetRouter = require('./routes/lostPetRouter')(LostPet);
+const foundPetRouter = require('./routes/foundPetRouter')(FoundPet);
+const adoptedPetRouter = require('./routes/adoptedPetRouter')(AdoptedPet);
 const matchPetRouter = require('./routes/matchPetRouter')(MatchPet);
 
 const app = express();
@@ -33,6 +32,14 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(
+  '/api',
+  userRouter,
+  lostPetRouter,
+  foundPetRouter,
+  adoptedPetRouter,
+  matchPetRouter
+);
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, 'storage/imgs'),
