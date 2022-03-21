@@ -8,10 +8,13 @@ import {
   Avatar,
   Grid,
   TextField,
+  Button,
 } from '@mui/material';
 //MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+//MATERIAL TRANSITIONS
+import Grow from '@mui/material/Grow';
 //UTILS
 import axios from 'axios';
 
@@ -32,14 +35,9 @@ const SignUp = () => {
   const handleSignUp = (event) => {
     event.preventDefault();
 
+    console.log(userData);
     axios
-      .post('http://localhost:5001/api/users', {
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
-        email: email,
-        password: password,
-      })
+      .post('http://localhost:5001/api/users/signup', userData)
       .then((res) => {
         if (res.status === 200) {
           setSuccess(true);
@@ -127,7 +125,7 @@ const SignUp = () => {
                   onChange={handleUserDataChange('email')}
                   inputProps={{
                     inputMode: 'text',
-                    pattern: '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,3}$',
+                    pattern: '^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$',
                   }}
                 />
               </Grid>
@@ -156,20 +154,22 @@ const SignUp = () => {
         </Box>
       )}
       {success && (
-        <Box
-          sx={{
-            mt: 8,
-            mb: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography sx={{ fontWeight: 'bold', fontSize: '1.5em', mb: 4 }}>
-            Signed Up Successfully
-          </Typography>
-          <CheckCircleIcon sx={{ color: 'green', transform: 'scale(3)' }} />
-        </Box>
+        <Grow in={true}>
+          <Box
+            sx={{
+              mt: 8,
+              mb: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Typography sx={{ fontWeight: 'bold', fontSize: '1.5em', mb: 4 }}>
+              Signed Up Successfully
+            </Typography>
+            <CheckCircleIcon sx={{ color: 'green', transform: 'scale(3)' }} />
+          </Box>
+        </Grow>
       )}
     </Container>
   );
