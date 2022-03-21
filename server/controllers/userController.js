@@ -98,21 +98,12 @@ const usersController = (User) => {
     const tokenPayload = {
       username: user.username,
     };
-    return jwt.sign(tokenPayload, process.env.TOKEN_SECRET,{expiresIn: '3m'});
+    return jwt.sign(tokenPayload, process.env.TOKEN_SECRET, {
+      expiresIn: '30m',
+    });
   };
 
-  // VERIFY TOKEN
-  const verifyToken = (req, res) => {
-    try{
-      const {body} = req.body;
-      jwt.verify(body.token, process.env.TOKEN_SECRET);
-      res.status(200).json(true);
-    }catch(err){
-      res.json(false)
-    }
-  }
-
-  return { postUser, getUsers, putUser, deleteUser, login, verifyToken };
+  return { postUser, getUsers, putUser, deleteUser, login };
 };
 
 module.exports = usersController;

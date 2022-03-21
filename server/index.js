@@ -6,10 +6,21 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const expressJwt = require('express-jwt');
+
 const User = require('./models/userModel');
+const AdoptedPet = require('./models/adoptedPetModel');
+const FoundPet = require('./models/foundPetModel');
+const LostPet = require('./models/lostPetModel');
+const MatchPet = require('./models/matchPetModel');
+
+
 const deleteFiles = require('./middleware/deleteFiles');
 const PORT = process.env.PORT || 8080;
 const userRouter = require('./routes/userRouter')(User);
+const adoptedPetRouter = require('./routes/adoptedPetRouter')(AdoptedPet);
+const foundPetRouter = require('./routes/foundPetRouter')(FoundPet);
+const lostPetRouter = require('./routes/lostPetRouter')(LostPet);
+const matchPetRouter = require('./routes/matchPetRouter')(MatchPet);
 
 const app = express();
 
@@ -37,9 +48,9 @@ app.all(
   expressJwt({
     secret: process.env.TOKEN_SECRET,
     algorithms: ['HS256'],
-  }).unless({ path: ['/api/users/login', '/api/users/auth'] })
+  }).unless({ path: ['/api/users/login', '/api/users/signup'] })
 );
 
-app.use('/api', userRouter);
+app.use('/api', userRouter, adoptedPetRouter, foundPetRouter, lostPetRouter, matchPetRouter);
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
