@@ -1,9 +1,7 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Paper, Button, Typography, Box } from "@mui/material";
-import { green } from "@mui/material/colors";
+import { Paper, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import Icon from "@mui/material/Icon";
 import './Carousel.css'
 
 function MyCarousel() {
@@ -84,7 +82,7 @@ function Item(props) {
         <Typography className={classes.description} sx={{textShadow: '2px 2px 2px black'}} variant="h5">{props.item.description}</Typography>
       </div>
 
-      <img className={classes.img_responsive} src={props.item.img_src} />
+      <img className={classes.img_responsive} src={props.item.img_src} alt='image'/>
     </Paper>
   );
 }
