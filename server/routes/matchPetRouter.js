@@ -3,13 +3,13 @@ const matchPetController = require('../controllers/matchPetController');
 
 const routes = (MatchPet) => {
   const matchPetRouter = express.Router();
-  const { getMatchPets, postMatchPet, putMatchPetById, deleteMatchPetById } =
+  const { getMatchPet, postMatchPet, putMatchPetById, deleteMatchPetById } =
     matchPetController(MatchPet);
 
-  matchPetRouter.route('/match-pets').get(getMatchPets).post(postMatchPet);
+  matchPetRouter.route('/match-pet').get(getMatchPet).post(postMatchPet);
 
   matchPetRouter
-    .route('/match-pets/:matchPetsId')
+    .route('/match-pet/:matchPetId')
     .put(putMatchPetById)
     .delete(deleteMatchPetById);
 
