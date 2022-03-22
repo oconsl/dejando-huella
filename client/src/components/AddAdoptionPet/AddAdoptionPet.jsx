@@ -38,6 +38,7 @@ import {
   furOptions,
 } from '../../utils/petOptions';
 //UTIL FUNCTION
+import formatDate from '../../utils/formatDate';
 import { sendAdoptionPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
@@ -86,6 +87,7 @@ const AddAdoptionPet = () => {
         specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,
+      data: formatDate(new Date()),
       image: file,
       addressRoad: address,
     };

@@ -6,16 +6,18 @@ cloudinary.config({
 });
 
 const lostPetController = (LostPet) => {
+  //GET
   const getLostPet = async (req, res) => {
     const { query } = req;
     const response = await LostPet.find(query);
     res.json(response);
   };
 
+  //POST
   const postLostPet = async (req, res) => {
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
-
     try {
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+
       const {
         username,
         petName,
@@ -49,6 +51,7 @@ const lostPetController = (LostPet) => {
     }
   };
 
+  //PUT
   const putLostPetById = async (req, res) => {
     try {
       const { body } = req;
@@ -76,6 +79,7 @@ const lostPetController = (LostPet) => {
     }
   };
 
+  //DELETE
   const deleteLostPetById = async (req, res) => {
     try {
       const id = req.params.lostPetId;
