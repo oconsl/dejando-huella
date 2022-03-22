@@ -40,7 +40,6 @@ import {
 import formatDate from '../../utils/formatDate';
 import { sendLostPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
-import axios from 'axios';
 
 const AddLostPet = () => {
   //PET
@@ -73,7 +72,6 @@ const AddLostPet = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(file);
     const lostPetDataBody = new FormData();
 
     const dataBody = {
@@ -90,8 +88,7 @@ const AddLostPet = () => {
     };    
     const lostPetData = jsonToFormData(dataBody,lostPetDataBody);
     
-    sendLostPetData({ lostPetData });
-    
+    sendLostPetData({ lostPetData });    
   };
 
   const handleOpenCrop = () => setOpenCrop(true);

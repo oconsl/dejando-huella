@@ -38,6 +38,8 @@ import {
 } from '../../utils/petOptions';
 //UTIL FUNCTION
 import formatDate from '../../utils/formatDate';
+import jsonToFormData from '../../utils/jsonToFormData';
+import sendFoundPetData from '../../services';
 
 const AddFoundPet = () => {
   //PET
@@ -69,7 +71,10 @@ const AddFoundPet = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log({
+    const foundPetDataBody = new FormData();
+
+    const dataBody = {
+      username: 'test',
       ...textData,
       filters: {
         ...optionData,
@@ -79,7 +84,10 @@ const AddFoundPet = () => {
       image: file,
       addressRoad: address,
       date: formatDate(date),
-    });
+    };
+    const foundPetData = jsonToFormData(dataBody,foundPetDataBody);
+
+    sendFoundPetData({ foundPetData });
   };
 
   const handleOpenCrop = () => setOpenCrop(true);

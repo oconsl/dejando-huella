@@ -31,3 +31,33 @@ export const sendLostPetData = ({ lostPetData }) => {
       console.log(response);
     });
 };
+
+export const sendFoundPetData = ({ foundPetData }) => {
+  return axios({
+    method: 'post',
+    url: 'http://localhost:5001/api/found-pet',
+    data: foundPetData,
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (response) {
+      console.log(response);
+    });
+};
+
+export const sendAdoptionPetData = ({ adoptionPetData }) => {
+  return axios({
+    method: 'post',
+    url: 'http://localhost:5001/api/adoption-pet',
+    data: adoptionPetData,
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (response) {
+      console.log(response);
+    });
+};
