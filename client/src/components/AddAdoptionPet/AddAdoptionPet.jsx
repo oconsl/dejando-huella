@@ -37,6 +37,10 @@ import {
   ageDogOptions,
   furOptions,
 } from '../../utils/petOptions';
+//UTIL FUNCTION
+import formatDate from '../../utils/formatDate';
+import { sendAdoptionPetData } from '../../services';
+import jsonToFormData from '../../utils/jsonToFormData';
 
 const AddAdoptionPet = () => {
   //PET
@@ -73,7 +77,9 @@ const AddAdoptionPet = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log({
+    const adoptionPetDataBody = new FormData();
+
+    const dataBody = {
       ...textData,
       filters: {
         ...optionData,
@@ -81,9 +87,13 @@ const AddAdoptionPet = () => {
         specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,
+      data: formatDate(new Date()),
       image: file,
       addressRoad: address,
-    });
+    };
+    const adoptionPetData = jsonToFormData(dataBody, adoptionPetDataBody);
+
+    sendAdoptionPetData({ adoptionPetData });
   };
 
   const handleOpenCrop = () => setOpenCrop(true);

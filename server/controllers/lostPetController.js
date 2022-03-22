@@ -6,16 +6,18 @@ cloudinary.config({
 });
 
 const lostPetController = (LostPet) => {
-  const getLostPet = async (req, res) => {
+  //GET
+  const getLostPets = async (req, res) => {
     const { query } = req;
     const response = await LostPet.find(query);
     res.json(response);
   };
 
+  //POST
   const postLostPet = async (req, res) => {
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
-
     try {
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+
       const {
         username,
         petName,
@@ -43,15 +45,19 @@ const lostPetController = (LostPet) => {
       });
 
       await lostPet.save();
-      res.json('Successful');
+      res.json('Uploaded successfully.');
     } catch (err) {
       res.json('Error');
     }
   };
 
+  //PUT
   const putLostPetById = async (req, res) => {
     try {
       const { body } = req;
+
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+
       const response = await LostPet.findByIdAndUpdate(req.params.lostPetId, {
         username: body.username,
         petName: body.petName,
@@ -60,34 +66,34 @@ const lostPetController = (LostPet) => {
         addressNumber: body.addressNumber,
         addressRoad: body.addressRoad,
         latLng: body.latLng,
-        image: body.image,
         date: body.date,
         filter: body.filter,
+        imgURL: result.url,
+        cloudinary: result.public_id,
       });
-      res.json(response);
+      cloudinary.v2.uploader.destroy(response.cloudinary);
+
+      res.json('Updated successfully.');
     } catch (err) {
-      if (err.name === 'ValidationError') {
-        let errors = {};
-        Object.keys(err.errors).forEach((key) => {
-          errors[key] = err.errors[key].message;
-        });
-        return res.json(errors);
-      }
       res.json('Error');
     }
   };
 
+  //DELETE
   const deleteLostPetById = async (req, res) => {
     try {
       const id = req.params.lostPetId;
-      await LostPet.findByIdAndDelete(id);
-      res.json('Pet has been deleted.');
+      const lostPet = await LostPet.findByIdAndDelete(id);
+
+      cloudinary.v2.uploader.destroy(lostPet.cloudinary);
+
+      res.json('Deleted successfully.');
     } catch (err) {
       res.json('Error');
     }
   };
 
-  return { getLostPet, postLostPet, putLostPetById, deleteLostPetById };
+  return { getLostPets, postLostPet, putLostPetById, deleteLostPetById };
 };
 
 module.exports = lostPetController;
