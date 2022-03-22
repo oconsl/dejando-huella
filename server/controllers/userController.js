@@ -13,7 +13,7 @@ const usersController = (User) => {
   const postUser = async (req, res, next) => {
     try {
       // const result = await cloudinary.v2.uploader.upload(req.file.path);
-      console.log(req.headers)
+      console.log(req.headers);
 
       const { firstName, lastName, email, username, password } = req.body;
 
@@ -47,6 +47,7 @@ const usersController = (User) => {
       const { body } = req;
 
       const result = await cloudinary.v2.uploader.upload(req.file.path);
+
       const updatedUser = await User.findByIdAndUpdate(req.params.userId, {
         firstName: body.firstName,
         lastName: body.lastName,

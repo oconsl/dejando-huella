@@ -43,7 +43,7 @@ const lostPetController = (LostPet) => {
       });
 
       await lostPet.save();
-      res.json('Successful');
+      res.json('Uploaded successfully.');
     } catch (err) {
       res.json('Error');
     }
@@ -52,6 +52,9 @@ const lostPetController = (LostPet) => {
   const putLostPetById = async (req, res) => {
     try {
       const { body } = req;
+
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+
       const response = await LostPet.findByIdAndUpdate(req.params.lostPetId, {
         username: body.username,
         petName: body.petName,
@@ -60,19 +63,15 @@ const lostPetController = (LostPet) => {
         addressNumber: body.addressNumber,
         addressRoad: body.addressRoad,
         latLng: body.latLng,
-        image: body.image,
         date: body.date,
         filter: body.filter,
+        imgURL: result.url,
+        cloudinary: result.public_id,
       });
-      res.json(response);
+      cloudinary.v2.uploader.destroy(response.cloudinary);
+
+      res.json('Updated successfully.');
     } catch (err) {
-      if (err.name === 'ValidationError') {
-        let errors = {};
-        Object.keys(err.errors).forEach((key) => {
-          errors[key] = err.errors[key].message;
-        });
-        return res.json(errors);
-      }
       res.json('Error');
     }
   };
@@ -84,7 +83,7 @@ const lostPetController = (LostPet) => {
 
       cloudinary.v2.uploader.destroy(lostPet.cloudinary);
 
-      res.json('Pet has been deleted.');
+      res.json('Deleted successfully.');
     } catch (err) {
       res.json('Error');
     }
