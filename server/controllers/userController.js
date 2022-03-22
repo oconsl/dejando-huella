@@ -1,20 +1,9 @@
-const fs = require('fs-extra');
 const jwt = require('jsonwebtoken');
-
-const cloudinary = require('cloudinary');
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 const usersController = (User) => {
   // POST
-  const postUser = async (req, res, next) => {
+  const postUser = async (req, res) => {
     try {
-      // const result = await cloudinary.v2.uploader.upload(req.file.path);
-      console.log(req.headers);
-
       const { firstName, lastName, email, username, password } = req.body;
 
       const user = User({
@@ -29,51 +18,45 @@ const usersController = (User) => {
 
       res.status(200).json('Signed up successfully');
     } catch (err) {
-      console.log(err);
-      res.status(409).json(err);
+      res.json('Error');
     }
   };
 
   // GET
-  const getUsers = async (req, res, next) => {
+  const getUsers = async (req, res) => {
     const { query } = req;
     const response = await User.find(query);
     res.json(response);
   };
 
   // PUT
-  const putUser = async (req, res, next) => {
+  const putUser = async (req, res) => {
     try {
       const { body } = req;
 
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-
-      const updatedUser = await User.findByIdAndUpdate(req.params.userId, {
+      await User.findByIdAndUpdate(req.params.userId, {
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
         username: body.username,
         password: body.password,
-        imgURL: result.url,
-        public_id: result.public_id,
       });
-      cloudinary.v2.uploader.destroy(updatedUser.public_id);
 
-      res.json(updatedUser);
+      res.json('Updated successfully.');
     } catch (err) {
-      res.status(500).json(err);
+      res.json('Error');
     }
   };
 
   // DELETE
-  const deleteUser = async (req, res, next) => {
+  const deleteUser = async (req, res) => {
     try {
       const id = req.params.userId;
-      const user = await User.findByIdAndDelete(id);
-      cloudinary.v2.uploader.destroy(user.public_id);
-      res.json('Deleted');
+      await User.findByIdAndDelete(id);
+
+      res.json('Deleted successfully.');
     } catch (err) {
-      res.status(500).json("Mongo's error");
+      res.json('Error');
     }
   };
 
@@ -84,13 +67,12 @@ const usersController = (User) => {
       const response = await User.findOne({ username: body.username });
 
       if (response === null || body.password !== response.password) {
-        console.log('fallo');
         return res.json('Invalid credentials');
       }
       const token = generateToken(response);
       res.status(200).json(token);
     } catch (err) {
-      res.json(err);
+      res.json('Error');
     }
   };
 
