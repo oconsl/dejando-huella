@@ -1,0 +1,10 @@
+.nav-link:link,
+.nav-link:visited,
+.nav-link:active {
+  text-decoration: none;
+  color: black;
+}
+
+.login-reg-button > Button {
+  margin: 10px;
+}
