@@ -60,6 +60,18 @@ const usersController = (User) => {
     }
   };
 
+  // GET USER BY ID
+  const getUserById = async(req, res) => {
+    try{
+        const { params } = req;
+        const response = await User.findById(params.userId);
+
+        res.json(response);
+    }catch(err){
+      res.json('Error');
+    }
+}
+
   // LOGIN
   const login = async (req, res) => {
     try {
@@ -85,7 +97,7 @@ const usersController = (User) => {
     });
   };
 
-  return { postUser, getUsers, putUser, deleteUser, login };
+  return { postUser, getUsers, putUser, deleteUser, login, getUserById };
 };
 
 module.exports = usersController;

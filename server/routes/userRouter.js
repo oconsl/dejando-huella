@@ -7,7 +7,7 @@ const idValidator = require('../validations/idValidator');
 const routes = (User) => {
   const userRouter = express.Router();
 
-  const { getUsers, postUser, putUser, deleteUser, login } =
+  const { getUsers, postUser, putUser, deleteUser, login, getUserById } =
     usersController(User);
 
   userRouter.route('/users').get(getUsers);
@@ -20,6 +20,7 @@ const routes = (User) => {
 
   userRouter
     .route('/users/:userId')
+    .get(validator.params(idValidator), getUserById)
     .put(validator.params(idValidator), validator.body(bodyValidator), putUser)
     .delete(validator.params(idValidator), deleteUser);
 
