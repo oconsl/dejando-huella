@@ -1,10 +1,6 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Box, Button, Typography, Modal } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -36,7 +32,16 @@ const ModalFoundPets = (props) => {
               <CloseIcon />
             </Button>
             <Grid container spacing={5}>
-              <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+              <Grid
+                item
+                xs={12}
+                md={4}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <Box>
                   <Typography
                     id="modal-modal-title"
@@ -55,14 +60,23 @@ const ModalFoundPets = (props) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+              <Grid
+                item
+                xs={12}
+                md={4}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <Box>
                   <Typography
                     id="modal-modal-title"
                     variant="h6"
                     component="h2"
                   >
-                    Informacion
+                    Information
                   </Typography>
                 </Box>
                 <Box>
@@ -101,7 +115,16 @@ const ModalFoundPets = (props) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+              <Grid
+                item
+                xs={12}
+                md={4}
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <Box>
                   <Typography
                     id="modal-modal-title"

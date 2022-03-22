@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import CardsPet from '../../components/CardsPets/CardsPets';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Pagination } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
 import { lostPets } from '../../TestData/dataBaseLostPets';
 
 const Adoption = () => {
-  const [filter, setFilter] = useState(false);
-  const [parameter, setParameter] = useState({});
+  const [cards, setCards] = useState(lostPets);
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 9;
+  const [filterCards, setFilterCards] = useState(lostPets);
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = filterCards.slice(indexOfFirstCard, indexOfLastCard);
+  const [totalCards, setTotalCards] = useState(cards.length);
+  const lastPage = Math.ceil(totalCards / cardsPerPage);
 
   const handleOnFilter = (value) => {
-    setFilter(true);
-    setParameter(value);
-  };
+    if (Object.keys(value).length !== 0) {
+      const cardsFilter = cards.filter((item) => {
+        const keys = Object.keys(value);
+        return keys.every((key) => item.filter[key] === value[key]);
+      });
 
-  const filterLess = () => {
-    setFilter(false);
+      setFilterCards(cardsFilter);
+      setTotalCards(cardsFilter.length);
+      setCurrentPage(1);
+    } else {
+      setFilterCards(lostPets);
+      setTotalCards(lostPets.length);
+      setCurrentPage(1);
+    }
   };
 
   useEffect(() => {
@@ -24,9 +39,9 @@ const Adoption = () => {
   return (
     <>
       <Box>
-        <h1>ADOPTION</h1>
+        <h1>ADOPTION PETS</h1>
       </Box>
-      <Filter buttonFilter={handleOnFilter} filterLess={filterLess} />
+      <Filter buttonFilter={handleOnFilter} />
       <Container
         maxWidth="lg"
         sx={{
@@ -36,44 +51,30 @@ const Adoption = () => {
           justifyContent: 'center',
         }}
       >
-        {!filter &&
-          lostPets.map((item, index) => (
-            <CardsPet
-              key={index}
-              title={item.name}
-              description={item.date + ' - \n' + item.description}
-              button={'More Details'}
-              img_src={item.image}
-              filter={item.filter}
-              addressRoad={item.addressRoad}
-              addressNumber={item.addressNumber}
-              phone={item.phone}
-            />
-          ))
-        }
-
-        {filter &&
-          lostPets
-            .filter((item) => {
-              const keys = Object.keys(parameter);
-
-              return keys.every((key) => item.filter[key] === parameter[key]);
-            })
-            .map((item, index) => (
-              <CardsPet
-                key={index}
-                title={item.name}
-                description={item.date + ' - \n' + item.description}
-                button={'More Details'}
-                img_src={item.image}
-                filter={item.filter}
-                addressRoad={item.addressRoad}
-                addressNumber={item.addressNumber}
-                phone={item.phone}
-              />
-            ))
-        }
+        {currentCards.map((item, index) => (
+          <CardsPet
+            key={index}
+            title={item.name}
+            description={item.date + ' - \n' + item.description}
+            button={'More Details'}
+            img_src={item.image}
+            filter={item.filter}
+            addressRoad={item.addressRoad}
+            addressNumber={item.addressNumber}
+            phone={item.phone}
+          />
+        ))}
       </Container>
+      <Pagination
+        page={currentPage}
+        count={lastPage}
+        color="primary"
+        onChange={(event, value) => {
+          setCurrentPage(value);
+          window.scrollTo(0, 0);
+        }}
+        sx={{ display: 'flex', justifyContent: 'center' }}
+      />
     </>
   );
 };
