@@ -11,7 +11,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../Hooks/useToken';
 import './HeaderPet.css';
 
 const pages = ['Found Pets', 'Lost Pets', 'Adoption'];
@@ -20,6 +21,8 @@ const settings = ['Profile', 'Logout'];
 const HeaderPet = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
+  const { token } = useToken();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,6 +38,14 @@ const HeaderPet = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  }
+
+  const handleSignUpClick = () => {
+    navigate('/sign-up');
+  }
 
   return (
     <AppBar position="sticky">
@@ -132,18 +143,18 @@ const HeaderPet = (props) => {
             ))}
           </Box>
 
-          { !props.authentication && (
+          { !token && (
             <Box>
-              <Button sx={{m:1}} color="secondary" variant="contained">
+              <Button sx={{m:1}} color="secondary" variant="contained" onClick={handleLoginClick}>
                 Login
               </Button>
-              <Button sx={{m:1}} color="secondary" variant="contained">
+              <Button sx={{m:1}} color="secondary" variant="contained" onClick={handleSignUpClick}>
                 Register
               </Button>
             </Box>   
           )}
 
-          { props.authentication && (
+          { token && (
             <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
