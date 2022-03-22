@@ -5,7 +5,7 @@ import useToken from '../../hooks/useToken';
 import useAutoLogout from '../../hooks/useAutoLogout';
 
 const ProtectedRoutes = () => {
-  const timer = useAutoLogout(10);
+  const timer = useAutoLogout(300);
   const { token, setToken } = useToken();
   const [isAuth, setIsAuth] = useState(false);
 
