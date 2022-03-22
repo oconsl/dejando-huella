@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-=======
 import React, { useState } from 'react';
 import {
   AppBar,
@@ -21,7 +12,6 @@ import {
   Tooltip,
   MenuItem,
 } from '@mui/material';
->>>>>>> 42c35f536dbc5f8ecdfe00af1798381f3c16baa1
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
@@ -51,19 +41,9 @@ const HeaderPet = () => {
     setAnchorElUser(null);
   };
 
-<<<<<<< HEAD
   const handleMenuOptionClick = (setting) => () => {
     setting === 'Logout' ? logOut() : navigate('/profile');
   }
-=======
-  const handleLoginClick = () => {
-    navigate('/login');
-  };
-
-  const handleSignUpClick = () => {
-    navigate('/sign-up');
-  };
->>>>>>> 42c35f536dbc5f8ecdfe00af1798381f3c16baa1
 
   return (
     <AppBar position='sticky'>
@@ -144,11 +124,7 @@ const HeaderPet = () => {
             {pages.map((page, index) => (
               <Link
                 key={index}
-<<<<<<< HEAD
-                className='nav-link'
-=======
                 className="nav-link"
->>>>>>> 42c35f536dbc5f8ecdfe00af1798381f3c16baa1
                 to={`/${page.replace(' ', '-').toLocaleLowerCase()}`}
               >
                 <Button
@@ -162,7 +138,6 @@ const HeaderPet = () => {
               </Link>
             ))}
           </Box>
-<<<<<<< HEAD
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -194,63 +169,6 @@ const HeaderPet = () => {
               ))}
             </Menu>
           </Box>
-=======
-
-          {!token && (
-            <Box>
-              <Button
-                sx={{ m: 1 }}
-                color="secondary"
-                variant="contained"
-                onClick={handleLoginClick}
-              >
-                Login
-              </Button>
-              <Button
-                sx={{ m: 1 }}
-                color="secondary"
-                variant="contained"
-                onClick={handleSignUpClick}
-              >
-                Register
-              </Button>
-            </Box>
-          )}
-
-          {token && (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px', float: 'right' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting, index) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography key={index} textAlign="center">
-                      {setting}
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-          )}
->>>>>>> 42c35f536dbc5f8ecdfe00af1798381f3c16baa1
         </Toolbar>
       </Container>
     </AppBar>
