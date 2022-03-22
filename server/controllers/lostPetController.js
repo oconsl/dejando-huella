@@ -80,7 +80,10 @@ const lostPetController = (LostPet) => {
   const deleteLostPetById = async (req, res) => {
     try {
       const id = req.params.lostPetId;
-      await LostPet.findByIdAndDelete(id);
+      const lostPet = await LostPet.findByIdAndDelete(id);
+
+      cloudinary.v2.uploader.destroy(lostPet.cloudinary);
+
       res.json('Pet has been deleted.');
     } catch (err) {
       res.json('Error');
