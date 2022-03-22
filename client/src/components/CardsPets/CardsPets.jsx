@@ -1,29 +1,41 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import Modal from '../Modal/Modal'
+import React, { useState } from 'react';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  CardActionArea,
+  CardActions,
+} from '@mui/material';
+import Modal from '../Modal/Modal';
 import ModalImagePets from '../ModalImagePets/ModalImagePet';
-// import './CardsPets.css';
 
 const CardsPet = (props) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [openImage, setOpenImage] = React.useState(false)
+  const [openImage, setOpenImage] = useState(false);
   const handleOpenImage = () => setOpenImage(true);
   const handleCloseImage = () => setOpenImage(false);
 
   return (
-    <Card className="card" sx={{ maxWidth: 345 }}>
-      <ModalImagePets 
-          openImg={openImage}
-          closeImg={handleCloseImage}
-          img_src={props.img_src}
-        />
+    <Card
+      sx={{
+        margin: '15px',
+        width: '100%',
+        minWidth: '250px',
+        maxWidth: '345px',
+        height: '100%',
+        maxHeight: '350px',
+      }}
+    >
+      <ModalImagePets
+        openImg={openImage}
+        closeImg={handleCloseImage}
+        img_src={props.img_src}
+      />
       <CardActionArea onClick={handleOpenImage}>
         <CardMedia
           component="img"
@@ -41,19 +53,19 @@ const CardsPet = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={handleOpen} >
+        <Button size="small" color="primary" onClick={handleOpen}>
           {props.button}
         </Button>
         <Modal
-        open={open}
-        close={handleClose}
-        title={props.title}
-        description={props.description}
-        img_src={props.img_src}
-        filter={props.filter}
-        addressRoad={props.addressRoad}
-        addressNumber={props.addressNumber}
-        phone={props.phone}
+          open={open}
+          close={handleClose}
+          title={props.title}
+          description={props.description}
+          img_src={props.img_src}
+          filter={props.filter}
+          addressRoad={props.addressRoad}
+          addressNumber={props.addressNumber}
+          phone={props.phone}
         />
       </CardActions>
     </Card>

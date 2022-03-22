@@ -1,15 +1,29 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import './CardsPage.css';
+import React from 'react';
+import {
+  Button,
+  CardActionArea,
+  CardActions,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
+import './CardsPage.css';
 
 const CardsPet = (props) => {
   return (
-    <Card className='card' sx={{ maxWidth: 345 }}>
+    <Card
+      className="card"
+      sx={{
+        margin: '15px',
+        width: '100%',
+        minWidth: '250px',
+        maxWidth: '345px',
+        height: '100%',
+        maxHeight: '350px',
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
@@ -27,14 +41,17 @@ const CardsPet = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link className='link-button' to={`/${props.title.replace(' ', '-').toLowerCase()}`}>
-          <Button size="small" color="primary" >
+        <Link
+          className="link-button"
+          to={`/${props.title.replace(' ', '-').toLowerCase()}`}
+        >
+          <Button size="small" color="primary">
             {props.button}
           </Button>
         </Link>
       </CardActions>
     </Card>
   );
-}
+};
 
 export default CardsPet;
