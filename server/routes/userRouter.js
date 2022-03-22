@@ -14,13 +14,9 @@ const routes = (User) => {
 
   userRouter
     .route('/users/signup')
-    .post(validator.body(bodyValidator), postUser);
+    .post( postUser);
 
   userRouter.route('/users/login').post(login);
-
-  userRouter
-    .route('/users/signup')
-    .post(validator.body(bodyValidator), postUser);
 
   userRouter
     .route('/users/:userId')

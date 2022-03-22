@@ -13,6 +13,7 @@ const usersController = (User) => {
   const postUser = async (req, res, next) => {
     try {
       // const result = await cloudinary.v2.uploader.upload(req.file.path);
+      console.log(req.headers)
 
       const { firstName, lastName, email, username, password } = req.body;
 
@@ -29,7 +30,7 @@ const usersController = (User) => {
       res.status(200).json('Signed up successfully');
     } catch (err) {
       console.log(err);
-      res.status(500).json(err);
+      res.status(409).json(err);
     }
   };
 
