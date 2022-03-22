@@ -1,25 +1,25 @@
-const adoptedPetController = (AdoptedPet) => {
-  const getAdoptedPets = async (req, res) => {
+const adoptionPetController = (AdoptionPet) => {
+  const getAdoptionPet = async (req, res) => {
     const { query } = req;
-    const response = await AdoptedPet.find(query);
+    const response = await AdoptionPet.find(query);
     res.json(response);
   };
 
-  const postAdoptedPet = async (req, res) => {
+  const postAdoptionPet = async (req, res) => {
     try {
-      const adoptedPet = new AdoptedPet(req.body);
-      await adoptedPet.save();
-      res.json(adoptedPet);
+      const adoptionPet = new AdoptionPet(req.body);
+      await adoptionPet.save();
+      res.json(adoptionPet);
     } catch (err) {
-      res.json(err);
+      res.json('error');
     }
   };
 
-  const putAdoptedPetById = async (req, res) => {
+  const putAdoptionPetById = async (req, res) => {
     try {
       const { body } = req;
-      const response = await AdoptedPet.findByIdAndUpdate(
-        req.params.adoptedPetsId,
+      const response = await AdoptionPet.findByIdAndUpdate(
+        req.params.adoptionPetId,
         {
           username: body.username,
           petName: body.petName,
@@ -46,10 +46,10 @@ const adoptedPetController = (AdoptedPet) => {
     }
   };
 
-  const deleteAdoptedPetById = async (req, res) => {
+  const deleteAdoptionPetById = async (req, res) => {
     try {
-      const id = req.params.adoptedPetsId;
-      await AdoptedPet.findByIdAndDelete(id);
+      const id = req.params.adoptionPetId;
+      await AdoptionPet.findByIdAndDelete(id);
       res.json('Pet has been deleted.');
     } catch (err) {
       res.json('Error');
@@ -57,11 +57,11 @@ const adoptedPetController = (AdoptedPet) => {
   };
 
   return {
-    getAdoptedPets,
-    postAdoptedPet,
-    putAdoptedPetById,
-    deleteAdoptedPetById,
+    getAdoptionPet,
+    postAdoptionPet,
+    putAdoptionPetById,
+    deleteAdoptionPetById,
   };
 };
 
-module.exports = adoptedPetController;
+module.exports = adoptionPetController;

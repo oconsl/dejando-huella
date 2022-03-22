@@ -101,7 +101,7 @@ const usersController = (User) => {
     });
   };
 
-  return { postUser, getUsers, putUser, deleteUser, login, verifyToken };
+  return { postUser, getUsers, putUser, deleteUser, login };
 };
 
 module.exports = usersController;

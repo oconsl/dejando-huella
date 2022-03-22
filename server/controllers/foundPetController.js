@@ -1,5 +1,5 @@
 const foundPetController = (FoundPet) => {
-  const getFoundPets = async (req, res) => {
+  const getFoundPet = async (req, res) => {
     const { query } = req;
     const response = await FoundPet.find(query);
     res.json(response);
@@ -18,20 +18,17 @@ const foundPetController = (FoundPet) => {
   const putFoundPetById = async (req, res) => {
     try {
       const { body } = req;
-      const response = await FoundPet.findByIdAndUpdate(
-        req.params.foundPetsId,
-        {
-          username: body.userName,
-          description: body.description,
-          phone: body.phone,
-          addressNumber: body.addressNumber,
-          addressRoad: body.addressRoad,
-          latLng: body.latLng,
-          image: body.image,
-          date: body.date,
-          filter: body.filter,
-        }
-      );
+      const response = await FoundPet.findByIdAndUpdate(req.params.foundPetId, {
+        username: body.username,
+        description: body.description,
+        phone: body.phone,
+        addressNumber: body.addressNumber,
+        addressRoad: body.addressRoad,
+        latLng: body.latLng,
+        image: body.image,
+        date: body.date,
+        filter: body.filter,
+      });
       res.json(response);
     } catch (err) {
       if (err.name === 'ValidationError') {
@@ -47,7 +44,7 @@ const foundPetController = (FoundPet) => {
 
   const deleteFoundPetById = async (req, res) => {
     try {
-      const id = req.params.foundPetsId;
+      const id = req.params.foundPetId;
       await FoundPet.findByIdAndDelete(id);
       res.json('Pet has been deleted.');
     } catch (err) {
@@ -55,7 +52,7 @@ const foundPetController = (FoundPet) => {
     }
   };
 
-  return { getFoundPets, postFoundPet, putFoundPetById, deleteFoundPetById };
+  return { getFoundPet, postFoundPet, putFoundPetById, deleteFoundPetById };
 };
 
 module.exports = foundPetController;
