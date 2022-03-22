@@ -32,14 +32,6 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(
-  '/api',
-  userRouter,
-  lostPetRouter,
-  foundPetRouter,
-  adoptedPetRouter,
-  matchPetRouter
-);
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, 'storage/imgs'),
