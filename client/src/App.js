@@ -20,12 +20,12 @@ function App() {
       <HeaderPet authentication={false} />
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        {/* <Route element={<ProtectedRoutes />}> */}
+        <Route element={<ProtectedRoutes />}>
           <Route path='/found-pets' element={<FoundPets />} />
           <Route path='/lost-pets' element={<LostPets />} />
           <Route path='/match-pets/:page' element={<MatchPets />} />
           <Route path='/adoption' element={<Adoption />} />
-        {/* </Route> */}
+        </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/add-lost-pet' element={<AddLostPet />} />
         <Route path='sign-up' element={<SignUp />} />
