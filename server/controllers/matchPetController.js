@@ -7,7 +7,7 @@ cloudinary.config({
 
 const matchPetController = (MatchPet) => {
   //GET
-  const getMatchPet = async (req, res) => {
+  const getMatchPets = async (req, res) => {
     const { query } = req;
     const response = await MatchPet.find(query);
     res.json(response);
@@ -73,7 +73,7 @@ const matchPetController = (MatchPet) => {
   };
 
   return {
-    getMatchPet,
+    getMatchPets,
     postMatchPet,
     putMatchPetById,
     deleteMatchPetById,

@@ -7,7 +7,7 @@ cloudinary.config({
 
 const lostPetController = (LostPet) => {
   //GET
-  const getLostPet = async (req, res) => {
+  const getLostPets = async (req, res) => {
     const { query } = req;
     const response = await LostPet.find(query);
     res.json(response);
@@ -93,7 +93,7 @@ const lostPetController = (LostPet) => {
     }
   };
 
-  return { getLostPet, postLostPet, putLostPetById, deleteLostPetById };
+  return { getLostPets, postLostPet, putLostPetById, deleteLostPetById };
 };
 
 module.exports = lostPetController;

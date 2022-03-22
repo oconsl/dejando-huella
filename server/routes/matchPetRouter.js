@@ -3,10 +3,10 @@ const matchPetController = require('../controllers/matchPetController');
 
 const routes = (MatchPet) => {
   const matchPetRouter = express.Router();
-  const { getMatchPet, postMatchPet, putMatchPetById, deleteMatchPetById } =
+  const { getMatchPets, postMatchPet, putMatchPetById, deleteMatchPetById } =
     matchPetController(MatchPet);
 
-  matchPetRouter.route('/match-pet').get(getMatchPet).post(postMatchPet);
+  matchPetRouter.route('/match-pet').get(getMatchPets).post(postMatchPet);
 
   matchPetRouter
     .route('/match-pet/:matchPetId')
