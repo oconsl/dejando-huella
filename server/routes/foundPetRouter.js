@@ -3,13 +3,13 @@ const foundPetController = require('../controllers/foundPetController');
 
 const routes = (FoundPet) => {
   const foundPetRouter = express.Router();
-  const { getFoundPets, postFoundPet, putFoundPetById, deleteFoundPetById } =
+  const { getFoundPet, postFoundPet, putFoundPetById, deleteFoundPetById } =
     foundPetController(FoundPet);
 
-  foundPetRouter.route('/found-pets').get(getFoundPets).post(postFoundPet);
+  foundPetRouter.route('/found-pet').get(getFoundPet).post(postFoundPet);
 
   foundPetRouter
-    .route('/found-pets/:foundPetsId')
+    .route('/found-pet/:foundPetId')
     .put(putFoundPetById)
     .delete(deleteFoundPetById);
 

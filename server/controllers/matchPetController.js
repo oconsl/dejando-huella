@@ -1,5 +1,5 @@
 const matchPetController = (MatchPet) => {
-  const getMatchPets = async (req, res) => {
+  const getMatchPet = async (req, res) => {
     const { query } = req;
     const response = await MatchPet.find(query);
     res.json(response);
@@ -18,15 +18,12 @@ const matchPetController = (MatchPet) => {
   const putMatchPetById = async (req, res) => {
     try {
       const { body } = req;
-      const response = await MatchPet.findByIdAndUpdate(
-        req.params.matchPetsId,
-        {
-          username: body.userName,
-          petName: body.petName,
-          testimony: body.testimony,
-          image: body.image,
-        }
-      );
+      const response = await MatchPet.findByIdAndUpdate(req.params.matchPetId, {
+        username: body.username,
+        petName: body.petName,
+        testimony: body.testimony,
+        image: body.image,
+      });
       res.json(response);
     } catch (err) {
       if (err.name === 'ValidationError') {
@@ -42,7 +39,7 @@ const matchPetController = (MatchPet) => {
 
   const deleteMatchPetById = async (req, res) => {
     try {
-      const id = req.params.matchPetsId;
+      const id = req.params.matchPetId;
       await MatchPet.findByIdAndDelete(id);
       res.status(202).json('Testimony has been deleted.');
     } catch (err) {
@@ -51,7 +48,7 @@ const matchPetController = (MatchPet) => {
   };
 
   return {
-    getMatchPets,
+    getMatchPet,
     postMatchPet,
     putMatchPetById,
     deleteMatchPetById,

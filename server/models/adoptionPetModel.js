@@ -26,7 +26,7 @@ const filterSchema = new Schema({
   vaccinated: { type: Boolean, required: true },
 });
 
-const AdoptedPet = new Schema({
+const AdoptionPet = new Schema({
   username: {
     type: String,
     required: true,
@@ -60,4 +60,4 @@ const AdoptedPet = new Schema({
   filter: filterSchema,
 });
 
-module.exports = mongoose.model('AdoptedPet', AdoptedPet);
+module.exports = mongoose.model('AdoptionPet', AdoptionPet);

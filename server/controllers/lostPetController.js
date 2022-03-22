@@ -6,7 +6,7 @@ cloudinary.config({
 });
 
 const lostPetController = (LostPet) => {
-  const getLostPets = async (req, res) => {
+  const getLostPet = async (req, res) => {
     const { query } = req;
     const response = await LostPet.find(query);
     res.json(response);
@@ -52,26 +52,18 @@ const lostPetController = (LostPet) => {
   const putLostPetById = async (req, res) => {
     try {
       const { body } = req;
-      const id = req.params.lostPetsId;
-      const response = await LostPet.updateOne(
-        {
-          _id: id,
-        },
-        {
-          $set: {
-            username: body.userName,
-            petName: body.petName,
-            description: body.description,
-            phone: body.phone,
-            addressNumber: body.addressNumber,
-            addressRoad: body.addressRoad,
-            latLng: body.latLng,
-            image: body.image,
-            date: body.date,
-            filter: body.filter,
-          },
-        }
-      );
+      const response = await LostPet.findByIdAndUpdate(req.params.lostPetId, {
+        username: body.username,
+        petName: body.petName,
+        description: body.description,
+        phone: body.phone,
+        addressNumber: body.addressNumber,
+        addressRoad: body.addressRoad,
+        latLng: body.latLng,
+        image: body.image,
+        date: body.date,
+        filter: body.filter,
+      });
       res.json(response);
     } catch (err) {
       if (err.name === 'ValidationError') {
@@ -87,7 +79,7 @@ const lostPetController = (LostPet) => {
 
   const deleteLostPetById = async (req, res) => {
     try {
-      const id = req.params.lostPetsId;
+      const id = req.params.lostPetId;
       await LostPet.findByIdAndDelete(id);
       res.json('Pet has been deleted.');
     } catch (err) {
@@ -95,7 +87,7 @@ const lostPetController = (LostPet) => {
     }
   };
 
-  return { getLostPets, postLostPet, putLostPetById, deleteLostPetById };
+  return { getLostPet, postLostPet, putLostPetById, deleteLostPetById };
 };
 
 module.exports = lostPetController;

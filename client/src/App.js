@@ -1,4 +1,3 @@
-import './App.css';
 import LandingPage from './pages/LandingPage/LandingPage';
 import FoundPets from './pages/FoundPets/FoundPets';
 import LostPets from './pages/LostPets/LostPets';
@@ -11,7 +10,7 @@ import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import { Routes, Route } from 'react-router-dom';
 import HeaderPet from './components/HeaderPet/HeaderPet';
 import Footer from './components/Footer/Footer';
-import useToken from './hooks/useToken';
+import useToken from './Hooks/useToken';
 
 function App() {
   const { setToken } = useToken();
