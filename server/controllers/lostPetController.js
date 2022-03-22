@@ -1,3 +1,10 @@
+const cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 const lostPetController = (LostPet) => {
   const getLostPets = async (req, res) => {
     const { query } = req;
@@ -6,10 +13,37 @@ const lostPetController = (LostPet) => {
   };
 
   const postLostPet = async (req, res) => {
+    const result = await cloudinary.v2.uploader.upload(req.file.path);
+
     try {
-      const lostPet = new LostPet(req.body);
+      const {
+        username,
+        petName,
+        description,
+        phone,
+        addressNumber,
+        addressRoad,
+        latLng,
+        date,
+        filter,
+      } = req.body;
+
+      const lostPet = LostPet({
+        username,
+        petName,
+        description,
+        phone,
+        addressNumber,
+        addressRoad,
+        latLng,
+        date,
+        filter,
+        imageURL: result.url,
+        cloudinary: result.public_id,
+      });
+
       await lostPet.save();
-      res.json(lostPet);
+      res.json('Successful');
     } catch (err) {
       res.json('Error');
     }

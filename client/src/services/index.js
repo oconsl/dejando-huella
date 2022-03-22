@@ -12,7 +12,22 @@ export const fetchGithubData = ({ setUserData, user }) => {
 };
 
 export const fetchMatchPetsData = ({ setMatchPets }) => {
-  return axios.get('http://localhost:5001/match-pets').then((res) => {
+  return axios.get('http://localhost:5001/api/match-pets').then((res) => {
     setMatchPets(res.data);
   });
+};
+
+export const sendLostPetData = ({ lostPetData }) => {
+  return axios({
+    method: 'post',
+    url: 'http://localhost:5001/api/lost-pets',
+    data: lostPetData,
+    headers: { 'Content-Type': 'multipart/form-data' },
+  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (response) {
+      console.log(response);
+    });
 };

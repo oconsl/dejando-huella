@@ -42,13 +42,13 @@ const storage = multer.diskStorage({
 app.use(deleteFiles);
 app.use(multer({ storage: storage }).single('image'));
 
-app.all(
-  '/api/*',
-  expressJwt({
-    secret: process.env.TOKEN_SECRET,
-    algorithms: ['HS256'],
-  }).unless({ path: ['/api/users/login', '/api/users/signup'] })
-);
+// app.all(
+//   '/api/*',
+//   expressJwt({
+//     secret: process.env.TOKEN_SECRET,
+//     algorithms: ['HS256'],
+//   }).unless({ path: ['/api/users/login', '/api/users/signup'] })
+// );
 
 app.use(
   '/api',
