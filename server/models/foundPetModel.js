@@ -7,12 +7,6 @@ const latLngSchema = new Schema({
   lng: { type: Number, required: true },
 });
 
-const imageSchema = new Schema({
-  name: { type: String, required: true },
-  size: { type: Number, required: true },
-  type: { type: String, required: true },
-});
-
 const filterSchema = new Schema({
   specie: { type: String, required: true },
   breed: { type: String, required: true },
@@ -45,12 +39,13 @@ const FoundPet = new Schema({
     required: true,
   },
   latLng: latLngSchema,
-  image: imageSchema,
   date: {
     type: String,
     required: true,
   },
   filter: filterSchema,
+  imageURL: { type: String },
+  cloudinary: { type: String },
 });
 
 module.exports = mongoose.model('FoundPet', FoundPet);

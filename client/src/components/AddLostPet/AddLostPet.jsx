@@ -38,6 +38,8 @@ import {
 } from '../../utils/petOptions';
 //UTIL FUNCTION
 import formatDate from '../../utils/formatDate';
+import { sendLostPetData } from '../../services';
+import jsonToFormData from '../../utils/jsonToFormData';
 
 const AddLostPet = () => {
   //PET
@@ -70,9 +72,12 @@ const AddLostPet = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log({
+    const lostPetDataBody = new FormData();
+
+    const dataBody = {
+      username: 'test',
       ...textData,
-      filters: {
+      filter: {
         ...optionData,
         specie: dogPet ? 'Dog' : 'Cat',
       },
@@ -80,7 +85,10 @@ const AddLostPet = () => {
       image: file,
       addressRoad: address,
       date: formatDate(date),
-    });
+    };    
+    const lostPetData = jsonToFormData(dataBody,lostPetDataBody);
+    
+    sendLostPetData({ lostPetData });    
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -93,8 +101,9 @@ const AddLostPet = () => {
   };
 
   const handleFileChange = (event) => {
+    console.log(event.target.files[0]);
     const url = URL.createObjectURL(event.target.files[0]);
-    setFile(url);
+    setFile(event.target.files[0]);
     setPhotoURL(url);
     handleOpenCrop();
   };
@@ -108,7 +117,12 @@ const AddLostPet = () => {
   };
 
   const handleOptionDataChange = (key) => (event) => {
-    setOptionData({ ...optionData, [key]: event.target.innerText });
+    key !== 'size'
+      ? setOptionData({ ...optionData, [key]: event.target.innerText })
+      : setOptionData({
+          ...optionData,
+          [key]: event.target.innerText.split('(')[0].trim(),
+        });
   };
 
   useEffect(() => {
@@ -148,10 +162,16 @@ const AddLostPet = () => {
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Add Lost Pet
+            New Lost Pet
           </Typography>
         </div>
-        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
+        <Box
+          component='form'
+          onSubmit={handleSubmit}
+          encType='multipart/form-data'
+          sx={{ mt: 3 }}
+          required
+        >
           <Grid container spacing={2}>
             <Grid
               item
@@ -310,62 +330,65 @@ const AddLostPet = () => {
               />
             </Grid>
           </Grid>
+
+          <Box
+            sx={{
+              marginTop: 4,
+              display: 'flex',
+              flex: 3,
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <div>Image to upload</div>
+            <TextField
+              required
+              id='image'
+              fullWidth
+              label='Pet Image'
+              name='image'
+              type='file'
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleFileChange}
+              sx={{ mt: 2 }}
+            />
+            {openCrop && (
+              <Dialog
+                open={true}
+                onClose={handleCloseCrop}
+                fullWidth={true}
+                maxWidth={'md'}
+              >
+                <CropEasy
+                  {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
+                />
+              </Dialog>
+            )}
+            <Card sx={{ maxHeight: 450, margin: 'auto' }}>
+              <CardActionArea>
+                <CardMedia
+                  component='img'
+                  alt='New Pet Image'
+                  image={photoURL}
+                  title='New Pet Image'
+                  height='450'
+                  onClick={handlePhotoClick}
+                  sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
+                />
+              </CardActionArea>
+            </Card>
+          </Box>
           <Button
             type='submit'
             fullWidth
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
-            Add Pet
+            Add Lost Pet
           </Button>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          flex: 3,
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div>Image to upload</div>
-        <TextField
-          required
-          id='image'
-          fullWidth
-          label='Pet Image'
-          name='image'
-          type='file'
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={handleFileChange}
-          sx={{ mt: 2 }}
-        />
-        {openCrop && (
-          <Dialog
-            open={true}
-            onClose={handleCloseCrop}
-            fullWidth={true}
-            maxWidth={'md'}
-          >
-            <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
-          </Dialog>
-        )}
-        <Card sx={{ maxHeight: 450, margin: 'auto' }}>
-          <CardActionArea>
-            <CardMedia
-              component='img'
-              alt='New Pet Image'
-              image={photoURL}
-              title='New Pet Image'
-              height='450'
-              onClick={handlePhotoClick}
-              sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
-            />
-          </CardActionArea>
-        </Card>
       </Box>
     </Container>
   );

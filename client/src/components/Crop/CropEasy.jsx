@@ -29,9 +29,8 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
         croppedAreaPixels,
         rotation
       );
-      console.log(file);
       setPhotoURL(url);
-      setFile(file);
+      setFile(new File([file],"image",{type: "file"}));
       setOpenCrop(false);
     } catch (error) {
       console.log(error);

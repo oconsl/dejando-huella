@@ -4,7 +4,7 @@ const adoptionPetController = require('../controllers/adoptionPetController');
 const routes = (AdoptionPet) => {
   const adoptionPetRouter = express.Router();
   const {
-    getAdoptionPet,
+    getAdoptionPets,
     getAdoptionPetById,
     postAdoptionPet,
     putAdoptionPetById,
@@ -13,7 +13,7 @@ const routes = (AdoptionPet) => {
 
   adoptionPetRouter
     .route('/adoption-pet')
-    .get(getAdoptionPet)
+    .get(getAdoptionPets)
     .post(postAdoptionPet);
 
   adoptionPetRouter

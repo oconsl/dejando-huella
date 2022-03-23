@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CardsPet from '../../components/CardsPets/CardsPets';
-import { Box, Container } from '@mui/material';
-import './FoundPets.css';
+import { Box, Container, Pagination } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
 import { lostPets } from '../../TestData/dataBaseLostPets';
-import Pagination from '@mui/material/Pagination';
 
 const FoundPets = () => {
   const [cards, setCards] = useState(lostPets);
@@ -65,17 +63,17 @@ const FoundPets = () => {
             phone={item.phone}
           />
         ))}
-
-        <Pagination
-          page={currentPage}
-          count={lastPage}
-          color="primary"
-          onChange={(event, value) => {
-            setCurrentPage(value);
-            window.scrollTo(0, 0);
-          }}
-        />
       </Container>
+      <Pagination
+        page={currentPage}
+        count={lastPage}
+        color="primary"
+        onChange={(event, value) => {
+          setCurrentPage(value);
+          window.scrollTo(0, 0);
+        }}
+        sx={{ display: 'flex', justifyContent: 'center' }}
+      />
     </>
   );
 };
