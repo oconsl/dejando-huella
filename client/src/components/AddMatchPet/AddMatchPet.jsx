@@ -43,7 +43,10 @@ const AddMatchPet = () => {
     const dataBody = {
       ...textData,
       image: file,
+      username: JSON.parse(localStorage.getItem('username'))
     };
+
+    console.log(dataBody);
     const matchPetData = jsonToFormData(dataBody, matchPetDataBody);
 
     sendMatchPetData({ matchPetData });
