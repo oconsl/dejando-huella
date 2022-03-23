@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const usersController = (User) => {
   // POST
@@ -13,6 +14,8 @@ const usersController = (User) => {
         username,
         password,
       });
+
+      user.password = await bcrypt.hash(user.password, 8)
 
       await user.save();
 
@@ -39,7 +42,7 @@ const usersController = (User) => {
         lastName: body.lastName,
         email: body.email,
         username: body.username,
-        password: body.password,
+        password: await bcrypt.hash(body.password, 8),
       });
 
       res.json('Updated successfully.');
@@ -60,25 +63,13 @@ const usersController = (User) => {
     }
   };
 
-  // GET USER BY ID
-  const getUserById = async(req, res) => {
-    try{
-        const { params } = req;
-        const response = await User.findById(params.userId);
-
-        res.json(response);
-    }catch(err){
-      res.json('Error');
-    }
-}
-
   // LOGIN
   const login = async (req, res) => {
     try {
       const { body } = req.body;
       const response = await User.findOne({ username: body.username });
 
-      if (response === null || body.password !== response.password) {
+      if (response === null || !(await bcrypt.compare(body.password, response.password))) {
         return res.json('Invalid credentials');
       }
       const token = generateToken(response);
@@ -97,7 +88,7 @@ const usersController = (User) => {
     });
   };
 
-  return { postUser, getUsers, putUser, deleteUser, login, getUserById };
+  return { postUser, getUsers, putUser, deleteUser, login };
 };
 
 module.exports = usersController;
