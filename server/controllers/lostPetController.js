@@ -5,6 +5,16 @@ const lostPetController = (LostPet) => {
     res.json(response);
   };
 
+  const getLostPetById = async (req, res) => {
+    try {
+      const { params } = req;
+      const response = await LostPet.findById(params.lostPetId);
+      res.json(response);
+    } catch (err) {
+      res.status(500).json('Error');
+    }
+  };
+
   const postLostPet = async (req, res) => {
     try {
       const lostPet = new LostPet(req.body);
@@ -53,7 +63,13 @@ const lostPetController = (LostPet) => {
     }
   };
 
-  return { getLostPet, postLostPet, putLostPetById, deleteLostPetById };
+  return {
+    getLostPet,
+    getLostPetById,
+    postLostPet,
+    putLostPetById,
+    deleteLostPetById,
+  };
 };
 
 module.exports = lostPetController;

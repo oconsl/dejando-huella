@@ -5,6 +5,16 @@ const adoptionPetController = (AdoptionPet) => {
     res.json(response);
   };
 
+  const getAdoptionPetById = async (req, res) => {
+    try {
+      const { params } = req;
+      const response = await AdoptionPet.findById(params.adoptionPetId);
+      res.json(response);
+    } catch (err) {
+      res.status(500).json('Error');
+    }
+  };
+
   const postAdoptionPet = async (req, res) => {
     try {
       const adoptionPet = new AdoptionPet(req.body);
@@ -58,6 +68,7 @@ const adoptionPetController = (AdoptionPet) => {
 
   return {
     getAdoptionPet,
+    getAdoptionPetById,
     postAdoptionPet,
     putAdoptionPetById,
     deleteAdoptionPetById,

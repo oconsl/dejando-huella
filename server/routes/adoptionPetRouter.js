@@ -5,6 +5,7 @@ const routes = (AdoptionPet) => {
   const adoptionPetRouter = express.Router();
   const {
     getAdoptionPet,
+    getAdoptionPetById,
     postAdoptionPet,
     putAdoptionPetById,
     deleteAdoptionPetById,
@@ -17,6 +18,7 @@ const routes = (AdoptionPet) => {
 
   adoptionPetRouter
     .route('/adoption-pet/:adoptionPetId')
+    .get(getAdoptionPetById)
     .put(putAdoptionPetById)
     .delete(deleteAdoptionPetById);
 

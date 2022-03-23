@@ -5,6 +5,16 @@ const matchPetController = (MatchPet) => {
     res.json(response);
   };
 
+  const getMatchPetById = async (req, res) => {
+    try {
+      const { params } = req;
+      const response = await MatchPet.findById(params.matchPetId);
+      res.json(response);
+    } catch (err) {
+      res.status(500).json('Error');
+    }
+  };
+
   const postMatchPet = async (req, res) => {
     try {
       const matchPet = new MatchPet(req.body);
@@ -49,6 +59,7 @@ const matchPetController = (MatchPet) => {
 
   return {
     getMatchPet,
+    getMatchPetById,
     postMatchPet,
     putMatchPetById,
     deleteMatchPetById,
