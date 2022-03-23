@@ -14,6 +14,7 @@ import { Routes, Route } from 'react-router-dom';
 import HeaderPet from './components/HeaderPet/HeaderPet';
 import Footer from './components/Footer/Footer';
 import useToken from './hooks/useToken';
+import ModifyMatchPet from './components/ModifyMatchPet/ModifyMatchPet';
 
 function App() {
   const { setToken } = useToken();
@@ -32,6 +33,12 @@ function App() {
         </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/add-match-pet' element={<AddMatchPet />} />
+        <Route
+          path='/update-match-pet'
+          element={<ModifyMatchPet id={'623b8ec8846956db83057fb1'} />}
+        />
+        <Route path='/add-found-pet' element={<AddMatchPet />} />
+        <Route path='/add-adoption-pet' element={<AddMatchPet />} />
         <Route path='sign-up' element={<SignUp />} />
       </Routes>
       <Footer />

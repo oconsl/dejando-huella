@@ -12,9 +12,7 @@ const routes = (User) => {
 
   userRouter.route('/users').get(getUsers);
 
-  userRouter
-    .route('/users/signup')
-    .post( postUser);
+  userRouter.route('/users/signup').post(postUser);
 
   userRouter.route('/users/login').post(login);
 

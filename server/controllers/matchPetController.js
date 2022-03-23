@@ -57,7 +57,7 @@ const matchPetController = (MatchPet) => {
         petName: body.petName,
         testimony: body.testimony,
         image: body.image,
-        imgURL: result.url,
+        imageURL: result.url,
         cloudinary: result.public_id,
       });
       cloudinary.v2.uploader.destroy(response.cloudinary);
