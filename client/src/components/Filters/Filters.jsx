@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   specieOption,
   sizeOptions,
@@ -9,19 +9,17 @@ import {
   furOptions,
 } from '../Utils/petOptions';
 import { catBreeds, dogBreeds } from '../Utils/petBreeds';
-import { Button, Container } from '@mui/material';
+import { Button, Container, TextField, Autocomplete } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 
 const Filter = (props) => {
-  const [specie, setSpecie] = React.useState('');
-  const [color, setColor] = React.useState('');
-  const [breed, setBreed] = React.useState('');
-  const [sex, setSex] = React.useState('');
-  const [size, setSize] = React.useState('');
-  const [age, setAge] = React.useState('');
-  const [fur, setFur] = React.useState('');
+  const [specie, setSpecie] = useState('');
+  const [color, setColor] = useState('');
+  const [breed, setBreed] = useState('');
+  const [sex, setSex] = useState('');
+  const [size, setSize] = useState('');
+  const [age, setAge] = useState('');
+  const [fur, setFur] = useState('');
 
   const handleOnClickFilter = () => {
     let petFilters = {
@@ -72,12 +70,7 @@ const Filter = (props) => {
         disablePortal
         id="specie"
         options={specieOption}
-        onChange={(event, value) => {
-          setSpecie(value);
-          /* if (!value) {
-            props.filterLess();
-          } */
-        }}
+        onChange={(event, value) => setSpecie(value)}
         sx={{ m: 1, width: '100px' }}
         renderInput={(params) => <TextField {...params} label="Specie" />}
       />
@@ -187,12 +180,7 @@ const Filter = (props) => {
         sx={{ m: 1 }}
         onClick={() => {
           const petFilter = handleOnClickFilter();
-          if (petFilter){
-            props.buttonFilter(petFilter);
-          }
-          else {
-            props.filterLess();
-          }
+          props.buttonFilter(petFilter);
         }}
       >
         Filter

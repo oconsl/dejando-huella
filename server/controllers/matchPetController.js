@@ -13,6 +13,16 @@ const matchPetController = (MatchPet) => {
     res.json(response);
   };
 
+  const getMatchPetById = async (req, res) => {
+    try {
+      const { params } = req;
+      const response = await MatchPet.findById(params.matchPetId);
+      res.json(response);
+    } catch (err) {
+      res.status(500).json('Error');
+    }
+  };
+
   //POST
   const postMatchPet = async (req, res) => {
     try {
@@ -47,7 +57,7 @@ const matchPetController = (MatchPet) => {
         petName: body.petName,
         testimony: body.testimony,
         image: body.image,
-        imgURL: result.url,
+        imageURL: result.url,
         cloudinary: result.public_id,
       });
       cloudinary.v2.uploader.destroy(response.cloudinary);
@@ -74,6 +84,7 @@ const matchPetController = (MatchPet) => {
 
   return {
     getMatchPets,
+    getMatchPetById,
     postMatchPet,
     putMatchPetById,
     deleteMatchPetById,

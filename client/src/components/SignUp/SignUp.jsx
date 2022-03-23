@@ -9,7 +9,7 @@ import {
   Grid,
   TextField,
   Button,
-  Dialog
+  Dialog,
 } from '@mui/material';
 //MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -18,6 +18,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Grow from '@mui/material/Grow';
 //UTILS
 import axios from 'axios';
+import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -50,7 +51,9 @@ const SignUp = () => {
       });
   };
 
-  return (   
+  return (
+    <>
+      <HeaderLandingPage />
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
         {!success && (
@@ -68,7 +71,12 @@ const SignUp = () => {
             <Typography component='h1' variant='h5'>
               Sign up
             </Typography>
-            <Box component='form' onSubmit={handleSignUp} sx={{ mt: 3 }} required>
+            <Box
+              component='form'
+              onSubmit={handleSignUp}
+              sx={{ mt: 3 }}
+              required
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -173,6 +181,7 @@ const SignUp = () => {
           </Grow>
         )}
       </Container>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import LandingPage from './pages/LandingPage/LandingPage';
 import FoundPets from './pages/FoundPets/FoundPets';
 import LostPets from './pages/LostPets/LostPets';
@@ -6,18 +7,21 @@ import MatchPets from './pages/MatchPets/MatchPets';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import AddLostPet from './components/AddLostPet/AddLostPet';
+import AddMatchPet from './components/AddMatchPet/AddMatchPet';
+import Profile from './pages/Profile/Profile';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import { Routes, Route } from 'react-router-dom';
 import HeaderPet from './components/HeaderPet/HeaderPet';
 import Footer from './components/Footer/Footer';
-import useToken from './Hooks/useToken';
+import useToken from './hooks/useToken';
+import ModifyMatchPet from './components/ModifyMatchPet/ModifyMatchPet';
 
 function App() {
   const { setToken } = useToken();
 
   return (
     <div className='App'>
-      <HeaderPet authentication={false} />
+      {/* <HeaderPet /> */}
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route element={<ProtectedRoutes />}>
@@ -25,9 +29,16 @@ function App() {
           <Route path='/lost-pets' element={<LostPets />} />
           <Route path='/match-pets/:page' element={<MatchPets />} />
           <Route path='/adoption' element={<Adoption />} />
+          <Route path='/profile' element={<Profile />} />
         </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />
-        <Route path='/add-lost-pet' element={<AddLostPet />} />
+        <Route path='/add-match-pet' element={<AddMatchPet />} />
+        <Route
+          path='/update-match-pet'
+          element={<ModifyMatchPet id={'623b8ec8846956db83057fb1'} />}
+        />
+        <Route path='/add-found-pet' element={<AddMatchPet />} />
+        <Route path='/add-adoption-pet' element={<AddMatchPet />} />
         <Route path='sign-up' element={<SignUp />} />
       </Routes>
       <Footer />

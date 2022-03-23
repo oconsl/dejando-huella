@@ -162,7 +162,7 @@ const AddLostPet = () => {
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Add Lost Pet
+            New Lost Pet
           </Typography>
         </div>
         <Box
@@ -386,7 +386,7 @@ const AddLostPet = () => {
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
-            Add Pet
+            Add Lost Pet
           </Button>
         </Box>
       </Box>
