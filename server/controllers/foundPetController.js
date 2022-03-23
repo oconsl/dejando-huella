@@ -6,6 +6,16 @@ const foundPetController = (FoundPet) => {
     res.json(response);
   };
 
+  const getFoundPetById = async (req, res) => {
+    try {
+      const { params } = req;
+      const response = await FoundPet.findById(params.foundPetId);
+      res.json(response);
+    } catch (err) {
+      res.status(500).json('Error');
+    }
+  };
+
   //POST
   const postFoundPet = async (req, res) => {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
@@ -80,7 +90,13 @@ const foundPetController = (FoundPet) => {
     }
   };
 
-  return { getFoundPets, postFoundPet, putFoundPetById, deleteFoundPetById };
+  return {
+    getFoundPets,
+    getFoundPetById,
+    postFoundPet,
+    putFoundPetById,
+    deleteFoundPetById,
+  };
 };
 
 module.exports = foundPetController;

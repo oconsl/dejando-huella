@@ -6,12 +6,21 @@ cloudinary.config({
 });
 
 const adoptionPetController = (AdoptionPet) => {
-
   //GET
   const getAdoptionPets = async (req, res) => {
     const { query } = req;
     const response = await AdoptionPet.find(query);
     res.json(response);
+  };
+
+  const getAdoptionPetById = async (req, res) => {
+    try {
+      const { params } = req;
+      const response = await AdoptionPet.findById(params.adoptionPetId);
+      res.json(response);
+    } catch (err) {
+      res.status(500).json('Error');
+    }
   };
 
   //POST
@@ -94,6 +103,7 @@ const adoptionPetController = (AdoptionPet) => {
 
   return {
     getAdoptionPets,
+    getAdoptionPetById,
     postAdoptionPet,
     putAdoptionPetById,
     deleteAdoptionPetById,
