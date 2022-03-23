@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 //MATERIAL UI
 import {
   CssBaseline,
@@ -21,10 +21,11 @@ import default_dog from '../../assets/default_dog.svg';
 //COMPONENTS
 import CropEasy from '../Crop/CropEasy';
 //UTIL FUNCTION
-import { sendMatchPetData } from '../../services';
+import { fetchMatchPetData, updateMatchPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const AddMatchPet = () => {
+const ModifyMatchPet = ({ id }) => {
+  const [newPhoto, setNewPhoto] = useState(false);
   //CROP
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState(default_dog);
@@ -42,11 +43,13 @@ const AddMatchPet = () => {
 
     const dataBody = {
       ...textData,
-      image: file,
     };
+
+    if (newPhoto) dataBody.image = file;
+
     const matchPetData = jsonToFormData(dataBody, matchPetDataBody);
 
-    sendMatchPetData({ matchPetData });
+    updateMatchPetData({ matchPetData, id });
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -57,7 +60,7 @@ const AddMatchPet = () => {
   };
 
   const handleFileChange = (event) => {
-    console.log(event.target.files[0]);
+    setNewPhoto(true);
     const url = URL.createObjectURL(event.target.files[0]);
     setFile(event.target.files[0]);
     setPhotoURL(url);
@@ -67,6 +70,18 @@ const AddMatchPet = () => {
   const handlePhotoClick = () => {
     handleOpenCrop();
   };
+
+  useEffect(() => {
+    const savedData = (fetchedData) => {
+      setTextData({
+        petName: fetchedData.petName,
+        testimony: fetchedData.testimony,
+      });
+      setPhotoURL(fetchedData.imageURL);
+    };
+
+    fetchMatchPetData({ savedData, id });
+  }, [id]);
 
   return (
     <Container component='main' sx={{ display: 'flex' }}>
@@ -110,6 +125,7 @@ const AddMatchPet = () => {
                 name='petName'
                 id='petName'
                 label='Pet Name'
+                value={textData.petName}
                 onChange={handleTextDataChange('petName')}
               />
             </Grid>
@@ -122,6 +138,7 @@ const AddMatchPet = () => {
                 name='testimony'
                 id='testimony'
                 label='Testimony'
+                value={textData.testimony}
                 onChange={handleTextDataChange('testimony')}
               />
             </Grid>
@@ -181,7 +198,7 @@ const AddMatchPet = () => {
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
-            Add Testimony
+            Modify
           </Button>
         </Box>
       </Box>
@@ -189,4 +206,4 @@ const AddMatchPet = () => {
   );
 };
 
-export default AddMatchPet;
+export default ModifyMatchPet;
