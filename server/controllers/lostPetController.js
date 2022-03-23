@@ -103,17 +103,13 @@ const lostPetController = (LostPet) => {
     }
   };
 
-<<<<<<< HEAD
   return {
-    getLostPet,
+    getLostPets,
     getLostPetById,
     postLostPet,
     putLostPetById,
     deleteLostPetById,
   };
-=======
-  return { getLostPets, postLostPet, putLostPetById, deleteLostPetById };
->>>>>>> 690bfb2fd6e1d7d33d23993508aa7abf7aeaec03
 };
 
 module.exports = lostPetController;
