@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Box,
@@ -23,6 +23,7 @@ const settings = ['Profile', 'Logout'];
 const HeaderPet = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [letter, setLetter] = useState("");
   const navigate = useNavigate();
   const { logOut } = useToken();
 
@@ -44,6 +45,10 @@ const HeaderPet = () => {
   const handleMenuOptionClick = (setting) => () => {
     setting === 'Logout' ? logOut() : navigate('/profile');
   }
+
+  useEffect(() => {
+    setLetter(JSON.parse(localStorage.getItem('username'))[0].toUpperCase());
+  },[]);
 
   return (
     <AppBar position='sticky'>
@@ -141,7 +146,7 @@ const HeaderPet = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+                <Avatar sx={{ bgcolor: 'orange'}}>{letter}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu

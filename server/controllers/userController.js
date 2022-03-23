@@ -63,7 +63,7 @@ const usersController = (User) => {
   // LOGIN
   const login = async (req, res) => {
     try {
-      const { body } = req.body;
+      const { body } = req;
       const response = await User.findOne({ username: body.username });
 
       if (response === null || body.password !== response.password) {

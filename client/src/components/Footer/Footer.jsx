@@ -50,7 +50,7 @@ const Footer = () => {
             </Grid>
           </Grid>
           <Box textAlign="center" pt={{ xs: 5, sm: 10 }} pb={{ xs: 5, sm: 0 }}>
-            ® {new Date().getFullYear()} All rights reserved | Dejando Huellas
+            ® {new Date().getFullYear()} All rights reserved | Dejando Huella
           </Box>
         </Container>
       </Box>

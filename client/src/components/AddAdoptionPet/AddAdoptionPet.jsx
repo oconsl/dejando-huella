@@ -170,7 +170,7 @@ const AddAdoptionPet = () => {
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            Add Adoption Pet
+            New Adoption Pet
           </Typography>
         </div>
         <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
@@ -370,7 +370,7 @@ const AddAdoptionPet = () => {
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
-            Add Pet
+            Add Adoption Pet
           </Button>
         </Box>
       </Box>
