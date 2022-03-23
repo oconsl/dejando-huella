@@ -13,7 +13,6 @@ const lostPetController = (LostPet) => {
     res.json(response);
   };
 
-<<<<<<< HEAD
   const getLostPetById = async (req, res) => {
     try {
       const { params } = req;
@@ -24,9 +23,7 @@ const lostPetController = (LostPet) => {
     }
   };
 
-=======
   //POST
->>>>>>> 690bfb2fd6e1d7d33d23993508aa7abf7aeaec03
   const postLostPet = async (req, res) => {
     try {
       const result = await cloudinary.v2.uploader.upload(req.file.path);
