@@ -132,6 +132,10 @@ export const deleteLostPetData = async ({ id }) => {
   return res.data;
 };
 
+export const fetchLostPetByQuery = async ({ query }) => {
+  axios.get(`http://localhost:5001/api/lost-pets?${query}`);
+};
+
 // FOUND PET SERVICES
 export const sendFoundPetData = async ({ foundPetData }) => {
   try {
