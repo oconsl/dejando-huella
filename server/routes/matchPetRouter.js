@@ -6,10 +6,10 @@ const routes = (MatchPet) => {
   const { getMatchPets, postMatchPet, putMatchPetById, deleteMatchPetById } =
     matchPetController(MatchPet);
 
-  matchPetRouter.route('/match-pet').get(getMatchPets).post(postMatchPet);
+  matchPetRouter.route('/match-pets').get(getMatchPets).post(postMatchPet);
 
   matchPetRouter
-    .route('/match-pet/:matchPetId')
+    .route('/match-pets/:matchPetId')
     .put(putMatchPetById)
     .delete(deleteMatchPetById);
 

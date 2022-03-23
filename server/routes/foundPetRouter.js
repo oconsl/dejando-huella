@@ -6,10 +6,10 @@ const routes = (FoundPet) => {
   const { getFoundPets, postFoundPet, putFoundPetById, deleteFoundPetById } =
     foundPetController(FoundPet);
 
-  foundPetRouter.route('/found-pet').get(getFoundPets).post(postFoundPet);
+  foundPetRouter.route('/found-pets').get(getFoundPets).post(postFoundPet);
 
   foundPetRouter
-    .route('/found-pet/:foundPetId')
+    .route('/found-pets/:foundPetId')
     .put(putFoundPetById)
     .delete(deleteFoundPetById);
 

@@ -11,12 +11,12 @@ const routes = (AdoptionPet) => {
   } = adoptionPetController(AdoptionPet);
 
   adoptionPetRouter
-    .route('/adoption-pet')
+    .route('/adoption-pets')
     .get(getAdoptionPets)
     .post(postAdoptionPet);
 
   adoptionPetRouter
-    .route('/adoption-pet/:adoptionPetId')
+    .route('/adoption-pets/:adoptionPetId')
     .put(putAdoptionPetById)
     .delete(deleteAdoptionPetById);
 
