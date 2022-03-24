@@ -141,7 +141,7 @@ export const sendFoundPetData = async ({ foundPetData }) => {
   try {
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5001/api/found-pet',
+      url: 'http://localhost:5001/api/found-pets',
       data: foundPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });

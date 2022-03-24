@@ -16,6 +16,8 @@ import Footer from './components/Footer/Footer';
 import useToken from './hooks/useToken';
 import ModifyMatchPet from './components/ModifyMatchPet/ModifyMatchPet';
 import ModifyLostPet from './components/ModifyLostPet/ModifyLostPet';
+import ModifyFoundPet from './components/ModifyFoundPet/ModifyFoundPet';
+import AddFoundPet from './components/AddFoundPet/AddFoundPet';
 
 function App() {
   const { setToken } = useToken();
@@ -35,10 +37,10 @@ function App() {
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path='/add-match-pet' element={<AddMatchPet />} />
         <Route
-          path='/update-lost-pet'
-          element={<ModifyLostPet id={'623c668b0c411f3a83382a89'} />}
+          path='/update-found-pet'
+          element={<ModifyFoundPet id={'623c7a06c2c8c4448070f1ba'} />}
         />
-        <Route path='/add-lost-pet' element={<AddLostPet />} />
+        <Route path='/add-found-pet' element={<AddFoundPet />} />
         <Route path='/add-adoption-pet' element={<AddMatchPet />} />
         <Route path='sign-up' element={<SignUp />} />
       </Routes>

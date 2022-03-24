@@ -134,7 +134,7 @@ const SignUp = () => {
                     onChange={handleUserDataChange('email')}
                     inputProps={{
                       inputMode: 'text',
-                      pattern: '^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$',
+                      pattern: '^\\w+@[a-zA-Z_-.]+?\\.[a-zA-Z]{2,3}$',
                     }}
                   />
                 </Grid>
