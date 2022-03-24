@@ -62,26 +62,47 @@ const adoptionPetController = (AdoptionPet) => {
   const putAdoptionPetById = async (req, res) => {
     try {
       const { body } = req;
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
+      if(req.file){
+        const result = await cloudinary.v2.uploader.upload(req.file.path);
 
-      const response = await AdoptionPet.findByIdAndUpdate(
-        req.params.adoptionPetId,
+        const response = await AdoptionPet.findByIdAndUpdate(
+          req.params.adoptionPetId,
+          {
+            username: body.username,
+            petName: body.petName,
+            description: body.description,
+            phone: body.phone,
+            addressNumber: body.addressNumber,
+            addressRoad: body.addressRoad,
+            latLng: body.latLng,
+            date: body.date,
+            filter: body.filter,
+            imageURL: result.url,
+            cloudinary: result.public_id,
+          }
+        );
+        cloudinary.v2.uploader.destroy(response.public_id);
+      }else{
+        const aux = await AdoptionPet.findById(req.params.adoptionPetId);
+        await AdoptionPet.updateOne({
+            _id: req.params.adoptionPetId
+        },
         {
-          username: body.username,
-          petName: body.petName,
-          description: body.description,
-          phone: body.phone,
-          addressNumber: body.addressNumber,
-          addressRoad: body.addressRoad,
-          latLng: body.latLng,
-          image: body.image,
-          date: body.date,
-          filter: body.filter,
-          imgURL: result.url,
-          cloudinary: result.public_id,
-        }
-      );
-      cloudinary.v2.uploader.destroy(response.public_id);
+          $set:{
+            username: body.username,
+            petName: body.petName,
+            description: body.description,
+            phone: body.phone,
+            addressNumber: body.addressNumber,
+            addressRoad: body.addressRoad,
+            latLng: body.latLng,
+            date: body.date,
+            filter: body.filter,
+            imageURL: aux.imageURL,
+            cloudinary: aux.cloudinary,
+          }
+        })
+      }
 
       res.json('Updated successfully');
     } catch (err) {

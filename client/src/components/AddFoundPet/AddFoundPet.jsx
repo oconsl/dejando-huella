@@ -39,7 +39,7 @@ import {
 //UTIL FUNCTION
 import formatDate from '../../utils/formatDate';
 import jsonToFormData from '../../utils/jsonToFormData';
-import sendFoundPetData from '../../services';
+import { sendFoundPetData } from '../../services';
 
 const AddFoundPet = () => {
   //PET
@@ -74,9 +74,9 @@ const AddFoundPet = () => {
     const foundPetDataBody = new FormData();
 
     const dataBody = {
-      username: 'test',
+      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
-      filters: {
+      filter: {
         ...optionData,
         specie: dogPet ? 'Dog' : 'Cat',
       },

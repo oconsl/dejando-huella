@@ -11,20 +11,17 @@ import {
   Card,
   CardMedia,
   Button,
-  Switch,
+  Checkbox,
+  FormControlLabel,
   TextField,
   Typography,
 } from '@mui/material';
 //MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-//DEFAULT IMAGES
-import default_dog from '../../assets/default_dog.svg';
-import default_cat from '../../assets/default_cat.svg';
 //COMPONENTS
-import MapView from '../MapView/MapView';
+import MapStatic from '../MapView/MapStatic';
 import CropEasy from '../Crop/CropEasy';
-import DatePick from '../DatePick/DatePick';
 import Breeds from '../FormComponents/Breeds/Breeds';
 import CustomForm from '../FormComponents/CustomForm/CustomForm';
 //INPUT DATA
@@ -38,15 +35,16 @@ import {
 } from '../../utils/petOptions';
 //UTIL FUNCTION
 import formatDate from '../../utils/formatDate';
-import { sendLostPetData } from '../../services';
+import { fetchAdoptionPetData, updateAdoptionPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const AddLostPet = () => {
+const ModifyAdoptionPet = ({ id, setOpen }) => {
+  const [newPhoto, setNewPhoto] = useState(false);
   //PET
   const [dogPet, setDogPet] = useState(true);
   //CROP
   const [openCrop, setOpenCrop] = useState(false);
-  const [photoURL, setPhotoURL] = useState(default_dog);
+  const [photoURL, setPhotoURL] = useState(null);
   //MAP
   const [openMap, setOpenMap] = useState(false);
   //FORM
@@ -64,7 +62,11 @@ const AddLostPet = () => {
     color: '',
     fur: '',
   });
-  const [date, setDate] = useState({});
+  const [boolData, setBoolData] = useState({
+    vaccinated: false,
+    sterilized: false,
+    dewormed: false,
+  });
   const [address, setAddress] = useState('');
   const [latLng, setLatLng] = useState({});
   const [file, setFile] = useState('');
@@ -72,23 +74,26 @@ const AddLostPet = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const lostPetDataBody = new FormData();
+    const adoptionPetDataBody = new FormData();
 
     const dataBody = {
-      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
       filter: {
         ...optionData,
+        ...boolData,
         specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,
-      image: file,
+      date: formatDate(new Date()),
       addressRoad: address,
-      date: formatDate(date),
-    };    
-    const lostPetData = jsonToFormData(dataBody,lostPetDataBody);
-    
-    sendLostPetData({ lostPetData });    
+    };
+    if(newPhoto) dataBody.image = file;
+
+    const adoptionPetData = jsonToFormData(dataBody, adoptionPetDataBody);
+
+    updateAdoptionPetData({ adoptionPetData });
+    setOpen(false);
+    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -101,19 +106,19 @@ const AddLostPet = () => {
   };
 
   const handleFileChange = (event) => {
-    console.log(event.target.files[0]);
     const url = URL.createObjectURL(event.target.files[0]);
-    setFile(event.target.files[0]);
+    setFile(url);
     setPhotoURL(url);
     handleOpenCrop();
-  };
-
-  const handlePetSwitchChange = () => {
-    setDogPet(!dogPet);
+    setNewPhoto(true);
   };
 
   const handlePhotoClick = () => {
     handleOpenCrop();
+  };
+
+  const handleBoolDataChange = (key) => () => {
+    setBoolData({ ...boolData, [key]: !boolData[key] });
   };
 
   const handleOptionDataChange = (key) => (event) => {
@@ -126,17 +131,34 @@ const AddLostPet = () => {
   };
 
   useEffect(() => {
-    switch (dogPet) {
-      case true:
-        setPhotoURL(default_dog);
-        return;
-      case false:
-        setPhotoURL(default_cat);
-        return;
-      default:
-        return;
-    }
-  }, [dogPet]);
+    const savedData = (fetchedData) => {
+      setTextData({
+        petName: fetchedData.petName,
+        description: fetchedData.description,
+        phone: fetchedData.phone,
+        addressNumber: fetchedData.addressNumber,
+      });
+      setOptionData({
+        breed: fetchedData.filter.breed,
+        sex: fetchedData.filter.sex,
+        size: fetchedData.filter.size,
+        age: fetchedData.filter.age,
+        color: fetchedData.filter.color,
+        fur: fetchedData.filter.fur,
+      });
+      setBoolData({
+        vaccinated: fetchedData.filter.vaccinated,
+        sterilized: fetchedData.filter.sterilized,
+        dewormed: fetchedData.filter.dewormed,
+      })
+      setAddress(fetchedData.addressRoad);
+      setLatLng(fetchedData.latLng);
+      setDogPet(fetchedData.filter.specie === 'Dog');
+      setPhotoURL(fetchedData.imageURL);
+    };
+
+    fetchAdoptionPetData({ savedData, id });
+  }, [id]);
 
   return (
     <Container component='main' sx={{ display: 'flex' }}>
@@ -162,30 +184,11 @@ const AddLostPet = () => {
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            New Lost Pet
+            Modify Adoption Pet
           </Typography>
         </div>
-        <Box
-          component='form'
-          onSubmit={handleSubmit}
-          encType='multipart/form-data'
-          sx={{ mt: 3 }}
-          required
-        >
+        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
           <Grid container spacing={2}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Typography>Cat</Typography>
-              <Switch onChange={handlePetSwitchChange} defaultChecked />
-              <Typography>Dog</Typography>
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 required
@@ -193,6 +196,7 @@ const AddLostPet = () => {
                 name='petName'
                 id='petName'
                 label='Pet Name'
+                value={textData.petName}
                 onChange={handleTextDataChange('petName')}
               />
             </Grid>
@@ -205,6 +209,7 @@ const AddLostPet = () => {
                 name='description'
                 id='description'
                 label='Description'
+                value={textData.description}
                 onChange={handleTextDataChange('description')}
               />
             </Grid>
@@ -219,6 +224,7 @@ const AddLostPet = () => {
                   inputMode: 'numeric',
                   pattern: '[0-9]*',
                 }}
+                value={textData.phone}
                 onChange={handleTextDataChange('phone')}
               />
             </Grid>
@@ -231,7 +237,6 @@ const AddLostPet = () => {
                 justifyContent: 'center',
               }}
             >
-              <DatePick saveDate={setDate} />
               <TextField
                 required
                 fullWidth
@@ -242,6 +247,7 @@ const AddLostPet = () => {
                   inputMode: 'numeric',
                   pattern: '[0-9]*',
                 }}
+                value={textData.addressNumber}
                 onChange={handleTextDataChange('addressNumber')}
                 sx={{ width: '50%', ml: 3 }}
               />
@@ -261,10 +267,9 @@ const AddLostPet = () => {
                   fullWidth={true}
                   maxWidth={'md'}
                 >
-                  <MapView
-                    saveLocation={setLatLng}
+                  <MapStatic
+                    position={latLng}
                     closeMap={handleCloseMap}
-                    saveAddress={setAddress}
                   />
                 </Dialog>
               )}
@@ -274,12 +279,14 @@ const AddLostPet = () => {
                 <Breeds
                   onChange={handleOptionDataChange('breed')}
                   isADog={dogPet}
+                  value={optionData.breed}
                 />
               )}
               {!dogPet && (
                 <Breeds
                   onChange={handleOptionDataChange('breed')}
                   isADog={dogPet}
+                  value={optionData.breed}
                 />
               )}
             </Grid>
@@ -288,6 +295,7 @@ const AddLostPet = () => {
                 onChange={handleOptionDataChange('sex')}
                 options={sexOptions}
                 label='sex'
+                value={optionData.sex}
               />
             </Grid>
             {dogPet && (
@@ -296,6 +304,7 @@ const AddLostPet = () => {
                   onChange={handleOptionDataChange('size')}
                   options={sizeOptions}
                   label='size'
+                  value={optionData.size}
                 />
               </Grid>
             )}
@@ -305,6 +314,7 @@ const AddLostPet = () => {
                   onChange={handleOptionDataChange('age')}
                   options={ageDogOptions}
                   label='age'
+                  value={optionData.age}
                 />
               )}
               {!dogPet && (
@@ -312,6 +322,7 @@ const AddLostPet = () => {
                   onChange={handleOptionDataChange('age')}
                   options={ageCatOptions}
                   label='age'
+                  value={optionData.age}
                 />
               )}
             </Grid>
@@ -320,6 +331,7 @@ const AddLostPet = () => {
                 onChange={handleOptionDataChange('color')}
                 options={colorOptions}
                 label='color'
+                value={optionData.color}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -327,10 +339,46 @@ const AddLostPet = () => {
                 onChange={handleOptionDataChange('fur')}
                 options={furOptions}
                 label='fur'
+                value={optionData.fur}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={boolData.vaccinated}
+                    onChange={handleBoolDataChange('vaccinated')}
+                    value={boolData.vaccinated}
+                  />
+                }
+                label='Vaccinated'
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={boolData.sterilized}
+                    onChange={handleBoolDataChange('sterilized')}
+                    value={boolData.sterilized}
+                  />
+                }
+                label='Sterilized'
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={boolData.dewormed}
+                    onChange={handleBoolDataChange('dewormed')}
+                    value={boolData.dewormed}
+                  />
+                }
+                label='Dewormed'
               />
             </Grid>
           </Grid>
-
           <Box
             sx={{
               marginTop: 4,
@@ -342,7 +390,6 @@ const AddLostPet = () => {
           >
             <div>Image to upload</div>
             <TextField
-              required
               id='image'
               fullWidth
               label='Pet Image'
@@ -386,7 +433,7 @@ const AddLostPet = () => {
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
-            Add Lost Pet
+            Modify
           </Button>
         </Box>
       </Box>
@@ -394,4 +441,4 @@ const AddLostPet = () => {
   );
 };
 
-export default AddLostPet;
+export default ModifyAdoptionPet;

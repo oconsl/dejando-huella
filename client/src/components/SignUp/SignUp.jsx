@@ -36,10 +36,9 @@ const SignUp = () => {
 
   const handleSignUp = (event) => {
     event.preventDefault();
-
-    console.log(userData);
+    
     axios
-      .post('http://localhost:5001/api/users/signup', userData)
+      .post('http://localhost:5000/api/users/signup', userData)
       .then((res) => {
         if (res.status === 200) {
           setSuccess(true);
@@ -134,7 +133,7 @@ const SignUp = () => {
                     onChange={handleUserDataChange('email')}
                     inputProps={{
                       inputMode: 'text',
-                      pattern: '^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$',
+                      pattern: '^\\w+@[a-zA-Z]+?\\.[a-zA-Z]{2,3}$',
                     }}
                   />
                 </Grid>

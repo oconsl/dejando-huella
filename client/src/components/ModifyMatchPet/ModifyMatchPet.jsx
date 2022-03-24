@@ -24,7 +24,7 @@ import CropEasy from '../Crop/CropEasy';
 import { fetchMatchPetData, updateMatchPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const ModifyMatchPet = ({ id }) => {
+const ModifyMatchPet = ({ id, setOpen }) => {
   const [newPhoto, setNewPhoto] = useState(false);
   //CROP
   const [openCrop, setOpenCrop] = useState(false);
@@ -50,6 +50,8 @@ const ModifyMatchPet = ({ id }) => {
     const matchPetData = jsonToFormData(dataBody, matchPetDataBody);
 
     updateMatchPetData({ matchPetData, id });
+    setOpen(false);
+    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -154,7 +156,6 @@ const ModifyMatchPet = ({ id }) => {
           >
             <div>Image to upload</div>
             <TextField
-              required
               id='image'
               fullWidth
               label='Pet Image'

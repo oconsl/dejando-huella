@@ -15,7 +15,7 @@ const usersController = (User) => {
         password,
       });
 
-      user.password = await bcrypt.hash(user.password, 8)
+      user.password = await bcrypt.hash(user.password, 8);
 
       await user.save();
 
@@ -69,7 +69,10 @@ const usersController = (User) => {
       const { body } = req;
       const response = await User.findOne({ username: body.username });
 
-      if (response === null || !(await bcrypt.compare(body.password, response.password))) {
+      if (
+        response === null ||
+        !(await bcrypt.compare(body.password, response.password))
+      ) {
         return res.json('Invalid credentials');
       }
       const token = generateToken(response);

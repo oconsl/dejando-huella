@@ -80,14 +80,15 @@ const AddAdoptionPet = () => {
     const adoptionPetDataBody = new FormData();
 
     const dataBody = {
+      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
-      filters: {
+      filter: {
         ...optionData,
         ...boolData,
         specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,
-      data: formatDate(new Date()),
+      date: formatDate(new Date()),
       image: file,
       addressRoad: address,
     };

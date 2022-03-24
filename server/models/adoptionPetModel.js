@@ -13,9 +13,9 @@ const filterSchema = new Schema({
   age: { type: String, required: true },
   sex: { type: String, required: true },
   color: { type: String, required: true },
-  size: { type: String, required: true },
+  size: { type: String },
   fur: { type: String, required: true },
-  castrated: { type: Boolean, required: true },
+  sterilized: { type: Boolean, required: true },
   dewormed: { type: Boolean, required: true },
   vaccinated: { type: Boolean, required: true },
 });
@@ -51,7 +51,7 @@ const AdoptionPet = new Schema({
     required: true,
   },
   filter: filterSchema,
-  imgURL: { type: 'string' },
+  imageURL: { type: 'string' },
   cloudinary: { type: 'string' },
 });
 
