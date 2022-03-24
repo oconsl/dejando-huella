@@ -23,13 +23,13 @@ const Filter = (props) => {
 
   const handleOnClickFilter = () => {
     let petFilters = {
-      specie,
-      color,
-      breed,
-      sex,
-      size: size ? size.slice(0, size.indexOf('(') - 1) : '',
-      age,
-      fur,
+      'filter.specie': specie,
+      'filter.color': color,
+      'filter.breed': breed,
+      'filter.sex': sex,
+      'filter.size': size ? size.slice(0, size.indexOf('(') - 1) : '',
+      'filter.age': age,
+      'filter.fur': fur,
     };
 
     for (const [key, value] of Object.entries(petFilters)) {
@@ -37,23 +37,21 @@ const Filter = (props) => {
         delete petFilters[key];
       }
     }
-    // console.log(petFilters);
-
-    return petFilters;
 
     //Esto es para realizar una query
 
-    /*const reg = /:/g;
+    const reg = /:/g;
     const reg2 = /,/g;
     const reg3 = /("|\{|\})/g;
     const reg4 = /\s/g;
-    const stringFilters =
-      '?' +
+    const queryFilter =
       JSON.stringify(petFilters)
         .replace(reg, '=')
         .replace(reg2, '&')
         .replace(reg3, '')
-        .replace(reg4, '%20');*/
+        .replace(reg4, '%20');
+
+    return queryFilter;
   };
 
   return (
@@ -179,8 +177,8 @@ const Filter = (props) => {
         endIcon={<FilterAltIcon />}
         sx={{ m: 1 }}
         onClick={() => {
-          const petFilter = handleOnClickFilter();
-          props.buttonFilter(petFilter);
+          const query = handleOnClickFilter();
+          props.buttonFilter(query);
         }}
       >
         Filter

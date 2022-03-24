@@ -156,6 +156,11 @@ export const fetchFoundPetsData = async ({ setFoundPets }) => {
   setFoundPets(res.data);
 };
 
+export const fetchFilterFoundPetsData = async ({query, setFoundPets}) => {
+  const res = await axios.get(`http://localhost:5001/api/found-pets?${query}`)
+  setFoundPets(res.data)
+}
+
 export const fetchFoundPetData = async ({ savedData, id }) => {
   const res = await axios.get(`http://localhost:5001/api/found-pets/${id}`);
   savedData(res.data);

@@ -1,40 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import CardsPet from '../../components/CardsPets/CardsPets';
-import { Box, Container, Pagination } from '@mui/material';
+import { Box, Container, Pagination, Typography } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
-import { lostPets } from '../../TestData/dataBaseLostPets';
+import { fetchFoundPetsData, fetchFilterFoundPetsData } from '../../services';
+import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
+// import { lostPets } from '../../TestData/dataBaseLostPets';
 
 const FoundPets = () => {
-  const [cards, setCards] = useState(lostPets);
-  const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 9;
-  const [filterCards, setFilterCards] = useState(lostPets);
-  const indexOfLastCard = currentPage * cardsPerPage;
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = filterCards.slice(indexOfFirstCard, indexOfLastCard);
-  const [totalCards, setTotalCards] = useState(cards.length);
-  const lastPage = Math.ceil(totalCards / cardsPerPage);
-
-  const handleOnFilter = (value) => {
-    if (Object.keys(value).length !== 0) {
-      const cardsFilter = cards.filter((item) => {
-        const keys = Object.keys(value);
-        return keys.every((key) => item.filter[key] === value[key]);
-      });
-
-      setFilterCards(cardsFilter);
-      setTotalCards(cardsFilter.length);
-      setCurrentPage(1);
-    } else {
-      setFilterCards(lostPets);
-      setTotalCards(lostPets.length);
-      setCurrentPage(1);
-    }
-  };
+  const [foundPets, setFoundPets] = useState([]);
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
+  const [foundPetsGroups, setFoundPetsGroups] = useState([[1]]);
+  const skeletonCount = new Array(9 - (foundPets.length % 9)).fill(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    fetchFoundPetsData({ setFoundPets });
   }, []);
+
+  useEffect(() => {
+    fetchFilterFoundPetsData({ query, setFoundPets });
+    setPage(1);
+    setMaxPage(foundPets.length);
+  }, [query]);
+
+  useEffect(() => {
+    const splitArrayIntoSubArrays = () => {
+      let subArray = [];
+      let i = 0;
+
+      while (i < foundPets.length) {
+        subArray.push(foundPets.slice(i, (i += 9)));
+      }
+
+      return subArray;
+    };
+
+    const subArray = splitArrayIntoSubArrays();
+
+    setFoundPetsGroups(subArray);
+    setMaxPage(subArray.length);
+  }, [foundPets]);
+
+  const handleChange = (value) => {
+    setPage(value);
+  };
+
+  const handleOnFilter = (value) => {
+    setQuery(value);
+  };
 
   return (
     <>
@@ -51,25 +66,82 @@ const FoundPets = () => {
           justifyContent: 'center',
         }}
       >
-        {currentCards.map((item, index) => (
-          <CardsPet
-            key={index}
-            description={item.date + ' - \n' + item.description}
-            button={'More Details'}
-            img_src={item.image}
-            filter={item.filter}
-            addressRoad={item.addressRoad}
-            addressNumber={item.addressNumber}
-            phone={item.phone}
-          />
-        ))}
+        {foundPets.length !== 0 && foundPetsGroups.length > 0 ? (
+          foundPetsGroups[page - 1].map((item, index) => {
+            if (page === maxPage && index === 8 - skeletonCount.length) {
+              if (skeletonCount.length === 8) {
+                skeletonCount[0] = true;
+              }
+
+              return (
+                <>
+                  <CardsPet
+                    key={index}
+                    description={item.date + ' - \n' + item.description}
+                    button={'More Details'}
+                    img_src={item.imageURL}
+                    filter={item.filter}
+                    addressRoad={item.addressRoad}
+                    addressNumber={item.addressNumber}
+                    phone={item.phone}
+                  />
+                  {skeletonCount.map((content, subIndex) => {
+                    return (
+                      <CardsPetsSkeleton
+                        key={`${page}${subIndex}`}
+                        flexVariant={content}
+                      />
+                    );
+                  })}
+                </>
+              );
+            }
+
+            return (
+              <>
+                <CardsPet
+                  key={index}
+                  description={item.date + ' - \n' + item.description}
+                  button={'More Details'}
+                  img_src={item.imageURL}
+                  filter={item.filter}
+                  addressRoad={item.addressRoad}
+                  addressNumber={item.addressNumber}
+                  phone={item.phone}
+                />
+              </>
+            );
+          })
+        ) : (
+          <Box
+            sx={{
+              height: '500px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography
+              variant="h1"
+              sx={{ fontWeight: '500', marginBottom: '50px' }}
+            >
+              Pets Not Found
+            </Typography>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/21/21656.png"
+              width="250px"
+              height="250px"
+            />
+          </Box>
+        )}
       </Container>
       <Pagination
-        page={currentPage}
-        count={lastPage}
+        page={page}
+        count={maxPage}
         color="primary"
         onChange={(event, value) => {
-          setCurrentPage(value);
+          handleChange(value);
           window.scrollTo(0, 0);
         }}
         sx={{ display: 'flex', justifyContent: 'center' }}
