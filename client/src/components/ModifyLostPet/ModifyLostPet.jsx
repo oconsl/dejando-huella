@@ -11,18 +11,14 @@ import {
   Card,
   CardMedia,
   Button,
-  Switch,
   TextField,
   Typography,
 } from '@mui/material';
 //MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-//DEFAULT IMAGES
-import default_dog from '../../assets/default_dog.svg';
-import default_cat from '../../assets/default_cat.svg';
 //COMPONENTS
-import MapView from '../MapView/MapView';
+import MapStatic from '../MapView/MapStatic';
 import CropEasy from '../Crop/CropEasy';
 import DatePick from '../DatePick/DatePick';
 import Breeds from '../FormComponents/Breeds/Breeds';
@@ -38,19 +34,22 @@ import {
 } from '../../utils/petOptions';
 //UTIL FUNCTION
 import formatDate from '../../utils/formatDate';
+import { fetchLostPetData, updateLostPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
-import { sendFoundPetData } from '../../services';
 
-const AddFoundPet = () => {
+const ModifyLostPet = ({ id }) => {
+  const [newDate, setNewDate] = useState(false);
+  const [newPhoto, setNewPhoto] = useState(false);
   //PET
-  const [dogPet, setDogPet] = useState(true);
+  const [dogPet, setDogPet] = useState(false);
   //CROP
   const [openCrop, setOpenCrop] = useState(false);
-  const [photoURL, setPhotoURL] = useState(default_dog);
+  const [photoURL, setPhotoURL] = useState(null);
   //MAP
   const [openMap, setOpenMap] = useState(false);
   //FORM
   const [textData, setTextData] = useState({
+    petName: '',
     description: '',
     phone: '',
     addressNumber: '',
@@ -63,7 +62,7 @@ const AddFoundPet = () => {
     color: '',
     fur: '',
   });
-  const [date, setDate] = useState({});
+  const [date, setDate] = useState('');
   const [address, setAddress] = useState('');
   const [latLng, setLatLng] = useState({});
   const [file, setFile] = useState('');
@@ -71,23 +70,25 @@ const AddFoundPet = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const foundPetDataBody = new FormData();
+    const lostPetDataBody = new FormData();
 
     const dataBody = {
-      username: 'test',
+      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
-      filters: {
+      filter: {
         ...optionData,
         specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,
-      image: file,
       addressRoad: address,
-      date: formatDate(date),
-    };
-    const foundPetData = jsonToFormData(dataBody,foundPetDataBody);
+      date: date,
+    };    
+    if (newPhoto) dataBody.image = file;
+    if (newDate) dataBody.date = formatDate(date);
 
-    sendFoundPetData({ foundPetData });
+    const lostPetData = jsonToFormData(dataBody,lostPetDataBody);
+    
+    updateLostPetData({ lostPetData, id });    
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -101,13 +102,10 @@ const AddFoundPet = () => {
 
   const handleFileChange = (event) => {
     const url = URL.createObjectURL(event.target.files[0]);
-    setFile(url);
+    setFile(event.target.files[0]);
     setPhotoURL(url);
     handleOpenCrop();
-  };
-
-  const handlePetSwitchChange = () => {
-    setDogPet(!dogPet);
+    setNewPhoto(true);
   };
 
   const handlePhotoClick = () => {
@@ -115,21 +113,39 @@ const AddFoundPet = () => {
   };
 
   const handleOptionDataChange = (key) => (event) => {
-    setOptionData({ ...optionData, [key]: event.target.innerText });
+    key !== 'size'
+      ? setOptionData({ ...optionData, [key]: event.target.innerText })
+      : setOptionData({
+          ...optionData,
+          [key]: event.target.innerText.split('(')[0].trim(),
+        });
   };
 
   useEffect(() => {
-    switch (dogPet) {
-      case true:
-        setPhotoURL(default_dog);
-        return;
-      case false:
-        setPhotoURL(default_cat);
-        return;
-      default:
-        return;
-    }
-  }, [dogPet]);
+    const savedData = (fetchedData) => {
+      setTextData({
+        petName: fetchedData.petName,
+        description: fetchedData.description,
+        phone: fetchedData.phone,
+        addressNumber: fetchedData.addressNumber,
+      });
+      setOptionData({
+        breed: fetchedData.filter.breed,
+        sex: fetchedData.filter.sex,
+        size: fetchedData.filter.size,
+        age: fetchedData.filter.age,
+        color: fetchedData.filter.color,
+        fur: fetchedData.filter.fur,
+      });
+      setAddress(fetchedData.addressRoad);
+      setDate(fetchedData.date);
+      setLatLng(fetchedData.latLng);
+      setDogPet(fetchedData.filter.specie === 'Dog');
+      setPhotoURL(fetchedData.imageURL);
+    };
+
+    fetchLostPetData({ savedData, id });
+  }, [id]);
 
   return (
     <Container component='main' sx={{ display: 'flex' }}>
@@ -155,23 +171,27 @@ const AddFoundPet = () => {
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
-            New Found Pet
+            Modify Lost Pet
           </Typography>
         </div>
-        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
+        <Box
+          component='form'
+          onSubmit={handleSubmit}
+          encType='multipart/form-data'
+          sx={{ mt: 3 }}
+          required
+        >
           <Grid container spacing={2}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Typography>Cat</Typography>
-              <Switch onChange={handlePetSwitchChange} defaultChecked />
-              <Typography>Dog</Typography>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name='petName'
+                id='petName'
+                label='Pet Name'
+                value={textData.petName}
+                onChange={handleTextDataChange('petName')}
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -182,6 +202,7 @@ const AddFoundPet = () => {
                 name='description'
                 id='description'
                 label='Description'
+                value={textData.description}
                 onChange={handleTextDataChange('description')}
               />
             </Grid>
@@ -196,6 +217,7 @@ const AddFoundPet = () => {
                   inputMode: 'numeric',
                   pattern: '[0-9]*',
                 }}
+                value={textData.phone}
                 onChange={handleTextDataChange('phone')}
               />
             </Grid>
@@ -208,7 +230,7 @@ const AddFoundPet = () => {
                 justifyContent: 'center',
               }}
             >
-              <DatePick saveDate={setDate} />
+              <DatePick saveDate={setDate} fetchedDate={date} setNewDate={setNewDate}/>
               <TextField
                 required
                 fullWidth
@@ -216,9 +238,9 @@ const AddFoundPet = () => {
                 label='Address Num'
                 name='addressNum'
                 inputProps={{
-                  inputMode: 'numeric',
-                  pattern: '[0-9]*',
+                  readOnly: true,
                 }}
+                value={textData.addressNumber}
                 onChange={handleTextDataChange('addressNumber')}
                 sx={{ width: '50%', ml: 3 }}
               />
@@ -238,10 +260,9 @@ const AddFoundPet = () => {
                   fullWidth={true}
                   maxWidth={'md'}
                 >
-                  <MapView
-                    saveLocation={setLatLng}
+                  <MapStatic
+                    position={latLng}
                     closeMap={handleCloseMap}
-                    saveAddress={setAddress}
                   />
                 </Dialog>
               )}
@@ -251,12 +272,14 @@ const AddFoundPet = () => {
                 <Breeds
                   onChange={handleOptionDataChange('breed')}
                   isADog={dogPet}
+                  value={optionData.breed}
                 />
               )}
               {!dogPet && (
                 <Breeds
                   onChange={handleOptionDataChange('breed')}
                   isADog={dogPet}
+                  value={optionData.breed}
                 />
               )}
             </Grid>
@@ -265,6 +288,7 @@ const AddFoundPet = () => {
                 onChange={handleOptionDataChange('sex')}
                 options={sexOptions}
                 label='sex'
+                value={optionData.sex}
               />
             </Grid>
             {dogPet && (
@@ -273,6 +297,7 @@ const AddFoundPet = () => {
                   onChange={handleOptionDataChange('size')}
                   options={sizeOptions}
                   label='size'
+                  value={optionData.size}
                 />
               </Grid>
             )}
@@ -282,6 +307,7 @@ const AddFoundPet = () => {
                   onChange={handleOptionDataChange('age')}
                   options={ageDogOptions}
                   label='age'
+                  value={optionData.age}
                 />
               )}
               {!dogPet && (
@@ -289,6 +315,7 @@ const AddFoundPet = () => {
                   onChange={handleOptionDataChange('age')}
                   options={ageCatOptions}
                   label='age'
+                  value={optionData.age}
                 />
               )}
             </Grid>
@@ -297,6 +324,7 @@ const AddFoundPet = () => {
                 onChange={handleOptionDataChange('color')}
                 options={colorOptions}
                 label='color'
+                value={optionData.color}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -304,68 +332,72 @@ const AddFoundPet = () => {
                 onChange={handleOptionDataChange('fur')}
                 options={furOptions}
                 label='fur'
+                value={optionData.fur}
               />
             </Grid>
           </Grid>
+
+          <Box
+            sx={{
+              marginTop: 4,
+              display: 'flex',
+              flex: 3,
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <div>Image to upload</div>
+            <TextField
+              required
+              id='image'
+              fullWidth
+              label='Pet Image'
+              name='image'
+              type='file'
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleFileChange}
+              sx={{ mt: 2 }}
+            />
+            {openCrop && (
+              <Dialog
+                open={true}
+                onClose={handleCloseCrop}
+                fullWidth={true}
+                maxWidth={'md'}
+              >
+                <CropEasy
+                  {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
+                />
+              </Dialog>
+            )}
+            <Card sx={{ maxHeight: 450, margin: 'auto' }}>
+              <CardActionArea>
+                <CardMedia
+                  component='img'
+                  alt='New Pet Image'
+                  image={photoURL}
+                  title='New Pet Image'
+                  height='450'
+                  onClick={handlePhotoClick}
+                  sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
+                />
+              </CardActionArea>
+            </Card>
+          </Box>
           <Button
             type='submit'
             fullWidth
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
-            Add Found Pet
+            Modify
           </Button>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          flex: 3,
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div>Image to upload</div>
-        <TextField
-          required
-          id='image'
-          fullWidth
-          label='Pet Image'
-          name='image'
-          type='file'
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={handleFileChange}
-          sx={{ mt: 2 }}
-        />
-        {openCrop && (
-          <Dialog
-            open={true}
-            onClose={handleCloseCrop}
-            fullWidth={true}
-            maxWidth={'md'}
-          >
-            <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
-          </Dialog>
-        )}
-        <Card sx={{ maxHeight: 450, margin: 'auto' }}>
-          <CardActionArea>
-            <CardMedia
-              component='img'
-              alt='New Pet Image'
-              image={photoURL}
-              title='New Pet Image'
-              height='450'
-              onClick={handlePhotoClick}
-              sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
-            />
-          </CardActionArea>
-        </Card>
       </Box>
     </Container>
   );
 };
 
-export default AddFoundPet;
+export default ModifyLostPet;

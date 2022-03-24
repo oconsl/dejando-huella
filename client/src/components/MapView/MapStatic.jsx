@@ -4,15 +4,28 @@ import 'leaflet/dist/leaflet.css';
 import Box from '@mui/material/Box';
 import LocationIcon from './utils/LocationIcon';
 import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import { Marker } from 'react-leaflet';
 
-const MapView = ({position}) => {
+const MapView = ({ position, closeMap }) => {
   const center = { lat: -26.829901, lng: -65.203667 };
   const zoom = 15.5;
 
   return (
     <>
       <DialogContent>
+        <IconButton
+          aria-label='close'
+          sx={{
+            position: 'absolute',
+            right: 20,
+            transform: 'scale(1.5)',
+          }}
+          onClick={closeMap}
+        >
+          <CloseIcon />
+        </IconButton>
         <Box
           sx={{
             display: 'flex',

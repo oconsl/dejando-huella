@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { catBreeds } from '../../../utils/petBreeds';
 import { dogBreeds } from '../../../utils/petBreeds';
 
-const Breeds = ({ onChange, isADog }) => {
+const Breeds = ({ onChange, isADog, value }) => {
   const [options, setOptions] = useState(isADog ? dogBreeds : catBreeds);
 
   useEffect(() => {    
@@ -20,6 +20,8 @@ const Breeds = ({ onChange, isADog }) => {
         // value={value}
         onChange={onChange}
         getOptionLabel={(option) => option}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
+        value={value}
         renderInput={(params) => (
           <TextField
             {...params}
