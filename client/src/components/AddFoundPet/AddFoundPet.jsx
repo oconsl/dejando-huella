@@ -74,9 +74,9 @@ const AddFoundPet = () => {
     const foundPetDataBody = new FormData();
 
     const dataBody = {
-      username: 'test',
+      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
-      filters: {
+      filter: {
         ...optionData,
         specie: dogPet ? 'Dog' : 'Cat',
       },

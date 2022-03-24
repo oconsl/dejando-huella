@@ -77,7 +77,7 @@ const adoptionPetController = (AdoptionPet) => {
           image: body.image,
           date: body.date,
           filter: body.filter,
-          imgURL: result.url,
+          imageURL: result.url,
           cloudinary: result.public_id,
         }
       );
