@@ -26,7 +26,7 @@ import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
 
 async function loginUser(credentials) {
   return axios
-    .post('http://localhost:5001/api/users/login', {
+    .post('http://localhost:5000/api/users/login', {
         username: credentials.username,
         password: credentials.password,
       },
