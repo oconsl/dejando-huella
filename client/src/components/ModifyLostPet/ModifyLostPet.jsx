@@ -37,7 +37,7 @@ import formatDate from '../../utils/formatDate';
 import { fetchLostPetData, updateLostPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const ModifyLostPet = ({ id }) => {
+const ModifyLostPet = ({ id, setOpen }) => {
   const [newDate, setNewDate] = useState(false);
   const [newPhoto, setNewPhoto] = useState(false);
   //PET
@@ -89,6 +89,8 @@ const ModifyLostPet = ({ id }) => {
     const lostPetData = jsonToFormData(dataBody,lostPetDataBody);
     
     updateLostPetData({ lostPetData, id });    
+    setOpen(false);
+    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);

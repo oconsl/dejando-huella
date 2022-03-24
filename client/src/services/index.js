@@ -20,14 +20,16 @@ export const sendUserData = async ({ userData }) => {
   return res.data;
 };
 
-export const fetchUserData = async ({ setUserData, user }) => {
-  const res = await axios.get(`http://localhost:5001/api/users/${user}`);
+export const fetchUserData = async ({ setUserData, username }) => {
+  const res = await axios.get(
+    `http://localhost:5001/api/users?username=${username}`
+  );
   setUserData({
-    firstName: res.data.firstName,
-    lastName: res.data.lastName,
-    email: res.data.email,
-    username: res.data.username,
-    id: res.data._id,
+    firstName: res.data[0].firstName,
+    lastName: res.data[0].lastName,
+    email: res.data[0].email,
+    username: res.data[0].username,
+    id: res.data[0]._id,
   });
 };
 
@@ -62,6 +64,13 @@ export const sendMatchPetData = async ({ matchPetData }) => {
 export const fetchMatchPetsData = async ({ setMatchPets }) => {
   const res = await axios.get('http://localhost:5001/api/match-pets');
   setMatchPets(res.data);
+};
+
+export const fetchMatchPetsByUsername = async ({ setData, data, username }) => {
+  const res = await axios.get(
+    `http://localhost:5001/api/match-pets?username=${username}`
+  );
+  setData([...data, ...res.data]);
 };
 
 export const fetchMatchPetData = async ({ savedData, id }) => {
@@ -106,6 +115,13 @@ export const sendLostPetData = async ({ lostPetData }) => {
 export const fetchLostPetsData = async ({ setLostPets }) => {
   const res = await axios.get('http://localhost:5001/api/lost-pets');
   setLostPets(res.data);
+};
+
+export const fetchLostPetsByUsername = async ({ setData, data, username }) => {
+  const res = await axios.get(
+    `http://localhost:5001/api/lost-pets?username=${username}`
+  );
+  setData([...data, ...res.data]);
 };
 
 export const fetchLostPetData = async ({ savedData, id }) => {
@@ -156,6 +172,13 @@ export const fetchFoundPetsData = async ({ setFoundPets }) => {
   setFoundPets(res.data);
 };
 
+export const fetchFoundPetsByUsername = async ({ setData, data, username }) => {
+  const res = await axios.get(
+    `http://localhost:5001/api/found-pets?username=${username}`
+  );
+  setData([...data, ...res.data]);
+};
+
 export const fetchFoundPetData = async ({ savedData, id }) => {
   const res = await axios.get(`http://localhost:5001/api/found-pets/${id}`);
   savedData(res.data);
@@ -200,6 +223,17 @@ export const fetchAdoptionPetsData = async ({ setAdoptionPets }) => {
   setAdoptionPets(res.data);
 };
 
+export const fetchAdoptionPetsByUsername = async ({
+  setData,
+  data,
+  username,
+}) => {
+  const res = await axios.get(
+    `http://localhost:5001/api/adoption-pets?username=${username}`
+  );
+  setData([...data, ...res.data]);
+};
+
 export const fetchAdoptionPetData = async ({ savedData, id }) => {
   const res = await axios.get(`http://localhost:5001/api/adoption-pets/${id}`);
   savedData(res.data);
@@ -224,4 +258,40 @@ export const deleteAdoptionPetData = async ({ id }) => {
     `http://localhost:5001/api/adoption-pets/${id}`
   );
   return res.data;
+};
+
+export const fetchAllPetDataByUsername = async ({ setData, username }) => {
+  const endpoints = [
+    `http://localhost:5001/api/match-pets?username=${username}`,
+    `http://localhost:5001/api/lost-pets?username=${username}`,
+    `http://localhost:5001/api/found-pets?username=${username}`,
+    `http://localhost:5001/api/adoption-pets?username=${username}`,
+  ];
+
+  const res = await Promise.all(
+    endpoints.map((endpoint) => axios.get(endpoint))
+  );
+
+  const sectionSelect = (data) => {
+    if (data.petName === undefined) return 'Found';
+    if (data.testimony) return 'Match';
+    if (data.filter.dewormed !== undefined) return 'Adoption';
+
+    return 'Lost';
+  };
+
+  const data = res.map((res) => res.data).flat();
+
+  const rowData = data.map((info) => {
+    return {
+      id: info._id,
+      section: sectionSelect(info),
+      petName: info.petName || '-',
+      specie: info?.filter?.specie || '-',
+      breed: info?.filter?.breed || '-',
+      date: info.date || '-',
+    };
+  });
+
+  setData(rowData);
 };

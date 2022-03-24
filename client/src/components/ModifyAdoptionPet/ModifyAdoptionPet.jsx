@@ -38,7 +38,7 @@ import formatDate from '../../utils/formatDate';
 import { fetchAdoptionPetData, updateAdoptionPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const ModifyAdoptionPet = ({ id }) => {
+const ModifyAdoptionPet = ({ id, setOpen }) => {
   const [newPhoto, setNewPhoto] = useState(false);
   //PET
   const [dogPet, setDogPet] = useState(true);
@@ -92,6 +92,8 @@ const ModifyAdoptionPet = ({ id }) => {
     const adoptionPetData = jsonToFormData(dataBody, adoptionPetDataBody);
 
     updateAdoptionPetData({ adoptionPetData });
+    setOpen(false);
+    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -388,7 +390,6 @@ const ModifyAdoptionPet = ({ id }) => {
           >
             <div>Image to upload</div>
             <TextField
-              required
               id='image'
               fullWidth
               label='Pet Image'

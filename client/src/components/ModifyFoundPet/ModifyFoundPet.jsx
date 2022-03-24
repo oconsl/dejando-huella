@@ -37,7 +37,7 @@ import formatDate from '../../utils/formatDate';
 import jsonToFormData from '../../utils/jsonToFormData';
 import { updateFoundPetData, fetchFoundPetData } from '../../services';
 
-const ModifyFoundPet = ({ id }) => {
+const ModifyFoundPet = ({ id, setOpen }) => {
   const [newDate, setNewDate] = useState(false);
   const [newPhoto, setNewPhoto] = useState(false);
   //PET
@@ -88,6 +88,8 @@ const ModifyFoundPet = ({ id }) => {
     const foundPetData = jsonToFormData(dataBody, foundPetDataBody);
 
     updateFoundPetData({ foundPetData, id });
+    setOpen(false);
+    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -324,7 +326,6 @@ const ModifyFoundPet = ({ id }) => {
           >
             <div>Image to upload</div>
             <TextField
-              required
               id='image'
               fullWidth
               label='Pet Image'
