@@ -39,7 +39,7 @@ import {
 //UTIL FUNCTION
 import formatDate from '../../utils/formatDate';
 import jsonToFormData from '../../utils/jsonToFormData';
-import sendFoundPetData from '../../services';
+import { sendFoundPetData } from '../../services';
 
 const AddFoundPet = () => {
   //PET

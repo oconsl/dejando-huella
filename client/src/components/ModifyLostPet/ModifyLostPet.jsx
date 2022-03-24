@@ -17,8 +17,6 @@ import {
 //MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-//DEFAULT IMAGES
-import default_dog from '../../assets/default_dog.svg';
 //COMPONENTS
 import MapStatic from '../MapView/MapStatic';
 import CropEasy from '../Crop/CropEasy';
@@ -40,12 +38,13 @@ import { fetchLostPetData, updateLostPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
 const ModifyLostPet = ({ id }) => {
-  const [dogPet, setDogPet] = useState(false);
   const [newDate, setNewDate] = useState(false);
   const [newPhoto, setNewPhoto] = useState(false);
+  //PET
+  const [dogPet, setDogPet] = useState(false);
   //CROP
   const [openCrop, setOpenCrop] = useState(false);
-  const [photoURL, setPhotoURL] = useState(default_dog);
+  const [photoURL, setPhotoURL] = useState(null);
   //MAP
   const [openMap, setOpenMap] = useState(false);
   //FORM
@@ -77,7 +76,8 @@ const ModifyLostPet = ({ id }) => {
       username: JSON.parse(localStorage.getItem('username')),
       ...textData,
       filter: {
-        ...optionData
+        ...optionData,
+        specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,
       addressRoad: address,
@@ -140,7 +140,7 @@ const ModifyLostPet = ({ id }) => {
       setAddress(fetchedData.addressRoad);
       setDate(fetchedData.date);
       setLatLng(fetchedData.latLng);
-      setDogPet(fetchedData.filter.specie);
+      setDogPet(fetchedData.filter.specie === 'Dog');
       setPhotoURL(fetchedData.imageURL);
     };
 
