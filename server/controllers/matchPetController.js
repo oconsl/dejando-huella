@@ -49,18 +49,32 @@ const matchPetController = (MatchPet) => {
   const putMatchPetById = async (req, res) => {
     try {
       const { body } = req;
+      if(req.file){
+        const result = await cloudinary.v2.uploader.upload(req.file.path);
 
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-
-      const response = await MatchPet.findByIdAndUpdate(req.params.matchPetId, {
-        username: body.username,
-        petName: body.petName,
-        testimony: body.testimony,
-        image: body.image,
-        imageURL: result.url,
-        cloudinary: result.public_id,
-      });
-      cloudinary.v2.uploader.destroy(response.cloudinary);
+        const response = await MatchPet.findByIdAndUpdate(req.params.matchPetId, {
+          username: body.username,
+          petName: body.petName,
+          testimony: body.testimony,
+          imageURL: result.url,
+          cloudinary: result.public_id,
+        });
+        cloudinary.v2.uploader.destroy(response.cloudinary);
+      }else{
+        const aux = await MatchPet.findById(req.params.matchPetId);
+        await MatchPet.updateOne({
+          _id: req.params.matchPetId
+      },
+      {
+        $set:{
+          username: body.username,
+          petName: body.petName,
+          testimony: body.testimony,
+          imageURL: aux.imageURL,
+          cloudinary: aux.cloudinary,
+        }
+      })
+      }
 
       res.json('Updated successfully.');
     } catch (err) {

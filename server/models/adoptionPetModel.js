@@ -51,7 +51,7 @@ const AdoptionPet = new Schema({
     required: true,
   },
   filter: filterSchema,
-  imgURL: { type: 'string' },
+  imageURL: { type: 'string' },
   cloudinary: { type: 'string' },
 });
 
