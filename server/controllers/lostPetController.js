@@ -65,23 +65,44 @@ const lostPetController = (LostPet) => {
   const putLostPetById = async (req, res) => {
     try {
       const { body } = req;
+      if(req.file){
+        const result = await cloudinary.v2.uploader.upload(req.file.path);
 
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-
-      const response = await LostPet.findByIdAndUpdate(req.params.lostPetId, {
-        username: body.username,
-        petName: body.petName,
-        description: body.description,
-        phone: body.phone,
-        addressNumber: body.addressNumber,
-        addressRoad: body.addressRoad,
-        latLng: body.latLng,
-        date: body.date,
-        filter: body.filter,
-        imgURL: result.url,
-        cloudinary: result.public_id,
-      });
-      cloudinary.v2.uploader.destroy(response.cloudinary);
+        const response = await LostPet.findByIdAndUpdate(req.params.lostPetId, {
+          username: body.username,
+          petName: body.petName,
+          description: body.description,
+          phone: body.phone,
+          addressNumber: body.addressNumber,
+          addressRoad: body.addressRoad,
+          latLng: body.latLng,
+          date: body.date,
+          filter: body.filter,
+          imageURL: result.url,
+          cloudinary: result.public_id,
+        });
+        cloudinary.v2.uploader.destroy(response.cloudinary);
+      }else{
+        const aux = await LostPet.findById(req.params.lostPetId);
+        await LostPet.updateOne({
+          _id: req.params.lostPetId
+      },
+      {
+          $set:{
+            username: body.username,
+            petName: body.petName,
+            description: body.description,
+            phone: body.phone,
+            addressNumber: body.addressNumber,
+            addressRoad: body.addressRoad,
+            latLng: body.latLng,
+            date: body.date,
+            filter: body.filter,
+            imageURL: aux.imageURL,
+            cloudinary: aux.cloudinary,
+          }
+      })
+      }
 
       res.json('Updated successfully.');
     } catch (err) {
