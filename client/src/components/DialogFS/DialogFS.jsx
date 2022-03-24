@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import Typography from '@mui/material/Typography';
 import Dialog from '@mui/material/Dialog';
 import AppBar from '@mui/material/AppBar';
@@ -11,7 +12,7 @@ import ModifyLostPet from '../../components/ModifyLostPet/ModifyLostPet';
 import ModifyFoundPet from '../../components/ModifyFoundPet/ModifyFoundPet';
 import ModifyAdoptionPet from '../../components/ModifyAdoptionPet/ModifyAdoptionPet';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
