@@ -21,18 +21,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
 //UTILS
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { loginUser } from '../../services';
 import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
 
-async function loginUser(credentials) {
-  return axios
-    .post('http://localhost:5001/api/users/login', {
-        username: credentials.username,
-        password: credentials.password,
-      },
-    )
-    .then((response) => response.data);
-}
 
 const Login = ({ setToken }) => {
   const [userData, setUserData] = useState({
@@ -55,7 +46,7 @@ const Login = ({ setToken }) => {
   const handleLogIn = async (event) => {
     event.preventDefault();
 
-    const response = await loginUser(userData);
+    const response = loginUser(userData);
 
     if (response === 'Invalid credentials') setError(true);
     else {
