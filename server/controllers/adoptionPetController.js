@@ -88,7 +88,6 @@ const adoptionPetController = (AdoptionPet) => {
             _id: req.params.adoptionPetId
         },
         {
-<<<<<<< HEAD
           $set:{
             username: body.username,
             petName: body.petName,
@@ -104,23 +103,6 @@ const adoptionPetController = (AdoptionPet) => {
           }
         })
       }
-=======
-          username: body.username,
-          petName: body.petName,
-          description: body.description,
-          phone: body.phone,
-          addressNumber: body.addressNumber,
-          addressRoad: body.addressRoad,
-          latLng: body.latLng,
-          image: body.image,
-          date: body.date,
-          filter: body.filter,
-          imageURL: result.url,
-          cloudinary: result.public_id,
-        }
-      );
-      cloudinary.v2.uploader.destroy(response.public_id);
->>>>>>> b1277f387e74f56847e4a8573a8e3ece486a3966
 
       res.json('Updated successfully');
     } catch (err) {
