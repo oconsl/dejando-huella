@@ -75,7 +75,7 @@ const AddLostPet = () => {
     const lostPetDataBody = new FormData();
 
     const dataBody = {
-      username: 'test',
+      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
       filter: {
         ...optionData,
