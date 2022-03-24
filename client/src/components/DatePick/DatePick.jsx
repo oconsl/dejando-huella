@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+// UTIL
+import stringToDate from '../../utils/stringToDate';
 
-const DatePick = ({saveDate}) => {
+const DatePick = ({saveDate, fetchedDate, setNewDate }) => {
   const [value, setValue] = useState(null);
+
+  useEffect(() => {
+    if(fetchedDate) setValue(stringToDate(fetchedDate))
+  }, [fetchedDate])
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -15,6 +21,7 @@ const DatePick = ({saveDate}) => {
         onChange={(newValue) => {
           setValue(newValue);
           saveDate(newValue);
+          setNewDate(true);
         }}
         renderInput={(params) => <TextField {...params} required />}
       />
