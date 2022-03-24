@@ -348,7 +348,6 @@ const ModifyLostPet = ({ id }) => {
           >
             <div>Image to upload</div>
             <TextField
-              required
               id='image'
               fullWidth
               label='Pet Image'

@@ -21,7 +21,7 @@ const DatePick = ({saveDate, fetchedDate, setNewDate }) => {
         onChange={(newValue) => {
           setValue(newValue);
           saveDate(newValue);
-          setNewDate(true);
+          if(setNewDate) setNewDate(true);
         }}
         renderInput={(params) => <TextField {...params} required />}
       />
