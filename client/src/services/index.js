@@ -12,6 +12,18 @@ export const fetchGithubData = async ({ setUserData, user }) => {
 };
 
 // USER SERVICES
+export const loginUser = async ({ credentials }) => {
+  const res = await axios.post(
+    `${process.env.REACT_APP_API_URL}/api/users/login`,
+    {
+      username: credentials.username,
+      password: credentials.password,
+    }
+  );
+
+  return res.data;
+};
+
 export const sendUserData = async ({ userData }) => {
   const res = await axios.post(
     `${process.env.REACT_APP_API_URL}/api/users/signup`,
