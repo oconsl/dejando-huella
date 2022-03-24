@@ -14,7 +14,7 @@ export const fetchGithubData = async ({ setUserData, user }) => {
 // USER SERVICES
 export const sendUserData = async ({ userData }) => {
   const res = await axios.post(
-    'http://localhost:5001/api/users/signup',
+    `${process.env.REACT_APP_API_URL}/api/users/signup`,
     userData
   );
   return res.data;
@@ -22,7 +22,7 @@ export const sendUserData = async ({ userData }) => {
 
 export const fetchUserData = async ({ setUserData, username }) => {
   const res = await axios.get(
-    `http://localhost:5001/api/users?username=${username}`
+    `${process.env.REACT_APP_API_URL}/api/users?username=${username}`
   );
   setUserData({
     firstName: res.data[0].firstName,
@@ -35,14 +35,16 @@ export const fetchUserData = async ({ setUserData, username }) => {
 
 export const updateUserData = async ({ newUserData, id }) => {
   const res = await axios.put(
-    `http://localhost:5001/api/users/${id}`,
+    `${process.env.REACT_APP_API_URL}/api/users/${id}`,
     newUserData
   );
   return res.data;
 };
 
 export const deleteUserData = async ({ id }) => {
-  const res = await axios.delete(`http://localhost:5001/api/users/${id}`);
+  const res = await axios.delete(
+    `${process.env.REACT_APP_API_URL}/api/users/${id}`
+  );
   return res.data;
 };
 
@@ -51,7 +53,7 @@ export const sendMatchPetData = async ({ matchPetData }) => {
   try {
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5001/api/match-pets',
+      url: `${process.env.REACT_APP_API_URL}/api/match-pets`,
       data: matchPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -62,19 +64,16 @@ export const sendMatchPetData = async ({ matchPetData }) => {
 };
 
 export const fetchMatchPetsData = async ({ setMatchPets }) => {
-  const res = await axios.get('http://localhost:5001/api/match-pets');
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/match-pets`
+  );
   setMatchPets(res.data);
 };
 
-export const fetchMatchPetsByUsername = async ({ setData, data, username }) => {
-  const res = await axios.get(
-    `http://localhost:5001/api/match-pets?username=${username}`
-  );
-  setData([...data, ...res.data]);
-};
-
 export const fetchMatchPetData = async ({ savedData, id }) => {
-  const res = await axios.get(`http://localhost:5001/api/match-pets/${id}`);
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/match-pets/${id}`
+  );
   savedData(res.data);
 };
 
@@ -82,7 +81,7 @@ export const updateMatchPetData = async ({ matchPetData, id }) => {
   try {
     const response = await axios({
       method: 'put',
-      url: `http://localhost:5001/api/match-pets/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/api/match-pets/${id}`,
       data: matchPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -93,7 +92,9 @@ export const updateMatchPetData = async ({ matchPetData, id }) => {
 };
 
 export const deleteMatchPetData = async ({ id }) => {
-  const res = await axios.delete(`http://localhost:5001/api/match-pets/${id}`);
+  const res = await axios.delete(
+    `${process.env.REACT_APP_API_URL}/api/match-pets/${id}`
+  );
   return res.data;
 };
 
@@ -102,7 +103,7 @@ export const sendLostPetData = async ({ lostPetData }) => {
   try {
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5001/api/lost-pets',
+      url: `${process.env.REACT_APP_API_URL}/api/lost-pets`,
       data: lostPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -113,19 +114,14 @@ export const sendLostPetData = async ({ lostPetData }) => {
 };
 
 export const fetchLostPetsData = async ({ setLostPets }) => {
-  const res = await axios.get('http://localhost:5001/api/lost-pets');
+  const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/lost-pets`);
   setLostPets(res.data);
 };
 
-export const fetchLostPetsByUsername = async ({ setData, data, username }) => {
-  const res = await axios.get(
-    `http://localhost:5001/api/lost-pets?username=${username}`
-  );
-  setData([...data, ...res.data]);
-};
-
 export const fetchLostPetData = async ({ savedData, id }) => {
-  const res = await axios.get(`http://localhost:5001/api/lost-pets/${id}`);
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/lost-pets/${id}`
+  );
   savedData(res.data);
 };
 
@@ -133,7 +129,7 @@ export const updateLostPetData = async ({ lostPetData, id }) => {
   try {
     const response = await axios({
       method: 'put',
-      url: `http://localhost:5001/api/lost-pets/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/api/lost-pets/${id}`,
       data: lostPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -144,12 +140,14 @@ export const updateLostPetData = async ({ lostPetData, id }) => {
 };
 
 export const deleteLostPetData = async ({ id }) => {
-  const res = await axios.delete(`http://localhost:5001/api/lost-pets/${id}`);
+  const res = await axios.delete(
+    `${process.env.REACT_APP_API_URL}/api/lost-pets/${id}`
+  );
   return res.data;
 };
 
 export const fetchLostPetByQuery = async ({ query }) => {
-  axios.get(`http://localhost:5001/api/lost-pets?${query}`);
+  axios.get(`${process.env.REACT_APP_API_URL}/api/lost-pets?${query}`);
 };
 
 // FOUND PET SERVICES
@@ -157,7 +155,7 @@ export const sendFoundPetData = async ({ foundPetData }) => {
   try {
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5001/api/found-pets',
+      url: `${process.env.REACT_APP_API_URL}/api/found-pets`,
       data: foundPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -168,19 +166,16 @@ export const sendFoundPetData = async ({ foundPetData }) => {
 };
 
 export const fetchFoundPetsData = async ({ setFoundPets }) => {
-  const res = await axios.get('http://localhost:5001/api/found-pets');
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/found-pets`
+  );
   setFoundPets(res.data);
 };
 
-export const fetchFoundPetsByUsername = async ({ setData, data, username }) => {
-  const res = await axios.get(
-    `http://localhost:5001/api/found-pets?username=${username}`
-  );
-  setData([...data, ...res.data]);
-};
-
 export const fetchFoundPetData = async ({ savedData, id }) => {
-  const res = await axios.get(`http://localhost:5001/api/found-pets/${id}`);
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/found-pets/${id}`
+  );
   savedData(res.data);
 };
 
@@ -188,7 +183,7 @@ export const updateFoundPetData = async ({ foundPetData, id }) => {
   try {
     const response = await axios({
       method: 'put',
-      url: `http://localhost:5001/api/found-pets/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/api/found-pets/${id}`,
       data: foundPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -199,7 +194,9 @@ export const updateFoundPetData = async ({ foundPetData, id }) => {
 };
 
 export const deleteFoundPetData = async ({ id }) => {
-  const res = await axios.delete(`http://localhost:5001/api/found-pets/${id}`);
+  const res = await axios.delete(
+    `${process.env.REACT_APP_API_URL}/api/found-pets/${id}`
+  );
   return res.data;
 };
 
@@ -208,7 +205,7 @@ export const sendAdoptionPetData = async ({ adoptionPetData }) => {
   try {
     const response = await axios({
       method: 'post',
-      url: 'http://localhost:5001/api/adoption-pets',
+      url: `${process.env.REACT_APP_API_URL}/api/adoption-pets`,
       data: adoptionPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -219,23 +216,16 @@ export const sendAdoptionPetData = async ({ adoptionPetData }) => {
 };
 
 export const fetchAdoptionPetsData = async ({ setAdoptionPets }) => {
-  const res = await axios.get('http://localhost:5001/api/adoption-pets');
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/adoption-pets`
+  );
   setAdoptionPets(res.data);
 };
 
-export const fetchAdoptionPetsByUsername = async ({
-  setData,
-  data,
-  username,
-}) => {
-  const res = await axios.get(
-    `http://localhost:5001/api/adoption-pets?username=${username}`
-  );
-  setData([...data, ...res.data]);
-};
-
 export const fetchAdoptionPetData = async ({ savedData, id }) => {
-  const res = await axios.get(`http://localhost:5001/api/adoption-pets/${id}`);
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/adoption-pets/${id}`
+  );
   savedData(res.data);
 };
 
@@ -243,7 +233,7 @@ export const updateAdoptionPetData = async ({ adoptionPetData, id }) => {
   try {
     const response = await axios({
       method: 'put',
-      url: `http://localhost:5001/api/adoption-pets/${id}`,
+      url: `${process.env.REACT_APP_API_URL}/api/adoption-pets/${id}`,
       data: adoptionPetData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -255,17 +245,17 @@ export const updateAdoptionPetData = async ({ adoptionPetData, id }) => {
 
 export const deleteAdoptionPetData = async ({ id }) => {
   const res = await axios.delete(
-    `http://localhost:5001/api/adoption-pets/${id}`
+    `${process.env.REACT_APP_API_URL}/api/adoption-pets/${id}`
   );
   return res.data;
 };
 
 export const fetchAllPetDataByUsername = async ({ setData, username }) => {
   const endpoints = [
-    `http://localhost:5001/api/match-pets?username=${username}`,
-    `http://localhost:5001/api/lost-pets?username=${username}`,
-    `http://localhost:5001/api/found-pets?username=${username}`,
-    `http://localhost:5001/api/adoption-pets?username=${username}`,
+    `${process.env.REACT_APP_API_URL}/api/match-pets?username=${username}`,
+    `${process.env.REACT_APP_API_URL}/api/lost-pets?username=${username}`,
+    `${process.env.REACT_APP_API_URL}/api/found-pets?username=${username}`,
+    `${process.env.REACT_APP_API_URL}/api/adoption-pets?username=${username}`,
   ];
 
   const res = await Promise.all(
