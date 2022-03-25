@@ -46,7 +46,7 @@ const Login = ({ setToken }) => {
   const handleLogIn = async (event) => {
     event.preventDefault();
 
-    const response = loginUser(userData);
+    const response = loginUser({ userData });
 
     if (response === 'Invalid credentials') setError(true);
     else {

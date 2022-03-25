@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container, Pagination, Typography } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
 import { fetchFoundPetsData, fetchFilterFoundPetsData } from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
-// import { lostPets } from '../../TestData/dataBaseLostPets';
 
 const FoundPets = () => {
   const [foundPets, setFoundPets] = useState([]);
@@ -12,12 +12,17 @@ const FoundPets = () => {
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
   const [foundPetsGroups, setFoundPetsGroups] = useState([[1]]);
+  const navigate = useNavigate();
   const skeletonCount = new Array(9 - (foundPets.length % 9)).fill(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchFoundPetsData({ setFoundPets });
   }, []);
+
+  useEffect(() => {
+    navigate(`/found-pets/${page}`);
+  }, [page]);
 
   useEffect(() => {
     fetchFilterFoundPetsData({ query, setFoundPets });

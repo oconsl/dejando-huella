@@ -20,6 +20,7 @@ export const loginUser = async ({ credentials }) => {
       password: credentials.password,
     }
   );
+  console.log(res);
   return res.data;
 };
 
