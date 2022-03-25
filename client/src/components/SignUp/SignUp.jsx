@@ -27,16 +27,31 @@ const SignUp = () => {
     username: '',
     password: '',
   });
+  const [error, setError] = useState({
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    password: '',
+  });
   const [success, setSuccess] = useState(false);
 
   const handleUserDataChange = (key) => (event) => {
     setUserData({ ...userData, [key]: event.target.value });
+    
+    setError({
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      password: '',
+    });
   };
 
   const handleSignUp = (event) => {
     event.preventDefault();
     
-    sendUserData({ userData, setSuccess });
+    sendUserData({ userData, setSuccess, setError });
   };
 
   return (
@@ -70,21 +85,20 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
+                    error={error.firstName !== ''}
                     name='firstName'
                     label='First Name'
                     id='firstName'
                     autoComplete='given-name'
                     onChange={handleUserDataChange('firstName')}
-                    inputProps={{
-                      inputMode: 'text',
-                      pattern: '^[a-zA-Z\\s]+$',
-                    }}
+                    helperText={error.firstName}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
+                    error={error.lastName !== ''}
                     id='lastName'
                     label='Last Name'
                     name='lastName'
@@ -94,11 +108,13 @@ const SignUp = () => {
                       inputMode: 'text',
                       pattern: '^[a-zA-Z\\s]+$',
                     }}
+                    helperText={error.lastName}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
+                    error={error.username !== ''}
                     fullWidth
                     id='username'
                     label='User Name'
@@ -109,11 +125,13 @@ const SignUp = () => {
                       inputMode: 'text',
                       pattern: '^[a-zA-Z0-9]+$',
                     }}
+                    helperText={error.username}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
+                    error={error.email !== ''}
                     fullWidth
                     id='email'
                     label='Email Address'
@@ -122,20 +140,23 @@ const SignUp = () => {
                     onChange={handleUserDataChange('email')}
                     inputProps={{
                       inputMode: 'text',
-                      pattern: '^\\w+@[a-zA-Z]+?\\.[a-zA-Z]{2,3}$',
+                      pattern: '^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$',
                     }}
+                    helperText={error.email === '' ? 'example@test.com' : error.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
+                    error={error.password !== ''}
                     name='password'
                     label='Password'
                     type='password'
                     id='password'
                     autoComplete='new-password'
                     onChange={handleUserDataChange('password')}
+                    helperText={error.password}
                   />
                 </Grid>
               </Grid>
