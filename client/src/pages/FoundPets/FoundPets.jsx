@@ -89,6 +89,7 @@ const FoundPets = () => {
                     addressRoad={item.addressRoad}
                     addressNumber={item.addressNumber}
                     phone={item.phone}
+                    position={item.latLng}
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -113,6 +114,7 @@ const FoundPets = () => {
                   addressRoad={item.addressRoad}
                   addressNumber={item.addressNumber}
                   phone={item.phone}
+                  position={item.latLng}
                 />
               </>
             );
