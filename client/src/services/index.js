@@ -12,19 +12,21 @@ export const fetchGithubData = async ({ setUserData, user }) => {
 };
 
 // USER SERVICES
-export const loginUser = async ({ credentials }) => {
-  const res = await axios.post(
-    `${process.env.REACT_APP_API_URL}/api/users/login`,
-    {
-      username: credentials.username,
-      password: credentials.password,
-    }
-  );
-  return res.data;
+export const loginUser = async ({ userData, setError }) => {
+  const res = await axios
+    .post(`${process.env.REACT_APP_API_URL}/api/users/login`, userData)
+    .then((res) => res.data)
+    .catch((err) => {
+      if (err.response.status === 401) {
+        setError(true);
+      }
+    });
+
+  return res;
 };
 
-export const sendUserData = async ({ userData, setSuccess }) => {
-  const res = await axios
+export const sendUserData = async ({ userData, setSuccess, setError }) => {
+  await axios
     .post(`${process.env.REACT_APP_API_URL}/api/users/signup`, userData)
     .then((res) => {
       if (res.status === 200) {
@@ -34,8 +36,61 @@ export const sendUserData = async ({ userData, setSuccess }) => {
           setSuccess(false);
         }, 5000);
       }
+    })
+    .catch((err) => {
+      if (err.response.status === 403) {
+        switch (err.response.data[0]) {
+          case 'email':
+            setError({
+              firstName: '',
+              lastName: '',
+              password: '',
+              username: '',
+              email: 'Email already in use.',
+            });
+            break;
+          case 'username':
+            setError({
+              firstName: '',
+              lastName: '',
+              password: '',
+              username: 'Username already in use.',
+              email: '',
+            });
+            break;
+        }
+      } else if (err.response.status === 400) {
+        switch (err.response.data.split('. ')[1].replace('.', '')) {
+          case 'firstName':
+            setError({
+              firstName: 'Only letters and spaces are allowed.',
+              lastName: '',
+              password: '',
+              username: '',
+              email: '',
+            });
+            break;
+          case 'lastName':
+            setError({
+              firstName: '',
+              lastName: 'Only letters and spaces are allowed.',
+              password: '',
+              username: '',
+              email: '',
+            });
+            break;
+          case 'password':
+            setError({
+              firstName: '',
+              lastName: '',
+              password: 'Password must have {8} to {16} characters.',
+              username: '',
+              email: '',
+            });
+            break;
+        }
+      }
     });
-  return res.data;
 };
 
 export const fetchUserData = async ({ setUserData, username }) => {
@@ -176,7 +231,9 @@ export const fetchFoundPetsData = async ({ setFoundPets }) => {
 };
 
 export const fetchFilterFoundPetsData = async ({ query, setFoundPets }) => {
-  const res = await axios.get(`http://localhost:5001/api/found-pets?${query}`);
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/found-pets?${query}`
+  );
   setFoundPets(res.data);
 };
 

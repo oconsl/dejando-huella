@@ -1,7 +1,6 @@
 import React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Container, Grid, Box, Button, Typography, Modal } from '@mui/material';
-import MapStatic from '../MapView/MapStatic';
 
 const style = {
   position: 'absolute',
@@ -18,7 +17,7 @@ const style = {
   p: 4,
 };
 
-const ModalFoundPets = (props) => {
+const ModalAdoptionPets = (props) => {
   return (
     <div>
       <Modal
@@ -115,6 +114,21 @@ const ModalFoundPets = (props) => {
                     Fur: {props.filter.fur}
                   </Typography>
                 </Box>
+                <Box>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Sterilized: {props.filter.sterilized}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Dewormed: {props.filter.dewormed}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Vaccinated: {props.filter.vaccinated}
+                  </Typography>
+                </Box>
               </Grid>
               <Grid
                 item
@@ -136,7 +150,10 @@ const ModalFoundPets = (props) => {
                   </Typography>
                 </Box>
                 <Box>
-                  <MapStatic position={props.position} />
+                  <img
+                    src="https://i.blogs.es/09af6a/google_maps/200_200.jpg"
+                    alt=""
+                  />
                 </Box>
                 <Box>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -160,4 +177,4 @@ const ModalFoundPets = (props) => {
   );
 };
 
-export default ModalFoundPets;
+export default ModalAdoptionPets;

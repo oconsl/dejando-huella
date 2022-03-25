@@ -21,7 +21,7 @@ const usersController = (User) => {
 
       res.status(200).json('Signed up successfully');
     } catch (err) {
-      res.json('Error');
+      res.status(403).json(Object.keys(err.keyValue));
     }
   };
 
@@ -73,12 +73,12 @@ const usersController = (User) => {
         response === null ||
         !(await bcrypt.compare(body.password, response.password))
       ) {
-        return res.json('Invalid credentials');
+        return res.status(401).send('Unauthorized');
       }
       const token = generateToken(response);
       res.status(200).json(token);
     } catch (err) {
-      res.json('Error');
+      res.status(401).send('Unauthorized');
     }
   };
 

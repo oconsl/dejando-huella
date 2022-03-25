@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path='/found-pets' element={<FoundPets />} />
+          <Route path='/found-pets/:page' element={<FoundPets />} />
           <Route path='/lost-pets' element={<LostPets />} />
           <Route path='/adoption-pets' element={<Adoption />} />
           <Route path='/match-pets/:page' element={<MatchPets />} />

@@ -17,7 +17,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import './HeaderPet.css';
 
-const pages = ['found-pets', 'lost-pets', 'adoption-pets', 'match-pets'];
+const pages = ['found-pets/1', 'lost-pets', 'adoption-pets', 'match-pets/1'];
 const settings = ['Profile', 'Logout'];
 
 const HeaderPet = () => {
@@ -60,11 +60,13 @@ const HeaderPet = () => {
             component='div'
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <img
-              width={'45px'}
-              height={'45px'}
-              src='https://cdn-icons-png.flaticon.com/512/1076/1076826.png'
-            />
+            <Link to='/'>
+              <img
+                width={'45px'}
+                height={'45px'}
+                src='https://cdn-icons-png.flaticon.com/512/1076/1076826.png'
+              />
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -102,7 +104,7 @@ const HeaderPet = () => {
                     <Link
                       key={index}
                       className='nav-link'
-                      to={`/${page.replace(' ', '-').toLocaleLowerCase()}`}
+                      to={`/${page}/1`}
                     >
                       {page}
                     </Link>

@@ -46,11 +46,10 @@ const Login = ({ setToken }) => {
   const handleLogIn = async (event) => {
     event.preventDefault();
 
-    const response = loginUser(userData);
+    const response = await loginUser({ userData, setError });
 
-    if (response === 'Invalid credentials') setError(true);
-    else {
-      setToken(response, userData.username);
+    if(!error){
+      if(typeof response === 'string') setToken(response, userData.username);
       navigate('/lost-pets');
     }
   };
@@ -119,7 +118,7 @@ const Login = ({ setToken }) => {
             />
             {error && (
               <FormHelperText id='password-component-error-text' error>
-                Invalid credentials.
+                Username or email invalid.
               </FormHelperText>
             )}
           </FormControl>

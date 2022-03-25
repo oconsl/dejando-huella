@@ -37,12 +37,7 @@ const CardsPet = (props) => {
         img_src={props.img_src}
       />
       <CardActionArea onClick={handleOpenImage}>
-        <CardMedia
-          component="img"
-          height="140"
-          image={props.img_src}
-          alt=""
-        />
+        <CardMedia component="img" height="140" image={props.img_src} alt="" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.title}
@@ -66,6 +61,7 @@ const CardsPet = (props) => {
           addressRoad={props.addressRoad}
           addressNumber={props.addressNumber}
           phone={props.phone}
+          position={props.position}
         />
       </CardActions>
     </Card>
