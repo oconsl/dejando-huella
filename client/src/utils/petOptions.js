@@ -23,3 +23,5 @@ export const ageDogOptions = ['Puppy', 'Adult', 'Senior'];
 export const ageCatOptions = ['Kitten', 'Adult', 'Senior'];
 
 export const furOptions = ['Hairless', 'Short', 'Large'];
+
+export const specieOption = ['Cat', 'Dog'];

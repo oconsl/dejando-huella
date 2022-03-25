@@ -7,8 +7,8 @@ import {
   ageDogOptions,
   ageCatOptions,
   furOptions,
-} from '../Utils/petOptions';
-import { catBreeds, dogBreeds } from '../Utils/petBreeds';
+} from '../../utils/petOptions';
+import { catBreeds, dogBreeds } from '../../utils/petBreeds';
 import { Button, Container, TextField, Autocomplete } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 

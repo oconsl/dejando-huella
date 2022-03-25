@@ -60,11 +60,13 @@ const HeaderPet = () => {
             component='div'
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <img
-              width={'45px'}
-              height={'45px'}
-              src='https://cdn-icons-png.flaticon.com/512/1076/1076826.png'
-            />
+            <Link to='/'>
+              <img
+                width={'45px'}
+                height={'45px'}
+                src='https://cdn-icons-png.flaticon.com/512/1076/1076826.png'
+              />
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
