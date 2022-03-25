@@ -231,13 +231,9 @@ export const fetchFoundPetsData = async ({ setFoundPets }) => {
 };
 
 export const fetchFilterFoundPetsData = async ({ query, setFoundPets }) => {
-<<<<<<< HEAD
-  const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/found-pets?${query}`);
-=======
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/found-pets?${query}`
   );
->>>>>>> c66b98a4d02cef68603eb49e8792acda87dc867a
   setFoundPets(res.data);
 };
 
