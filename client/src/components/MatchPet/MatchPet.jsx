@@ -18,7 +18,7 @@ const MatchPet = ({ testimonyData, flexVariant }) => {
         <CardMedia
           component='img'
           height='350'
-          image={testimonyData.image}
+          image={testimonyData.imageURL}
           alt={'img'}
           sx={{ width: '350px' }}
         />

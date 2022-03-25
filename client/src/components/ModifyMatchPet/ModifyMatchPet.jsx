@@ -51,7 +51,6 @@ const ModifyMatchPet = ({ id, setOpen }) => {
 
     updateMatchPetData({ matchPetData, id });
     setOpen(false);
-    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);

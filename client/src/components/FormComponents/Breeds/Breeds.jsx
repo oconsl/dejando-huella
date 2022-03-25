@@ -14,13 +14,11 @@ const Breeds = ({ onChange, isADog, value }) => {
 
   return (
       <Autocomplete
-        // multiple
         id="breeds-standard"
         options={options}
-        // value={value}
         onChange={onChange}
-        getOptionLabel={(option) => option}
-        isOptionEqualToValue={(option, value) => option.id === value.id}
+        disableClearable
+        isOptionEqualToValue={(option, value) => option.id === value?.id}
         value={value}
         renderInput={(params) => (
           <TextField

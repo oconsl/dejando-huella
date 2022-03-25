@@ -89,7 +89,6 @@ const ModifyFoundPet = ({ id, setOpen }) => {
 
     updateFoundPetData({ foundPetData, id });
     setOpen(false);
-    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -208,16 +207,33 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                 justifyContent: 'center',
               }}
             >
-              <DatePick saveDate={setDate} fetchedDate={date} setNewDate={setNewDate}/>
+              <DatePick
+                saveDate={setDate}
+                fetchedDate={date}
+                setNewDate={setNewDate}
+              />
+              <TextField
+                disabled
+                required
+                fullWidth
+                id='addressRoad'
+                label='Address Road'
+                name='addressRoad'
+                inputProps={{
+                  readOnly: true,
+                }}
+                value={address}
+                sx={{ width: '50%', ml: 3 }}
+              />
               <TextField
                 required
+                disabled
                 fullWidth
                 id='addressNum'
                 label='Address Num'
                 name='addressNum'
                 inputProps={{
-                  inputMode: 'numeric',
-                  pattern: '[0-9]*',
+                  readOnly: true,
                 }}
                 value={textData.addressNumber}
                 onChange={handleTextDataChange('addressNumber')}
@@ -239,10 +255,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                   fullWidth={true}
                   maxWidth={'md'}
                 >
-                  <MapStatic
-                    position={latLng}
-                    closeMap={handleCloseMap}
-                  />
+                  <MapStatic position={latLng} closeMap={handleCloseMap} />
                 </Dialog>
               )}
             </Grid>

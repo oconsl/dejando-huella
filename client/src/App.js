@@ -32,8 +32,8 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path='/found-pets' element={<FoundPets />} />
           <Route path='/lost-pets' element={<LostPets />} />
+          <Route path='/adoption-pets' element={<Adoption />} />
           <Route path='/match-pets/:page' element={<MatchPets />} />
-          <Route path='/adoption' element={<Adoption />} />
           <Route path='/profile' element={<Profile />} />
         </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />

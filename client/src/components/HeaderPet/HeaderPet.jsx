@@ -17,7 +17,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import './HeaderPet.css';
 
-const pages = ['Found Pets', 'Lost Pets', 'Adoption'];
+const pages = ['found-pets', 'lost-pets', 'adoption-pets', 'match-pets'];
 const settings = ['Profile', 'Logout'];
 
 const HeaderPet = () => {
@@ -130,11 +130,11 @@ const HeaderPet = () => {
               <Link
                 key={index}
                 className="nav-link"
-                to={`/${page.replace(' ', '-').toLocaleLowerCase()}`}
+                to={`/${page}`}
               >
                 <Button
                   className='header-button'
-                  key={page}
+                  key={`${page}`}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >

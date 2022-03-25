@@ -8,8 +8,8 @@ const CustomForm = ({ onChange, options, label, value}) => {
         id="tags-standard"
         options={options}
         onChange={onChange}
-        getOptionLabel={(option) => option}
-        isOptionEqualToValue={(option, value) => option.id === value.id}
+        disableClearable
+        isOptionEqualToValue={(option, value) => option.id === value?.id}
         value={value}
         renderInput={(params) => (
           <TextField

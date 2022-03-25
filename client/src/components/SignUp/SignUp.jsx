@@ -9,7 +9,6 @@ import {
   Grid,
   TextField,
   Button,
-  Dialog,
 } from '@mui/material';
 //MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -17,8 +16,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 //MATERIAL TRANSITIONS
 import Grow from '@mui/material/Grow';
 //UTILS
-import axios from 'axios';
 import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
+import { sendUserData } from '../../services';
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -37,17 +36,7 @@ const SignUp = () => {
   const handleSignUp = (event) => {
     event.preventDefault();
     
-    axios
-      .post('http://localhost:5000/api/users/signup', userData)
-      .then((res) => {
-        if (res.status === 200) {
-          setSuccess(true);
-
-          setTimeout(() => {
-            setSuccess(false);
-          }, 3000);
-        }
-      });
+    sendUserData({ userData, setSuccess });
   };
 
   return (

@@ -90,7 +90,6 @@ const ModifyLostPet = ({ id, setOpen }) => {
     
     updateLostPetData({ lostPetData, id });    
     setOpen(false);
-    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -234,7 +233,21 @@ const ModifyLostPet = ({ id, setOpen }) => {
             >
               <DatePick saveDate={setDate} fetchedDate={date} setNewDate={setNewDate}/>
               <TextField
+                disabled
                 required
+                fullWidth
+                id='addressRoad'
+                label='Address Road'
+                name='addressRoad'
+                inputProps={{
+                  readOnly: true,
+                }}
+                value={address}
+                sx={{ width: '50%', ml: 3 }}
+              />
+              <TextField
+                required
+                disabled
                 fullWidth
                 id='addressNum'
                 label='Address Num'

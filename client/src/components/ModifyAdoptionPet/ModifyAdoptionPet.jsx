@@ -93,7 +93,6 @@ const ModifyAdoptionPet = ({ id, setOpen }) => {
 
     updateAdoptionPetData({ adoptionPetData });
     setOpen(false);
-    window.location.reload();
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
@@ -238,14 +237,27 @@ const ModifyAdoptionPet = ({ id, setOpen }) => {
               }}
             >
               <TextField
+                disabled
+                required
+                fullWidth
+                id='addressRoad'
+                label='Address Road'
+                name='addressRoad'
+                inputProps={{
+                  readOnly: true,
+                }}
+                value={address}
+                sx={{ width: '50%'}}
+              />
+              <TextField
+                disabled
                 required
                 fullWidth
                 id='addressNum'
                 label='Address Num'
                 name='addressNum'
                 inputProps={{
-                  inputMode: 'numeric',
-                  pattern: '[0-9]*',
+                  readOnly: true,
                 }}
                 value={textData.addressNumber}
                 onChange={handleTextDataChange('addressNumber')}
