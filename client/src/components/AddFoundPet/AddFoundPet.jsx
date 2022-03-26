@@ -195,9 +195,10 @@ const AddFoundPet = ({ setOpen }) => {
                 label='Phone'
                 inputProps={{
                   inputMode: 'numeric',
-                  pattern: '[0-9]*',
+                  pattern: '[0-9]{10,11}*$',
                 }}
                 onChange={handleTextDataChange('phone')}
+                helperText='Format: 10 to 11 digits'
               />
             </Grid>
             <Grid
@@ -265,7 +266,7 @@ const AddFoundPet = ({ setOpen }) => {
               <CustomForm
                 onChange={handleOptionDataChange('sex')}
                 options={sexOptions}
-                label='sex'
+                label='Sex'
               />
             </Grid>
             {dogPet && (
@@ -273,7 +274,7 @@ const AddFoundPet = ({ setOpen }) => {
                 <CustomForm
                   onChange={handleOptionDataChange('size')}
                   options={sizeOptions}
-                  label='size'
+                  label='Size'
                 />
               </Grid>
             )}
@@ -282,14 +283,14 @@ const AddFoundPet = ({ setOpen }) => {
                 <CustomForm
                   onChange={handleOptionDataChange('age')}
                   options={ageDogOptions}
-                  label='age'
+                  label='Age'
                 />
               )}
               {!dogPet && (
                 <CustomForm
                   onChange={handleOptionDataChange('age')}
                   options={ageCatOptions}
-                  label='age'
+                  label='Age'
                 />
               )}
             </Grid>
@@ -297,14 +298,14 @@ const AddFoundPet = ({ setOpen }) => {
               <CustomForm
                 onChange={handleOptionDataChange('color')}
                 options={colorOptions}
-                label='color'
+                label='Color'
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <CustomForm
                 onChange={handleOptionDataChange('fur')}
                 options={furOptions}
-                label='fur'
+                label='Fur'
               />
             </Grid>
           </Grid>

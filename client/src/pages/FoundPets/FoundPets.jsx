@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container, Pagination, Typography } from '@mui/material';
@@ -84,7 +84,7 @@ const FoundPets = () => {
               }
 
               return (
-                <>
+                <Fragment key={index}>
                   <CardsPet
                     key={index}
                     description={item.date + ' - \n' + item.description}
@@ -105,12 +105,12 @@ const FoundPets = () => {
                       />
                     );
                   })}
-                </>
+                </Fragment>
               );
             }
 
             return (
-              <>
+              <Fragment key={index}>
                 <CardsPet
                   key={index}
                   description={item.date + ' - \n' + item.description}
@@ -123,7 +123,7 @@ const FoundPets = () => {
                   position={item.latLng}
                   page='found-pets'
                 />
-              </>
+              </Fragment>
             );
           })
         ) : (

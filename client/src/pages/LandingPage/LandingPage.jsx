@@ -16,7 +16,7 @@ const LandingPage = () => {
   return (
     <>
       {!token && <HeaderLandingPage />}
-      {token && <HeaderPet />}
+      {/* {token && <HeaderPet />} */}
       <Carousel />
       <Information />
       <CardsContainer />

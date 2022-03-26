@@ -302,7 +302,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
               <CustomForm
                 onChange={handleOptionDataChange('sex')}
                 options={sexOptions}
-                label='sex'
+                label='Sex'
                 value={optionData.sex}
               />
             </Grid>
@@ -311,7 +311,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
                 <CustomForm
                   onChange={handleOptionDataChange('size')}
                   options={sizeOptions}
-                  label='size'
+                  label='Size'
                   value={optionData.size}
                 />
               </Grid>
@@ -321,7 +321,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
                 <CustomForm
                   onChange={handleOptionDataChange('age')}
                   options={ageDogOptions}
-                  label='age'
+                  label='Age'
                   value={optionData.age}
                 />
               )}
@@ -329,7 +329,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
                 <CustomForm
                   onChange={handleOptionDataChange('age')}
                   options={ageCatOptions}
-                  label='age'
+                  label='Age'
                   value={optionData.age}
                 />
               )}
@@ -338,7 +338,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
               <CustomForm
                 onChange={handleOptionDataChange('color')}
                 options={colorOptions}
-                label='color'
+                label='Color'
                 value={optionData.color}
               />
             </Grid>
@@ -346,7 +346,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
               <CustomForm
                 onChange={handleOptionDataChange('fur')}
                 options={furOptions}
-                label='fur'
+                label='Fur'
                 value={optionData.fur}
               />
             </Grid>
