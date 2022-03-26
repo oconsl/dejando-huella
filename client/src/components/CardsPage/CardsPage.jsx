@@ -14,7 +14,7 @@ import './CardsPage.css';
 const CardsPet = (props) => {
   return (
     <Card
-      className="card"
+      className='card'
       sx={{
         margin: '15px',
         width: '100%',
@@ -24,28 +24,27 @@ const CardsPet = (props) => {
         maxHeight: '350px',
       }}
     >
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={props.img_src}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <CardMedia
+        component='img'
+        height='140'
+        image={props.img_src}
+        alt='green iguana'
+      />
+      <CardContent>
+        <Typography gutterBottom variant='h5' component='div'>
+          {props.title}
+        </Typography>
+        <Typography variant='body2' color='text.secondary'>
+          {props.description}
+        </Typography>
+      </CardContent>
+
       <CardActions>
         <Link
-          className="link-button"
+          className='link-button'
           to={`/${props.title.replace(' ', '-').toLowerCase()}/1`}
         >
-          <Button size="small" color="primary">
+          <Button size='small' color='primary'>
             {props.button}
           </Button>
         </Link>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
@@ -69,7 +69,7 @@ const MatchPets = () => {
               }
 
               return (
-                <>
+                <Fragment key={index}>
                   <MatchPet
                     testimonyData={item}
                     key={index}
@@ -80,18 +80,18 @@ const MatchPets = () => {
                       <MatchPetSkeleton key={subIndex} flexVariant={content} />
                     );
                   })}
-                </>
+                </Fragment>
               );
             }
 
             return (
-              <>
+              <Fragment key={index}>
                 <MatchPet
                   testimonyData={item}
                   key={index}
                   flexVariant={index === 0 || index === 1}
                 />
-              </>
+              </Fragment>
             );
           })
         ) : (

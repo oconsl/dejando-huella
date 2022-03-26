@@ -64,8 +64,6 @@ const Filter = (props) => {
         .replace(reg3, '')
         .replace(reg4, '%20');
 
-    console.log(queryFilter)
-
     return queryFilter;
   };
 

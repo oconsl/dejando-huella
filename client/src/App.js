@@ -6,6 +6,7 @@ import AdoptionPets from './pages/AdoptionPets/AdoptionPets';
 import MatchPets from './pages/MatchPets/MatchPets';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
+import NotFound from './pages/NotFound/NotFound';
 import AddLostPet from './components/AddLostPet/AddLostPet';
 import AddMatchPet from './components/AddMatchPet/AddMatchPet';
 import Profile from './pages/Profile/Profile';
