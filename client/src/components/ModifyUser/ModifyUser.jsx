@@ -80,7 +80,7 @@ const ModifyUser = ({ id, setOpen }) => {
           setTimeout(() => {
             setSuccess(false);            
             setOpen(false);
-          }, 5000);
+          }, 3000);
         }
       }
     }

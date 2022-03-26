@@ -15,7 +15,7 @@ const MapView = ({ position, closeMap }) => {
   return (
     <>
       <DialogContent>
-        <IconButton
+        {/* <IconButton
           aria-label='close'
           sx={{
             position: 'absolute',
@@ -25,7 +25,7 @@ const MapView = ({ position, closeMap }) => {
           onClick={closeMap}
         >
           <CloseIcon />
-        </IconButton>
+        </IconButton> */}
         <Box
           sx={{
             display: 'flex',
