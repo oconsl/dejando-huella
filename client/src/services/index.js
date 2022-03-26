@@ -26,17 +26,11 @@ export const loginUser = async ({ userData, setError }) => {
   return res;
 };
 
-export const sendUserData = async ({ userData, setSuccess, setError }) => {
-  await axios
+export const sendUserData = async ({ userData, setError }) => {
+  const res = await axios
     .post(`${process.env.REACT_APP_API_URL}/api/users/signup`, userData)
     .then((res) => {
-      if (res.status === 200) {
-        setSuccess(true);
-
-        setTimeout(() => {
-          setSuccess(false);
-        }, 5000);
-      }
+      return res.status;
     })
     .catch((err) => {
       if (err.response.status === 403) {
@@ -96,6 +90,8 @@ export const sendUserData = async ({ userData, setSuccess, setError }) => {
         }
       }
     });
+
+  return res;
 };
 
 export const fetchUserData = async ({ setUserData, username }) => {
@@ -358,7 +354,10 @@ export const fetchAdoptionPetsData = async ({ setAdoptionPets }) => {
   setAdoptionPets(res.data);
 };
 
-export const fetchFilterAdoptionPetsData = async ({ query, setAdoptionPets }) => {
+export const fetchFilterAdoptionPetsData = async ({
+  query,
+  setAdoptionPets,
+}) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/adoption-pets?${query}`
   );

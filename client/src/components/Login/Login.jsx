@@ -50,7 +50,7 @@ const Login = ({ setToken }) => {
 
     if(!error){
       if(typeof response === 'string') setToken(response, userData.username);
-      navigate('/lost-pets');
+      navigate('/');
     }
   };
 

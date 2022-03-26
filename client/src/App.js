@@ -10,7 +10,7 @@ import AddLostPet from './components/AddLostPet/AddLostPet';
 import AddMatchPet from './components/AddMatchPet/AddMatchPet';
 import Profile from './pages/Profile/Profile';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import HeaderPet from './components/HeaderPet/HeaderPet';
 import Footer from './components/Footer/Footer';
 import useToken from './hooks/useToken';
@@ -22,14 +22,14 @@ import AddAdoptionPet from './components/AddAdoptionPet/AddAdoptionPet';
 import ModifyAdoptionPet from './components/ModifyAdoptionPet/ModifyAdoptionPet';
 
 function App() {
-  const { setToken } = useToken();
+  const { token, setToken } = useToken();
 
   return (
     <div className='App'>
-      {/* <HeaderPet /> */}
       <Routes>
-        <Route path='/' element={<LandingPage />} />
+        {!token && <Route path='/' element={<LandingPage />} />}
         <Route element={<ProtectedRoutes />}>
+          {token && <Route path='/' element={<LandingPage />} />}
           <Route path='/found-pets/:page' element={<FoundPets />} />
           <Route path='/lost-pets/:page' element={<LostPets />} />
           <Route path='/adoption-pets/:page' element={<AdoptionPets />} />
@@ -37,18 +37,10 @@ function App() {
           <Route path='/profile' element={<Profile />} />
         </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />
-        <Route
-          path='/update-adoption-pet'
-          element={<ModifyAdoptionPet id={'623c84f1a126835b2c6f7472'} />}
-        />
-        <Route path='/add-match-pet' element={<AddMatchPet />} />
-        <Route path='/add-lost-pet' element={<AddLostPet />} />
-        <Route path='/add-found-pet' element={<AddFoundPet />} />
-        <Route path='/add-adoption-pet' element={<AddAdoptionPet />} />
-        <Route path='/add-lost-pet' element={<AddLostPet />} />
-        <Route path='sign-up' element={<SignUp />} />
-        <Route path='*' element={<h1>ERROR 404</h1>} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
+
       <Footer />
     </div>
   );

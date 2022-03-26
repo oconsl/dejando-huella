@@ -7,6 +7,7 @@ const useAutoLogout = (startTime) => {
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
+      console.log(timer);
       if (timer > 0) {
         setTimer(timer - 1);
       } else if (timer === 0) {

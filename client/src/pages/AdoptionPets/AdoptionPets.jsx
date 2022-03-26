@@ -5,6 +5,7 @@ import { Box, Container, Pagination, Typography } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
 import { fetchAdoptionPetsData, fetchFilterAdoptionPetsData } from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
+import AddPet from '../../components/AddPet/AddPet';
 
 const AdoptionPets = () => {
   const [adoptionPets, setAdoptionPets] = useState([]);
@@ -59,8 +60,11 @@ const AdoptionPets = () => {
 
   return (
     <>
-      <Box>
+      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
         <h1>ADOPTION PETS</h1>
+        <div>
+          <AddPet option={'*AddAdoption'}/>
+        </div>
       </Box>
       <Filter buttonFilter={handleOnFilter} page='adoption-pets'/>
       <Container

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 //MATERIAL UI
 import {
   Box,
@@ -35,6 +36,7 @@ const SignUp = () => {
     password: '',
   });
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleUserDataChange = (key) => (event) => {
     setUserData({ ...userData, [key]: event.target.value });
@@ -48,10 +50,19 @@ const SignUp = () => {
     });
   };
 
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     
-    sendUserData({ userData, setSuccess, setError });
+    const status = await sendUserData({ userData, setError });
+
+    if(status === 200) {
+      setSuccess(true);
+
+      setTimeout(() => {
+        setSuccess(false);  
+        navigate('/login');
+      }, 3000);
+    }
   };
 
   return (
