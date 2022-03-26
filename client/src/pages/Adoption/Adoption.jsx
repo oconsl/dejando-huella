@@ -3,6 +3,7 @@ import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container, Pagination } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
 import { lostPets } from '../../TestData/dataBaseLostPets';
+import AddPet from '../../components/AddPet/AddPet';
 
 const Adoption = () => {
   const [cards, setCards] = useState(lostPets);
@@ -38,8 +39,11 @@ const Adoption = () => {
 
   return (
     <>
-      <Box>
+      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
         <h1>ADOPTION PETS</h1>
+        <div>
+          <AddPet option={'*AddAdoption'}/>
+        </div>
       </Box>
       <Filter buttonFilter={handleOnFilter} />
       <Container

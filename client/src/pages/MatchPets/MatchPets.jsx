@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import MatchPet from '../../components/MatchPet/MatchPet';
 import MatchPetSkeleton from '../../components/MatchPet/utils/MatchPetSkeleton';
 import { fetchMatchPetsData } from '../../services';
+import AddPet from '../../components/AddPet/AddPet';
 
 const MatchPets = () => {
   const [page, setPage] = useState(1);
@@ -47,6 +48,12 @@ const MatchPets = () => {
 
   return (
     <>
+      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
+        <h1>MATCH PETS</h1>
+        <div>
+          <AddPet option={'*AddMatch'}/>
+        </div>
+      </Box>
       <Box
         sx={{
           display: 'flex',

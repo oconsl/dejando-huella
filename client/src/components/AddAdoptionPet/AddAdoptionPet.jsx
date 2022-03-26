@@ -42,7 +42,7 @@ import formatDate from '../../utils/formatDate';
 import { sendAdoptionPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const AddAdoptionPet = () => {
+const AddAdoptionPet = ({ setOpen }) => {
   //PET
   const [dogPet, setDogPet] = useState(true);
   //CROP
@@ -95,6 +95,7 @@ const AddAdoptionPet = () => {
     const adoptionPetData = jsonToFormData(dataBody, adoptionPetDataBody);
 
     sendAdoptionPetData({ adoptionPetData });
+    setOpen(false);
   };
 
   const handleOpenCrop = () => setOpenCrop(true);

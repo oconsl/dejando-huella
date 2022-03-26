@@ -5,6 +5,7 @@ import { Box, Container, Pagination, Typography } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
 import { fetchFoundPetsData, fetchFilterFoundPetsData } from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
+import AddPet from '../../components/AddPet/AddPet';
 
 const FoundPets = () => {
   const [foundPets, setFoundPets] = useState([]);
@@ -58,8 +59,11 @@ const FoundPets = () => {
 
   return (
     <>
-      <Box>
+      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
         <h1>FOUND PETS</h1>
+        <div>
+          <AddPet option={'*AddFound'}/>
+        </div>
       </Box>
       <Filter buttonFilter={handleOnFilter} />
       <Container

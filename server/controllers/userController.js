@@ -45,9 +45,9 @@ const usersController = (User) => {
         password: await bcrypt.hash(body.password, 8),
       });
 
-      res.json('Updated successfully.');
+      res.status(200).json('Updated successfully.');
     } catch (err) {
-      res.json('Error');
+      res.status(403).json(Object.keys(err.keyValue));
     }
   };
 

@@ -44,6 +44,7 @@ const HeaderPet = () => {
 
   const handleMenuOptionClick = (setting) => () => {
     setting === 'Logout' ? logOut() : navigate('/profile');
+    setAnchorElUser(null);
   }
 
   useEffect(() => {
@@ -168,8 +169,8 @@ const HeaderPet = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting, index) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography key={index} textAlign='center' onClick={handleMenuOptionClick(setting)}>
+                <MenuItem key={setting} onClick={handleMenuOptionClick(setting)}>
+                  <Typography key={index} textAlign='center'>
                     {setting}
                   </Typography>
                 </MenuItem>

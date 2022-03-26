@@ -37,13 +37,16 @@ function App() {
           <Route path='/profile' element={<Profile />} />
         </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />
-        <Route path='/add-match-pet' element={<AddMatchPet />} />
         <Route
           path='/update-adoption-pet'
           element={<ModifyAdoptionPet id={'623c84f1a126835b2c6f7472'} />}
         />
+        <Route path='/add-match-pet' element={<AddMatchPet />} />
+        <Route path='/add-lost-pet' element={<AddLostPet />} />
+        <Route path='/add-found-pet' element={<AddFoundPet />} />
         <Route path='/add-adoption-pet' element={<AddAdoptionPet />} />
         <Route path='sign-up' element={<SignUp />} />
+        <Route path='*' element={<h1>ERROR 404</h1>} />
       </Routes>
       <Footer />
     </div>

@@ -41,7 +41,7 @@ import formatDate from '../../utils/formatDate';
 import { sendLostPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const AddLostPet = () => {
+const AddLostPet = ({ setOpen }) => {
   //PET
   const [dogPet, setDogPet] = useState(true);
   //CROP
@@ -88,7 +88,8 @@ const AddLostPet = () => {
     };    
     const lostPetData = jsonToFormData(dataBody,lostPetDataBody);
     
-    sendLostPetData({ lostPetData });    
+    sendLostPetData({ lostPetData });  
+    setOpen(false);
   };
 
   const handleOpenCrop = () => setOpenCrop(true);

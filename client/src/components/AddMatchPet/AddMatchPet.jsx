@@ -24,7 +24,7 @@ import CropEasy from '../Crop/CropEasy';
 import { sendMatchPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
-const AddMatchPet = () => {
+const AddMatchPet = ({ setOpen }) => {
   //CROP
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState(default_dog);
@@ -46,10 +46,10 @@ const AddMatchPet = () => {
       username: JSON.parse(localStorage.getItem('username'))
     };
 
-    console.log(dataBody);
     const matchPetData = jsonToFormData(dataBody, matchPetDataBody);
 
     sendMatchPetData({ matchPetData });
+    setOpen(false);
   };
 
   const handleOpenCrop = () => setOpenCrop(true);
