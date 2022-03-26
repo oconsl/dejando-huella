@@ -21,7 +21,7 @@ const useToken = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     setToken(getToken());
-    navigate('/');
+    navigate('/login');
     window.location.reload();
   };
 

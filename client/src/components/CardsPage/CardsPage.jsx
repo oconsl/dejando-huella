@@ -24,22 +24,20 @@ const CardsPet = (props) => {
         maxHeight: '350px',
       }}
     >
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={props.img_src}
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <CardMedia
+        component="img"
+        height="140"
+        image={props.img_src}
+        alt="green iguana"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {props.title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {props.description}
+        </Typography>
+      </CardContent>
       <CardActions>
         <Link
           className="link-button"

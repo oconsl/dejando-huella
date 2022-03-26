@@ -6,7 +6,7 @@ import useAutoLogout from '../../hooks/useAutoLogout';
 import HeaderPet from '../HeaderPet/HeaderPet';
 
 const ProtectedRoutes = () => {
-  const timer = useAutoLogout(300);
+  const timer = useAutoLogout(10);
   const { token, setToken } = useToken();
   const [isAuth, setIsAuth] = useState(false);
 

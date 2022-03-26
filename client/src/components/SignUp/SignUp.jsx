@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 //MATERIAL UI
 import {
   Box,
@@ -20,6 +20,10 @@ import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
 import { sendUserData } from '../../services';
 
 const SignUp = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
