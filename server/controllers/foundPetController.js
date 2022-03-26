@@ -25,9 +25,9 @@ const foundPetController = (FoundPet) => {
 
   //POST
   const postFoundPet = async (req, res) => {
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
-
     try {
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+
       const {
         username,
         description,

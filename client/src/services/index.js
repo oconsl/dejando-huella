@@ -256,6 +256,13 @@ export const fetchLostPetsData = async ({ setLostPets }) => {
   setLostPets(res.data);
 };
 
+export const fetchFilterLostPetsData = async ({ query, setLostPets }) => {
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/lost-pets?${query}`
+  );
+  setLostPets(res.data);
+};
+
 export const fetchLostPetData = async ({ savedData, id }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/lost-pets/${id}`
@@ -347,6 +354,13 @@ export const sendAdoptionPetData = async ({ adoptionPetData }) => {
 export const fetchAdoptionPetsData = async ({ setAdoptionPets }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/adoption-pets`
+  );
+  setAdoptionPets(res.data);
+};
+
+export const fetchFilterAdoptionPetsData = async ({ query, setAdoptionPets }) => {
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/adoption-pets?${query}`
   );
   setAdoptionPets(res.data);
 };

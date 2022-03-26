@@ -115,6 +115,25 @@ const ModalFoundPets = (props) => {
                     Fur: {props.filter.fur}
                   </Typography>
                 </Box>
+                {props.page === 'adoption-pets' && (
+                  <>
+                    <Box>                  
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Sterilized: {props.filter.sterilized ? 'Yes' : 'No'}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Dewormed: {props.filter.dewormed ? 'Yes' : 'No'}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Vaccinated: {props.filter.vaccinated ? 'Yes' : 'No'}
+                      </Typography>
+                    </Box>
+                  </> 
+                )}
               </Grid>
               <Grid
                 item

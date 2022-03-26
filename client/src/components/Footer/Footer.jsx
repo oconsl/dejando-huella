@@ -12,13 +12,13 @@ const Footer = () => {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>Navigation</Box>
               <Box>
-                <Link to="/found-pets">Found Pets</Link>
+                <Link to="/found-pets/1">Found Pets</Link>
               </Box>
               <Box>
-                <Link to="/lost-pets">Lost Pets</Link>
+                <Link to="/lost-pets/1">Lost Pets</Link>
               </Box>
               <Box>
-                <Link to="/adoption">Adoption</Link>
+                <Link to="/adoption-pets/1">Adoption</Link>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -39,13 +39,13 @@ const Footer = () => {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>Menu</Box>
               <Box>
-                <Link to="/found-pets">About Us</Link>
+                <Link to="/">About Us</Link>
               </Box>
               <Box>
-                <Link to="/lost-pets">Contact</Link>
+                <Link to="/">Contact</Link>
               </Box>
               <Box>
-                <Link to="/adoption">Testimonials</Link>
+                <Link to="/">Testimonials</Link>
               </Box>
             </Grid>
           </Grid>

@@ -22,8 +22,9 @@ const FoundPets = () => {
   }, []);
 
   useEffect(() => {
-    navigate(`/found-pets/${page}`);
-  }, [page]);
+    const reg = /filter./g
+    navigate(`/found-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`);
+  }, [page, query]);
 
   useEffect(() => {
     fetchFilterFoundPetsData({ query, setFoundPets });
@@ -65,7 +66,7 @@ const FoundPets = () => {
           <AddPet option={'*AddFound'}/>
         </div>
       </Box>
-      <Filter buttonFilter={handleOnFilter} />
+      <Filter buttonFilter={handleOnFilter} page='found-pets' />
       <Container
         maxWidth="lg"
         sx={{
@@ -94,6 +95,7 @@ const FoundPets = () => {
                     addressNumber={item.addressNumber}
                     phone={item.phone}
                     position={item.latLng}
+                    page='found-pets'
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -119,6 +121,7 @@ const FoundPets = () => {
                   addressNumber={item.addressNumber}
                   phone={item.phone}
                   position={item.latLng}
+                  page='found-pets'
                 />
               </>
             );

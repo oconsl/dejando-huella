@@ -2,7 +2,7 @@ import { useState } from 'react';
 import LandingPage from './pages/LandingPage/LandingPage';
 import FoundPets from './pages/FoundPets/FoundPets';
 import LostPets from './pages/LostPets/LostPets';
-import Adoption from './pages/Adoption/Adoption';
+import AdoptionPets from './pages/AdoptionPets/AdoptionPets';
 import MatchPets from './pages/MatchPets/MatchPets';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
@@ -31,8 +31,8 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route element={<ProtectedRoutes />}>
           <Route path='/found-pets/:page' element={<FoundPets />} />
-          <Route path='/lost-pets' element={<LostPets />} />
-          <Route path='/adoption-pets' element={<Adoption />} />
+          <Route path='/lost-pets/:page' element={<LostPets />} />
+          <Route path='/adoption-pets/:page' element={<AdoptionPets />} />
           <Route path='/match-pets/:page' element={<MatchPets />} />
           <Route path='/profile' element={<Profile />} />
         </Route>
@@ -45,6 +45,7 @@ function App() {
         <Route path='/add-lost-pet' element={<AddLostPet />} />
         <Route path='/add-found-pet' element={<AddFoundPet />} />
         <Route path='/add-adoption-pet' element={<AddAdoptionPet />} />
+        <Route path='/add-lost-pet' element={<AddLostPet />} />
         <Route path='sign-up' element={<SignUp />} />
         <Route path='*' element={<h1>ERROR 404</h1>} />
       </Routes>
