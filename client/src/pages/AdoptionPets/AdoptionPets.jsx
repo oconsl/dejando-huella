@@ -3,32 +3,32 @@ import { useNavigate } from 'react-router-dom';
 import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container, Pagination, Typography } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
-import { fetchLostPetsData, fetchFilterLostPetsData } from '../../services';
+import { fetchAdoptionPetsData, fetchFilterAdoptionPetsData } from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
 
-const LostPets = () => {
-  const [lostPets, setLostPets] = useState([]);
+const AdoptionPets = () => {
+  const [adoptionPets, setAdoptionPets] = useState([]);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
-  const [lostPetsGroups, setLostPetsGroups] = useState([[1]]);
+  const [adoptionPetsGroups, setAdoptionPetsGroups] = useState([[1]]);
   const navigate = useNavigate();
-  const skeletonCount = new Array(9 - (lostPets.length % 9)).fill(false);
+  const skeletonCount = new Array(9 - (adoptionPets.length % 9)).fill(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchLostPetsData({ setLostPets });
+    fetchAdoptionPetsData({ setAdoptionPets });
   }, []);
 
   useEffect(() => {
     const reg = /filter./g
-    navigate(`/lost-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`);
+    navigate(`/adoption-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`);
   }, [page, query]);
 
   useEffect(() => {
-    fetchFilterLostPetsData({ query, setLostPets });
+    fetchFilterAdoptionPetsData({ query, setAdoptionPets });
     setPage(1);
-    setMaxPage(lostPets.length);
+    setMaxPage(adoptionPets.length);
   }, [query]);
 
   useEffect(() => {
@@ -36,8 +36,8 @@ const LostPets = () => {
       let subArray = [];
       let i = 0;
 
-      while (i < lostPets.length) {
-        subArray.push(lostPets.slice(i, (i += 9)));
+      while (i < adoptionPets.length) {
+        subArray.push(adoptionPets.slice(i, (i += 9)));
       }
 
       return subArray;
@@ -45,9 +45,9 @@ const LostPets = () => {
 
     const subArray = splitArrayIntoSubArrays();
 
-    setLostPetsGroups(subArray);
+    setAdoptionPetsGroups(subArray);
     setMaxPage(subArray.length);
-  }, [lostPets]);
+  }, [adoptionPets]);
 
   const handleChange = (value) => {
     setPage(value);
@@ -60,9 +60,9 @@ const LostPets = () => {
   return (
     <>
       <Box>
-        <h1>LOST PETS</h1>
+        <h1>ADOPTION PETS</h1>
       </Box>
-      <Filter buttonFilter={handleOnFilter} page='lost-pets' />
+      <Filter buttonFilter={handleOnFilter} page='adoption-pets'/>
       <Container
         maxWidth="lg"
         sx={{
@@ -72,8 +72,8 @@ const LostPets = () => {
           justifyContent: 'center',
         }}
       >
-        {lostPets.length !== 0 && lostPetsGroups.length > 0 ? (
-          lostPetsGroups[page - 1].map((item, index) => {
+        {adoptionPets.length !== 0 && adoptionPetsGroups.length > 0 ? (
+          adoptionPetsGroups[page - 1].map((item, index) => {
             if (page === maxPage && index === 8 - skeletonCount.length) {
               if (skeletonCount.length === 8) {
                 skeletonCount[0] = true;
@@ -92,7 +92,7 @@ const LostPets = () => {
                     addressNumber={item.addressNumber}
                     phone={item.phone}
                     position={item.latLng}
-                    page='lost-pets'
+                    page='adoption-pets'
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -110,7 +110,7 @@ const LostPets = () => {
               <>
                 <CardsPet
                   key={index}
-                  tile={item.petName}
+                  title={item.petName}
                   description={item.date + ' - \n' + item.description}
                   button={'More Details'}
                   img_src={item.imageURL}
@@ -119,7 +119,7 @@ const LostPets = () => {
                   addressNumber={item.addressNumber}
                   phone={item.phone}
                   position={item.latLng}
-                  page='lost-pets'
+                  page='adoption-pets'
                 />
               </>
             );
@@ -162,4 +162,4 @@ const LostPets = () => {
   );
 };
 
-export default LostPets;
+export default AdoptionPets;

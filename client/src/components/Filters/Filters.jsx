@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   specieOption,
   sizeOptions,
@@ -20,6 +20,16 @@ const Filter = (props) => {
   const [size, setSize] = useState('');
   const [age, setAge] = useState('');
   const [fur, setFur] = useState('');
+  const [sterilized, setSterilized] = useState(null);
+  const [dewormed, setDewormed] = useState(null);
+  const [vaccinated, setVaccinated] = useState(null);
+
+  useEffect(()=>{
+    if (!specie){
+      setBreed('');
+      setAge('')
+    }
+  }, [specie])
 
   const handleOnClickFilter = () => {
     let petFilters = {
@@ -30,10 +40,13 @@ const Filter = (props) => {
       'filter.size': size ? size.slice(0, size.indexOf('(') - 1) : '',
       'filter.age': age,
       'filter.fur': fur,
+      'filter.sterilized': sterilized,
+      'filter.dewormed': dewormed,
+      'filter.vaccinated': vaccinated,
     };
 
     for (const [key, value] of Object.entries(petFilters)) {
-      if (!value) {
+      if (value === null || value === '') {
         delete petFilters[key];
       }
     }
@@ -50,6 +63,8 @@ const Filter = (props) => {
         .replace(reg2, '&')
         .replace(reg3, '')
         .replace(reg4, '%20');
+
+    console.log(queryFilter)
 
     return queryFilter;
   };
@@ -172,6 +187,63 @@ const Filter = (props) => {
         sx={{ m: 1, width: '100px' }}
         renderInput={(params) => <TextField {...params} label="Fur" />}
       />
+
+      {props.page === 'adoption-pets' && (
+        <>
+          <Autocomplete
+            disablePortal
+            id="sterilized"
+            options={['Yes', 'No']}
+            onChange={(event, value) => {
+              if (value === 'Yes'){
+                setSterilized(true)
+              } else if (value === 'No'){
+                setSterilized(false)
+              } else {
+                setSterilized(null)
+              }
+              
+            }}
+            sx={{ m: 1, width: '150px' }}
+            renderInput={(params) => <TextField {...params} label="Sterilized" />}
+          />
+          <Autocomplete
+            disablePortal
+            id="dewormed"
+            options={['Yes', 'No']}
+            onChange={(event, value) => {
+              if (value === 'Yes'){
+                setDewormed(true)
+              } else if (value === 'No'){
+                setDewormed(false)
+              } else {
+                setDewormed(null)
+              }
+              
+            }}
+            sx={{ m: 1, width: '150px' }}
+            renderInput={(params) => <TextField {...params} label="Dewormed" />}
+          />
+          <Autocomplete
+            disablePortal
+            id="vaccinated"
+            options={['Yes', 'No']}
+            onChange={(event, value) => {
+              if (value === 'Yes'){
+                setVaccinated(true)
+              } else if (value === 'No'){
+                setVaccinated(false)
+              } else {
+                setVaccinated(null)
+              }
+              
+            }}
+            sx={{ m: 1, width: '150px' }}
+            renderInput={(params) => <TextField {...params} label="Vaccinated" />}
+          />
+        </>
+      )}
+
       <Button
         variant="contained"
         endIcon={<FilterAltIcon />}

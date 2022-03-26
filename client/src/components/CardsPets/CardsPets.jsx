@@ -62,6 +62,7 @@ const CardsPet = (props) => {
           addressNumber={props.addressNumber}
           phone={props.phone}
           position={props.position}
+          page={props.page}
         />
       </CardActions>
     </Card>

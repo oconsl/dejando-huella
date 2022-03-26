@@ -43,7 +43,7 @@ const CardsPet = (props) => {
       <CardActions>
         <Link
           className="link-button"
-          to={`/${props.title.replace(' ', '-').toLowerCase()}`}
+          to={`/${props.title.replace(' ', '-').toLowerCase()}/1`}
         >
           <Button size="small" color="primary">
             {props.button}
