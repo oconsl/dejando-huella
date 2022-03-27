@@ -3,9 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container, Pagination, Typography } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
-import { fetchAdoptionPetsData, fetchFilterAdoptionPetsData } from '../../services';
+import {
+  fetchAdoptionPetsData,
+  fetchFilterAdoptionPetsData,
+} from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
 import AddPet from '../../components/AddPet/AddPet';
+import Progress from '../../components/Progress/Progress';
+import styles from './styles';
 
 const AdoptionPets = () => {
   const [adoptionPets, setAdoptionPets] = useState([]);
@@ -15,15 +20,18 @@ const AdoptionPets = () => {
   const [adoptionPetsGroups, setAdoptionPetsGroups] = useState([[1]]);
   const navigate = useNavigate();
   const skeletonCount = new Array(9 - (adoptionPets.length % 9)).fill(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchAdoptionPetsData({ setAdoptionPets });
+    fetchAdoptionPetsData({ setAdoptionPets, setLoading });
   }, []);
 
   useEffect(() => {
-    const reg = /filter./g
-    navigate(`/adoption-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`);
+    const reg = /filter./g;
+    navigate(
+      `/adoption-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`
+    );
   }, [page, query]);
 
   useEffect(() => {
@@ -60,23 +68,17 @@ const AdoptionPets = () => {
 
   return (
     <>
-      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
+      <Box sx={styles.box_title}>
         <h1>ADOPTION PETS</h1>
         <div>
-          <AddPet option={'*AddAdoption'}/>
+          <AddPet option={'*AddAdoption'} />
         </div>
       </Box>
-      <Filter buttonFilter={handleOnFilter} page='adoption-pets'/>
-      <Container
-        maxWidth="lg"
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
-        {adoptionPets.length !== 0 && adoptionPetsGroups.length > 0 ? (
+      <Filter buttonFilter={handleOnFilter} page="adoption-pets" />
+      <Container maxWidth="lg" sx={styles.container}>
+        {loading ? (
+          <Progress />
+        ) : adoptionPets.length !== 0 && adoptionPetsGroups.length > 0 ? (
           adoptionPetsGroups[page - 1].map((item, index) => {
             if (page === maxPage && index === 8 - skeletonCount.length) {
               if (skeletonCount.length === 8) {
@@ -96,7 +98,7 @@ const AdoptionPets = () => {
                     addressNumber={item.addressNumber}
                     phone={item.phone}
                     position={item.latLng}
-                    page='adoption-pets'
+                    page="adoption-pets"
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -123,25 +125,14 @@ const AdoptionPets = () => {
                   addressNumber={item.addressNumber}
                   phone={item.phone}
                   position={item.latLng}
-                  page='adoption-pets'
+                  page="adoption-pets"
                 />
               </Fragment>
             );
           })
         ) : (
-          <Box
-            sx={{
-              height: '500px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography
-              variant="h1"
-              sx={{ fontWeight: '500', marginBottom: '50px' }}
-            >
+          <Box sx={styles.box_notFound}>
+            <Typography variant="h1" sx={styles.typography}>
               Pets Not Found
             </Typography>
             <img
@@ -160,7 +151,7 @@ const AdoptionPets = () => {
           handleChange(value);
           window.scrollTo(0, 0);
         }}
-        sx={{ display: 'flex', justifyContent: 'center' }}
+        sx={styles.pagination}
       />
     </>
   );

@@ -12,6 +12,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import DialogFS from '../../components/DialogFS/DialogFS';
 import UserDeleteDialog from '../../components/UserDeleteDialog/UserDeleteDialog';
+import styles from './styles';
 
 // SERVICES
 import { fetchAllPetDataByUsername, fetchUserData } from '../../services';
@@ -65,7 +66,7 @@ const Profile = () => {
       width: 100,
       renderCell: (params) => (
         <EditIcon
-          sx={{ color: 'green', cursor: 'pointer', transform: 'scale(1.5)' }}
+          sx={styles.editIcon}
           onClick={(event) => handlePetEditClick(event, params)}
         />
       ),
@@ -76,7 +77,7 @@ const Profile = () => {
       width: 100,
       renderCell: (params) => (
         <DeleteForeverIcon
-          sx={{ color: 'red', cursor: 'pointer', transform: 'scale(1.5)' }}
+          sx={styles.deleteForeverIcon}
           onClick={(event) => handlePetDeleteClick(event, params)}
         />
       ),
@@ -116,6 +117,7 @@ const Profile = () => {
     fetchUserData({ setUserData, username });
     setLetter(JSON.parse(localStorage.getItem('username'))[0].toUpperCase());
     fetchAllPetDataByUsername({ setData, username });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -133,58 +135,22 @@ const Profile = () => {
       {userDeleteOpen && (
         <UserDeleteDialog setOpen={setUserDeleteOpen} id={userData.id} />
       )}
-      <Box
-        sx={{
-          minWidth: 500,
-          display: 'flex',
-          justifyContent: 'center',
-          my: 3,
-        }}
-      >
-        <Card sx={{ width: '25%', border: 'solid 2px grey' }}>
+      <Box sx={styles.box_container}>
+        <Card sx={styles.card}>
           <CardContent>
-            <Typography
-              variant='h5'
-              component='div'
-              sx={{ textAlign: 'center', mb: 3 }}
-            >
+            <Typography variant="h5" component="div" sx={styles.typography}>
               PROFILE
             </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-              }}
-            >
-              <Box
-                sx={{
-                  flex: 2,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Avatar
-                  sx={{ bgcolor: 'orange', transform: 'scale(2.5)' }}
-                  aria-label='recipe'
-                >
+            <Box sx={styles.box_profile}>
+              <Box sx={styles.box_avatar}>
+                <Avatar sx={styles.avatar} aria-label="recipe">
                   {letter}
                 </Avatar>
               </Box>
-              <Box
-                sx={{
-                  ml: 3,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  textAlign: 'center',
-                  flex: 4,
-                }}
-              >
+              <Box sx={styles.box_grid}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>Username:</Typography>
+                    <Typography color="text.secondary">Username:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -194,7 +160,7 @@ const Profile = () => {
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>Email:</Typography>
+                    <Typography color="text.secondary">Email:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -204,7 +170,7 @@ const Profile = () => {
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>First Name:</Typography>
+                    <Typography color="text.secondary">First Name:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -214,7 +180,7 @@ const Profile = () => {
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>Last Name:</Typography>
+                    <Typography color="text.secondary">Last Name:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -225,19 +191,19 @@ const Profile = () => {
               </Box>
             </Box>
           </CardContent>
-          <CardActions sx={{ display: 'flex', justifyContent: 'space-around' }}>
+          <CardActions sx={styles.cardAction}>
             <Button
-              size='large'
-              variant='contained'
-              color='success'
+              size="large"
+              variant="contained"
+              color="success"
               onClick={handleEditClick}
             >
               Edit
             </Button>
             <Button
-              size='large'
-              variant='contained'
-              color='error'
+              size="large"
+              variant="contained"
+              color="error"
               onClick={handleDeleteClick}
             >
               Delete
