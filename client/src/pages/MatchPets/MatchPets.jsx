@@ -7,6 +7,7 @@ import MatchPet from '../../components/MatchPet/MatchPet';
 import MatchPetSkeleton from '../../components/MatchPet/utils/MatchPetSkeleton';
 import { fetchMatchPetsData } from '../../services';
 import AddPet from '../../components/AddPet/AddPet';
+import styles from './styles';
 
 const MatchPets = () => {
   const [page, setPage] = useState(1);
@@ -21,7 +22,7 @@ const MatchPets = () => {
   }, []);
 
   useEffect(() => {
-    navigate(`/match-pets/${page}`);
+    navigate(`/testimony-pets/${page}`);
   }, [page]);
 
   useEffect(() => {
@@ -48,19 +49,13 @@ const MatchPets = () => {
 
   return (
     <>
-      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-        <h1>MATCH PETS</h1>
+      <Box sx={styles.box_title}>
+        <h1>TESTIMONIALS</h1>
         <div>
-          <AddPet option={'*AddMatch'}/>
+          <AddPet option={'*AddMatch'} />
         </div>
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          flexWrap: 'wrap',
-        }}
-      >
+      <Box sx={styles.box_container}>
         {matchPets.length !== 0 && matchPetsGroups.length > 0 ? (
           matchPetsGroups[page - 1].map((item, index) => {
             if (page === maxPage && index === 3 - skeletonCount.length) {
@@ -99,7 +94,7 @@ const MatchPets = () => {
             <MatchPetSkeleton key={1} flexVariant={true} />
             <MatchPetSkeleton key={2} flexVariant={true} />
             <MatchPetSkeleton key={3} flexVariant={false} />
-            <MatchPetSkeleton key={4} flexVariant={false} />          
+            <MatchPetSkeleton key={4} flexVariant={false} />
           </>
         )}
       </Box>
@@ -107,7 +102,7 @@ const MatchPets = () => {
         count={maxPage}
         onChange={handleChange}
         color={'primary'}
-        sx={{ display: 'flex', justifyContent: 'center' }}
+        sx={styles.pagination}
       />
     </>
   );

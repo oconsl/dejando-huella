@@ -221,7 +221,7 @@ const AddAdoptionPet = ({ setOpen }) => {
                 label='Phone'
                 inputProps={{
                   inputMode: 'numeric',
-                  pattern: '[0-9]{10,11}*$',
+                  pattern: '^[0-9]{10,11}$',
                 }}
                 onChange={handleTextDataChange('phone')}
                 helperText='Format: 10 to 11 digits'

@@ -6,6 +6,8 @@ import Filter from '../../components/Filters/Filters';
 import AddPet from '../../components/AddPet/AddPet';
 import { fetchLostPetsData, fetchFilterLostPetsData } from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
+import Progress from '../../components/Progress/Progress';
+import styles from './styles';
 
 const LostPets = () => {
   const [lostPets, setLostPets] = useState([]);
@@ -15,15 +17,18 @@ const LostPets = () => {
   const [lostPetsGroups, setLostPetsGroups] = useState([[1]]);
   const navigate = useNavigate();
   const skeletonCount = new Array(9 - (lostPets.length % 9)).fill(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchLostPetsData({ setLostPets });
+    fetchLostPetsData({ setLostPets, setLoading });
   }, []);
 
   useEffect(() => {
-    const reg = /filter./g
-    navigate(`/lost-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`);
+    const reg = /filter./g;
+    navigate(
+      `/lost-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`
+    );
   }, [page, query]);
 
   useEffect(() => {
@@ -60,23 +65,17 @@ const LostPets = () => {
 
   return (
     <>
-      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
+      <Box sx={styles.box_title}>
         <h1>LOST PETS</h1>
         <div>
-          <AddPet option={'*AddLost'}/>
+          <AddPet option={'*AddLost'} />
         </div>
       </Box>
-      <Filter buttonFilter={handleOnFilter} page='lost-pets' />
-      <Container
-        maxWidth="lg"
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
-        {lostPets.length !== 0 && lostPetsGroups.length > 0 ? (
+      <Filter buttonFilter={handleOnFilter} page="lost-pets" />
+      <Container maxWidth="lg" sx={styles.container}>
+        {loading ? (
+          <Progress />
+        ) : lostPets.length !== 0 && lostPetsGroups.length > 0 ? (
           lostPetsGroups[page - 1].map((item, index) => {
             if (page === maxPage && index === 8 - skeletonCount.length) {
               if (skeletonCount.length === 8) {
@@ -96,7 +95,7 @@ const LostPets = () => {
                     addressNumber={item.addressNumber}
                     phone={item.phone}
                     position={item.latLng}
-                    page='lost-pets'
+                    page="lost-pets"
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -123,25 +122,14 @@ const LostPets = () => {
                   addressNumber={item.addressNumber}
                   phone={item.phone}
                   position={item.latLng}
-                  page='lost-pets'
+                  page="lost-pets"
                 />
               </Fragment>
             );
           })
         ) : (
-          <Box
-            sx={{
-              height: '500px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography
-              variant="h1"
-              sx={{ fontWeight: '500', marginBottom: '50px' }}
-            >
+          <Box sx={styles.box_notFound}>
+            <Typography variant="h1" sx={styles.typography}>
               Pets Not Found
             </Typography>
             <img
@@ -160,7 +148,7 @@ const LostPets = () => {
           handleChange(value);
           window.scrollTo(0, 0);
         }}
-        sx={{ display: 'flex', justifyContent: 'center' }}
+        sx={styles.pagination}
       />
     </>
   );

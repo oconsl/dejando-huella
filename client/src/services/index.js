@@ -205,11 +205,12 @@ export const sendMatchPetData = async ({ matchPetData }) => {
   }).finally(() => window.location.reload());
 };
 
-export const fetchMatchPetsData = async ({ setMatchPets }) => {
+export const fetchMatchPetsData = async ({ setMatchPets, setLoading }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/match-pets`
   );
   setMatchPets(res.data);
+  setLoading(false);
 };
 
 export const fetchMatchPetData = async ({ savedData, id }) => {
@@ -247,9 +248,10 @@ export const sendLostPetData = async ({ lostPetData }) => {
   }).finally(() => window.location.reload());
 };
 
-export const fetchLostPetsData = async ({ setLostPets }) => {
+export const fetchLostPetsData = async ({ setLostPets, setLoading }) => {
   const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/lost-pets`);
   setLostPets(res.data);
+  setLoading(false);
 };
 
 export const fetchFilterLostPetsData = async ({ query, setLostPets }) => {
@@ -298,11 +300,12 @@ export const sendFoundPetData = async ({ foundPetData }) => {
   }).finally(() => window.location.reload());
 };
 
-export const fetchFoundPetsData = async ({ setFoundPets }) => {
+export const fetchFoundPetsData = async ({ setFoundPets, setLoading }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/found-pets`
   );
   setFoundPets(res.data);
+  setLoading(false);
 };
 
 export const fetchFilterFoundPetsData = async ({ query, setFoundPets }) => {
@@ -347,11 +350,12 @@ export const sendAdoptionPetData = async ({ adoptionPetData }) => {
   }).finally(() => window.location.reload());
 };
 
-export const fetchAdoptionPetsData = async ({ setAdoptionPets }) => {
+export const fetchAdoptionPetsData = async ({ setAdoptionPets, setLoading }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/adoption-pets`
   );
   setAdoptionPets(res.data);
+  setLoading(false);
 };
 
 export const fetchFilterAdoptionPetsData = async ({
