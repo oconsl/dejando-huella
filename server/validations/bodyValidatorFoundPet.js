@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const bodySchemaLatLang = Joi.object({
   lat: Joi.number().required(),
-  lang: Joi.number().required(),
+  lng: Joi.number().required(),
 });
 
 const bodySchemaFilter = Joi.object({

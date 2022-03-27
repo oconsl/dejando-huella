@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import getCroppedImg from './utils/CropImage';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import styles from './styles';
 
 const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -41,13 +42,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
     <>
       <DialogContent
         dividers
-        sx={{
-          background: '#333',
-          position: 'relative',
-          height: 400,
-          width: 'auto',
-          minWidth: { sm: 500 },
-        }}
+        sx={styles.dialogContent}
       >
         <Cropper
           image={photoURL}
@@ -61,12 +56,9 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
           onZoomChange={setZoom}
         />
       </DialogContent>
-      <DialogActions sx={{ flexDirection: 'column', mx: 3, my: 2 }}>
+      <DialogActions sx={styles.dialogActions}>
         <Box
-          sx={{
-            width: '70%',
-            mb: 1,
-          }}
+          sx={styles.box}
         >
           <Box>
             <Typography variant='overline'>

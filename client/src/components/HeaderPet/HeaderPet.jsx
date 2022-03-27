@@ -16,6 +16,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import './HeaderPet.css';
+import styles from './styles';
 
 const pages = ['Found Pets', 'Lost Pets', 'Adoption Pets', 'Match Pets'];
 const settings = ['Profile', 'Logout'];
@@ -59,7 +60,7 @@ const HeaderPet = () => {
             variant='h6'
             noWrap
             component='div'
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={styles.typography_toolbar}
           >
             <Link to='/'>
               <img
@@ -70,7 +71,7 @@ const HeaderPet = () => {
             </Link>
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={styles.box}>
             <IconButton
               size='large'
               aria-label='account of current user'
@@ -95,9 +96,7 @@ const HeaderPet = () => {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
+              sx={styles.menu_appbar}
             >
               {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -118,7 +117,7 @@ const HeaderPet = () => {
             variant='h6'
             noWrap
             component='div'
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            sx={styles.typography}
           >
             <Link to='/'>
               <img
@@ -128,7 +127,7 @@ const HeaderPet = () => {
               />
             </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={styles.box_pages}>
             {pages.map((page, index) => (
               <Link
                 key={index}
@@ -139,21 +138,21 @@ const HeaderPet = () => {
                   className='header-button'
                   key={`${page}`}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  sx={styles.button_link}
                 >
                   {page}
                 </Button>
               </Link>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={styles.box_toolTip}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar sx={{ bgcolor: 'orange'}}>{letter}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px', float: 'right' }}
+              sx={styles.menu_user}
               id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{

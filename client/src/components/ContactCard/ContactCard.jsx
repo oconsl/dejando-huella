@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActions, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { fetchGithubData } from '../../services';
+import styles from './styles';
 
 const ContactCard = ({user}) => {
   const [userData, setUserData] = useState({
@@ -24,7 +25,7 @@ const ContactCard = ({user}) => {
   }, [user]);
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={styles.card}>
       <CardContent>
         <CardMedia
           component="img"
@@ -32,7 +33,7 @@ const ContactCard = ({user}) => {
           image={userData.avatar}
           alt={userData.user}          
         />
-        <CardContent sx={{ textAlign: 'center'}}>
+        <CardContent sx={styles.cardContent}>
           <Typography gutterBottom variant="h5" component="div">
             {userData.name}
           </Typography>
@@ -41,7 +42,7 @@ const ContactCard = ({user}) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton sx={{margin: 'auto', width: '100%', borderRadius: 0}} onClick={handleClick}>
+          <IconButton sx={styles.iconButton} onClick={handleClick}>
             <GitHubIcon />
           </IconButton>
         </CardActions>
