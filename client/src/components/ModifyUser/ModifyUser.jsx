@@ -17,6 +17,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Grow from '@mui/material/Grow';
 //UTILS
 import { fetchUserDataById, loginUser, updateUserData } from '../../services';
+import styles from './styles';
 
 const ModifyUser = ({ id, setOpen }) => {
   const [userData, setUserData] = useState({
@@ -96,14 +97,9 @@ const ModifyUser = ({ id, setOpen }) => {
         <CssBaseline />
         {!success && (
           <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
+            sx={styles.box_Container}
           >
-            <Avatar sx={{ m: 1, backgroundColor: 'lightcoral' }}>
+            <Avatar sx={styles.avatar}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component='h1' variant='h5'>
@@ -112,7 +108,7 @@ const ModifyUser = ({ id, setOpen }) => {
             <Box
               component='form'
               onSubmit={handleUpdate}
-              sx={{ mt: 3 }}
+              sx={styles.box_form}
               required
             >
               <Grid container spacing={2}>
@@ -206,7 +202,7 @@ const ModifyUser = ({ id, setOpen }) => {
                 type='submit'
                 fullWidth
                 variant='contained'
-                sx={{ mt: 3, mb: 2 }}
+                sx={styles.button}
               >
                 Modify
               </Button>
@@ -216,18 +212,12 @@ const ModifyUser = ({ id, setOpen }) => {
         {success && (
           <Grow in={true}>
             <Box
-              sx={{
-                mt: 8,
-                mb: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
+            sx={styles.box}
             >
-              <Typography sx={{ fontWeight: 'bold', fontSize: '1.5em', mb: 4 }}>
+              <Typography sx={styles.typography}>
                 User modified successfully!
               </Typography>
-              <CheckCircleIcon sx={{ color: 'green', transform: 'scale(3)' }} />
+              <CheckCircleIcon sx={styles.checkCircleIcon} />
             </Box>
           </Grow>
         )}
