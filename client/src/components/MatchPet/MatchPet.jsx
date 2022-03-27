@@ -3,26 +3,22 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import styles from './styles';
 
 const MatchPet = ({ testimonyData, flexVariant }) => {
   return (
-    <Card sx={{ maxWidth: 800, margin: '0.5em' }}>
+    <Card sx={styles.card}>
       <CardContent
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: !flexVariant ? 'row-reverse' : 'row',
-        }}
+        sx={styles.cardContent}
       >
         <CardMedia
           component='img'
           height='350'
           image={testimonyData.imageURL}
           alt={'img'}
-          sx={{ width: '350px' }}
+          sx={styles.cardMedia}
         />
-        <CardContent sx={{ textAlign: 'center' }}>
+        <CardContent sx={styles.cardContent_testimonyData}>
           <Typography gutterBottom variant='h5' component='div'>
             {`"${testimonyData.petName}" & ${testimonyData.username}`}
           </Typography>

@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Marker } from 'react-leaflet';
+import styles from './styles';
 
 const MapView = ({ position, closeMap }) => {
   const center = { lat: -26.829901, lng: -65.203667 };
@@ -27,13 +28,7 @@ const MapView = ({ position, closeMap }) => {
           <CloseIcon />
         </IconButton> */}
         <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '50vh',
-          }}
+          sx={styles.box}
         >
           <MapContainer
             center={position}

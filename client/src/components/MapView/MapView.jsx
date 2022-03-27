@@ -10,6 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
+import styles from './styles';
 
 const MapView = ({ saveLocation, closeMap, saveAddress }) => {
   const center = { lat: -26.829901, lng: -65.203667 };
@@ -19,33 +20,19 @@ const MapView = ({ saveLocation, closeMap, saveAddress }) => {
     <>
       <DialogContent>
         <DialogTitle
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          sx={styles.dialogTitle}
         >
           Move the marker
           <IconButton
             aria-label='close'
-            sx={{
-              position: 'absolute',
-              right: 20,
-              transform: 'scale(1.5)',
-            }}
+            sx={styles.iconButton}
             onClick={closeMap}
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
         <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '50vh',
-          }}
+          sx={styles.box}
         >
           <MapContainer
             center={center}
@@ -67,7 +54,7 @@ const MapView = ({ saveLocation, closeMap, saveAddress }) => {
         <DialogActions>
           <Button
             autoFocus
-            sx={{ margin: 'auto' }}
+            sx={styles.button}
             variant='contained'
             onClick={closeMap}
           >

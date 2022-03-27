@@ -36,6 +36,7 @@ import {
 import formatDate from '../../utils/formatDate';
 import jsonToFormData from '../../utils/jsonToFormData';
 import { updateFoundPetData, fetchFoundPetData } from '../../services';
+import styles from './styles';
 
 const ModifyFoundPet = ({ id, setOpen }) => {
   const [newDate, setNewDate] = useState(false);
@@ -142,17 +143,10 @@ const ModifyFoundPet = ({ id, setOpen }) => {
   }, [id]);
 
   return (
-    <Container component='main' sx={{ display: 'flex' }}>
+    <Container component='main' sx={styles.container}>
       <CssBaseline />
       <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          marginRight: 8,
-          flex: 2,
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+        sx={styles.box_Container}
       >
         <div
           style={{
@@ -161,14 +155,14 @@ const ModifyFoundPet = ({ id, setOpen }) => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, backgroundColor: 'blue' }}>
+          <Avatar sx={styles.avatar}>
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
             Modify Found Pet
           </Typography>
         </div>
-        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
+        <Box component='form' onSubmit={handleSubmit} sx={styles.box} required>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -201,11 +195,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
             <Grid
               item
               xs={12}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
+              sx={styles.grid}
             >
               <DatePick
                 saveDate={setDate}
@@ -223,7 +213,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                   readOnly: true,
                 }}
                 value={address}
-                sx={{ width: '50%', ml: 3 }}
+                sx={styles.textField_address}
               />
               <TextField
                 required
@@ -237,15 +227,10 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                 }}
                 value={textData.addressNumber}
                 onChange={handleTextDataChange('addressNumber')}
-                sx={{ width: '50%', ml: 3 }}
+                sx={styles.textField_address}
               />
               <LocationIcon
-                sx={{
-                  color: 'green',
-                  margin: '0 1em',
-                  cursor: 'pointer',
-                  transform: 'scale(2)',
-                }}
+                sx={styles.locationIcon}
                 onClick={handleOpenMap}
               />
               {openMap && (
@@ -329,13 +314,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
             </Grid>
           </Grid>
           <Box
-            sx={{
-              marginTop: 4,
-              display: 'flex',
-              flex: 3,
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
+            sx={styles.box_image}
           >
             <div>Image to upload</div>
             <TextField
@@ -348,7 +327,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                 shrink: true,
               }}
               onChange={handleFileChange}
-              sx={{ mt: 2 }}
+              sx={styles.textField_image}
             />
             {openCrop && (
               <Dialog
@@ -362,7 +341,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                 />
               </Dialog>
             )}
-            <Card sx={{ maxHeight: 450, margin: 'auto' }}>
+            <Card sx={styles.card}>
               <CardActionArea>
                 <CardMedia
                   component='img'
@@ -371,7 +350,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                   title='New Pet Image'
                   height='450'
                   onClick={handlePhotoClick}
-                  sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
+                  sx={styles.cardMedia}
                 />
               </CardActionArea>
             </Card>
@@ -380,7 +359,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
             type='submit'
             fullWidth
             variant='contained'
-            sx={{ mt: 3, mb: 2 }}
+            sx={styles.button}
           >
             Modify
           </Button>

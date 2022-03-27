@@ -23,7 +23,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import PropTypes from 'prop-types';
 import { loginUser } from '../../services';
 import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
-
+import styles from './styles';
 
 const Login = ({ setToken }) => {
   useEffect(() => {
@@ -64,22 +64,17 @@ const Login = ({ setToken }) => {
       <Container component='main' maxWidth='xs'>
         <Box
           component='form'
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            mt: 8,
-          }}
+          sx={styles.box}
           autoComplete='off'
           onSubmit={handleLogIn}
         >
-          <Avatar sx={{ m: 1, backgroundColor: 'lightcoral' }}>
+          <Avatar sx={styles.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
             Log in
           </Typography>
-          <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
+          <FormControl sx={styles.formControl_username} fullWidth variant='outlined' required>
             <InputLabel htmlFor='username-component' error={error}>
               Username
             </InputLabel>
@@ -96,7 +91,7 @@ const Login = ({ setToken }) => {
               }}
             />
           </FormControl>
-          <FormControl sx={{ m: 1 }} fullWidth variant='outlined' required>
+          <FormControl sx={styles.formControl_password} fullWidth variant='outlined' required>
             <InputLabel htmlFor='password-component-password' error={error}>
               Password
             </InputLabel>
@@ -130,7 +125,7 @@ const Login = ({ setToken }) => {
             type='submit'
             variant='contained'
             fullWidth
-            sx={{ mt: 3, mb: 2 }}
+            sx={styles.button}
           >
             Log In
           </Button>
