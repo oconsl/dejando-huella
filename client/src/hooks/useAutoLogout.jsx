@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+// HOOKS
 import useToken from './useToken';
 
 const useAutoLogout = (startTime) => {

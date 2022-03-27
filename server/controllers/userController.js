@@ -36,16 +36,16 @@ const usersController = (User) => {
   const putUser = async (req, res) => {
     try {
       const { body } = req;
-
-      await User.findByIdAndUpdate(req.params.userId, {
-        firstName: body.firstName,
-        lastName: body.lastName,
-        email: body.email,
-        username: body.username,
-        password: await bcrypt.hash(body.password, 8),
-      });
-
-      res.status(200).json('Updated successfully.');
+      
+        await User.findByIdAndUpdate(req.params.userId, {
+          firstName: body.firstName,
+          lastName: body.lastName,
+          email: body.email,
+          username: body.username,
+          password: await bcrypt.hash(body.password, 8),
+        });
+        res.json('Updated successfully.');
+        
     } catch (err) {
       res.status(403).json(Object.keys(err.keyValue));
     }
@@ -87,11 +87,18 @@ const usersController = (User) => {
       username: user.username,
     };
     return jwt.sign(tokenPayload, process.env.TOKEN_SECRET, {
-      expiresIn: '30m',
+      expiresIn: '10s',
     });
   };
 
-  return { postUser, getUsers, putUser, deleteUser, login };
+  const refresh = async (req, res) => {
+    const { body } = req;
+
+    const newToken = generateToken(body);
+    res.status(200).json(newToken);
+  };
+
+  return { postUser, getUsers, putUser, deleteUser, login, refresh };
 };
 
 module.exports = usersController;

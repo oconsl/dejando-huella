@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import './HeaderPet.css';
+import styles from './styles';
 
 const pages = ['Found Pets', 'Lost Pets', 'Adoption'];
 const settings = ['Profile', 'Logout'];
@@ -54,7 +55,7 @@ const HeaderLandingPage = () => {
             variant='h6'
             noWrap
             component='div'
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={styles.typography_toolbar}
           >
             <Link to='/'>
               <img
@@ -65,7 +66,7 @@ const HeaderLandingPage = () => {
             </Link>
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={styles.box}>
             <IconButton
               size='large'
               aria-label='account of current user'
@@ -90,9 +91,7 @@ const HeaderLandingPage = () => {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
+              sx={styles.menu}
             >
               {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -113,7 +112,7 @@ const HeaderLandingPage = () => {
             variant='h6'
             noWrap
             component='div'
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+            sx={styles.typography}
           >
             <Link to='/'>
               <img
@@ -125,7 +124,7 @@ const HeaderLandingPage = () => {
           </Typography>
           <Box>
               <Button
-                sx={{ m: 1 }}
+                sx={styles.button}
                 color="secondary"
                 variant="contained"
                 onClick={handleLoginClick}
@@ -133,7 +132,7 @@ const HeaderLandingPage = () => {
                 Login
               </Button>
               <Button
-                sx={{ m: 1 }}
+                sx={styles.button}
                 color="secondary"
                 variant="contained"
                 onClick={handleSignUpClick}

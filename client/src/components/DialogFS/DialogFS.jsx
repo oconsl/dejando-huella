@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
+import styles from './styles';
 // COMPONENTS
 import AddMatchPet from '../AddMatchPet/AddMatchPet';
 import AddLostPet from '../AddLostPet/AddLostPet';
@@ -34,7 +35,7 @@ const DialogFS = ({ setOpen, option, id }) => {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative' }}>
+        <AppBar sx={styles.appBar}>
           <Toolbar>
             <IconButton
               edge='start'
@@ -44,7 +45,7 @@ const DialogFS = ({ setOpen, option, id }) => {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
+            <Typography sx={styles.typography} variant='h6' component='div'>
               {option[0] === '*'
                 ? 'Fill the form to add new pet'
                 : 'Edit to save new info'}

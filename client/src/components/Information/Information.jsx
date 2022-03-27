@@ -2,28 +2,21 @@ import React from 'react';
 import { CssBaseline, Box, Container, Typography } from '@mui/material';
 import CardsPage from '../CardsPage/CardsPage';
 import './Information.css';
+import styles from './styles';
 
 const Information = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="lg" sx={{ marginTop: '20px' }}>
+      <Container maxWidth="lg" sx={styles.container}>
         <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            bgcolor: 'rgba(188, 255, 182, 0.61)',
-            height: '100%',
-            marginBottom: '20px',
-          }}
+          sx={styles.box}
         >
           <Box>
-            <Typography variant="h2" sx={{ fontWeight: '500' }}>
+            <Typography variant="h2" sx={styles.typography_h2}>
               About us?
             </Typography>
-            <Typography variant="body1" sx={{ margin: '20px' }}>
+            <Typography variant="body1" sx={styles.typography_body1}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
               nemo repellendus sint deserunt totam magnam ex omnis reiciendis,
               consequuntur quibusdam quae numquam officia adipisci excepturi,
@@ -35,7 +28,7 @@ const Information = () => {
             </Typography>
           </Box>
 
-          <Box className="cards" sx={{ display: 'flex', marginBottom: '20px' }}>
+          <Box className="cards" sx={styles.box_cards}>
             <CardsPage
               title={'Found Pets'}
               description={

@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Twitter } from '@mui/icons-material';
+import styles from './styles'
 
 const Footer = () => {
   return (
@@ -23,15 +24,15 @@ const Footer = () => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>Follow us</Box>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box sx={styles.box_socialNetwork}>
                 <Instagram />
                 Instagram
               </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box sx={styles.box_socialNetwork}>
                 <Facebook />
                 Facebook
               </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box sx={styles.box_socialNetwork}>
                 <Twitter />
                 Twitter
               </Box>

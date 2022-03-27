@@ -11,6 +11,7 @@ import {
 import { catBreeds, dogBreeds } from '../../utils/petBreeds';
 import { Button, Container, TextField, Autocomplete } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import styles from './styles';
 
 const Filter = (props) => {
   const [specie, setSpecie] = useState('');
@@ -70,19 +71,14 @@ const Filter = (props) => {
   return (
     <Container
       maxWidth="lg"
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+      sx={styles.container}
     >
       <Autocomplete
         disablePortal
         id="specie"
         options={specieOption}
         onChange={(event, value) => setSpecie(value)}
-        sx={{ m: 1, width: '100px' }}
+        sx={styles.autocomplete_specie}
         renderInput={(params) => <TextField {...params} label="Specie" />}
       />
 
@@ -92,7 +88,7 @@ const Filter = (props) => {
           id="breed"
           options={[]}
           onChange={(event, value) => setBreed(value)}
-          sx={{ m: 1, width: '150px' }}
+          sx={styles.autocomplete_breed}
           renderInput={(params) => <TextField {...params} label="Breed" />}
         />
       )}
@@ -103,7 +99,7 @@ const Filter = (props) => {
           id="cat-breed"
           options={catBreeds}
           onChange={(event, value) => setBreed(value)}
-          sx={{ m: 1, width: '150px' }}
+          sx={styles.autocomplete_catBreed}
           renderInput={(params) => <TextField {...params} label="Breed" />}
         />
       )}
@@ -114,7 +110,7 @@ const Filter = (props) => {
           id="dog-breed"
           options={dogBreeds}
           onChange={(event, value) => setBreed(value)}
-          sx={{ m: 1, width: '150px' }}
+          sx={styles.autocomplete_dogBreed}
           renderInput={(params) => <TextField {...params} label="Breed" />}
         />
       )}
@@ -124,7 +120,7 @@ const Filter = (props) => {
         id="color"
         options={colorOptions}
         onChange={(event, value) => setColor(value)}
-        sx={{ m: 1, width: '110px' }}
+        sx={styles.autocomplete_color}
         renderInput={(params) => <TextField {...params} label="Color" />}
       />
       <Autocomplete
@@ -132,7 +128,7 @@ const Filter = (props) => {
         id="sex"
         options={sexOptions}
         onChange={(event, value) => setSex(value)}
-        sx={{ m: 1, width: '100px' }}
+        sx={styles.autocomplete_sex}
         renderInput={(params) => <TextField {...params} label="Sex" />}
       />
       <Autocomplete
@@ -140,7 +136,7 @@ const Filter = (props) => {
         id="Size"
         options={sizeOptions}
         onChange={(event, value) => setSize(value)}
-        sx={{ m: 1, width: '150px' }}
+        sx={styles.autocomplete_size}
         renderInput={(params) => <TextField {...params} label="Size" />}
       />
 
@@ -150,7 +146,7 @@ const Filter = (props) => {
           id="age"
           options={[]}
           onChange={(event, value) => setAge(value)}
-          sx={{ m: 1, width: '110px' }}
+          sx={styles.autocomplete_age}
           renderInput={(params) => <TextField {...params} label="Age" />}
         />
       )}
@@ -161,7 +157,7 @@ const Filter = (props) => {
           id="age"
           options={ageCatOptions}
           onChange={(event, value) => setAge(value)}
-          sx={{ m: 1, width: '110px' }}
+          sx={styles.autocomplete_age}
           renderInput={(params) => <TextField {...params} label="Age" />}
         />
       )}
@@ -172,7 +168,7 @@ const Filter = (props) => {
           id="age"
           options={ageDogOptions}
           onChange={(event, value) => setAge(value)}
-          sx={{ m: 1, width: '110px' }}
+          sx={styles.autocomplete_age}
           renderInput={(params) => <TextField {...params} label="Age" />}
         />
       )}
@@ -182,7 +178,7 @@ const Filter = (props) => {
         id="fur"
         options={furOptions}
         onChange={(event, value) => setFur(value)}
-        sx={{ m: 1, width: '100px' }}
+        sx={styles.autocomplete_fur}
         renderInput={(params) => <TextField {...params} label="Fur" />}
       />
 
@@ -202,7 +198,7 @@ const Filter = (props) => {
               }
               
             }}
-            sx={{ m: 1, width: '150px' }}
+            sx={styles.autocomplete_sterilized}
             renderInput={(params) => <TextField {...params} label="Sterilized" />}
           />
           <Autocomplete
@@ -219,7 +215,7 @@ const Filter = (props) => {
               }
               
             }}
-            sx={{ m: 1, width: '150px' }}
+            sx={styles.autocomplete_dewormed}
             renderInput={(params) => <TextField {...params} label="Dewormed" />}
           />
           <Autocomplete
@@ -236,7 +232,7 @@ const Filter = (props) => {
               }
               
             }}
-            sx={{ m: 1, width: '150px' }}
+            sx={styles.autocomplete_vaccinated}
             renderInput={(params) => <TextField {...params} label="Vaccinated" />}
           />
         </>
@@ -245,7 +241,7 @@ const Filter = (props) => {
       <Button
         variant="contained"
         endIcon={<FilterAltIcon />}
-        sx={{ m: 1 }}
+        sx={styles.button}
         onClick={() => {
           const query = handleOnClickFilter();
           props.buttonFilter(query);
