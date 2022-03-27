@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-//MATERIAL UI
+// MATERIAL UI
 import {
   CssBaseline,
   Container,
@@ -17,18 +17,18 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-//DEFAULT IMAGES
+// DEFAULT IMAGES
 import default_dog from '../../assets/default_dog.svg';
 import default_cat from '../../assets/default_cat.svg';
-//COMPONENTS
+// COMPONENTS
 import MapView from '../MapView/MapView';
 import CropEasy from '../Crop/CropEasy';
 import Breeds from '../FormComponents/Breeds/Breeds';
 import CustomForm from '../FormComponents/CustomForm/CustomForm';
-//INPUT DATA
+// INPUT DATA
 import {
   sizeOptions,
   sexOptions,
@@ -37,20 +37,23 @@ import {
   ageDogOptions,
   furOptions,
 } from '../../utils/petOptions';
-//UTIL FUNCTION
+// UTIL FUNCTIONS
 import formatDate from '../../utils/formatDate';
-import { sendAdoptionPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
+// STYLES
+import styles from './styles';
+// SERVICES
+import { sendAdoptionPetData } from '../../services';
 
 const AddAdoptionPet = ({ setOpen }) => {
-  //PET
+  // PET
   const [dogPet, setDogPet] = useState(true);
-  //CROP
+  // CROP
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState(default_dog);
-  //MAP
+  // MAP
   const [openMap, setOpenMap] = useState(false);
-  //FORM
+  // FORM
   const [textData, setTextData] = useState({
     petName: '',
     description: '',
@@ -149,25 +152,10 @@ const AddAdoptionPet = ({ setOpen }) => {
   }, [dogPet]);
 
   return (
-    <Container component='main' sx={{ display: 'flex' }}>
+    <Container component='main' sx={styles.container}>
       <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          marginRight: 8,
-          flex: 2,
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+      <Box sx={styles.box_container}>
+        <div style={styles.div}>
           <Avatar sx={{ m: 1, backgroundColor: 'blue' }}>
             <PetsIcon />
           </Avatar>
@@ -175,17 +163,14 @@ const AddAdoptionPet = ({ setOpen }) => {
             New Adoption Pet
           </Typography>
         </div>
-        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }} required>
+        <Box
+          component='form'
+          onSubmit={handleSubmit}
+          sx={styles.box_form}
+          required
+        >
           <Grid container spacing={2}>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
+            <Grid item xs={12} sx={styles.grid_switch}>
               <Typography>Cat</Typography>
               <Switch onChange={handlePetSwitchChange} defaultChecked />
               <Typography>Dog</Typography>
@@ -221,21 +206,13 @@ const AddAdoptionPet = ({ setOpen }) => {
                 label='Phone'
                 inputProps={{
                   inputMode: 'numeric',
-                  pattern: '[0-9]{10,11}*$',
+                  pattern: '^[0-9]{10,11}$',
                 }}
                 onChange={handleTextDataChange('phone')}
                 helperText='Format: 10 to 11 digits'
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <Grid item xs={12} sx={styles.grid_date}>
               <TextField
                 required
                 fullWidth
@@ -247,17 +224,9 @@ const AddAdoptionPet = ({ setOpen }) => {
                   pattern: '[0-9]*',
                 }}
                 onChange={handleTextDataChange('addressNumber')}
-                sx={{ width: '50%', ml: 3 }}
+                sx={styles.textField_address}
               />
-              <LocationIcon
-                sx={{
-                  color: 'green',
-                  margin: '0 1em',
-                  cursor: 'pointer',
-                  transform: 'scale(2)',
-                }}
-                onClick={handleOpenMap}
-              />
+              <LocationIcon sx={styles.locationIcon} onClick={handleOpenMap} />
               {openMap && (
                 <Dialog
                   open={true}
@@ -367,62 +336,56 @@ const AddAdoptionPet = ({ setOpen }) => {
               />
             </Grid>
           </Grid>
+          <Box sx={styles.box_image}>
+            <div>Image to upload</div>
+            <TextField
+              required
+              id='image'
+              fullWidth
+              label='Pet Image'
+              name='image'
+              type='file'
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleFileChange}
+              sx={styles.textField_image}
+            />
+            {openCrop && (
+              <Dialog
+                open={true}
+                onClose={handleCloseCrop}
+                fullWidth={true}
+                maxWidth={'md'}
+              >
+                <CropEasy
+                  {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
+                />
+              </Dialog>
+            )}
+            <Card sx={styles.card}>
+              <CardActionArea>
+                <CardMedia
+                  component='img'
+                  alt='New Pet Image'
+                  image={photoURL}
+                  title='New Pet Image'
+                  height='450'
+                  onClick={handlePhotoClick}
+                  sx={styles.cardMedia}
+                />
+              </CardActionArea>
+            </Card>
+          </Box>
           <Button
             type='submit'
             fullWidth
             variant='contained'
-            sx={{ mt: 3, mb: 2 }}
+            sx={styles.button}
           >
             Add Adoption Pet
           </Button>
         </Box>
-      </Box>
-      <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          flex: 3,
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div>Image to upload</div>
-        <TextField
-          required
-          id='image'
-          fullWidth
-          label='Pet Image'
-          name='image'
-          type='file'
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={handleFileChange}
-          sx={{ mt: 2 }}
-        />
-        {openCrop && (
-          <Dialog
-            open={true}
-            onClose={handleCloseCrop}
-            fullWidth={true}
-            maxWidth={'md'}
-          >
-            <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
-          </Dialog>
-        )}
-        <Card sx={{ maxHeight: 450, margin: 'auto' }}>
-          <CardActionArea>
-            <CardMedia
-              component='img'
-              alt='New Pet Image'
-              image={photoURL}
-              title='New Pet Image'
-              height='450'
-              onClick={handlePhotoClick}
-              sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
-            />
-          </CardActionArea>
-        </Card>
       </Box>
     </Container>
   );

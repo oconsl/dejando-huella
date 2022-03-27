@@ -1,30 +1,33 @@
 import React from 'react';
+// CAROUSEL
 import Carousel from 'react-material-ui-carousel';
+// MATERIAL UI
 import { Paper, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+// STYLES
+import styles from './styles';
 
-function MyCarousel() {
-  var items = [
-    {
-      name: 'Be the person',
-      description: 'your dog thinks you are',
-      img_src:
-        'https://latam.globspot.tech/wp-content/uploads/2019/08/localizador-gps-personas-mascotas-globspot-mexico-banner2.jpg',
-    },
-    {
-      name: 'A purr',
-      description: 'is worth a thousand words',
-      img_src:
-        'http://jorgerisi.com/site/wp-content/uploads/2021/06/hoja-de-vida-header.jpg',
-    },
-    {
-      name: 'Treat animals',
-      description: 'as you would like to be treated',
-      img_src:
-        'https://www.helpguau.com/wp-content/uploads/2019/06/perro-ojos-cerrado-helpguau.jpg',
-    },
-  ];
+const items = [
+  {
+    name: 'Be the person',
+    description: 'your dog thinks you are',
+    img_src:
+      'https://latam.globspot.tech/wp-content/uploads/2019/08/localizador-gps-personas-mascotas-globspot-mexico-banner2.jpg',
+  },
+  {
+    name: 'A purr',
+    description: 'is worth a thousand words',
+    img_src:
+      'http://jorgerisi.com/site/wp-content/uploads/2021/06/hoja-de-vida-header.jpg',
+  },
+  {
+    name: 'Treat animals',
+    description: 'as you would like to be treated',
+    img_src:
+      'https://www.helpguau.com/wp-content/uploads/2019/06/perro-ojos-cerrado-helpguau.jpg',
+  },
+];
 
+const MyCarousel = () => {
   return (
     <Carousel
       next={() => {
@@ -34,7 +37,7 @@ function MyCarousel() {
         /* Do other stuff */
       }}
       stopAutoPlayOnHover={false}
-      sx={{ height: '36vw' }}
+      sx={styles.carousel}
       indicators={false}
       duration={500}
       interval={5000}
@@ -44,61 +47,29 @@ function MyCarousel() {
       ))}
     </Carousel>
   );
-}
+};
 
-const useStyles = makeStyles({
-  root: {
-    position: 'relative',
-  },
-  img_responsive: {
-    height: 'auto',
-    maxHeight: '700px',
-    width: '100%',
-  },
-  sec: {
-    position: 'absolute',
-    /*  top: "6em",
-    left: "2em", */
-    marginTop: '6em',
-    marginLeft: '2em',
-    color: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  name: {
-    fontSize: '6vw',
-  },
-  description: {
-    fontSize: '4vw',
-  },
-});
-
-function Item(props) {
-  const classes = useStyles();
+const Item = (props) => {
   return (
-    <Paper className={classes.root}>
-      <div className={classes.sec}>
+    <Paper sx={styles.paper}>
+      <div style={styles.div_section}>
         <Typography
-          className={classes.name}
-          sx={{ fontWeight: '900', textShadow: '2px 2px 2px black' }}
+          sx={styles.typography_name}
           variant="h2"
         >
           {props.item.name}
         </Typography>
         <Typography
-          className={classes.description}
-          sx={{ textShadow: '2px 2px 2px black' }}
+          sx={styles.typography_description}
           variant="h5"
         >
           {props.item.description}
         </Typography>
       </div>
-
       <img
-        className={classes.img_responsive}
+        style={styles.img}
         src={props.item.img_src}
-        alt="image"
+        alt='carousel-content'
       />
     </Paper>
   );

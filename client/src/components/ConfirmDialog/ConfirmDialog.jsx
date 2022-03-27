@@ -1,10 +1,19 @@
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { deleteAdoptionPetData, deleteFoundPetData, deleteLostPetData, deleteMatchPetData } from '../../services';
+// MATERIAL UI
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
+// SERVICES
+import {
+  deleteAdoptionPetData,
+  deleteFoundPetData,
+  deleteLostPetData,
+  deleteMatchPetData,
+} from '../../services';
 
 const ConfirmDialog = ({ setOpen, option, id }) => {
   const handleCancel = () => {
@@ -12,7 +21,7 @@ const ConfirmDialog = ({ setOpen, option, id }) => {
   };
 
   const handleDelete = () => {
-    switch(option){
+    switch (option) {
       case 'Match':
         deleteMatchPetData(id);
         break;
@@ -25,7 +34,9 @@ const ConfirmDialog = ({ setOpen, option, id }) => {
       case 'Adoption':
         deleteAdoptionPetData(id);
         break;
-    }    
+      default:
+        break;
+    }
     window.location.reload();
   };
 
@@ -45,6 +56,6 @@ const ConfirmDialog = ({ setOpen, option, id }) => {
       </Dialog>
     </div>
   );
-}
+};
 
 export default ConfirmDialog;

@@ -87,11 +87,18 @@ const usersController = (User) => {
       username: user.username,
     };
     return jwt.sign(tokenPayload, process.env.TOKEN_SECRET, {
-      expiresIn: '30m',
+      expiresIn: '10s',
     });
   };
 
-  return { postUser, getUsers, putUser, deleteUser, login };
+  const refresh = async (req, res) => {
+    const { body } = req;
+
+    const newToken = generateToken(body);
+    res.status(200).json(newToken);
+  };
+
+  return { postUser, getUsers, putUser, deleteUser, login, refresh };
 };
 
 module.exports = usersController;

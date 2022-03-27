@@ -1,8 +1,14 @@
 import axios from 'axios';
+import { requestInterceptor, responseInterceptor } from './axiosInterceptors';
+
+const commonAxios = axios.create();
+
+requestInterceptor();
+responseInterceptor();
 
 // GITHUB SERVICE
 export const fetchGithubData = async ({ setUserData, user }) => {
-  const res = await axios.get(`https://api.github.com/users/${user}`);
+  const res = await commonAxios.get(`https://api.github.com/users/${user}`);
   setUserData({
     avatar: res.data.avatar_url,
     name: res.data.name,

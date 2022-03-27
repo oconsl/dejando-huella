@@ -1,5 +1,5 @@
 import { useState } from 'react';
-//MATERIAL UI
+// MATERIAL UI
 import {
   CssBaseline,
   Container,
@@ -14,21 +14,24 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
-//DEFAULT IMAGES
+// DEFAULT IMAGES
 import default_dog from '../../assets/default_dog.svg';
-//COMPONENTS
+// COMPONENTS
 import CropEasy from '../Crop/CropEasy';
-//UTIL FUNCTION
-import { sendMatchPetData } from '../../services';
+// UTIL FUNCTIONS
 import jsonToFormData from '../../utils/jsonToFormData';
+// STYLES
+import styles from './styles';
+// SERVICES
+import { sendMatchPetData } from '../../services';
 
 const AddMatchPet = ({ setOpen }) => {
-  //CROP
+  // CROP
   const [openCrop, setOpenCrop] = useState(false);
   const [photoURL, setPhotoURL] = useState(default_dog);
-  //FORM
+  // FORM
   const [textData, setTextData] = useState({
     petName: '',
     testimony: '',
@@ -43,7 +46,7 @@ const AddMatchPet = ({ setOpen }) => {
     const dataBody = {
       ...textData,
       image: file,
-      username: JSON.parse(localStorage.getItem('username'))
+      username: JSON.parse(localStorage.getItem('username')),
     };
 
     const matchPetData = jsonToFormData(dataBody, matchPetDataBody);
@@ -72,26 +75,11 @@ const AddMatchPet = ({ setOpen }) => {
   };
 
   return (
-    <Container component='main' sx={{ display: 'flex' }}>
+    <Container component='main' sx={styles.container}>
       <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 4,
-          display: 'flex',
-          marginRight: 8,
-          flex: 2,
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, backgroundColor: 'blue' }}>
+      <Box sx={styles.box_container}>
+        <div style={styles.div}>
+          <Avatar sx={styles.avatar}>
             <PetsIcon />
           </Avatar>
           <Typography component='h1' variant='h5'>
@@ -102,7 +90,7 @@ const AddMatchPet = ({ setOpen }) => {
           component='form'
           onSubmit={handleSubmit}
           encType='multipart/form-data'
-          sx={{ mt: 3 }}
+          sx={styles.box_form}
           required
         >
           <Grid container spacing={2}>
@@ -129,15 +117,7 @@ const AddMatchPet = ({ setOpen }) => {
               />
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              marginTop: 4,
-              display: 'flex',
-              flex: 3,
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
+          <Box sx={styles.box_image}>
             <div>Image to upload</div>
             <TextField
               required
@@ -150,7 +130,7 @@ const AddMatchPet = ({ setOpen }) => {
                 shrink: true,
               }}
               onChange={handleFileChange}
-              sx={{ mt: 2 }}
+              sx={styles.textField}
             />
             {openCrop && (
               <Dialog
@@ -164,7 +144,7 @@ const AddMatchPet = ({ setOpen }) => {
                 />
               </Dialog>
             )}
-            <Card sx={{ maxHeight: 450, margin: 'auto' }}>
+            <Card sx={styles.card}>
               <CardActionArea>
                 <CardMedia
                   component='img'
@@ -173,7 +153,7 @@ const AddMatchPet = ({ setOpen }) => {
                   title='New Pet Image'
                   height='450'
                   onClick={handlePhotoClick}
-                  sx={{ backgroundColor: 'grey', objectFit: 'contain' }}
+                  sx={styles.cardMedia}
                 />
               </CardActionArea>
             </Card>
@@ -182,7 +162,7 @@ const AddMatchPet = ({ setOpen }) => {
             type='submit'
             fullWidth
             variant='contained'
-            sx={{ mt: 3, mb: 2 }}
+            sx={styles.button}
           >
             Add Testimony
           </Button>

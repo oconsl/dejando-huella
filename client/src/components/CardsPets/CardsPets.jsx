@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+// MATERIAL UI
 import {
   Card,
   CardContent,
@@ -8,8 +9,11 @@ import {
   CardActionArea,
   CardActions,
 } from '@mui/material';
+// COMPONENTS
 import Modal from '../Modal/Modal';
 import ModalImagePets from '../ModalImagePets/ModalImagePet';
+// STYLES
+import styles from './styles';
 
 const CardsPet = (props) => {
   const [open, setOpen] = useState(false);
@@ -22,14 +26,7 @@ const CardsPet = (props) => {
 
   return (
     <Card
-      sx={{
-        margin: '15px',
-        width: '100%',
-        minWidth: '250px',
-        maxWidth: '345px',
-        height: '100%',
-        maxHeight: '350px',
-      }}
+      sx={styles.card}
     >
       <ModalImagePets
         openImg={openImage}
