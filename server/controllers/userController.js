@@ -36,16 +36,31 @@ const usersController = (User) => {
   const putUser = async (req, res) => {
     try {
       const { body } = req;
+      if (body.password){
+        await User.findByIdAndUpdate(req.params.userId, {
+          firstName: body.firstName,
+          lastName: body.lastName,
+          email: body.email,
+          username: body.username,
+          password: await bcrypt.hash(body.password, 8),
+        });
 
-      await User.findByIdAndUpdate(req.params.userId, {
+        res.json('Updated successfully.');
+    }else{
+      const aux = await User.findById(req.params.userId);
+      await User.updateOne({
+        _id: req.params.userId,
+    },
+    {
+      $set:{
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
         username: body.username,
-        password: await bcrypt.hash(body.password, 8),
-      });
-
-      res.json('Updated successfully.');
+        password: await bcrypt.hash(aux.password, 8),
+      }
+    })
+    }
     } catch (err) {
       res.json('Error');
     }
