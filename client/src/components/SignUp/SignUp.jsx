@@ -19,11 +19,12 @@ import Grow from '@mui/material/Grow';
 //UTILS
 import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
 import { sendUserData } from '../../services';
+import styles from './styles';
 
 const SignUp = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
   const [userData, setUserData] = useState({
     firstName: '',
@@ -44,7 +45,7 @@ const SignUp = () => {
 
   const handleUserDataChange = (key) => (event) => {
     setUserData({ ...userData, [key]: event.target.value });
-    
+
     setError({
       firstName: '',
       lastName: '',
@@ -56,14 +57,14 @@ const SignUp = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    
+
     const status = await sendUserData({ userData, setError });
 
-    if(status === 200) {
+    if (status === 200) {
       setSuccess(true);
 
       setTimeout(() => {
-        setSuccess(false);  
+        setSuccess(false);
         navigate('/login');
       }, 3000);
     }
@@ -72,27 +73,20 @@ const SignUp = () => {
   return (
     <>
       <HeaderLandingPage />
-      <Container component='main' maxWidth='xs'>
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         {!success && (
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, backgroundColor: 'lightcoral' }}>
+          <Box sx={styles.box_container}>
+            <Avatar sx={styles.avatar}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component='h1' variant='h5'>
+            <Typography component="h1" variant="h5">
               Sign up
             </Typography>
             <Box
-              component='form'
+              component="form"
               onSubmit={handleSignUp}
-              sx={{ mt: 3 }}
+              sx={styles.box_child}
               required
             >
               <Grid container spacing={2}>
@@ -101,10 +95,10 @@ const SignUp = () => {
                     required
                     fullWidth
                     error={error.firstName !== ''}
-                    name='firstName'
-                    label='First Name'
-                    id='firstName'
-                    autoComplete='given-name'
+                    name="firstName"
+                    label="First Name"
+                    id="firstName"
+                    autoComplete="given-name"
                     onChange={handleUserDataChange('firstName')}
                     helperText={error.firstName}
                   />
@@ -114,10 +108,10 @@ const SignUp = () => {
                     required
                     fullWidth
                     error={error.lastName !== ''}
-                    id='lastName'
-                    label='Last Name'
-                    name='lastName'
-                    autoComplete='family-name'
+                    id="lastName"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="family-name"
                     onChange={handleUserDataChange('lastName')}
                     inputProps={{
                       inputMode: 'text',
@@ -131,10 +125,10 @@ const SignUp = () => {
                     required
                     error={error.username !== ''}
                     fullWidth
-                    id='username'
-                    label='User Name'
-                    name='username'
-                    autoComplete='family-name'
+                    id="username"
+                    label="User Name"
+                    name="username"
+                    autoComplete="family-name"
                     onChange={handleUserDataChange('username')}
                     inputProps={{
                       inputMode: 'text',
@@ -148,16 +142,19 @@ const SignUp = () => {
                     required
                     error={error.email !== ''}
                     fullWidth
-                    id='email'
-                    label='Email Address'
-                    name='email'
-                    autoComplete='email'
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
                     onChange={handleUserDataChange('email')}
                     inputProps={{
                       inputMode: 'text',
-                      pattern: '^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$',
+                      pattern:
+                        '^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$',
                     }}
-                    helperText={error.email === '' ? 'example@test.com' : error.email}
+                    helperText={
+                      error.email === '' ? 'example@test.com' : error.email
+                    }
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -165,21 +162,21 @@ const SignUp = () => {
                     required
                     fullWidth
                     error={error.password !== ''}
-                    name='password'
-                    label='Password'
-                    type='password'
-                    id='password'
-                    autoComplete='new-password'
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
                     onChange={handleUserDataChange('password')}
                     helperText={error.password}
                   />
                 </Grid>
               </Grid>
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
-                variant='contained'
-                sx={{ mt: 3, mb: 2 }}
+                variant="contained"
+                sx={styles.button}
               >
                 Sign Up
               </Button>
@@ -188,19 +185,11 @@ const SignUp = () => {
         )}
         {success && (
           <Grow in={true}>
-            <Box
-              sx={{
-                mt: 8,
-                mb: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
-              <Typography sx={{ fontWeight: 'bold', fontSize: '1.5em', mb: 4 }}>
+            <Box sx={styles.box_signed}>
+              <Typography sx={styles.typography}>
                 Signed Up Successfully
               </Typography>
-              <CheckCircleIcon sx={{ color: 'green', transform: 'scale(3)' }} />
+              <CheckCircleIcon sx={styles.checkCircleIcon} />
             </Box>
           </Grow>
         )}

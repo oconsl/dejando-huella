@@ -192,7 +192,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                 label='Phone'
                 inputProps={{
                   inputMode: 'numeric',
-                  pattern: '[0-9]*',
+                  pattern: '^[0-9]{10,11}$',
                 }}
                 value={textData.phone}
                 onChange={handleTextDataChange('phone')}

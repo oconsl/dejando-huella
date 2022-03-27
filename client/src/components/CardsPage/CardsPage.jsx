@@ -1,28 +1,24 @@
 import React from 'react';
+// ROUTER
+import { Link } from 'react-router-dom';
+// MATERIAL UI
 import {
   Button,
-  CardActionArea,
   CardActions,
   Card,
   CardContent,
   CardMedia,
   Typography,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+// STYLES
 import './CardsPage.css';
+import styles from './styles';
 
 const CardsPet = (props) => {
   return (
     <Card
       className='card'
-      sx={{
-        margin: '15px',
-        width: '100%',
-        minWidth: '250px',
-        maxWidth: '345px',
-        height: '100%',
-        maxHeight: '350px',
-      }}
+      sx={styles.card}
     >
       <CardMedia
         component='img'

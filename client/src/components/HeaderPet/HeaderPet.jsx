@@ -15,10 +15,9 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
-import './HeaderPet.css';
 import styles from './styles';
 
-const pages = ['Found Pets', 'Lost Pets', 'Adoption Pets', 'Match Pets'];
+const pages = ['Found', 'Lost', 'Adoption', 'Testimony'];
 const settings = ['Profile', 'Logout'];
 
 const HeaderPet = () => {
@@ -100,14 +99,8 @@ const HeaderPet = () => {
             >
               {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>
-                    <Link
-                      key={index}
-                      className='nav-link'
-                      to={`/${page.replace(' ', '-').toLowerCase()}/1`}
-                    >
+                  <Typography textAlign='center' onClick={(() => navigate(`/${page.toLowerCase()}-pets/1`))}>
                       {page}
-                    </Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -129,20 +122,17 @@ const HeaderPet = () => {
           </Typography>
           <Box sx={styles.box_pages}>
             {pages.map((page, index) => (
-              <Link
-                key={index}
-                className="nav-link"
-                to={`/${page.replace(' ', '-').toLowerCase()}/1`}
-              >
                 <Button
                   className='header-button'
                   key={`${page}`}
-                  onClick={handleCloseNavMenu}
                   sx={styles.button_link}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    navigate(`/${page.toLowerCase()}-pets/1`)
+                  }}
                 >
                   {page}
                 </Button>
-              </Link>
             ))}
           </Box>
           <Box sx={styles.box_toolTip}>

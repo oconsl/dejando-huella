@@ -34,7 +34,7 @@ function App() {
           <Route path='/found-pets/:page' element={<FoundPets />} />
           <Route path='/lost-pets/:page' element={<LostPets />} />
           <Route path='/adoption-pets/:page' element={<AdoptionPets />} />
-          <Route path='/match-pets/:page' element={<MatchPets />} />
+          <Route path='/testimony-pets/:page' element={<MatchPets />} /> 
           <Route path='/profile' element={<Profile />} />
         </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />

@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
+// MATERIAL UI
+import { Box, IconButton } from '@mui/material';
+// COMPONENTS
 import DialogFS from '../../components/DialogFS/DialogFS';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import AddIcon from '@mui/icons-material/Add';
+// ASSETS
 import logo from '../../assets/logo.png';
+// MATERIAL ICONS
+import AddIcon from '@mui/icons-material/Add';
+// STYLES
+import styles from './styles';
 
 const AddPet = ({ option }) => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -19,24 +23,11 @@ const AddPet = ({ option }) => {
       <Box>
         <IconButton
           onClick={handleClick}
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100',
-            height: '100',
-          }}
+          sx={styles.box}
         >
-          <img src={logo} style={{ width: '75px' }} />
+          <img src={logo} style={styles.img} alt='add-paw-icon'/>
           <AddIcon
-            sx={{
-              color: 'white',
-              position: 'absolute',
-              bottom: '19%',
-              left: '34%',
-              transform: 'scale(1.5)'
-            }}
+            sx={styles.addIcon}
           />
         </IconButton>
       </Box>

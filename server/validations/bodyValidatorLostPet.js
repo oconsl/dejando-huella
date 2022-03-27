@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const bodySchemaLatLang = Joi.object({
+const bodySchemaLatLng = Joi.object({
   lat: Joi.number().required(),
   lng: Joi.number().required(),
 });
@@ -23,7 +23,7 @@ const bodySchema = Joi.object({
   addressNumber: Joi.string().required(),
   addressRoad: Joi.string().required(),
   date: Joi.string().required(),
-  latLng: bodySchemaLatLang,
+  latLng: bodySchemaLatLng,
   filter: bodySchemaFilter,
 });
 

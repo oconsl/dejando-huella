@@ -38,6 +38,7 @@ import formatDate from '../../utils/formatDate';
 import { fetchAdoptionPetData, updateAdoptionPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
 
+
 const ModifyAdoptionPet = ({ id, setOpen }) => {
   const [newPhoto, setNewPhoto] = useState(false);
   //PET
@@ -221,7 +222,7 @@ const ModifyAdoptionPet = ({ id, setOpen }) => {
                 label='Phone'
                 inputProps={{
                   inputMode: 'numeric',
-                  pattern: '[0-9]*',
+                  pattern: '^[0-9]{10,11}$',
                 }}
                 value={textData.phone}
                 onChange={handleTextDataChange('phone')}

@@ -1,10 +1,13 @@
-import React from 'react';
+// MATERIAL UI
+import { Box } from '@mui/material';
+// COMPONENTS
 import ContactCard from '../ContactCard/ContactCard';
-import Box from '@mui/material/Box';
+// STYLES
+import styles from './styles';
 
 const CardsContainer = () => {
   return (
-    <Box sx={{display: 'flex',justifyContent: 'space-around', alignItems: 'center'}}>
+    <Box sx={styles.box}>
       <ContactCard user='Luudupuy'/>
       <ContactCard user='gonzalez-gabriel'/>
       <ContactCard user='oconsl'/>
