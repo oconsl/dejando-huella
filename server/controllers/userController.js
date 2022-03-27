@@ -36,16 +36,15 @@ const usersController = (User) => {
   const putUser = async (req, res) => {
     try {
       const { body } = req;
-      
-        await User.findByIdAndUpdate(req.params.userId, {
-          firstName: body.firstName,
-          lastName: body.lastName,
-          email: body.email,
-          username: body.username,
-          password: await bcrypt.hash(body.password, 8),
-        });
-        res.json('Updated successfully.');
-        
+
+      await User.findByIdAndUpdate(req.params.userId, {
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email,
+        username: body.username,
+        password: await bcrypt.hash(body.password, 8),
+      });
+      res.json('Updated successfully.');
     } catch (err) {
       res.status(403).json(Object.keys(err.keyValue));
     }
@@ -87,7 +86,7 @@ const usersController = (User) => {
       username: user.username,
     };
     return jwt.sign(tokenPayload, process.env.TOKEN_SECRET, {
-      expiresIn: '10s',
+      expiresIn: '30m',
     });
   };
 

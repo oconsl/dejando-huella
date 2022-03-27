@@ -52,9 +52,9 @@ const HeaderPet = () => {
   },[]);
 
   return (
-    <AppBar position='sticky'>
-      <Container maxWidth='xl'>
-        <Toolbar disableGutters>
+    <AppBar position='sticky' sx={styles.appBar}>
+      <Container maxWidth='xl' sx={styles.container}>
+        <Toolbar disableGutters sx={styles.toolbar}>
           <Typography
             variant='h6'
             noWrap
@@ -66,6 +66,7 @@ const HeaderPet = () => {
                 width={'45px'}
                 height={'45px'}
                 src='https://cdn-icons-png.flaticon.com/512/1076/1076826.png'
+                style={styles.img}
               />
             </Link>
           </Typography>
@@ -138,7 +139,7 @@ const HeaderPet = () => {
           <Box sx={styles.box_toolTip}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: 'orange'}}>{letter}</Avatar>
+                <Avatar sx={styles.avatar}>{letter}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -158,7 +159,7 @@ const HeaderPet = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting, index) => (
-                <MenuItem key={setting} onClick={handleMenuOptionClick(setting)}>
+                <MenuItem key={setting} sx={styles.menuItem} onClick={handleMenuOptionClick(setting)}>
                   <Typography key={index} textAlign='center'>
                     {setting}
                   </Typography>

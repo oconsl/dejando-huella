@@ -21,6 +21,7 @@ import ModifyFoundPet from './components/ModifyFoundPet/ModifyFoundPet';
 import AddFoundPet from './components/AddFoundPet/AddFoundPet';
 import AddAdoptionPet from './components/AddAdoptionPet/AddAdoptionPet';
 import ModifyAdoptionPet from './components/ModifyAdoptionPet/ModifyAdoptionPet';
+import './App.css';
 
 function App() {
   const { token, setToken } = useToken();
@@ -34,7 +35,7 @@ function App() {
           <Route path='/found-pets/:page' element={<FoundPets />} />
           <Route path='/lost-pets/:page' element={<LostPets />} />
           <Route path='/adoption-pets/:page' element={<AdoptionPets />} />
-          <Route path='/testimony-pets/:page' element={<MatchPets />} /> 
+          <Route path='/testimony-pets/:page' element={<MatchPets />} />
           <Route path='/profile' element={<Profile />} />
         </Route>
         <Route path='/login' element={<Login setToken={setToken} />} />

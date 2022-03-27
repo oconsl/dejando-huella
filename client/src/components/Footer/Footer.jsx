@@ -1,56 +1,51 @@
 import React from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Twitter } from '@mui/icons-material';
+import { GitHub } from '@mui/icons-material';
+import dogShadow from '../../assets/dogShadow.png';
+import catShadow from '../../assets/catShadow.png';
 import styles from './styles'
 
 const Footer = () => {
   return (
     <footer>
-      <Box px={{ xs: 3, sm: 6 }} py={{ xs: 5, sm: 6 }} bgcolor="gray">
+      <Box sx={styles.box_container}>
         <Container maxWidth="lg">
           <Grid container spacing={5}>
-            <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Navigation</Box>
-              <Box>
-                <Link to="/found-pets/1">Found Pets</Link>
-              </Box>
-              <Box>
-                <Link to="/lost-pets/1">Lost Pets</Link>
-              </Box>
-              <Box>
-                <Link to="/adoption-pets/1">Adoption</Link>
+            <Grid item xs={12} sm={2}>
+              <Box sx={styles.box_dog}>
+                <img src={dogShadow} alt="dog" style={styles.dog}/>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Follow us</Box>
-              <Box sx={styles.box_socialNetwork}>
-                <Instagram />
-                Instagram
-              </Box>
-              <Box sx={styles.box_socialNetwork}>
-                <Facebook />
-                Facebook
-              </Box>
-              <Box sx={styles.box_socialNetwork}>
-                <Twitter />
-                Twitter
+            <Grid item xs={12} sm={8}>
+              <Box borderBottom={1} sx={styles.box_followUs}>Follow us</Box>
+              <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
+                <Box sx={styles.box_socialNetwork}>
+                  <GitHub sx={{mx: 2}}/>
+                  Carlos
+                </Box>
+                <Box sx={styles.box_socialNetwork}>
+                  <GitHub sx={{mx: 2}}/>
+                  Gabriel  
+                </Box>
+
+                <Box sx={styles.box_socialNetwork}>
+                  <GitHub sx={{mx: 2}}/>
+                  Lourdes
+                </Box>
+                <Box sx={styles.box_socialNetwork}>
+                  <GitHub sx={{mx: 2}}/>
+                  Santiago
+                </Box>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Menu</Box>
-              <Box>
-                <Link to="/">About Us</Link>
-              </Box>
-              <Box>
-                <Link to="/">Contact</Link>
-              </Box>
-              <Box>
-                <Link to="/">Testimonials</Link>
+            <Grid item xs={12} sm={2}>
+              <Box sx={styles.box_cat}>
+                <img src={catShadow} alt="cat" style={styles.cat}/>
               </Box>
             </Grid>
           </Grid>
-          <Box textAlign="center" pt={{ xs: 5, sm: 10 }} pb={{ xs: 5, sm: 0 }}>
+          <Box textAlign="center" sx={styles.box_copyright}>
             ® {new Date().getFullYear()} All rights reserved | Dejando Huella
           </Box>
         </Container>

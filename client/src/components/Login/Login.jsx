@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 //MATERIAL UI
 import {
@@ -26,10 +26,6 @@ import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
 
 
 const Login = ({ setToken }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
-
   const [userData, setUserData] = useState({
     username: '',
     password: '',
