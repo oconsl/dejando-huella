@@ -17,7 +17,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Grow from '@mui/material/Grow';
 //UTILS
 import { fetchUserDataById, loginUser, updateUserData } from '../../services';
-import styles from '../ModifyLostPet/styles';
+import styles from './styles';
 
 const ModifyUser = ({ id, setOpen }) => {
   const [userData, setUserData] = useState({
@@ -97,7 +97,7 @@ const ModifyUser = ({ id, setOpen }) => {
         <CssBaseline />
         {!success && (
           <Box
-            sx={styles.boxContainer}
+            sx={styles.box_Container}
           >
             <Avatar sx={styles.avatar}>
               <LockOutlinedIcon />
