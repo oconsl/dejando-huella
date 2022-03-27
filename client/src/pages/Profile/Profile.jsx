@@ -11,6 +11,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import DialogFS from '../../components/DialogFS/DialogFS';
+import UserDeleteDialog from '../../components/UserDeleteDialog/UserDeleteDialog';
 
 // SERVICES
 import { fetchAllPetDataByUsername, fetchUserData } from '../../services';
@@ -28,6 +29,7 @@ const Profile = () => {
   const [data, setData] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const [userDeleteOpen, setUserDeleteOpen] = useState(false);
   const [id, setId] = useState(0);
   const [option, setOption] = useState('');
 
@@ -99,10 +101,14 @@ const Profile = () => {
 
   const handleEditClick = () => {
     // MODIFY USER
+    setId(userData.id);
+    setOption('User');
+    setDialogOpen(true);
   };
 
   const handleDeleteClick = () => {
     // ASK FOR DELETE
+    setUserDeleteOpen(true);
   };
 
   useEffect(() => {
@@ -110,6 +116,7 @@ const Profile = () => {
     fetchUserData({ setUserData, username });
     setLetter(JSON.parse(localStorage.getItem('username'))[0].toUpperCase());
     fetchAllPetDataByUsername({ setData, username });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -118,7 +125,14 @@ const Profile = () => {
         <DialogFS setOpen={setDialogOpen} option={option} id={id} />
       )}
       {confirmDialogOpen && (
-        <ConfirmDialog setOpen={setConfirmDialogOpen} option={option} id={{id}} />
+        <ConfirmDialog
+          setOpen={setConfirmDialogOpen}
+          option={option}
+          id={{ id }}
+        />
+      )}
+      {userDeleteOpen && (
+        <UserDeleteDialog setOpen={setUserDeleteOpen} id={userData.id} />
       )}
       <Box
         sx={{

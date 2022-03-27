@@ -3,33 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import CardsPet from '../../components/CardsPets/CardsPets';
 import { Box, Container, Pagination, Typography } from '@mui/material';
 import Filter from '../../components/Filters/Filters';
-import { fetchFoundPetsData, fetchFilterFoundPetsData } from '../../services';
+import { fetchAdoptionPetsData, fetchFilterAdoptionPetsData } from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
 import AddPet from '../../components/AddPet/AddPet';
 
-const FoundPets = () => {
-  const [foundPets, setFoundPets] = useState([]);
+const AdoptionPets = () => {
+  const [adoptionPets, setAdoptionPets] = useState([]);
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
-  const [foundPetsGroups, setFoundPetsGroups] = useState([[1]]);
+  const [adoptionPetsGroups, setAdoptionPetsGroups] = useState([[1]]);
   const navigate = useNavigate();
-  const skeletonCount = new Array(9 - (foundPets.length % 9)).fill(false);
+  const skeletonCount = new Array(9 - (adoptionPets.length % 9)).fill(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchFoundPetsData({ setFoundPets });
+    fetchAdoptionPetsData({ setAdoptionPets });
   }, []);
 
   useEffect(() => {
     const reg = /filter./g
-    navigate(`/found-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`);
+    navigate(`/adoption-pets/${page}?${query.replace(reg, '').toLocaleLowerCase()}`);
   }, [page, query]);
 
   useEffect(() => {
-    fetchFilterFoundPetsData({ query, setFoundPets });
+    fetchFilterAdoptionPetsData({ query, setAdoptionPets });
     setPage(1);
-    setMaxPage(foundPets.length);
+    setMaxPage(adoptionPets.length);
   }, [query]);
 
   useEffect(() => {
@@ -37,8 +37,8 @@ const FoundPets = () => {
       let subArray = [];
       let i = 0;
 
-      while (i < foundPets.length) {
-        subArray.push(foundPets.slice(i, (i += 9)));
+      while (i < adoptionPets.length) {
+        subArray.push(adoptionPets.slice(i, (i += 9)));
       }
 
       return subArray;
@@ -46,9 +46,9 @@ const FoundPets = () => {
 
     const subArray = splitArrayIntoSubArrays();
 
-    setFoundPetsGroups(subArray);
+    setAdoptionPetsGroups(subArray);
     setMaxPage(subArray.length);
-  }, [foundPets]);
+  }, [adoptionPets]);
 
   const handleChange = (value) => {
     setPage(value);
@@ -61,12 +61,12 @@ const FoundPets = () => {
   return (
     <>
       <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
-        <h1>FOUND PETS</h1>
+        <h1>ADOPTION PETS</h1>
         <div>
-          <AddPet option={'*AddFound'}/>
+          <AddPet option={'*AddAdoption'}/>
         </div>
       </Box>
-      <Filter buttonFilter={handleOnFilter} page='found-pets' />
+      <Filter buttonFilter={handleOnFilter} page='adoption-pets'/>
       <Container
         maxWidth="lg"
         sx={{
@@ -76,8 +76,8 @@ const FoundPets = () => {
           justifyContent: 'center',
         }}
       >
-        {foundPets.length !== 0 && foundPetsGroups.length > 0 ? (
-          foundPetsGroups[page - 1].map((item, index) => {
+        {adoptionPets.length !== 0 && adoptionPetsGroups.length > 0 ? (
+          adoptionPetsGroups[page - 1].map((item, index) => {
             if (page === maxPage && index === 8 - skeletonCount.length) {
               if (skeletonCount.length === 8) {
                 skeletonCount[0] = true;
@@ -87,6 +87,7 @@ const FoundPets = () => {
                 <Fragment key={index}>
                   <CardsPet
                     key={index}
+                    title={item.petName}
                     description={item.date + ' - \n' + item.description}
                     button={'More Details'}
                     img_src={item.imageURL}
@@ -95,7 +96,7 @@ const FoundPets = () => {
                     addressNumber={item.addressNumber}
                     phone={item.phone}
                     position={item.latLng}
-                    page='found-pets'
+                    page='adoption-pets'
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -113,6 +114,7 @@ const FoundPets = () => {
               <Fragment key={index}>
                 <CardsPet
                   key={index}
+                  title={item.petName}
                   description={item.date + ' - \n' + item.description}
                   button={'More Details'}
                   img_src={item.imageURL}
@@ -121,7 +123,7 @@ const FoundPets = () => {
                   addressNumber={item.addressNumber}
                   phone={item.phone}
                   position={item.latLng}
-                  page='found-pets'
+                  page='adoption-pets'
                 />
               </Fragment>
             );
@@ -164,4 +166,4 @@ const FoundPets = () => {
   );
 };
 
-export default FoundPets;
+export default AdoptionPets;

@@ -57,7 +57,7 @@ const Information = () => {
               }
             />
             <CardsPage
-              title={'Adoption'}
+              title={'Adoption Pets'}
               description={
                 'Aqui puedes encontra tu proximo compañero de la vida'
               }

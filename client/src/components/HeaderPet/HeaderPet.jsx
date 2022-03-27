@@ -17,7 +17,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
 import './HeaderPet.css';
 
-const pages = ['found-pets/1', 'lost-pets', 'adoption-pets', 'match-pets/1'];
+const pages = ['Found Pets', 'Lost Pets', 'Adoption Pets', 'Match Pets'];
 const settings = ['Profile', 'Logout'];
 
 const HeaderPet = () => {
@@ -44,6 +44,7 @@ const HeaderPet = () => {
 
   const handleMenuOptionClick = (setting) => () => {
     setting === 'Logout' ? logOut() : navigate('/profile');
+    setAnchorElUser(null);
   }
 
   useEffect(() => {
@@ -104,7 +105,7 @@ const HeaderPet = () => {
                     <Link
                       key={index}
                       className='nav-link'
-                      to={`/${page}/1`}
+                      to={`/${page.replace(' ', '-').toLowerCase()}/1`}
                     >
                       {page}
                     </Link>
@@ -132,7 +133,7 @@ const HeaderPet = () => {
               <Link
                 key={index}
                 className="nav-link"
-                to={`/${page}`}
+                to={`/${page.replace(' ', '-').toLowerCase()}/1`}
               >
                 <Button
                   className='header-button'
@@ -168,8 +169,8 @@ const HeaderPet = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting, index) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography key={index} textAlign='center' onClick={handleMenuOptionClick(setting)}>
+                <MenuItem key={setting} onClick={handleMenuOptionClick(setting)}>
+                  <Typography key={index} textAlign='center'>
                     {setting}
                   </Typography>
                 </MenuItem>

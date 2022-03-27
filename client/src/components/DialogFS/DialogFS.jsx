@@ -7,13 +7,18 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 // COMPONENTS
+import AddMatchPet from '../AddMatchPet/AddMatchPet';
+import AddLostPet from '../AddLostPet/AddLostPet';
+import AddFoundPet from '../AddFoundPet/AddFoundPet';
+import AddAdoptionPet from '../AddAdoptionPet/AddAdoptionPet';
 import ModifyMatchPet from '../../components/ModifyMatchPet/ModifyMatchPet';
 import ModifyLostPet from '../../components/ModifyLostPet/ModifyLostPet';
 import ModifyFoundPet from '../../components/ModifyFoundPet/ModifyFoundPet';
 import ModifyAdoptionPet from '../../components/ModifyAdoptionPet/ModifyAdoptionPet';
+import ModifyUser from '../ModifyUser/ModifyUser';
 
 const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const DialogFS = ({ setOpen, option, id }) => {
@@ -40,14 +45,29 @@ const DialogFS = ({ setOpen, option, id }) => {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
-              Edit to save new info
+              {option[0] === '*'
+                ? 'Fill the form to add new pet'
+                : 'Edit to save new info'}
             </Typography>
           </Toolbar>
         </AppBar>
-        {option==='Match' ? <ModifyMatchPet id={id} setOpen={setOpen} /> : null}
-        {option==='Lost' ? <ModifyLostPet id={id} setOpen={setOpen} /> : null}
-        {option==='Found' ? <ModifyFoundPet id={id} setOpen={setOpen} /> : null}
-        {option==='Adoption' ? <ModifyAdoptionPet id={id} setOpen={setOpen} /> : null}
+        {option === '*AddMatch' ? <AddMatchPet setOpen={setOpen} /> : null}
+        {option === '*AddLost' ? <AddLostPet setOpen={setOpen} /> : null}
+        {option === '*AddFound' ? <AddFoundPet setOpen={setOpen} /> : null}
+        {option === '*AddAdoption' ? (
+          <AddAdoptionPet setOpen={setOpen} />
+        ) : null}
+        {option === 'Match' ? (
+          <ModifyMatchPet id={id} setOpen={setOpen} />
+        ) : null}
+        {option === 'Lost' ? <ModifyLostPet id={id} setOpen={setOpen} /> : null}
+        {option === 'Found' ? (
+          <ModifyFoundPet id={id} setOpen={setOpen} />
+        ) : null}
+        {option === 'Adoption' ? (
+          <ModifyAdoptionPet id={id} setOpen={setOpen} />
+        ) : null}
+        {option === 'User' ? <ModifyUser id={id} setOpen={setOpen} /> : null}
       </Dialog>
     </div>
   );

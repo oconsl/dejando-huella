@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import MatchPet from '../../components/MatchPet/MatchPet';
 import MatchPetSkeleton from '../../components/MatchPet/utils/MatchPetSkeleton';
 import { fetchMatchPetsData } from '../../services';
+import AddPet from '../../components/AddPet/AddPet';
 
 const MatchPets = () => {
   const [page, setPage] = useState(1);
@@ -47,6 +48,12 @@ const MatchPets = () => {
 
   return (
     <>
+      <Box sx={{display: 'flex', justifyContent: 'space-around'}}>
+        <h1>MATCH PETS</h1>
+        <div>
+          <AddPet option={'*AddMatch'}/>
+        </div>
+      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -62,7 +69,7 @@ const MatchPets = () => {
               }
 
               return (
-                <>
+                <Fragment key={index}>
                   <MatchPet
                     testimonyData={item}
                     key={index}
@@ -73,18 +80,18 @@ const MatchPets = () => {
                       <MatchPetSkeleton key={subIndex} flexVariant={content} />
                     );
                   })}
-                </>
+                </Fragment>
               );
             }
 
             return (
-              <>
+              <Fragment key={index}>
                 <MatchPet
                   testimonyData={item}
                   key={index}
                   flexVariant={index === 0 || index === 1}
                 />
-              </>
+              </Fragment>
             );
           })
         ) : (

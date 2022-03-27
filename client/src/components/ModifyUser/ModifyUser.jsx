@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 //MATERIAL UI
 import {
   Box,
@@ -17,14 +16,9 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 //MATERIAL TRANSITIONS
 import Grow from '@mui/material/Grow';
 //UTILS
-import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
-import { sendUserData } from '../../services';
+import { fetchUserDataById, loginUser, updateUserData } from '../../services';
 
-const SignUp = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [])
-
+const ModifyUser = ({ id, setOpen }) => {
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
@@ -39,12 +33,14 @@ const SignUp = () => {
     email: '',
     password: '',
   });
+  const [newPassword, setNewPassword] = useState('');
+  const [loginError, setLoginError] = useState(false);
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
 
   const handleUserDataChange = (key) => (event) => {
     setUserData({ ...userData, [key]: event.target.value });
-    
+
+    setLoginError(false);
     setError({
       firstName: '',
       lastName: '',
@@ -54,24 +50,48 @@ const SignUp = () => {
     });
   };
 
-  const handleSignUp = async (event) => {
+  const handleNewPasswordChange = (event) => {
+    setNewPassword(event.target.value);
+
+    setLoginError(false);
+    setError({
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      password: '',
+    });
+  }
+
+  const handleUpdate = async (event) => {
     event.preventDefault();
-    
-    const status = await sendUserData({ userData, setError });
 
-    if(status === 200) {
-      setSuccess(true);
+    const response = await loginUser({ userData, setError: setLoginError });
 
-      setTimeout(() => {
-        setSuccess(false);  
-        navigate('/login');
-      }, 3000);
+    if(!loginError){
+      if(typeof response === 'string'){
+        if(newPassword !== '') userData.password = newPassword;
+
+        const status = await updateUserData({ userData, setError, id });
+        
+        if(status === 200) {
+          setSuccess(true);
+
+          setTimeout(() => {
+            setSuccess(false);            
+            setOpen(false);
+          }, 3000);
+        }
+      }
     }
   };
 
+  useEffect(() => {
+    fetchUserDataById({ setUserData, id });
+  }, [id]);
+
   return (
     <>
-      <HeaderLandingPage />
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
         {!success && (
@@ -87,11 +107,11 @@ const SignUp = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component='h1' variant='h5'>
-              Sign up
+              Modify
             </Typography>
             <Box
               component='form'
-              onSubmit={handleSignUp}
+              onSubmit={handleUpdate}
               sx={{ mt: 3 }}
               required
             >
@@ -100,6 +120,7 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
+                    value={userData.firstName}
                     error={error.firstName !== ''}
                     name='firstName'
                     label='First Name'
@@ -113,65 +134,71 @@ const SignUp = () => {
                   <TextField
                     required
                     fullWidth
+                    value={userData.lastName}
                     error={error.lastName !== ''}
                     id='lastName'
                     label='Last Name'
                     name='lastName'
                     autoComplete='family-name'
                     onChange={handleUserDataChange('lastName')}
-                    inputProps={{
-                      inputMode: 'text',
-                      pattern: '^[a-zA-Z\\s]+$',
-                    }}
                     helperText={error.lastName}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    required
-                    error={error.username !== ''}
+                    value={userData.username}
                     fullWidth
+                    disabled
                     id='username'
                     label='User Name'
                     name='username'
-                    autoComplete='family-name'
                     onChange={handleUserDataChange('username')}
                     inputProps={{
-                      inputMode: 'text',
-                      pattern: '^[a-zA-Z0-9]+$',
+                      readOnly: true,
                     }}
-                    helperText={error.username}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    required
-                    error={error.email !== ''}
+                    value={userData.email}
+                    disabled
                     fullWidth
                     id='email'
                     label='Email Address'
                     name='email'
-                    autoComplete='email'
                     onChange={handleUserDataChange('email')}
                     inputProps={{
-                      inputMode: 'text',
-                      pattern: '^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$',
+                      readOnly: true,
                     }}
-                    helperText={error.email === '' ? 'example@test.com' : error.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
-                    error={error.password !== ''}
-                    name='password'
-                    label='Password'
+                    error={loginError}
+                    label='Current password'
                     type='password'
                     id='password'
-                    autoComplete='new-password'
+                    autoComplete='password'
                     onChange={handleUserDataChange('password')}
-                    helperText={error.password}
+                    helperText={loginError ? 'Wrong password.' : null}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    error={error.password !== ''}
+                    label='New password'
+                    type='newPassword'
+                    id='newPassword'
+                    autoComplete='new-password'
+                    onChange={handleNewPasswordChange}
+                    helperText={
+                      error.password === ''
+                        ? 'Only fill this field if you want a new password.'
+                        : error.password
+                    }
                   />
                 </Grid>
               </Grid>
@@ -181,7 +208,7 @@ const SignUp = () => {
                 variant='contained'
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Modify
               </Button>
             </Box>
           </Box>
@@ -198,7 +225,7 @@ const SignUp = () => {
               }}
             >
               <Typography sx={{ fontWeight: 'bold', fontSize: '1.5em', mb: 4 }}>
-                Signed Up Successfully
+                User modified successfully!
               </Typography>
               <CheckCircleIcon sx={{ color: 'green', transform: 'scale(3)' }} />
             </Box>
@@ -209,4 +236,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ModifyUser;

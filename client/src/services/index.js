@@ -18,6 +18,7 @@ export const loginUser = async ({ userData, setError }) => {
     .then((res) => res.data)
     .catch((err) => {
       if (err.response.status === 401) {
+        console.log('err');
         setError(true);
       }
     });
@@ -25,17 +26,11 @@ export const loginUser = async ({ userData, setError }) => {
   return res;
 };
 
-export const sendUserData = async ({ userData, setSuccess, setError }) => {
-  await axios
+export const sendUserData = async ({ userData, setError }) => {
+  const res = await axios
     .post(`${process.env.REACT_APP_API_URL}/api/users/signup`, userData)
     .then((res) => {
-      if (res.status === 200) {
-        setSuccess(true);
-
-        setTimeout(() => {
-          setSuccess(false);
-        }, 5000);
-      }
+      return res.status;
     })
     .catch((err) => {
       if (err.response.status === 403) {
@@ -57,6 +52,8 @@ export const sendUserData = async ({ userData, setSuccess, setError }) => {
               username: 'Username already in use.',
               email: '',
             });
+            break;
+          default:
             break;
         }
       } else if (err.response.status === 400) {
@@ -88,15 +85,20 @@ export const sendUserData = async ({ userData, setSuccess, setError }) => {
               email: '',
             });
             break;
+          default:
+            break;
         }
       }
     });
+
+  return res;
 };
 
 export const fetchUserData = async ({ setUserData, username }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/users?username=${username}`
   );
+
   setUserData({
     firstName: res.data[0].firstName,
     lastName: res.data[0].lastName,
@@ -106,12 +108,84 @@ export const fetchUserData = async ({ setUserData, username }) => {
   });
 };
 
-export const updateUserData = async ({ newUserData, id }) => {
-  const res = await axios.put(
-    `${process.env.REACT_APP_API_URL}/api/users/${id}`,
-    newUserData
+export const fetchUserDataById = async ({ setUserData, id }) => {
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/users?_id=${id}`
   );
-  return res.data;
+
+  setUserData({
+    firstName: res.data[0].firstName,
+    lastName: res.data[0].lastName,
+    email: res.data[0].email,
+    username: res.data[0].username,
+  });
+};
+
+export const updateUserData = async ({ userData, setError, id }) => {
+  const res = await axios
+    .put(`${process.env.REACT_APP_API_URL}/api/users/${id}`, userData)
+    .then((res) => {
+      return res.status;
+    })
+    .catch((err) => {
+      if (err.response.status === 403) {
+        switch (err.response.data[0]) {
+          case 'email':
+            setError({
+              firstName: '',
+              lastName: '',
+              password: '',
+              username: '',
+              email: 'Email already in use.',
+            });
+            break;
+          case 'username':
+            setError({
+              firstName: '',
+              lastName: '',
+              password: '',
+              username: 'Username already in use.',
+              email: '',
+            });
+            break;
+          default:
+            break;
+        }
+      } else if (err.response.status === 400) {
+        switch (err.response.data.split('. ')[1].replace('.', '')) {
+          case 'firstName':
+            setError({
+              firstName: 'Only letters and spaces are allowed.',
+              lastName: '',
+              password: '',
+              username: '',
+              email: '',
+            });
+            break;
+          case 'lastName':
+            setError({
+              firstName: '',
+              lastName: 'Only letters and spaces are allowed.',
+              password: '',
+              username: '',
+              email: '',
+            });
+            break;
+          case 'password':
+            setError({
+              firstName: '',
+              lastName: '',
+              password: 'Password must have {8} to {16} characters.',
+              username: '',
+              email: '',
+            });
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  return res;
 };
 
 export const deleteUserData = async ({ id }) => {
@@ -128,9 +202,7 @@ export const sendMatchPetData = async ({ matchPetData }) => {
     url: `${process.env.REACT_APP_API_URL}/api/match-pets`,
     data: matchPetData,
     headers: { 'Content-Type': 'multipart/form-data' },
-  });
-
-  return res.data;
+  }).finally(() => window.location.reload());
 };
 
 export const fetchMatchPetsData = async ({ setMatchPets }) => {
@@ -172,13 +244,18 @@ export const sendLostPetData = async ({ lostPetData }) => {
     url: `${process.env.REACT_APP_API_URL}/api/lost-pets`,
     data: lostPetData,
     headers: { 'Content-Type': 'multipart/form-data' },
-  });
-
-  return res.data;
+  }).finally(() => window.location.reload());
 };
 
 export const fetchLostPetsData = async ({ setLostPets }) => {
   const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/lost-pets`);
+  setLostPets(res.data);
+};
+
+export const fetchFilterLostPetsData = async ({ query, setLostPets }) => {
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/lost-pets?${query}`
+  );
   setLostPets(res.data);
 };
 
@@ -218,9 +295,7 @@ export const sendFoundPetData = async ({ foundPetData }) => {
     url: `${process.env.REACT_APP_API_URL}/api/found-pets`,
     data: foundPetData,
     headers: { 'Content-Type': 'multipart/form-data' },
-  });
-
-  return res.data;
+  }).finally(() => window.location.reload());
 };
 
 export const fetchFoundPetsData = async ({ setFoundPets }) => {
@@ -269,14 +344,22 @@ export const sendAdoptionPetData = async ({ adoptionPetData }) => {
     url: `${process.env.REACT_APP_API_URL}/api/adoption-pets`,
     data: adoptionPetData,
     headers: { 'Content-Type': 'multipart/form-data' },
-  });
-
-  return res.data;
+  }).finally(() => window.location.reload());
 };
 
 export const fetchAdoptionPetsData = async ({ setAdoptionPets }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/adoption-pets`
+  );
+  setAdoptionPets(res.data);
+};
+
+export const fetchFilterAdoptionPetsData = async ({
+  query,
+  setAdoptionPets,
+}) => {
+  const res = await axios.get(
+    `${process.env.REACT_APP_API_URL}/api/adoption-pets?${query}`
   );
   setAdoptionPets(res.data);
 };
