@@ -50,19 +50,19 @@ const Login = ({ setToken }) => {
   const handleLogIn = async (event) => {
     event.preventDefault();
 
-    const response = await loginUser({ userData, setError }).finally(() => {
-      if(!error){
-        if(typeof response === 'string') setToken(response, userData.username);
-        navigate('/');
-      }
-    });
+    const response = await loginUser({ userData, setError });
+    
+    if (!error && response) {
+      if (typeof response === 'string') setToken(response, userData.username);
+      navigate('/');
+    }
   };
 
   return (
     <>
       <HeaderLandingPage />
       <Container component='main' maxWidth='xs' sx={styles.container}>
-        <CssBaseline/>
+        <CssBaseline />
         <Box
           component='form'
           sx={styles.box}
@@ -75,7 +75,12 @@ const Login = ({ setToken }) => {
           <Typography component='h1' variant='h5'>
             Log in
           </Typography>
-          <FormControl sx={styles.formControl_username} fullWidth variant='outlined' required>
+          <FormControl
+            sx={styles.formControl_username}
+            fullWidth
+            variant='outlined'
+            required
+          >
             <InputLabel htmlFor='username-component' error={error}>
               Username
             </InputLabel>
@@ -92,7 +97,12 @@ const Login = ({ setToken }) => {
               }}
             />
           </FormControl>
-          <FormControl sx={styles.formControl_password} fullWidth variant='outlined' required>
+          <FormControl
+            sx={styles.formControl_password}
+            fullWidth
+            variant='outlined'
+            required
+          >
             <InputLabel htmlFor='password-component-password' error={error}>
               Password
             </InputLabel>
