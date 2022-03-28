@@ -225,6 +225,7 @@ const Profile = () => {
         }}
       >
         <DataGrid
+          sx={{bgcolor: 'white'}}
           rows={data}
           columns={columns}
           pageSize={5}

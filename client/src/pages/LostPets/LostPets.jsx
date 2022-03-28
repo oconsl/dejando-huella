@@ -118,7 +118,7 @@ const LostPets = () => {
               <Fragment key={index}>
                 <CardsPet
                   key={index}
-                  tile={item.petName}
+                  title={item.petName}
                   description={item.date + ' - \n' + item.description}
                   button={'More Details'}
                   img_src={item.imageURL}

@@ -33,12 +33,15 @@ const DialogFS = ({ setOpen, option, id }) => {
   };
 
   return (
-    <div>
+    <>
       <Dialog
         fullScreen
         open={true}
         onClose={handleClose}
         TransitionComponent={Transition}
+        PaperProps={{
+          style: styles.dialog,
+        }}
       >
         <AppBar sx={styles.appBar}>
           <Toolbar>
@@ -47,6 +50,7 @@ const DialogFS = ({ setOpen, option, id }) => {
               color='inherit'
               onClick={handleClose}
               aria-label='close'
+              sx={styles.close}
             >
               <CloseIcon />
             </IconButton>
@@ -75,7 +79,7 @@ const DialogFS = ({ setOpen, option, id }) => {
         ) : null}
         {option === 'User' ? <ModifyUser id={id} setOpen={setOpen} /> : null}
       </Dialog>
-    </div>
+    </>
   );
 };
 

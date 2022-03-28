@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from 'react';
 // ROUTER
 import { useNavigate } from 'react-router-dom';
 // MATERIAL UI
-import { Box, Pagination } from '@mui/material';
+import { Box, Pagination, CssBaseline } from '@mui/material';
 // COMPONENTS
 import MatchPet from '../../components/MatchPet/MatchPet';
 import MatchPetSkeleton from '../../components/MatchPet/utils/MatchPetSkeleton';
@@ -52,6 +52,7 @@ const MatchPets = () => {
 
   return (
     <>
+      <CssBaseline/>
       <Box sx={styles.box_title}>
         <h1>TESTIMONIALS</h1>
         <div>

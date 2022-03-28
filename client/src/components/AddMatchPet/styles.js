@@ -1,22 +1,40 @@
 const styles = {
-  container: { display: 'flex' },
+  container: {
+    display: 'flex',
+    width: '100%',
+  },
   box_container: {
     marginTop: 4,
     display: 'flex',
-    marginRight: 8,
     flex: 2,
+    mx: 50,
+    px: 3,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    bgcolor: 'rgba(255,255,255,0.7)',
+    boxShadow: '0px 0px 5px 1px rgba(54,54,54,0.55)',
+    borderRadius: '1em',
   },
   div: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '20px',
   },
-  avatar: { m: 1, backgroundColor: 'blue' },
-  box_form: { mt: 3 },
+  avatar: { m: 1, width: '3vw' },
+  box_form: { mt: 5, display: 'flex' },
+  box_formLeft: {
+    flex: 1,
+    mr: 4,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  box_formRight: { flex: 1 },
   box_image: {
-    marginTop: 4,
     display: 'flex',
     flex: 3,
     flexDirection: 'column',
@@ -25,7 +43,19 @@ const styles = {
   textField: { mt: 2 },
   card: { maxHeight: 450, margin: 'auto' },
   cardMedia: { backgroundColor: 'grey', objectFit: 'contain' },
-  button: { mt: 3, mb: 2 },
+  button: {
+    'width': '100%',
+    'bgcolor': '#705ebb',
+    'py': 1,
+    'my': 2,
+    'border': '2px solid white',
+    '&:hover': {
+      bgcolor: 'white',
+      border: '2px solid black',
+      color: '#705ebb',
+    },
+  },
+  img: { width: '100%' },
 };
 
 export default styles;
