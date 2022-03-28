@@ -92,7 +92,8 @@ const LostPets = () => {
                   <CardsPet
                     key={index}
                     title={item.petName}
-                    description={item.date + ' - \n' + item.description}
+                    description={item.description}
+                    date={item.date}
                     button={'More Details'}
                     img_src={item.imageURL}
                     filter={item.filter}
@@ -119,7 +120,8 @@ const LostPets = () => {
                 <CardsPet
                   key={index}
                   title={item.petName}
-                  description={item.date + ' - \n' + item.description}
+                  description={item.description}
+                  date={item.date}
                   button={'More Details'}
                   img_src={item.imageURL}
                   filter={item.filter}

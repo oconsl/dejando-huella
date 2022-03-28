@@ -33,19 +33,19 @@ const CardsPet = (props) => {
         closeImg={handleCloseImage}
         img_src={props.img_src}
       />
-      <CardActionArea onClick={handleOpenImage}>
-        <CardMedia component="img" height="140" image={props.img_src} alt="" />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+      <CardActionArea onClick={handleOpenImage} sx={styles.cardActionArea}>
+        <CardMedia component="img" image={props.img_src} alt="" sx={styles.cardMedia} />
+      </CardActionArea>  
+        <CardContent sx={styles.cardContent}>
+          <Typography gutterBottom variant="h5" component="div" color='black'>
             {props.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2"  color='black' sx={styles.typography_description}>
             {props.description}
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={handleOpen}>
+      <CardActions sx={styles.cardActionArea}>
+        <Button size="medium" onClick={handleOpen} variant='contained' sx={styles.button}>
           {props.button}
         </Button>
         <Modal
@@ -53,6 +53,7 @@ const CardsPet = (props) => {
           close={handleClose}
           title={props.title}
           description={props.description}
+          date={props.date}
           img_src={props.img_src}
           filter={props.filter}
           addressRoad={props.addressRoad}

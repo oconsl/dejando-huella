@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // MATERIAL UI
-import { Button, Container, TextField, Autocomplete } from '@mui/material';
+import { Button, Container, TextField, Autocomplete, Box } from '@mui/material';
 // MATERIAL ICONS
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 // INPUT DATA
@@ -72,175 +72,192 @@ const Filter = (props) => {
   };
 
   return (
-    <Container maxWidth='lg' sx={styles.container}>
-      <Autocomplete
-        disablePortal
-        id='specie'
-        options={specieOption}
-        onChange={(event, value) => setSpecie(value)}
-        sx={styles.autocomplete_specie}
-        renderInput={(params) => <TextField {...params} label='Specie' />}
-      />
-
-      {!specie && (
+    <Container maxWidth="lg" sx={styles.container}>
+      <Box sx={styles.box}>
         <Autocomplete
           disablePortal
-          id='breed'
-          options={[]}
-          onChange={(event, value) => setBreed(value)}
-          sx={styles.autocomplete_breed}
-          renderInput={(params) => <TextField {...params} label='Breed' />}
+          id="specie"
+          options={specieOption}
+          onChange={(event, value) => setSpecie(value)}
+          sx={styles.autocomplete_specie}
+          renderInput={(params) => <TextField {...params} label="Specie" />}
         />
-      )}
 
-      {specie === 'Cat' && (
-        <Autocomplete
-          disablePortal
-          id='cat-breed'
-          options={catBreeds}
-          onChange={(event, value) => setBreed(value)}
-          sx={styles.autocomplete_catBreed}
-          renderInput={(params) => <TextField {...params} label='Breed' />}
-        />
-      )}
-
-      {specie === 'Dog' && (
-        <Autocomplete
-          disablePortal
-          id='dog-breed'
-          options={dogBreeds}
-          onChange={(event, value) => setBreed(value)}
-          sx={styles.autocomplete_dogBreed}
-          renderInput={(params) => <TextField {...params} label='Breed' />}
-        />
-      )}
-
-      <Autocomplete
-        disablePortal
-        id='color'
-        options={colorOptions}
-        onChange={(event, value) => setColor(value)}
-        sx={styles.autocomplete_color}
-        renderInput={(params) => <TextField {...params} label='Color' />}
-      />
-      <Autocomplete
-        disablePortal
-        id='sex'
-        options={sexOptions}
-        onChange={(event, value) => setSex(value)}
-        sx={styles.autocomplete_sex}
-        renderInput={(params) => <TextField {...params} label='Sex' />}
-      />
-      <Autocomplete
-        disablePortal
-        id='Size'
-        options={sizeOptions}
-        onChange={(event, value) => setSize(value)}
-        sx={styles.autocomplete_size}
-        renderInput={(params) => <TextField {...params} label='Size' />}
-      />
-
-      {!specie && (
-        <Autocomplete
-          disablePortal
-          id='age'
-          options={[]}
-          onChange={(event, value) => setAge(value)}
-          sx={styles.autocomplete_age}
-          renderInput={(params) => <TextField {...params} label='Age' />}
-        />
-      )}
-
-      {specie === 'Cat' && (
-        <Autocomplete
-          disablePortal
-          id='age'
-          options={ageCatOptions}
-          onChange={(event, value) => setAge(value)}
-          sx={styles.autocomplete_age}
-          renderInput={(params) => <TextField {...params} label='Age' />}
-        />
-      )}
-
-      {specie === 'Dog' && (
-        <Autocomplete
-          disablePortal
-          id='age'
-          options={ageDogOptions}
-          onChange={(event, value) => setAge(value)}
-          sx={styles.autocomplete_age}
-          renderInput={(params) => <TextField {...params} label='Age' />}
-        />
-      )}
-
-      <Autocomplete
-        disablePortal
-        id='fur'
-        options={furOptions}
-        onChange={(event, value) => setFur(value)}
-        sx={styles.autocomplete_fur}
-        renderInput={(params) => <TextField {...params} label='Fur' />}
-      />
-
-      {props.page === 'adoption-pets' && (
-        <>
+        {!specie && (
           <Autocomplete
             disablePortal
-            id='sterilized'
-            options={['Yes', 'No']}
-            onChange={(event, value) => {
-              if (value === 'Yes') {
-                setSterilized(true);
-              } else if (value === 'No') {
-                setSterilized(false);
-              } else {
-                setSterilized(null);
-              }
-            }}
-            sx={styles.autocomplete_sterilized}
-            renderInput={(params) => (
-              <TextField {...params} label='Sterilized' />
+            id="breed"
+            options={[]}
+            onChange={(event, value) => setBreed(value)}
+            sx={styles.autocomplete_breed}
+            renderInput={(params) => <TextField {...params} label="Breed" />}
+          />
+        )}
+
+        {specie === 'Cat' && (
+          <Autocomplete
+            disablePortal
+            id="cat-breed"
+            options={catBreeds}
+            onChange={(event, value) => setBreed(value)}
+            sx={styles.autocomplete_catBreed}
+            renderInput={(params) => <TextField {...params} label="Breed" />}
+          />
+        )}
+
+        {specie === 'Dog' && (
+          <Autocomplete
+            disablePortal
+            id="dog-breed"
+            options={dogBreeds}
+            onChange={(event, value) => setBreed(value)}
+            sx={styles.autocomplete_dogBreed}
+            renderInput={(params) => <TextField {...params} label="Breed" />}
+          />
+        )}
+
+        <Autocomplete
+          disablePortal
+          id="color"
+          options={colorOptions}
+          onChange={(event, value) => setColor(value)}
+          sx={styles.autocomplete_color}
+          renderInput={(params) => <TextField {...params} label="Color" />}
+        />
+        <Autocomplete
+          disablePortal
+          id="sex"
+          options={sexOptions}
+          onChange={(event, value) => setSex(value)}
+          sx={styles.autocomplete_sex}
+          renderInput={(params) => <TextField {...params} label="Sex" />}
+        />
+
+        {!specie && (
+          <Autocomplete
+            disablePortal
+            id="age"
+            options={[]}
+            onChange={(event, value) => setAge(value)}
+            sx={styles.autocomplete_age}
+            renderInput={(params) => <TextField {...params} label="Age" />}
+          />
+        )}
+
+        {specie === 'Cat' && (
+          <Autocomplete
+            disablePortal
+            id="age"
+            options={ageCatOptions}
+            onChange={(event, value) => setAge(value)}
+            sx={styles.autocomplete_age}
+            renderInput={(params) => <TextField {...params} label="Age" />}
+          />
+        )}
+
+        {specie === 'Dog' && (
+          <Autocomplete
+            disablePortal
+            id="age"
+            options={ageDogOptions}
+            onChange={(event, value) => setAge(value)}
+            sx={styles.autocomplete_age}
+            renderInput={(params) => <TextField {...params} label="Age" />}
+          />
+        )}
+
+        <Autocomplete
+          disablePortal
+          id="fur"
+          options={furOptions}
+          onChange={(event, value) => setFur(value)}
+          sx={styles.autocomplete_fur}
+          renderInput={(params) => <TextField {...params} label="Fur" />}
+        />
+
+        {specie === 'Dog' && props.page !== 'adoption-pets' && (
+          <Autocomplete
+            disablePortal
+            id="Size"
+            options={sizeOptions}
+            onChange={(event, value) => setSize(value)}
+            sx={styles.autocomplete_size}
+            renderInput={(params) => <TextField {...params} label="Size" />}
+          />
+        )}
+
+        {props.page === 'adoption-pets' && (
+          <Box sx={styles.box_adoption}>
+            {specie === 'Dog' && (
+              <Autocomplete
+                disablePortal
+                id="Size"
+                options={sizeOptions}
+                onChange={(event, value) => setSize(value)}
+                sx={styles.autocomplete_size}
+                renderInput={(params) => <TextField {...params} label="Size" />}
+              />
             )}
-          />
-          <Autocomplete
-            disablePortal
-            id='dewormed'
-            options={['Yes', 'No']}
-            onChange={(event, value) => {
-              if (value === 'Yes') {
-                setDewormed(true);
-              } else if (value === 'No') {
-                setDewormed(false);
-              } else {
-                setDewormed(null);
-              }
-            }}
-            sx={styles.autocomplete_dewormed}
-            renderInput={(params) => <TextField {...params} label='Dewormed' />}
-          />
-          <Autocomplete
-            disablePortal
-            id='vaccinated'
-            options={['Yes', 'No']}
-            onChange={(event, value) => {
-              if (value === 'Yes') {
-                setVaccinated(true);
-              } else if (value === 'No') {
-                setVaccinated(false);
-              } else {
-                setVaccinated(null);
-              }
-            }}
-            sx={styles.autocomplete_vaccinated}
-            renderInput={(params) => (
-              <TextField {...params} label='Vaccinated' />
-            )}
-          />
-        </>
-      )}
+            <Autocomplete
+              disablePortal
+              id="sterilized"
+              options={['Yes', 'No']}
+              onChange={(event, value) => {
+                if (value === 'Yes') {
+                  setSterilized(true);
+                } else if (value === 'No') {
+                  setSterilized(false);
+                } else {
+                  setSterilized(null);
+                }
+              }}
+              sx={styles.autocomplete_sterilized}
+              renderInput={(params) => (
+                <TextField {...params} label="Sterilized" />
+              )}
+            />
+            <Autocomplete
+              disablePortal
+              id="dewormed"
+              options={['Yes', 'No']}
+              onChange={(event, value) => {
+                if (value === 'Yes') {
+                  setDewormed(true);
+                } else if (value === 'No') {
+                  setDewormed(false);
+                } else {
+                  setDewormed(null);
+                }
+              }}
+              sx={styles.autocomplete_dewormed}
+              renderInput={(params) => (
+                <TextField {...params} label="Dewormed" />
+              )}
+            />
+            <Autocomplete
+              disablePortal
+              id="vaccinated"
+              options={['Yes', 'No']}
+              onChange={(event, value) => {
+                if (value === 'Yes') {
+                  setVaccinated(true);
+                } else if (value === 'No') {
+                  setVaccinated(false);
+                } else {
+                  setVaccinated(null);
+                }
+              }}
+              sx={styles.autocomplete_vaccinated}
+              renderInput={(params) => (
+                <TextField {...params} label="Vaccinated" />
+              )}
+            />
+          </Box>
+        )}
+      </Box>
 
       <Button
-        variant='contained'
+        variant="contained"
         endIcon={<FilterAltIcon />}
         sx={styles.button}
         onClick={() => {

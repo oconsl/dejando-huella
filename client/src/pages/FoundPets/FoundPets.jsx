@@ -91,7 +91,8 @@ const FoundPets = () => {
                 <Fragment key={index}>
                   <CardsPet
                     key={index}
-                    description={item.date + ' - \n' + item.description}
+                    description={item.description}
+                    date={item.date}
                     button={'More Details'}
                     img_src={item.imageURL}
                     filter={item.filter}
@@ -117,7 +118,8 @@ const FoundPets = () => {
               <Fragment key={index}>
                 <CardsPet
                   key={index}
-                  description={item.date + ' - \n' + item.description}
+                  description={item.description}
+                  date={item.date}
                   button={'More Details'}
                   img_src={item.imageURL}
                   filter={item.filter}
