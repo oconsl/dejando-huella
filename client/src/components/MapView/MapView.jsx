@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogActions,
   DialogTitle,
-} from '@mui/material/Box';
+} from '@mui/material';
 // MATERIAL ICONS
 import CloseIcon from '@mui/icons-material/Close';
 // LEAFLET

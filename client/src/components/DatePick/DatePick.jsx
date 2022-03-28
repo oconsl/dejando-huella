@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 // MATERIAL UI
 import { TextField } from '@mui/material';
 // MATERIAL LAB
-import { AdapterDateFns, LocalizationProvider, DatePicker } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { LocalizationProvider, DatePicker } from '@mui/lab';
 // UTIL
 import stringToDate from '../../utils/stringToDate';
 

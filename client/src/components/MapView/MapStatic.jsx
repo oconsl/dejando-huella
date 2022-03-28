@@ -3,7 +3,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import { Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 // MATERIAL UI
-import { Box, IconButton, DialogContent } from '@mui/material/Box';
+import { Box, IconButton, DialogContent } from '@mui/material';
 // MATERIAL ICONS
 import CloseIcon from '@mui/icons-material/Close';
 // UTILS

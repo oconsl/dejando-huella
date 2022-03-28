@@ -3,7 +3,7 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 // STYLES
 import styles from './styles';
 
-const MatchPet = ({ testimonyData, flexVariant }) => {
+const MatchPet = ({ testimonyData }) => {
   return (
     <Card sx={styles.card}>
       <CardContent sx={styles.cardContent}>

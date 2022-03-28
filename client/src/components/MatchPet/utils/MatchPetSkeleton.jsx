@@ -9,7 +9,7 @@ import {
 // STYLES
 import styles from './styles';
 
-const MatchPetSkeleton = ({ flexVariant }) => {
+const MatchPetSkeleton = () => {
   return (
     <Card sx={styles.card}>
       <CardContent sx={styles.cardContent}>

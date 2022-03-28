@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from '@mui/material/Button';
+} from '@mui/material';
 // SERVICES
 import { deleteUserData } from '../../services';
 // HOOKS

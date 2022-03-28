@@ -4,7 +4,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: !flexVariant ? 'row-reverse' : 'row',
+    flexDirection: !true ? 'row-reverse' : 'row',
   },
   skeleton_main: { height: 350, width: 350 },
   cardContent_text: { textAlign: 'center' },
