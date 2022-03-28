@@ -1,5 +1,6 @@
-import * as React from 'react';
+// MATERIAL UI
 import { CircularProgress, Box } from '@mui/material';
+// STYLES
 import styles from './styles';
 
 const Progress = () => {

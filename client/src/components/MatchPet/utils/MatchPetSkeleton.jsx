@@ -1,23 +1,24 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Skeleton from '@mui/material/Skeleton';
+// MATERIAL UI
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Skeleton,
+} from '@mui/material';
+// STYLES
+import styles from './styles';
 
 const MatchPetSkeleton = ({ flexVariant }) => {
   return (
-    <Card sx={{ maxWidth: 800, margin: '0.5em' }}>
-      <CardContent
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: !flexVariant ? 'row-reverse' : 'row',
-        }}
-      >
-        <Skeleton sx={{ height: 350, width:350 }} animation="wave" variant="rectangular" />
-        <CardContent sx={{ textAlign: 'center' }}>
+    <Card sx={styles.card}>
+      <CardContent sx={styles.cardContent}>
+        <Skeleton
+          sx={styles.skeleton_main}
+          animation='wave'
+          variant='rectangular'
+        />
+        <CardContent sx={styles.cardContent_text}>
           <Typography gutterBottom variant='h5' component='div'>
             {
               <>
@@ -25,7 +26,7 @@ const MatchPetSkeleton = ({ flexVariant }) => {
                   animation='wave'
                   height={50}
                   width={250}
-                  style={{ marginBottom: 6}}
+                  sx={styles.skeleton_sub}
                 />
               </>
             }
@@ -37,19 +38,19 @@ const MatchPetSkeleton = ({ flexVariant }) => {
                   animation='wave'
                   height={10}
                   width={380}
-                  style={{ marginBottom: 6 }}
+                  sx={styles.skeleton_sub}
                 />
                 <Skeleton
                   animation='wave'
                   height={10}
                   width={270}
-                  style={{ marginBottom: 6 }}
+                  sx={styles.skeleton_sub}
                 />
                 <Skeleton
                   animation='wave'
                   height={10}
                   width={290}
-                  style={{ marginBottom: 6 }}
+                  sx={styles.skeleton_sub}
                 />
                 <Skeleton animation='wave' height={10} width='70%' />
               </>

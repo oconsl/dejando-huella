@@ -1,6 +1,7 @@
 import { useState } from 'react';
+// ROUTER
 import { useNavigate } from 'react-router-dom';
-//MATERIAL UI
+// MATERIAL UI
 import {
   Box,
   Avatar,
@@ -15,14 +16,17 @@ import {
   IconButton,
   CssBaseline,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-//UTILS
-import PropTypes from 'prop-types';
-import { loginUser } from '../../services';
+// COMPONENTS
 import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
+// UTILS
+import PropTypes from 'prop-types';
+// SERVICES
+import { loginUser } from '../../services';
+// STYLES
 import styles from './styles';
 
 const Login = ({ setToken }) => {

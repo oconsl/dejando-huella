@@ -1,22 +1,27 @@
 import { forwardRef } from 'react';
-import Typography from '@mui/material/Typography';
-import Dialog from '@mui/material/Dialog';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+// MATERIAL UI
+import {
+  Typography,
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Slide,
+} from '@mui/material';
+// MATERIAL ICONS
 import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-import styles from './styles';
 // COMPONENTS
 import AddMatchPet from '../AddMatchPet/AddMatchPet';
 import AddLostPet from '../AddLostPet/AddLostPet';
 import AddFoundPet from '../AddFoundPet/AddFoundPet';
 import AddAdoptionPet from '../AddAdoptionPet/AddAdoptionPet';
-import ModifyMatchPet from '../../components/ModifyMatchPet/ModifyMatchPet';
-import ModifyLostPet from '../../components/ModifyLostPet/ModifyLostPet';
-import ModifyFoundPet from '../../components/ModifyFoundPet/ModifyFoundPet';
-import ModifyAdoptionPet from '../../components/ModifyAdoptionPet/ModifyAdoptionPet';
+import ModifyMatchPet from '../ModifyMatchPet/ModifyMatchPet';
+import ModifyLostPet from '../ModifyLostPet/ModifyLostPet';
+import ModifyFoundPet from '../ModifyFoundPet/ModifyFoundPet';
+import ModifyAdoptionPet from '../ModifyAdoptionPet/ModifyAdoptionPet';
 import ModifyUser from '../ModifyUser/ModifyUser';
+//STYLES
+import styles from './styles';
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;

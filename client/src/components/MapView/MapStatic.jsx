@@ -1,12 +1,14 @@
-import React from 'react';
+// LEAFLET
 import { MapContainer, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import Box from '@mui/material/Box';
-import LocationIcon from './utils/LocationIcon';
-import DialogContent from '@mui/material/DialogContent';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import { Marker } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+// MATERIAL UI
+import { Box, IconButton, DialogContent } from '@mui/material/Box';
+// MATERIAL ICONS
+import CloseIcon from '@mui/icons-material/Close';
+// UTILS
+import LocationIcon from './utils/LocationIcon';
+// STYLES
 import styles from './styles';
 
 const MapView = ({ position, closeMap }) => {
@@ -27,9 +29,7 @@ const MapView = ({ position, closeMap }) => {
         >
           <CloseIcon />
         </IconButton> */}
-        <Box
-          sx={styles.box}
-        >
+        <Box sx={styles.box}>
           <MapContainer
             center={position}
             zoom={zoom}

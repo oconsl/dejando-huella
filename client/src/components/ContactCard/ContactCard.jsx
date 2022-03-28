@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActions, IconButton } from '@mui/material';
+import { useEffect, useState } from 'react';
+// MATERIAL UI
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Typography,
+  IconButton,
+} from '@mui/material';
+// MATERIAL ICONS
 import GitHubIcon from '@mui/icons-material/GitHub';
+// SERVICES
 import { fetchGithubData } from '../../services';
+// STYLES
 import styles from './styles';
 
-const ContactCard = ({user}) => {
+const ContactCard = ({ user }) => {
   const [userData, setUserData] = useState({
     avatar: '',
     name: '',
@@ -18,26 +25,26 @@ const ContactCard = ({user}) => {
 
   const handleClick = () => {
     window.open(userData.url, '_blank');
-  }
+  };
 
   useEffect(() => {
-    fetchGithubData({setUserData, user});
+    fetchGithubData({ setUserData, user });
   }, [user]);
 
   return (
     <Card sx={styles.card}>
       <CardContent>
         <CardMedia
-          component="img"
-          height="300"
+          component='img'
+          height='300'
           image={userData.avatar}
-          alt={userData.user}          
+          alt={userData.user}
         />
         <CardContent sx={styles.cardContent}>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant='h5' component='div'>
             {userData.name}
           </Typography>
-          <Typography variant="body2" color="text.primary">
+          <Typography variant='body2' color='text.primary'>
             {'Username: ' + userData.user}
           </Typography>
         </CardContent>

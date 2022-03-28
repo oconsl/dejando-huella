@@ -1,12 +1,15 @@
-import React from 'react';
-import { CssBaseline, Box, Container, Typography } from '@mui/material';
+import { Fragment } from 'react';
+// MATERIAL UI
+import { CssBaseline, Box, Typography } from '@mui/material';
+// COMPONENTS
 import CardsPage from '../CardsPage/CardsPage';
+// STYLES
 import './Information.css';
 import styles from './styles';
 
 const Information = () => {
   return (
-    <React.Fragment>
+    <Fragment>
       <CssBaseline />
       <Box sx={styles.container}>
         <Box sx={styles.box_title}>
@@ -73,7 +76,7 @@ const Information = () => {
           </Box>
         </Box>
       </Box>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

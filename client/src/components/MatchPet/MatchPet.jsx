@@ -1,16 +1,12 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+// MATERIAL UI
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+// STYLES
 import styles from './styles';
 
 const MatchPet = ({ testimonyData, flexVariant }) => {
   return (
     <Card sx={styles.card}>
-      <CardContent
-        sx={styles.cardContent}
-      >
+      <CardContent sx={styles.cardContent}>
         <CardMedia
           component='img'
           height='350'

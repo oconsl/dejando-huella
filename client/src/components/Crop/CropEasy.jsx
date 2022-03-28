@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
+import { useState } from 'react';
+// MATERIAL UI
+import {
+  Box,
+  Slider,
+  Button,
+  Typography,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
+// COMPONENTS
 import Cropper from 'react-easy-crop';
-import Slider from '@mui/material/Slider';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+// UTIL FUNCTIONS
 import getCroppedImg from './utils/CropImage';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
+// STYLES
 import styles from './styles';
 
 const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
@@ -31,7 +37,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
         rotation
       );
       setPhotoURL(url);
-      setFile(new File([file],"image",{type: "file"}));
+      setFile(new File([file], 'image', { type: 'file' }));
       setOpenCrop(false);
     } catch (error) {
       console.log(error);
@@ -40,10 +46,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
 
   return (
     <>
-      <DialogContent
-        dividers
-        sx={styles.dialogContent}
-      >
+      <DialogContent dividers sx={styles.dialogContent}>
         <Cropper
           image={photoURL}
           crop={crop}
@@ -57,9 +60,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
         />
       </DialogContent>
       <DialogActions sx={styles.dialogActions}>
-        <Box
-          sx={styles.box}
-        >
+        <Box sx={styles.box}>
           <Box>
             <Typography variant='overline'>
               Zoom: {zoomPercent(zoom)}

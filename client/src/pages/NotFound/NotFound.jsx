@@ -1,4 +1,4 @@
-import React from 'react'
+// COMPONENTS
 import Progress from '../../components/Progress/Progress';
 
 

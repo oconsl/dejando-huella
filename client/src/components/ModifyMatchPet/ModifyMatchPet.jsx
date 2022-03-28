@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-//MATERIAL UI
+// MATERIAL UI
 import {
   CssBaseline,
   Container,
@@ -14,15 +14,17 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
-//DEFAULT IMAGES
+// DEFAULT IMAGES
 import default_dog from '../../assets/default_dog.svg';
-//COMPONENTS
+// COMPONENTS
 import CropEasy from '../Crop/CropEasy';
-//UTIL FUNCTION
-import { fetchMatchPetData, updateMatchPetData } from '../../services';
+// UTIL FUNCTIONS
 import jsonToFormData from '../../utils/jsonToFormData';
+// SERVICES
+import { fetchMatchPetData, updateMatchPetData } from '../../services';
+// STYLES
 import styles from './styles';
 
 const ModifyMatchPet = ({ id, setOpen }) => {

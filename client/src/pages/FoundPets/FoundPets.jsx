@@ -1,13 +1,18 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment } from 'react';
+// ROUTER
 import { useNavigate } from 'react-router-dom';
-import CardsPet from '../../components/CardsPets/CardsPets';
+// MATERIAL UI
 import { Box, Container, Pagination, Typography } from '@mui/material';
-import Filter from '../../components/Filters/Filters';
-import { fetchFoundPetsData, fetchFilterFoundPetsData } from '../../services';
+// COMPONENTS
+import CardsPet from '../../components/CardsPets/CardsPets';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
 import AddPet from '../../components/AddPet/AddPet';
-import styles from './styles';
 import Progress from '../../components/Progress/Progress';
+import Filter from '../../components/Filters/Filters';
+// SERVICES
+import { fetchFoundPetsData, fetchFilterFoundPetsData } from '../../services';
+// STYLES
+import styles from './styles';
 
 const FoundPets = () => {
   const [foundPets, setFoundPets] = useState([]);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-//MATERIAL UI
+// MATERIAL UI
 import {
   CssBaseline,
   Container,
@@ -14,16 +14,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-//COMPONENTS
+// COMPONENTS
 import MapStatic from '../MapView/MapStatic';
 import CropEasy from '../Crop/CropEasy';
 import DatePick from '../DatePick/DatePick';
 import Breeds from '../FormComponents/Breeds/Breeds';
 import CustomForm from '../FormComponents/CustomForm/CustomForm';
-//INPUT DATA
+// INPUT DATA
 import {
   sizeOptions,
   sexOptions,
@@ -32,10 +32,12 @@ import {
   ageDogOptions,
   furOptions,
 } from '../../utils/petOptions';
-//UTIL FUNCTION
+// UTIL FUNCTIONS
 import formatDate from '../../utils/formatDate';
-import { fetchLostPetData, updateLostPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
+// SERVICES
+import { fetchLostPetData, updateLostPetData } from '../../services';
+// STYLES
 import styles from './styles';
 
 const ModifyLostPet = ({ id, setOpen }) => {

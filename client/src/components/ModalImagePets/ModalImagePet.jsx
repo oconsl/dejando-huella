@@ -1,6 +1,8 @@
-import React from 'react';
+// MATERIAL UI
 import { Modal, Box, Button } from '@mui/material';
+// MATERIAL ICONS
 import CloseIcon from '@mui/icons-material/Close';
+// STYLES
 import styles from './styles';
 
 const ModalImagePets = (props) => {

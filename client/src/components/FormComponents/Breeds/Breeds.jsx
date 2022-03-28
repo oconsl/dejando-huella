@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-// BREEDS
+import { useEffect, useState } from 'react';
+// MATERIAL UI
+import { Autocomplete, TextField } from '@mui/material';
+// INPUT DATA
 import { catBreeds } from '../../../utils/petBreeds';
 import { dogBreeds } from '../../../utils/petBreeds';
 

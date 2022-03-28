@@ -1,11 +1,15 @@
-import React from 'react'
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+// MATERIAL UI
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material/Button';
+// SERVICES
 import { deleteUserData } from '../../services';
+// HOOKS
 import useToken from '../../hooks/useToken';
 
 const UserDeleteDialog = ({ setOpen, id }) => {
@@ -16,7 +20,7 @@ const UserDeleteDialog = ({ setOpen, id }) => {
   };
 
   const handleDelete = () => {
-    deleteUserData({ id });    
+    deleteUserData({ id });
     logOut();
   };
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-//MATERIAL UI
+// MATERIAL UI
 import {
   CssBaseline,
   Container,
@@ -16,15 +16,15 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
-//COMPONENTS
+// COMPONENTS
 import MapStatic from '../MapView/MapStatic';
 import CropEasy from '../Crop/CropEasy';
 import Breeds from '../FormComponents/Breeds/Breeds';
 import CustomForm from '../FormComponents/CustomForm/CustomForm';
-//INPUT DATA
+// INPUT DATA
 import {
   sizeOptions,
   sexOptions,
@@ -33,10 +33,12 @@ import {
   ageDogOptions,
   furOptions,
 } from '../../utils/petOptions';
-//UTIL FUNCTION
+// UTIL FUNCTIONS
 import formatDate from '../../utils/formatDate';
-import { fetchAdoptionPetData, updateAdoptionPetData } from '../../services';
 import jsonToFormData from '../../utils/jsonToFormData';
+// SERVICES
+import { fetchAdoptionPetData, updateAdoptionPetData } from '../../services';
+// STYLES
 import styles from './styles';
 
 

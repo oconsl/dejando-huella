@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-//MATERIAL UI
+// MATERIAL UI
 import {
   Box,
   Container,
@@ -10,13 +10,14 @@ import {
   TextField,
   Button,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-//MATERIAL TRANSITIONS
+// MATERIAL TRANSITIONS
 import Grow from '@mui/material/Grow';
-//UTILS
+// SERVICES
 import { fetchUserDataById, loginUser, updateUserData } from '../../services';
+// STYLES
 import styles from './styles';
 
 const ModifyUser = ({ id, setOpen }) => {

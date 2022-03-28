@@ -1,12 +1,15 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment } from 'react';
+// ROUTER
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Pagination from '@mui/material/Pagination';
-import Typography from '@mui/material/Typography';
+// MATERIAL UI
+import { Box, Pagination } from '@mui/material';
+// COMPONENTS
 import MatchPet from '../../components/MatchPet/MatchPet';
 import MatchPetSkeleton from '../../components/MatchPet/utils/MatchPetSkeleton';
-import { fetchMatchPetsData } from '../../services';
 import AddPet from '../../components/AddPet/AddPet';
+// SERVICES
+import { fetchMatchPetsData } from '../../services';
+// STYLES
 import styles from './styles';
 
 const MatchPets = () => {

@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+// ROUTER
 import { Outlet } from 'react-router-dom'; 
+// COMPONENTS
 import Login from '../Login/Login';
+import HeaderPet from '../HeaderPet/HeaderPet';
+// HOOKS
 import useToken from '../../hooks/useToken';
 import useAutoLogout from '../../hooks/useAutoLogout';
-import HeaderPet from '../HeaderPet/HeaderPet';
 
 const ProtectedRoutes = () => {
   const timer = useAutoLogout(600);
@@ -15,6 +18,6 @@ const ProtectedRoutes = () => {
   }, [timer, token]);
 
   return isAuth ? <><HeaderPet/><Outlet/></> : <Login setToken={setToken}/>;
-}
+};
 
-export default ProtectedRoutes
+export default ProtectedRoutes;

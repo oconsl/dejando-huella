@@ -1,12 +1,17 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState, Fragment } from 'react';
+// ROUTER
 import { useNavigate } from 'react-router-dom';
-import CardsPet from '../../components/CardsPets/CardsPets';
+// MATERIAL UI
 import { Box, Container, Pagination, Typography } from '@mui/material';
+// COMPONENTS
+import CardsPet from '../../components/CardsPets/CardsPets';
 import Filter from '../../components/Filters/Filters';
 import AddPet from '../../components/AddPet/AddPet';
-import { fetchLostPetsData, fetchFilterLostPetsData } from '../../services';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
 import Progress from '../../components/Progress/Progress';
+// SERVICES
+import { fetchLostPetsData, fetchFilterLostPetsData } from '../../services';
+// STYLES
 import styles from './styles';
 
 const LostPets = () => {

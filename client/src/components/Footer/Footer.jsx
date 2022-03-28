@@ -1,9 +1,12 @@
 import React from 'react';
+// MATERIAL UI
 import { Box, Container, Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
+// MATERIAL ICONS
 import { GitHub } from '@mui/icons-material';
+// ASSETS
 import dogShadow from '../../assets/dogShadow.png';
 import catShadow from '../../assets/catShadow.png';
+// STYLES
 import styles from './styles';
 
 const Footer = () => {

@@ -1,12 +1,17 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+// ROUTER
 import { Link, useNavigate } from 'react-router-dom';
+// MATERIAL UI
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Container,
+  Button,
+} from '@mui/material';
+// STYLES
 import styles from './styles';
-
+// PAGE ARRAYS
 const pages = ['Found Pets', 'Lost Pets', 'Adoption'];
 const settings = ['Profile', 'Logout'];
 
@@ -56,23 +61,23 @@ const HeaderLandingPage = () => {
             </Link>
           </Typography>
           <Box sx={styles.box_buttons}>
-              <Button
-                sx={styles.button_login}
-                color="secondary"
-                variant="contained"
-                onClick={handleLoginClick}
-              >
-                Login
-              </Button>
-              <Button
-                sx={styles.button_signup}
-                color="secondary"
-                variant="contained"
-                onClick={handleSignUpClick}
-              >
-                Sign up
-              </Button>
-            </Box>
+            <Button
+              sx={styles.button_login}
+              color='secondary'
+              variant='contained'
+              onClick={handleLoginClick}
+            >
+              Login
+            </Button>
+            <Button
+              sx={styles.button_signup}
+              color='secondary'
+              variant='contained'
+              onClick={handleSignUpClick}
+            >
+              Sign up
+            </Button>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

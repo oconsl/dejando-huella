@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState, useEffect } from 'react';
+// LEAFLET
 import { Marker, Popup, Circle } from 'react-leaflet';
-import axios from 'axios';
+// SERVICES
 
 const DraggableMarker = ({ center, icon, saveMarkerLocation, saveAddress }) => {
   const [position, setPosition] = useState(center);

@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+// ROUTER
+import { Link, useNavigate } from 'react-router-dom';
+// MATERIAL UI
 import {
   AppBar,
   Box,
@@ -12,11 +15,13 @@ import {
   Tooltip,
   MenuItem,
 } from '@mui/material';
+// MATERIAL ICONS
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, useNavigate } from 'react-router-dom';
+// HOOKS
 import useToken from '../../hooks/useToken';
+// STYLES
 import styles from './styles';
-
+// PAGE ARRAYS
 const pages = ['Found', 'Lost', 'Adoption', 'Testimony'];
 const settings = ['Profile', 'Logout'];
 

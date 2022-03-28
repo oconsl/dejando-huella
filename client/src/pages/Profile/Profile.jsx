@@ -1,22 +1,27 @@
 import { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Grid from '@mui/material/Grid';
+// MATERIAL UI
+import {
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+  Avatar,
+  Grid,
+} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+// MATERIAL ICONS
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+// COMPONENTS
 import DialogFS from '../../components/DialogFS/DialogFS';
 import UserDeleteDialog from '../../components/UserDeleteDialog/UserDeleteDialog';
-import styles from './styles';
-
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 // SERVICES
 import { fetchAllPetDataByUsername, fetchUserData } from '../../services';
-import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
+// STYLES
+import styles from './styles';
 
 const Profile = () => {
   const [userData, setUserData] = useState({
@@ -138,19 +143,19 @@ const Profile = () => {
       <Box sx={styles.box_container}>
         <Card sx={styles.card}>
           <CardContent>
-            <Typography variant="h5" component="div" sx={styles.typography}>
+            <Typography variant='h5' component='div' sx={styles.typography}>
               PROFILE
             </Typography>
             <Box sx={styles.box_profile}>
               <Box sx={styles.box_avatar}>
-                <Avatar sx={styles.avatar} aria-label="recipe">
+                <Avatar sx={styles.avatar} aria-label='recipe'>
                   {letter}
                 </Avatar>
               </Box>
               <Box sx={styles.box_grid}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color="text.secondary">Username:</Typography>
+                    <Typography color='text.secondary'>Username:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -160,7 +165,7 @@ const Profile = () => {
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color="text.secondary">Email:</Typography>
+                    <Typography color='text.secondary'>Email:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -170,7 +175,7 @@ const Profile = () => {
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color="text.secondary">First Name:</Typography>
+                    <Typography color='text.secondary'>First Name:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -180,7 +185,7 @@ const Profile = () => {
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <Typography color="text.secondary">Last Name:</Typography>
+                    <Typography color='text.secondary'>Last Name:</Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography>
@@ -193,17 +198,17 @@ const Profile = () => {
           </CardContent>
           <CardActions sx={styles.cardAction}>
             <Button
-              size="large"
-              variant="contained"
-              color="success"
+              size='large'
+              variant='contained'
+              color='success'
               onClick={handleEditClick}
             >
               Edit
             </Button>
             <Button
-              size="large"
-              variant="contained"
-              color="error"
+              size='large'
+              variant='contained'
+              color='error'
               onClick={handleDeleteClick}
             >
               Delete

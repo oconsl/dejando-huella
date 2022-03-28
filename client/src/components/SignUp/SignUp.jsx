@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+// ROUTER
 import { useNavigate } from 'react-router-dom';
-//MATERIAL UI
+// MATERIAL UI
 import {
   Box,
   Container,
@@ -11,14 +12,16 @@ import {
   TextField,
   Button,
 } from '@mui/material';
-//MATERIAL ICONS
+// MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-//MATERIAL TRANSITIONS
+// MATERIAL TRANSITIONS
 import Grow from '@mui/material/Grow';
-//UTILS
+// COMPONENTS
 import HeaderLandingPage from '../HeaderLandingPage/HeaderLandingPage';
+// SERVICES
 import { sendUserData } from '../../services';
+// STYLES
 import styles from './styles';
 
 const SignUp = () => {

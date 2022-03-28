@@ -1,15 +1,21 @@
-import React from 'react';
+// MATERIAL UI
+import {
+  Box,
+  IconButton,
+  Button,
+  DialogContent,
+  DialogActions,
+  DialogTitle,
+} from '@mui/material/Box';
+// MATERIAL ICONS
+import CloseIcon from '@mui/icons-material/Close';
+// LEAFLET
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import Box from '@mui/material/Box';
+// UTILS
 import LocationIcon from './utils/LocationIcon';
 import DraggableMarker from './utils/DraggableMarker';
-import DialogContent from '@mui/material/DialogContent';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
-import DialogTitle from '@mui/material/DialogTitle';
+// STYLES
 import styles from './styles';
 
 const MapView = ({ saveLocation, closeMap, saveAddress }) => {
@@ -19,9 +25,7 @@ const MapView = ({ saveLocation, closeMap, saveAddress }) => {
   return (
     <>
       <DialogContent>
-        <DialogTitle
-          sx={styles.dialogTitle}
-        >
+        <DialogTitle sx={styles.dialogTitle}>
           Move the marker
           <IconButton
             aria-label='close'
@@ -31,9 +35,7 @@ const MapView = ({ saveLocation, closeMap, saveAddress }) => {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <Box
-          sx={styles.box}
-        >
+        <Box sx={styles.box}>
           <MapContainer
             center={center}
             zoom={zoom}
