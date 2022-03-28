@@ -7,7 +7,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: !flexVariant ? 'row-reverse' : 'row',
+    flexDirection: !true ? 'row-reverse' : 'row',
   },
   cardMedia: {
     width: '350px',

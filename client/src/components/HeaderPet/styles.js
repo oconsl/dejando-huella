@@ -1,6 +1,4 @@
 const styles = {
-  container: { height: '100%' },
-  toolbar: { height: '100%' },
   appBar: {
     bgcolor: '#030104',
     borderBottom: '#FBFAF2 solid 1px',

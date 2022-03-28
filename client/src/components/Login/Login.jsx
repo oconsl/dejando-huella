@@ -13,7 +13,7 @@ import {
   InputAdornment,
   Button,
   IconButton,
-  Dialog,
+  CssBaseline,
 } from '@mui/material';
 //MATERIAL ICONS
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -57,7 +57,8 @@ const Login = ({ setToken }) => {
   return (
     <>
       <HeaderLandingPage />
-      <Container component='main' maxWidth='xs'>
+      <Container component='main' maxWidth='xs' sx={styles.container}>
+        <CssBaseline/>
         <Box
           component='form'
           sx={styles.box}

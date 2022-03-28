@@ -22,9 +22,9 @@ const CardsPet = (props) => {
     >
       <CardMedia
         component='img'
-        height='140'
         image={props.img_src}
         alt='green iguana'
+        sx={styles.cardMedia}
       />
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
@@ -40,7 +40,7 @@ const CardsPet = (props) => {
           className='link-button'
           to={`/${props.title.replace(' ', '-').toLowerCase()}/1`}
         >
-          <Button size='small' color='primary'>
+          <Button size='small' color='primary' variant='contained' sx={styles.button}>
             {props.button}
           </Button>
         </Link>

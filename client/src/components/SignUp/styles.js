@@ -1,20 +1,31 @@
 const styles = {
+  container: {
+    height: '70.25vh',
+  },
   box_container: {
-    marginTop: 8,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+    mt: 15,
+    p: 4,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: '0.8em',
   },
   avatar: {
     m: 1,
-    backgroundColor: 'lightcoral',
+    backgroundColor: '#705ebb',
   },
   box_child: {
     mt: 3,
   },
   button: {
-    mt: 3,
-    mb: 2,
+    'mt': 3,
+    'mb': 2,
+    'bgcolor': '#96a42f',
+    '&:hover': {
+      bgcolor: '#a5bc38',
+    },
   },
   box_signed: {
     mt: 8,

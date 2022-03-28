@@ -73,7 +73,7 @@ const SignUp = () => {
   return (
     <>
       <HeaderLandingPage />
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={styles.container}>
         <CssBaseline />
         {!success && (
           <Box sx={styles.box_container}>
