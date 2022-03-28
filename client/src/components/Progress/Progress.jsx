@@ -6,7 +6,7 @@ import styles from './styles';
 const Progress = () => {
   return (
     <Box sx={styles.box}>
-      <CircularProgress size={80} />
+      <CircularProgress size={80} sx={styles.circle}/>
     </Box>
   );
 };

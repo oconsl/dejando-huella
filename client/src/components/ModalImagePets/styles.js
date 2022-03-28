@@ -1,7 +1,7 @@
 const styles = {
   box: {
-    maxWidth: '370px',
-    maxHeight: '370px',
+    maxWidth: '600px',
+    maxHeight: '600px',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -15,12 +15,16 @@ const styles = {
   },
   button: {
     position: 'absolute',
-    left: '85%',
-    bottom: '89%',
+    left: '90%',
+    bottom: '92%',
   },
   closeIcon: {
     color: 'white',
   },
+  img: {
+    width: '580px',
+    height: '580px',
+  }
 };
 
 export default styles;

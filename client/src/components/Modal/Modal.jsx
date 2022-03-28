@@ -4,21 +4,6 @@ import { Container, Grid, Box, Button, Typography, Modal } from '@mui/material';
 import MapStatic from '../MapView/MapStatic';
 import styles from './styles';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  height: 'auto',
-  maxHeight: '80%',
-  width: '60vw',
-  overflowY: 'auto',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 const ModalFoundPets = (props) => {
   return (
     <div>
@@ -29,135 +14,177 @@ const ModalFoundPets = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Container maxWidth="lg">
-          <Box sx={style}>
-            <Button onClick={props.close}>
+          <Box sx={styles.box_container}>
+            <Button
+              onClick={props.close}
+              sx={styles.button_close}
+              variant="contained"
+            >
               <CloseIcon />
             </Button>
             <Grid container spacing={5}>
-              <Grid
-                item
-                xs={12}
-                md={4}
-                sx={styles.grid}
-              >
+              <Grid item md={12} lg={4} sx={styles.grid}>
                 <Box>
                   <Typography
                     id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
+                    variant="h5"
+                    sx={styles.typography_title}
                   >
-                    {props.title}
+                    Photo
                   </Typography>
                 </Box>
-                <Box>
-                  <img width={200} height={200} src={props.img_src} alt="" />
+                <Box sx={styles.box_img}>
+                  <img style={styles.img} src={props.img_src} alt="" />
                 </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
+                <Box sx={styles.box_description}>
+                  <Typography sx={styles.typography_name}>{props.title}</Typography>
+                  <Typography
+                    id="modal-modal-description"
+                    sx={styles.typography}
+                  >
+                    {props.date}
+                  </Typography>
+                  <Typography
+                    id="modal-modal-description"
+                    sx={styles.typography}
+                  >
                     {props.description}
                   </Typography>
                 </Box>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                md={4}
-                sx={styles.grid}
-              >
+              <Grid item md={12} lg={4} sx={styles.grid}>
                 <Box>
                   <Typography
                     id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
+                    variant="h5"
+                    sx={styles.typography_title}
                   >
                     Information
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Specie: {props.filter.specie}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Breed: {props.filter.breed}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Color: {props.filter.color}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Sex: {props.filter.sex}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Size: {props.filter.size}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Age: {props.filter.age}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Fur: {props.filter.fur}
-                  </Typography>
-                </Box>
-                {props.page === 'adoption-pets' && (
-                  <>
-                    <Box>                  
-                      <Typography id="modal-modal-description" sx={styles.box}>
-                        Sterilized: {props.filter.sterilized ? 'Yes' : 'No'}
-                      </Typography>
-                    </Box>
+                  <Box>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography_specie}
+                    >
+                      Specie: {props.filter.specie}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Breed: {props.filter.breed}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Color: {props.filter.color}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Sex: {props.filter.sex}
+                    </Typography>
+                  </Box>
+                  {props.filter.specie === 'Dog' && (
                     <Box>
-                      <Typography id="modal-modal-description" sx={styles.box}>
-                        Dewormed: {props.filter.dewormed ? 'Yes' : 'No'}
+                      <Typography
+                        id="modal-modal-description"
+                        sx={styles.typography}
+                      >
+                        Size: {props.filter.size}
                       </Typography>
                     </Box>
-                    <Box>
-                      <Typography id="modal-modal-description" sx={styles.box}>
-                        Vaccinated: {props.filter.vaccinated ? 'Yes' : 'No'}
-                      </Typography>
-                    </Box>
-                  </> 
-                )}
+                  )}
+                  <Box>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Age: {props.filter.age}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Fur: {props.filter.fur}
+                    </Typography>
+                  </Box>
+                  {props.page === 'adoption-pets' && (
+                    <>
+                      <Box>
+                        <Typography
+                          id="modal-modal-description"
+                          sx={styles.typography}
+                        >
+                          Sterilized: {props.filter.sterilized ? 'Yes' : 'No'}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography
+                          id="modal-modal-description"
+                          sx={styles.typography}
+                        >
+                          Dewormed: {props.filter.dewormed ? 'Yes' : 'No'}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Typography
+                          id="modal-modal-description"
+                          sx={styles.typography}
+                        >
+                          Vaccinated: {props.filter.vaccinated ? 'Yes' : 'No'}
+                        </Typography>
+                      </Box>
+                    </>
+                  )}
+                </Box>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                md={4}
-                sx={styles.grid}
-              >
+              <Grid item md={12} lg={4} sx={styles.grid}>
                 <Box>
                   <Typography
                     id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
+                    variant="h5"
+                    sx={styles.typography_title}
                   >
                     Location
                   </Typography>
                 </Box>
-                <Box>
-                  <MapStatic position={props.position} />
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Address Road: {props.addressRoad}
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Address Number : {props.addressNumber}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography id="modal-modal-description" sx={styles.box}>
-                    Phone: {props.phone}
-                  </Typography>
+                <Box sx={styles.box_location}>
+                  <Box>
+                    <MapStatic position={props.position} sx={styles.map} />
+                  </Box>
+                  <Box>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Address Road: {props.addressRoad}
+                    </Typography>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Address Number : {props.addressNumber}
+                    </Typography>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={styles.typography}
+                    >
+                      Phone: {props.phone}
+                    </Typography>
+                  </Box>
                 </Box>
               </Grid>
             </Grid>
