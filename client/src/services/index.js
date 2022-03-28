@@ -19,12 +19,11 @@ export const fetchGithubData = async ({ setUserData, user }) => {
 
 // USER SERVICES
 export const loginUser = async ({ userData, setError }) => {
-  const res = await axios
+  const res = await commonAxios
     .post(`${process.env.REACT_APP_API_URL}/api/users/login`, userData)
     .then((res) => res.data)
     .catch((err) => {
-      if (err.response.status === 401) {
-        console.log('err');
+      if (err.response.status === 403) {
         setError(true);
       }
     });
@@ -356,7 +355,10 @@ export const sendAdoptionPetData = async ({ adoptionPetData }) => {
   }).finally(() => window.location.reload());
 };
 
-export const fetchAdoptionPetsData = async ({ setAdoptionPets, setLoading }) => {
+export const fetchAdoptionPetsData = async ({
+  setAdoptionPets,
+  setLoading,
+}) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/adoption-pets`
   );

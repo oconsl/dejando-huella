@@ -72,12 +72,12 @@ const usersController = (User) => {
         response === null ||
         !(await bcrypt.compare(body.password, response.password))
       ) {
-        return res.status(401).send('Unauthorized');
+        return res.status(403).send('Unauthorized');
       }
       const token = generateToken(response);
       res.status(200).json(token);
     } catch (err) {
-      res.status(401).send('Unauthorized');
+      res.status(403).send('Unauthorized');
     }
   };
 

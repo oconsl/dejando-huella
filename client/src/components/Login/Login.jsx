@@ -46,12 +46,12 @@ const Login = ({ setToken }) => {
   const handleLogIn = async (event) => {
     event.preventDefault();
 
-    const response = await loginUser({ userData, setError });
-
-    if(!error){
-      if(typeof response === 'string') setToken(response, userData.username);
-      navigate('/');
-    }
+    const response = await loginUser({ userData, setError }).finally(() => {
+      if(!error){
+        if(typeof response === 'string') setToken(response, userData.username);
+        navigate('/');
+      }
+    });
   };
 
   return (
