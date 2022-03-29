@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 // MATERIAL UI
 import {
   CssBaseline,
-  Container,
   Box,
   Grid,
   Dialog,
-  Avatar,
   CardActionArea,
   Card,
   CardMedia,
@@ -15,7 +13,6 @@ import {
   Typography,
 } from '@mui/material';
 // MATERIAL ICONS
-import PetsIcon from '@mui/icons-material/Pets';
 import LocationIcon from '@mui/icons-material/AddLocationAlt';
 // COMPONENTS
 import MapStatic from '../MapView/MapStatic';
@@ -23,6 +20,8 @@ import CropEasy from '../Crop/CropEasy';
 import DatePick from '../DatePick/DatePick';
 import Breeds from '../FormComponents/Breeds/Breeds';
 import CustomForm from '../FormComponents/CustomForm/CustomForm';
+// ASSETS
+import logo from '../../assets/logo.png';
 // INPUT DATA
 import {
   sizeOptions,
@@ -38,7 +37,7 @@ import jsonToFormData from '../../utils/jsonToFormData';
 // SERVICES
 import { fetchLostPetData, updateLostPetData } from '../../services';
 // STYLES
-import styles from './styles';
+import styles from '../AddAdoptionPet/styles';
 
 const ModifyLostPet = ({ id, setOpen }) => {
   const [newDate, setNewDate] = useState(false);
@@ -85,13 +84,13 @@ const ModifyLostPet = ({ id, setOpen }) => {
       latLng: latLng,
       addressRoad: address,
       date: date,
-    };    
+    };
     if (newPhoto) dataBody.image = file;
     if (newDate) dataBody.date = formatDate(date);
 
-    const lostPetData = jsonToFormData(dataBody,lostPetDataBody);
-    
-    updateLostPetData({ lostPetData, id });    
+    const lostPetData = jsonToFormData(dataBody, lostPetDataBody);
+
+    updateLostPetData({ lostPetData, id });
     setOpen(false);
   };
 
@@ -152,21 +151,13 @@ const ModifyLostPet = ({ id, setOpen }) => {
   }, [id]);
 
   return (
-    <Container component='main' sx={styles.container}>
+    <Box component='main' sx={styles.container}>
       <CssBaseline />
-      <Box
-        sx={styles.box_Container}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={styles.avatar}>
-            <PetsIcon />
-          </Avatar>
+      <Box sx={styles.box_container}>
+        <div style={styles.div}>
+          <Box sx={styles.avatar}>
+            <img src={logo} alt='paw' style={styles.img} />
+          </Box>
           <Typography component='h1' variant='h5'>
             Modify Lost Pet
           </Typography>
@@ -175,223 +166,226 @@ const ModifyLostPet = ({ id, setOpen }) => {
           component='form'
           onSubmit={handleSubmit}
           encType='multipart/form-data'
-          sx={styles.box}
+          sx={styles.box_form}
           required
         >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name='petName'
-                id='petName'
-                label='Pet Name'
-                value={textData.petName}
-                onChange={handleTextDataChange('petName')}
-              />
+          <Box sx={styles.box_formLeft}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name='petName'
+                  id='petName'
+                  label='Pet Name'
+                  value={textData.petName}
+                  onChange={handleTextDataChange('petName')}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  multiline
+                  rows={4}
+                  name='description'
+                  id='description'
+                  label='Description'
+                  value={textData.description}
+                  onChange={handleTextDataChange('description')}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name='phone'
+                  id='phone'
+                  label='Phone'
+                  inputProps={{
+                    inputMode: 'numeric',
+                    pattern: '^[0-9]{10,11}$',
+                  }}
+                  value={textData.phone}
+                  onChange={handleTextDataChange('phone')}
+                  helperText='Format: 10 to 11 digits'
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <DatePick
+                  saveDate={setDate}
+                  fetchedDate={date}
+                  setNewDate={setNewDate}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={5}>
+                <TextField
+                  required
+                  fullWidth
+                  id='addressNum'
+                  label='Address Num'
+                  name='addressNum'
+                  inputProps={{
+                    inputMode: 'numeric',
+                    pattern: '[0-9]*',
+                  }}
+                  onChange={handleTextDataChange('addressNumber')}
+                />
+              </Grid>
+              <Grid item xs={12} sm={5}>
+                <TextField
+                  required
+                  fullWidth
+                  disabled
+                  id='addressRoad'
+                  label='Address Road'
+                  name='addressRoad'
+                  inputProps={{
+                    readOnly: true,
+                  }}
+                  value={address}
+                />
+              </Grid>
+              <Grid item xs={12} sm={2}>
+                <LocationIcon
+                  sx={styles.locationIcon}
+                  onClick={handleOpenMap}
+                />
+                {openMap && (
+                  <Dialog
+                    open={true}
+                    onClose={handleCloseMap}
+                    fullWidth={true}
+                    maxWidth={'md'}
+                  >
+                    <MapStatic position={latLng} closeMap={handleCloseMap} />
+                  </Dialog>
+                )}
+              </Grid>
+              <Grid item xs={12} sm={9}>
+                {dogPet && (
+                  <Breeds
+                    onChange={handleOptionDataChange('breed')}
+                    isADog={dogPet}
+                    value={optionData.breed}
+                  />
+                )}
+                {!dogPet && (
+                  <Breeds
+                    onChange={handleOptionDataChange('breed')}
+                    isADog={dogPet}
+                    value={optionData.breed}
+                  />
+                )}
+              </Grid>
+              <Grid item xs={12} sm={3}>
+                <CustomForm
+                  onChange={handleOptionDataChange('sex')}
+                  options={sexOptions}
+                  label='Sex'
+                  value={optionData.sex}
+                />
+              </Grid>
+              {dogPet && (
+                <Grid item xs={12} sm={6}>
+                  <CustomForm
+                    onChange={handleOptionDataChange('size')}
+                    options={sizeOptions}
+                    label='Size'
+                    value={optionData.size}
+                  />
+                </Grid>
+              )}
+              <Grid item xs={12} sm={6}>
+                {dogPet && (
+                  <CustomForm
+                    onChange={handleOptionDataChange('age')}
+                    options={ageDogOptions}
+                    label='Age'
+                    value={optionData.age}
+                  />
+                )}
+                {!dogPet && (
+                  <CustomForm
+                    onChange={handleOptionDataChange('age')}
+                    options={ageCatOptions}
+                    label='Age'
+                    value={optionData.age}
+                  />
+                )}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <CustomForm
+                  onChange={handleOptionDataChange('color')}
+                  options={colorOptions}
+                  label='Color'
+                  value={optionData.color}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <CustomForm
+                  onChange={handleOptionDataChange('fur')}
+                  options={furOptions}
+                  label='Fur'
+                  value={optionData.fur}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
+          </Box>
+          <Box sx={styles.box_formRight}>
+            <Box sx={styles.box_image}>
+              <div>Image to upload</div>
               <TextField
-                required
+                id='image'
                 fullWidth
-                multiline
-                rows={4}
-                name='description'
-                id='description'
-                label='Description'
-                value={textData.description}
-                onChange={handleTextDataChange('description')}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name='phone'
-                id='phone'
-                label='Phone'
-                inputProps={{
-                  inputMode: 'numeric',
-                  pattern: '^[0-9]{10,11}$',
+                label='Pet Image'
+                name='image'
+                type='file'
+                InputLabelProps={{
+                  shrink: true,
                 }}
-                value={textData.phone}
-                onChange={handleTextDataChange('phone')}
+                onChange={handleFileChange}
+                sx={styles.textField_image}
               />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sx={styles.grid}
-            >
-              <DatePick saveDate={setDate} fetchedDate={date} setNewDate={setNewDate}/>
-              <TextField
-                disabled
-                required
-                fullWidth
-                id='addressRoad'
-                label='Address Road'
-                name='addressRoad'
-                inputProps={{
-                  readOnly: true,
-                }}
-                value={address}
-                sx={styles.textField_address}
-              />
-              <TextField
-                required
-                disabled
-                fullWidth
-                id='addressNum'
-                label='Address Num'
-                name='addressNum'
-                inputProps={{
-                  readOnly: true,
-                }}
-                value={textData.addressNumber}
-                onChange={handleTextDataChange('addressNumber')}
-                sx={styles.textField_address}
-              />
-              <LocationIcon
-                sx={styles.locationIcon}
-                onClick={handleOpenMap}
-              />
-              {openMap && (
+              {openCrop && (
                 <Dialog
                   open={true}
-                  onClose={handleCloseMap}
+                  onClose={handleCloseCrop}
                   fullWidth={true}
                   maxWidth={'md'}
                 >
-                  <MapStatic
-                    position={latLng}
-                    closeMap={handleCloseMap}
+                  <CropEasy
+                    {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
                   />
                 </Dialog>
               )}
-            </Grid>
-            <Grid item xs={12} sm={9}>
-              {dogPet && (
-                <Breeds
-                  onChange={handleOptionDataChange('breed')}
-                  isADog={dogPet}
-                  value={optionData.breed}
-                />
-              )}
-              {!dogPet && (
-                <Breeds
-                  onChange={handleOptionDataChange('breed')}
-                  isADog={dogPet}
-                  value={optionData.breed}
-                />
-              )}
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <CustomForm
-                onChange={handleOptionDataChange('sex')}
-                options={sexOptions}
-                label='Sex'
-                value={optionData.sex}
-              />
-            </Grid>
-            {dogPet && (
-              <Grid item xs={12} sm={6}>
-                <CustomForm
-                  onChange={handleOptionDataChange('size')}
-                  options={sizeOptions}
-                  label='Size'
-                  value={optionData.size}
-                />
-              </Grid>
-            )}
-            <Grid item xs={12} sm={6}>
-              {dogPet && (
-                <CustomForm
-                  onChange={handleOptionDataChange('age')}
-                  options={ageDogOptions}
-                  label='Age'
-                  value={optionData.age}
-                />
-              )}
-              {!dogPet && (
-                <CustomForm
-                  onChange={handleOptionDataChange('age')}
-                  options={ageCatOptions}
-                  label='Age'
-                  value={optionData.age}
-                />
-              )}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <CustomForm
-                onChange={handleOptionDataChange('color')}
-                options={colorOptions}
-                label='Color'
-                value={optionData.color}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <CustomForm
-                onChange={handleOptionDataChange('fur')}
-                options={furOptions}
-                label='Fur'
-                value={optionData.fur}
-              />
-            </Grid>
-          </Grid>
-
-          <Box
-            sx={styles.box_image}
-          >
-            <div>Image to upload</div>
-            <TextField
-              id='image'
+              <Card sx={styles.card}>
+                <CardActionArea>
+                  <CardMedia
+                    component='img'
+                    alt='New Pet Image'
+                    image={photoURL}
+                    title='New Pet Image'
+                    height='450'
+                    onClick={handlePhotoClick}
+                    sx={styles.cardMedia}
+                  />
+                </CardActionArea>
+              </Card>
+            </Box>
+            <Button
+              type='submit'
               fullWidth
-              label='Pet Image'
-              name='image'
-              type='file'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={handleFileChange}
-              sx={styles.textField_image}
-            />
-            {openCrop && (
-              <Dialog
-                open={true}
-                onClose={handleCloseCrop}
-                fullWidth={true}
-                maxWidth={'md'}
-              >
-                <CropEasy
-                  {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
-                />
-              </Dialog>
-            )}
-            <Card sx={styles.card}>
-              <CardActionArea>
-                <CardMedia
-                  component='img'
-                  alt='New Pet Image'
-                  image={photoURL}
-                  title='New Pet Image'
-                  height='450'
-                  onClick={handlePhotoClick}
-                  sx={styles.cardMedia}
-                />
-              </CardActionArea>
-            </Card>
+              variant='contained'
+              sx={styles.button}
+            >
+              Modify
+            </Button>
           </Box>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            sx={styles.button}
-          >
-            Modify
-          </Button>
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

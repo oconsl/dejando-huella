@@ -25,20 +25,20 @@ export const requestInterceptor = () => {
 
 export const responseInterceptor = () => {
   axios.interceptors.response.use(
-    (res) => {
+    async (res) => {
+      const refresh = await commonAxios.post(
+        `${process.env.REACT_APP_API_URL}/api/users/refresh-token`,
+        {
+          username: getLocalUsername(),
+        }
+      );
+
+      localStorage.setItem('token', JSON.stringify(refresh.data));
+
       return res;
     },
     async (err) => {
-      if (err.response.status === 401) {
-        const res = await commonAxios.post(
-          `${process.env.REACT_APP_API_URL}/api/users/refresh-token`,
-          {
-            username: getLocalUsername(),
-          }
-        );
-
-        localStorage.setItem('token', JSON.stringify(res.data));
-      }
+      return err;
     }
   );
 };

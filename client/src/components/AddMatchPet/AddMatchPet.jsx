@@ -19,10 +19,10 @@ import logo from '../../assets/logo.png';
 import CropEasy from '../Crop/CropEasy';
 // UTIL FUNCTIONS
 import jsonToFormData from '../../utils/jsonToFormData';
-// STYLES
-import styles from './styles';
 // SERVICES
 import { sendMatchPetData } from '../../services';
+// STYLES
+import styles from '../AddAdoptionPet/styles';
 
 const AddMatchPet = ({ setOpen }) => {
   // CROP

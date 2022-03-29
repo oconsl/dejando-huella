@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 // MATERIAL UI
 import {
   CssBaseline,
-  Container,
   Box,
   Grid,
   Dialog,
-  Avatar,
   CardActionArea,
   Card,
   CardMedia,
@@ -14,10 +12,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-// MATERIAL ICONS
-import PetsIcon from '@mui/icons-material/Pets';
 // DEFAULT IMAGES
 import default_dog from '../../assets/default_dog.svg';
+import logo from '../../assets/logo.png';
 // COMPONENTS
 import CropEasy from '../Crop/CropEasy';
 // UTIL FUNCTIONS
@@ -25,7 +22,7 @@ import jsonToFormData from '../../utils/jsonToFormData';
 // SERVICES
 import { fetchMatchPetData, updateMatchPetData } from '../../services';
 // STYLES
-import styles from './styles';
+import styles from '../AddAdoptionPet/styles';
 
 const ModifyMatchPet = ({ id, setOpen }) => {
   const [newPhoto, setNewPhoto] = useState(false);
@@ -88,21 +85,17 @@ const ModifyMatchPet = ({ id, setOpen }) => {
   }, [id]);
 
   return (
-    <Container component='main' sx={styles.container}>
+    <Box component='main' sx={styles.container}>
       <CssBaseline />
       <Box
-        sx={styles.box_Container}
+        sx={styles.box_container}
       >
         <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          style={styles.div}
         >
-          <Avatar sx={styles.avatar}>
-            <PetsIcon />
-          </Avatar>
+          <Box sx={styles.avatar}>
+            <img src={logo} alt='paw' style={styles.img} />
+          </Box>
           <Typography component='h1' variant='h5'>
             New Testimony
           </Typography>
@@ -111,9 +104,10 @@ const ModifyMatchPet = ({ id, setOpen }) => {
           component='form'
           onSubmit={handleSubmit}
           encType='multipart/form-data'
-          sx={styles.box}
+          sx={styles.box_form}
           required
         >
+          <Box sx={styles.box_formLeft}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -131,7 +125,7 @@ const ModifyMatchPet = ({ id, setOpen }) => {
                 required
                 fullWidth
                 multiline
-                rows={4}
+                rows={19}
                 name='testimony'
                 id='testimony'
                 label='Testimony'
@@ -140,9 +134,12 @@ const ModifyMatchPet = ({ id, setOpen }) => {
               />
             </Grid>
           </Grid>
+          </Box>
+          <Box sx={styles.box_formRight}>
+
           <Box
             sx={styles.box_image}
-          >
+            >
             <div>Image to upload</div>
             <TextField
               id='image'
@@ -155,17 +152,17 @@ const ModifyMatchPet = ({ id, setOpen }) => {
               }}
               onChange={handleFileChange}
               sx={styles.textField_image}
-            />
+              />
             {openCrop && (
               <Dialog
-                open={true}
-                onClose={handleCloseCrop}
-                fullWidth={true}
-                maxWidth={'md'}
+              open={true}
+              onClose={handleCloseCrop}
+              fullWidth={true}
+              maxWidth={'md'}
               >
                 <CropEasy
                   {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
-                />
+                  />
               </Dialog>
             )}
             <Card sx={styles.card}>
@@ -178,7 +175,7 @@ const ModifyMatchPet = ({ id, setOpen }) => {
                   height='450'
                   onClick={handlePhotoClick}
                   sx={styles.cardMedia}
-                />
+                  />
               </CardActionArea>
             </Card>
           </Box>
@@ -187,12 +184,13 @@ const ModifyMatchPet = ({ id, setOpen }) => {
             fullWidth
             variant='contained'
             sx={styles.button}
-          >
+            >
             Modify
           </Button>
         </Box>
+            </Box>
       </Box>
-    </Container>
+    </Box>
   );
 };
 
