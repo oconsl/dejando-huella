@@ -27,7 +27,7 @@ const styles = {
     width: '80%',
   },
   box_notFound: {
-    height: '500px',
+    height: '58.5vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
