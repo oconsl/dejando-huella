@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import LandingPage from './pages/LandingPage/LandingPage';
 import FoundPets from './pages/FoundPets/FoundPets';
 import LostPets from './pages/LostPets/LostPets';
@@ -7,20 +6,11 @@ import MatchPets from './pages/MatchPets/MatchPets';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import NotFound from './pages/NotFound/NotFound';
-import AddLostPet from './components/AddLostPet/AddLostPet';
-import AddMatchPet from './components/AddMatchPet/AddMatchPet';
 import Profile from './pages/Profile/Profile';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import HeaderPet from './components/HeaderPet/HeaderPet';
 import Footer from './components/Footer/Footer';
 import useToken from './hooks/useToken';
-import ModifyMatchPet from './components/ModifyMatchPet/ModifyMatchPet';
-import ModifyLostPet from './components/ModifyLostPet/ModifyLostPet';
-import ModifyFoundPet from './components/ModifyFoundPet/ModifyFoundPet';
-import AddFoundPet from './components/AddFoundPet/AddFoundPet';
-import AddAdoptionPet from './components/AddAdoptionPet/AddAdoptionPet';
-import ModifyAdoptionPet from './components/ModifyAdoptionPet/ModifyAdoptionPet';
 import './App.css';
 
 function App() {

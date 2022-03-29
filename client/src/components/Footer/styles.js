@@ -3,6 +3,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     mt: 1,
+    cursor: 'pointer',
   },
   box_container: {
     flex: '0 1 40px',

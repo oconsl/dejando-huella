@@ -210,12 +210,11 @@ export const sendMatchPetData = async ({ matchPetData }) => {
   }).finally(() => window.location.reload());
 };
 
-export const fetchMatchPetsData = async ({ setMatchPets, setLoading }) => {
+export const fetchMatchPetsData = async ({ setMatchPets }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/match-pets`
   );
   setMatchPets(res.data);
-  setLoading(false);
 };
 
 export const fetchMatchPetData = async ({ savedData, id }) => {

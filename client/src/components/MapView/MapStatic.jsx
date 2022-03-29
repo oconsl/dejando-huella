@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 // UTILS
 import LocationIcon from './utils/LocationIcon';
 // STYLES
-import styles from './styles';
+import { styles_static } from './styles';
 
 const MapView = ({ position, closeMap }) => {
   const center = { lat: -26.829901, lng: -65.203667 };
@@ -17,7 +17,7 @@ const MapView = ({ position, closeMap }) => {
 
   return (
     <>
-      <DialogContent>
+      <DialogContent sx={styles_static.dialogContent}>
         {/* <IconButton
           aria-label='close'
           sx={{
@@ -29,7 +29,7 @@ const MapView = ({ position, closeMap }) => {
         >
           <CloseIcon />
         </IconButton> */}
-        <Box sx={styles.box}>
+        <Box sx={styles_static.box}>
           <MapContainer
             center={position}
             zoom={zoom}

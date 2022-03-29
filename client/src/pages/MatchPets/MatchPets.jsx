@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from 'react';
 // ROUTER
 import { useNavigate } from 'react-router-dom';
 // MATERIAL UI
-import { Box, Pagination } from '@mui/material';
+import { Box, Pagination, CssBaseline } from '@mui/material';
 // COMPONENTS
 import MatchPet from '../../components/MatchPet/MatchPet';
 import MatchPetSkeleton from '../../components/MatchPet/utils/MatchPetSkeleton';
@@ -52,12 +52,19 @@ const MatchPets = () => {
 
   return (
     <>
+      <CssBaseline/>
       <Box sx={styles.box_title}>
-        <h1>TESTIMONIALS</h1>
-        <div>
+        <h1 style={styles.title}>TESTIMONY</h1>
+        <div style={styles.addPet}>
           <AddPet option={'*AddMatch'} />
         </div>
       </Box>
+      <Pagination
+        count={maxPage}
+        onChange={handleChange}
+        color={'secondary'}
+        sx={styles.pagination}
+      />
       <Box sx={styles.box_container}>
         {matchPets.length !== 0 && matchPetsGroups.length > 0 ? (
           matchPetsGroups[page - 1].map((item, index) => {
@@ -101,12 +108,7 @@ const MatchPets = () => {
           </>
         )}
       </Box>
-      <Pagination
-        count={maxPage}
-        onChange={handleChange}
-        color={'primary'}
-        sx={styles.pagination}
-      />
+      
     </>
   );
 };

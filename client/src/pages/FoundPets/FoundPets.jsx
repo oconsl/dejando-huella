@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from 'react';
 // ROUTER
 import { useNavigate } from 'react-router-dom';
 // MATERIAL UI
-import { Box, Container, Pagination, Typography } from '@mui/material';
+import { Box, Container, Pagination, Typography, CssBaseline } from '@mui/material';
 // COMPONENTS
 import CardsPet from '../../components/CardsPets/CardsPets';
 import CardsPetsSkeleton from '../../components/CardsPets/util/CardsPetsSkeleton';
@@ -69,15 +69,26 @@ const FoundPets = () => {
   };
 
   return (
-    <>
+    <Box style={styles.page}>
+      <CssBaseline/>
       <Box sx={styles.box_title}>
-        <h1>FOUND PETS</h1>
-        <div>
+        <h1 style={styles.title}>FOUND</h1>
+        <div style={styles.addPet}>
           <AddPet option={'*AddFound'} />
         </div>
       </Box>
       <Filter buttonFilter={handleOnFilter} page="found-pets" />
-      <Container maxWidth="lg" sx={styles.container}>
+      <Pagination
+        page={page}
+        count={maxPage}
+        color="secondary"
+        onChange={(event, value) => {
+          handleChange(value);
+          window.scrollTo(0, 0);
+        }}
+        sx={styles.pagination}
+      />
+      <Box sx={styles.container}>
         {loading ? (
           <Progress />
         ) : foundPets.length !== 0 && foundPetsGroups.length > 0 ? (
@@ -144,18 +155,9 @@ const FoundPets = () => {
             />
           </Box>
         )}
-      </Container>
-      <Pagination
-        page={page}
-        count={maxPage}
-        color="primary"
-        onChange={(event, value) => {
-          handleChange(value);
-          window.scrollTo(0, 0);
-        }}
-        sx={styles.pagination}
-      />
-    </>
+      </Box>
+      
+    </Box>
   );
 };
 

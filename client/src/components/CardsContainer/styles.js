@@ -15,11 +15,11 @@ const styles = {
     bgcolor: 'white',
     color: '#030104',
     borderRadius: '1em',
-    border: 'solid #030104 6px',
+    border: 'solid #030104 3px',
     boxShadow: '0px 0px 20px 2px rgba(54,54,54,0.75)',
     height: '100%',
     width: '80%',
-    p: 3,
+    p: 1,
     marginBottom: '20px',
   },
   box_information: {
@@ -45,6 +45,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-around',
     width: '100%',
+    pt: 2,
     marginBottom: '20px',
   },
   typography: {

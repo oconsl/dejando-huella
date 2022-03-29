@@ -11,9 +11,9 @@ const styles = {
     width: '75px',
   },
   addIcon: {
-    color: 'white',
+    color: '#0a0a0a',
     position: 'absolute',
-    bottom: '19%',
+    bottom: '23%',
     left: '34%',
     transform: 'scale(1.5)',
   },

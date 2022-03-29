@@ -9,6 +9,7 @@ import {
   Typography,
   Avatar,
   Grid,
+  CssBaseline,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 // MATERIAL ICONS
@@ -126,7 +127,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <>
+    <Box sx={styles.page}>
       {dialogOpen && (
         <DialogFS setOpen={setDialogOpen} option={option} id={id} />
       )}
@@ -140,99 +141,98 @@ const Profile = () => {
       {userDeleteOpen && (
         <UserDeleteDialog setOpen={setUserDeleteOpen} id={userData.id} />
       )}
+      <CssBaseline />
       <Box sx={styles.box_container}>
-        <Card sx={styles.card}>
-          <CardContent>
-            <Typography variant='h5' component='div' sx={styles.typography}>
-              PROFILE
-            </Typography>
-            <Box sx={styles.box_profile}>
-              <Box sx={styles.box_avatar}>
-                <Avatar sx={styles.avatar} aria-label='recipe'>
-                  {letter}
-                </Avatar>
+        <Box sx={styles.box_user}>
+          <Card sx={styles.card}>
+            <CardContent sx={styles.cardContent}>
+              <Typography variant='h5' component='div' sx={styles.typography}>
+                PROFILE
+              </Typography>
+              <Box sx={styles.box_profile}>
+                <Box sx={styles.box_avatar}>
+                  <Avatar sx={styles.avatar} aria-label='recipe'>
+                    {letter}
+                  </Avatar>
+                </Box>
+                <Box sx={styles.box_grid}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Typography color='text.secondary'>Username:</Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Typography>
+                        {userData.username ? userData.username : '-'}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Typography color='text.secondary'>Email:</Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Typography>
+                        {userData.email ? userData.email : '-'}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Typography color='text.secondary'>
+                        First Name:
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Typography>
+                        {userData.firstName ? userData.firstName : '-'}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Typography color='text.secondary'>Last Name:</Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Typography>
+                        {userData.lastName ? userData.lastName : '-'}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
               </Box>
-              <Box sx={styles.box_grid}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>Username:</Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Typography>
-                      {userData.username ? userData.username : '-'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>Email:</Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Typography>
-                      {userData.email ? userData.email : '-'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>First Name:</Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Typography>
-                      {userData.firstName ? userData.firstName : '-'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <Typography color='text.secondary'>Last Name:</Typography>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Typography>
-                      {userData.lastName ? userData.lastName : '-'}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </Box>
-          </CardContent>
-          <CardActions sx={styles.cardAction}>
-            <Button
-              size='large'
-              variant='contained'
-              color='success'
-              onClick={handleEditClick}
-            >
-              Edit
-            </Button>
-            <Button
-              size='large'
-              variant='contained'
-              color='error'
-              onClick={handleDeleteClick}
-            >
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
+            </CardContent>
+            <CardActions sx={styles.cardAction}>
+              <Button
+                size='large'
+                variant='contained'
+                color='success'
+                onClick={handleEditClick}
+              >
+                Edit
+              </Button>
+              <Button
+                size='large'
+                variant='contained'
+                color='error'
+                onClick={handleDeleteClick}
+              >
+                Delete
+              </Button>
+            </CardActions>
+          </Card>
+        </Box>
+        <Box sx={styles.box_table}>
+            <DataGrid
+              sx={{ bgcolor: 'white' }}
+              rows={data}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              disableSelectionOnClick
+            />
+        </Box>
       </Box>
-      <div
-        style={{
-          height: 400,
-          width: '52%',
-          margin: 'auto',
-          marginBottom: '2em',
-        }}
-      >
-        <DataGrid
-          rows={data}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          disableSelectionOnClick
-        />
-      </div>
-    </>
+    </Box>
   );
 };
 

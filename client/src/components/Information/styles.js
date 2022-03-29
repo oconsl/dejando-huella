@@ -1,6 +1,6 @@
 const styles = {
   container: {
-    marginTop: '15px',
+    mt: 3,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',

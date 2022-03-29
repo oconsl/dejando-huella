@@ -16,7 +16,7 @@ import 'leaflet/dist/leaflet.css';
 import LocationIcon from './utils/LocationIcon';
 import DraggableMarker from './utils/DraggableMarker';
 // STYLES
-import styles from './styles';
+import { styles_view } from './styles';
 
 const MapView = ({ saveLocation, closeMap, saveAddress }) => {
   const center = { lat: -26.829901, lng: -65.203667 };
@@ -25,17 +25,17 @@ const MapView = ({ saveLocation, closeMap, saveAddress }) => {
   return (
     <>
       <DialogContent>
-        <DialogTitle sx={styles.dialogTitle}>
+        <DialogTitle sx={styles_view.dialogTitle}>
           Move the marker
           <IconButton
             aria-label='close'
-            sx={styles.iconButton}
+            sx={styles_view.iconButton}
             onClick={closeMap}
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <Box sx={styles.box}>
+        <Box sx={styles_view.box}>
           <MapContainer
             center={center}
             zoom={zoom}
@@ -56,7 +56,7 @@ const MapView = ({ saveLocation, closeMap, saveAddress }) => {
         <DialogActions>
           <Button
             autoFocus
-            sx={styles.button}
+            sx={styles_view.button}
             variant='contained'
             onClick={closeMap}
           >

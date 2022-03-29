@@ -12,7 +12,7 @@ const CardsContainer = () => {
       <Box sx={styles.container}>
         <Box sx={styles.box_title}>
           <Box>
-            <Typography variant='h2' sx={styles.typography}>
+            <Typography variant='h4' sx={styles.typography}>
               GitHub
             </Typography>
           </Box>
