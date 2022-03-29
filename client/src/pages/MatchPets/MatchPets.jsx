@@ -54,11 +54,17 @@ const MatchPets = () => {
     <>
       <CssBaseline/>
       <Box sx={styles.box_title}>
-        <h1>TESTIMONIALS</h1>
-        <div>
+        <h1 style={styles.title}>TESTIMONY</h1>
+        <div style={styles.addPet}>
           <AddPet option={'*AddMatch'} />
         </div>
       </Box>
+      <Pagination
+        count={maxPage}
+        onChange={handleChange}
+        color={'secondary'}
+        sx={styles.pagination}
+      />
       <Box sx={styles.box_container}>
         {matchPets.length !== 0 && matchPetsGroups.length > 0 ? (
           matchPetsGroups[page - 1].map((item, index) => {
@@ -102,12 +108,7 @@ const MatchPets = () => {
           </>
         )}
       </Box>
-      <Pagination
-        count={maxPage}
-        onChange={handleChange}
-        color={'primary'}
-        sx={styles.pagination}
-      />
+      
     </>
   );
 };

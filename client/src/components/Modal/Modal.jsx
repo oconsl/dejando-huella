@@ -22,7 +22,7 @@ const ModalFoundPets = (props) => {
             >
               <CloseIcon />
             </Button>
-            <Grid container spacing={5}>
+            <Grid container sx={styles.grid_container} >
               <Grid item md={12} lg={4} sx={styles.grid}>
                 <Box>
                   <Typography
@@ -62,7 +62,7 @@ const ModalFoundPets = (props) => {
                     Information
                   </Typography>
                 </Box>
-                <Box>
+                <Box sx={styles.box_information}>
                   <Box>
                     <Typography
                       id="modal-modal-description"
@@ -162,10 +162,10 @@ const ModalFoundPets = (props) => {
                   </Typography>
                 </Box>
                 <Box sx={styles.box_location}>
-                  <Box>
-                    <MapStatic position={props.position} sx={styles.map} />
+                  <Box sx={styles.map} >
+                    <MapStatic position={props.position} />
                   </Box>
-                  <Box>
+                  <Box sx={styles.location_text}>
                     <Typography
                       id="modal-modal-description"
                       sx={styles.typography}

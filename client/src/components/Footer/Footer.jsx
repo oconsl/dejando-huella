@@ -10,6 +10,26 @@ import catShadow from '../../assets/catShadow.png';
 import styles from './styles';
 
 const Footer = () => {
+  const handleClick = (event) => {
+    switch(event.target.innerText){
+      case 'Carlos':
+        window.open('https://github.com/SpagnoloCarlos', '_blank');
+        break;
+      case 'Gabriel':
+        window.open('https://github.com/gonzalez-gabriel', '_blank');
+        break;
+      case 'Lourdes':
+        window.open('https://github.com/Luudupuy', '_blank');
+        break;
+      case 'Santiago':
+        window.open('https://github.com/oconsl', '_blank');
+        break;
+      default:
+        break;
+    }
+    console.log(event.target.innerText);
+  }
+
   return (
     <Box sx={styles.box_container}>
       <Container maxWidth='lg'>
@@ -24,20 +44,20 @@ const Footer = () => {
               Follow us
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
-              <Box sx={styles.box_socialNetwork}>
+              <Box sx={styles.box_socialNetwork} onClick={handleClick}>
                 <GitHub sx={{ mx: 2 }} />
                 Carlos
               </Box>
-              <Box sx={styles.box_socialNetwork}>
+              <Box sx={styles.box_socialNetwork} onClick={handleClick}>
                 <GitHub sx={{ mx: 2 }} />
                 Gabriel
               </Box>
 
-              <Box sx={styles.box_socialNetwork}>
+              <Box sx={styles.box_socialNetwork} onClick={handleClick}>
                 <GitHub sx={{ mx: 2 }} />
                 Lourdes
               </Box>
-              <Box sx={styles.box_socialNetwork}>
+              <Box sx={styles.box_socialNetwork} onClick={handleClick}>
                 <GitHub sx={{ mx: 2 }} />
                 Santiago
               </Box>

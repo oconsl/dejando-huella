@@ -1,4 +1,8 @@
 const styles = {
+  page: {
+    width: '100vw',
+    height: '80.5vh',
+  },
   editIcon: {
     color: 'green',
     cursor: 'pointer',
@@ -10,24 +14,37 @@ const styles = {
     transform: 'scale(1.5)',
   },
   box_container: {
-    minWidth: 500,
+    width: '100%',
+    height: '100%',
+    border: 'solid 2px white',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     my: 3,
   },
+  box_table: {
+    width: '52vw',
+    height: '400px',
+  },
+  box_user: {
+    width: '30vw',
+    height: '60vh',
+    backgroundColor: 'black',
+  },
   card: {
-    width: '25%',
-    border: 'solid 2px grey',
+    height: '100%',
+  },
+  cardContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   typography: {
     textAlign: 'center',
     mb: 3,
   },
-  box_profile: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
+  box_profile: {},
   box_avatar: {
     flex: 2,
     display: 'flex',

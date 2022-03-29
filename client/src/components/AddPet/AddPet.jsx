@@ -4,7 +4,7 @@ import { Box, IconButton } from '@mui/material';
 // COMPONENTS
 import DialogFS from '../../components/DialogFS/DialogFS';
 // ASSETS
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logoBlack.png';
 // MATERIAL ICONS
 import AddIcon from '@mui/icons-material/Add';
 // STYLES

@@ -1,4 +1,5 @@
 import axios from 'axios';
+const commonAxios = axios.create();
 
 const getLocalToken = () => {
   const token = JSON.parse(localStorage.getItem('token'));
@@ -29,7 +30,7 @@ export const responseInterceptor = () => {
     },
     async (err) => {
       if (err.response.status === 401) {
-        const res = await axios.post(
+        const res = await commonAxios.post(
           `${process.env.REACT_APP_API_URL}/api/users/refresh-token`,
           {
             username: getLocalUsername(),

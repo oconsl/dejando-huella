@@ -1,4 +1,4 @@
-const styles = {
+export const styles_view = {
   box: {
     display: 'flex',
     justifyContent: 'center',
@@ -21,4 +21,15 @@ const styles = {
   },
 };
 
-export default styles;
+export const styles_static = {
+  box: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 'auto',
+  },
+  dialogContent: {
+    p: 0,
+  },
+};

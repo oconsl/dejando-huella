@@ -5,7 +5,8 @@ const styles = {
     alignItems: 'center',
     bgcolor: 'white',
     borderRadius: '0.7em',
-    border: 'solid 1px black',
+    border: 'solid 4px black',
+    mb: 2,
   },
   box: {
     display: 'flex',
@@ -13,7 +14,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     margin: '10px',
-    width: '83%'
+    width: '83%',
   },
   autocomplete_specie: {
     m: 1,
@@ -88,11 +89,18 @@ const styles = {
     borderRadius: '4px',
   },
   button: {
-    m: 1,
+    'py': 2,
+    'px': 4,
+    'm': 1,
+    'mx': 2,
+    'bgcolor': '#96a42f',
+    '&:hover': {
+      bgcolor: '#a5bc38',
+    },
   },
   box_adoption: {
     display: 'flex',
-  }
+  },
 };
 
 export default styles;

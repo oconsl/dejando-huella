@@ -2,7 +2,13 @@ import { useEffect, useState, Fragment } from 'react';
 // ROUTER
 import { useNavigate } from 'react-router-dom';
 // MATERIAL UI
-import { Box, Container, Pagination, Typography } from '@mui/material';
+import {
+  Box,
+  Container,
+  Pagination,
+  Typography,
+  CssBaseline,
+} from '@mui/material';
 // COMPONENTS
 import CardsPet from '../../components/CardsPets/CardsPets';
 import Filter from '../../components/Filters/Filters';
@@ -72,15 +78,26 @@ const AdoptionPets = () => {
   };
 
   return (
-    <>
+    <Box sx={styles.page}>
+      <CssBaseline />
       <Box sx={styles.box_title}>
-        <h1>ADOPTION PETS</h1>
-        <div>
+        <h1 style={styles.title}>ADOPTION</h1>
+        <div style={styles.addPet}>
           <AddPet option={'*AddAdoption'} />
         </div>
       </Box>
-      <Filter buttonFilter={handleOnFilter} page="adoption-pets" />
-      <Container maxWidth="lg" sx={styles.container}>
+      <Filter buttonFilter={handleOnFilter} page='adoption-pets' />
+      <Pagination
+        page={page}
+        count={maxPage}
+        color='secondary'
+        onChange={(event, value) => {
+          handleChange(value);
+          window.scrollTo(0, 0);
+        }}
+        sx={styles.pagination}
+      />
+      <Box sx={styles.container}>
         {loading ? (
           <Progress />
         ) : adoptionPets.length !== 0 && adoptionPetsGroups.length > 0 ? (
@@ -104,7 +121,7 @@ const AdoptionPets = () => {
                     addressNumber={item.addressNumber}
                     phone={item.phone}
                     position={item.latLng}
-                    page="adoption-pets"
+                    page='adoption-pets'
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -132,35 +149,25 @@ const AdoptionPets = () => {
                   addressNumber={item.addressNumber}
                   phone={item.phone}
                   position={item.latLng}
-                  page="adoption-pets"
+                  page='adoption-pets'
                 />
               </Fragment>
             );
           })
         ) : (
           <Box sx={styles.box_notFound}>
-            <Typography variant="h1" sx={styles.typography}>
+            <Typography variant='h1' sx={styles.typography}>
               Pets Not Found
             </Typography>
             <img
-              src="https://cdn-icons-png.flaticon.com/512/21/21656.png"
-              width="250px"
-              height="250px"
+              src='https://cdn-icons-png.flaticon.com/512/21/21656.png'
+              width='250px'
+              height='250px'
             />
           </Box>
         )}
-      </Container>
-      <Pagination
-        page={page}
-        count={maxPage}
-        color="primary"
-        onChange={(event, value) => {
-          handleChange(value);
-          window.scrollTo(0, 0);
-        }}
-        sx={styles.pagination}
-      />
-    </>
+      </Box>
+    </Box>
   );
 };
 

@@ -10,12 +10,12 @@ import useAutoLogout from '../../hooks/useAutoLogout';
 
 const ProtectedRoutes = () => {
   const timer = useAutoLogout(600);
-  const { token, setToken } = useToken();
+  const { setToken } = useToken();
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    setIsAuth(token && timer > 0);
-  }, [timer, token]);
+    setIsAuth(timer > 0);
+  }, [timer]);
 
   return isAuth ? <><HeaderPet/><Outlet/></> : <Login setToken={setToken}/>;
 };

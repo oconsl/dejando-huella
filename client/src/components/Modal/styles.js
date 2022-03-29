@@ -8,18 +8,29 @@ const styles = {
     maxHeight: '90%',
     width: '75vw',
     overflowY: 'auto',
-    bgcolor: 'background.paper',
+    background:
+      'url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648480057/Shiny_Overlay_xyp2iy.svg")',
     border: '2px solid #000',
     boxShadow: 24,
     p: 2,
     display: 'flex',
     flexDirection: 'column',
+    borderRadius: '1em',
   },
   button_close: {
-    margin: '10px',
-    width: '20px',
-    position: 'relative',
-    left: '91%',
+    'margin': '10px',
+    'width': '20px',
+    'position': 'relative',
+    'left': '91%',
+    'bgcolor': '#96a42f',
+    '&:hover': {
+      bgcolor: '#a5bc38',
+    },
+  },
+  grid_container: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    p: 3,
   },
   grid: {
     p: 0,
@@ -31,7 +42,7 @@ const styles = {
     fontWeight: '600',
     marginBottom: '20px',
     fontSize: '28px',
-    borderBottom: 'solid 1px black'
+    borderBottom: 'solid 1px black',
   },
   typography_name: {
     fontSize: '30px',
@@ -42,10 +53,13 @@ const styles = {
     fontSize: '20px',
   },
   typography_specie: {
-    fontSize: '20px'
+    fontSize: '20px',
   },
-  box_img :{
+  box_img: {
     mx: '10px',
+    boxShadow: '0px 0px 20px 2px rgba(54,54,54,0.65)',
+    borderRadius: '1em',
+    overflow: 'hidden',
   },
   img: {
     width: '400px',
@@ -57,18 +71,29 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '10px',
-    width: '80%'
+    width: '80%',
   },
   map: {
     width: '400px',
     height: '400px',
+    flex: '3',
+    boxShadow: '0px 0px 20px 2px rgba(54,54,54,0.65)',
+    borderRadius: '1em',
+    overflow: 'hidden',
+  },
+  location_text: {
+    flex: '1 0 0',
+    textAlign: 'center',
   },
   box_location: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  box_information: {
+    textAlign: 'center',
+  },
 };
 
 export default styles;
