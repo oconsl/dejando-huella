@@ -60,6 +60,8 @@ const styles = {
     boxShadow: '0px 0px 20px 2px rgba(54,54,54,0.65)',
     borderRadius: '1em',
     overflow: 'hidden',
+    width: '400px',
+    height: '400px',
   },
   img: {
     width: '400px',
@@ -72,6 +74,7 @@ const styles = {
     alignItems: 'center',
     marginBottom: '10px',
     width: '80%',
+    textAlign: 'center',
   },
   map: {
     width: '400px',

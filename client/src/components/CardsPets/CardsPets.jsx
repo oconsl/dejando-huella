@@ -8,6 +8,7 @@ import {
   Button,
   CardActionArea,
   CardActions,
+  Box,
 } from '@mui/material';
 // COMPONENTS
 import Modal from '../Modal/Modal';
@@ -34,7 +35,9 @@ const CardsPet = (props) => {
         img_src={props.img_src}
       />
       <CardActionArea onClick={handleOpenImage} sx={styles.cardActionArea}>
-        <CardMedia component="img" image={props.img_src} alt="" sx={styles.cardMedia} />
+        <Box sx={styles.box_img_preUpLoad}>
+          <CardMedia component="img" image={props.img_src} alt="" sx={styles.cardMedia} />
+        </Box>
       </CardActionArea>  
         <CardContent sx={styles.cardContent}>
           <Typography gutterBottom variant="h5" component="div" color='black'>

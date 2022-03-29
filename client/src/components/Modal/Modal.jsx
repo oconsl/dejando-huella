@@ -37,7 +37,13 @@ const ModalFoundPets = (props) => {
                   <img style={styles.img} src={props.img_src} alt="" />
                 </Box>
                 <Box sx={styles.box_description}>
-                  <Typography sx={styles.typography_name}>{props.title}</Typography>
+                  <Typography sx={styles.typography_name}>
+                    {props.page === 'found-pets' ? (
+                        ''
+                      ) : (
+                        props.title
+                      )}
+                  </Typography>
                   <Typography
                     id="modal-modal-description"
                     sx={styles.typography}

@@ -84,7 +84,6 @@ const FoundPets = () => {
         color="secondary"
         onChange={(event, value) => {
           handleChange(value);
-          window.scrollTo(0, 0);
         }}
         sx={styles.pagination}
       />
@@ -102,6 +101,7 @@ const FoundPets = () => {
                 <Fragment key={index}>
                   <CardsPet
                     key={index}
+                    title={item.date}
                     description={item.description}
                     date={item.date}
                     button={'More Details'}
@@ -129,6 +129,7 @@ const FoundPets = () => {
               <Fragment key={index}>
                 <CardsPet
                   key={index}
+                  title={item.date}
                   description={item.description}
                   date={item.date}
                   button={'More Details'}

@@ -214,7 +214,7 @@ export const fetchMatchPetsData = async ({ setMatchPets }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/match-pets`
   );
-  setMatchPets(res.data);
+  setMatchPets(res.data.reverse());
 };
 
 export const fetchMatchPetData = async ({ savedData, id }) => {
@@ -254,7 +254,7 @@ export const sendLostPetData = async ({ lostPetData }) => {
 
 export const fetchLostPetsData = async ({ setLostPets, setLoading }) => {
   const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/lost-pets`);
-  setLostPets(res.data);
+  setLostPets(res.data.reverse());
   setLoading(false);
 };
 
@@ -262,7 +262,7 @@ export const fetchFilterLostPetsData = async ({ query, setLostPets }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/lost-pets?${query}`
   );
-  setLostPets(res.data);
+  setLostPets(res.data.reverse());
 };
 
 export const fetchLostPetData = async ({ savedData, id }) => {
@@ -308,7 +308,7 @@ export const fetchFoundPetsData = async ({ setFoundPets, setLoading }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/found-pets`
   );
-  setFoundPets(res.data);
+  setFoundPets(res.data.reverse());
   setLoading(false);
 };
 
@@ -316,7 +316,7 @@ export const fetchFilterFoundPetsData = async ({ query, setFoundPets }) => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/found-pets?${query}`
   );
-  setFoundPets(res.data);
+  setFoundPets(res.data.reverse());
 };
 
 export const fetchFoundPetData = async ({ savedData, id }) => {
@@ -361,7 +361,7 @@ export const fetchAdoptionPetsData = async ({
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/adoption-pets`
   );
-  setAdoptionPets(res.data);
+  setAdoptionPets(res.data.reverse());
   setLoading(false);
 };
 
@@ -372,7 +372,7 @@ export const fetchFilterAdoptionPetsData = async ({
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/api/adoption-pets?${query}`
   );
-  setAdoptionPets(res.data);
+  setAdoptionPets(res.data.reverse());
 };
 
 export const fetchAdoptionPetData = async ({ savedData, id }) => {

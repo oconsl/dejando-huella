@@ -84,7 +84,6 @@ const LostPets = () => {
         color="secondary"
         onChange={(event, value) => {
           handleChange(value);
-          window.scrollTo(0, 0);
         }}
         sx={styles.pagination}
       />

@@ -3,7 +3,7 @@ const styles = {
     mx: 8,
     my: 4,
     width: '350px',
-    height: 'auto',
+    height: '500px',
     borderRadius: '0.7em',
     boxShadow: '0px 0px 20px 2px rgba(54,54,54,0.75)',
     background:
@@ -14,6 +14,12 @@ const styles = {
     flexDirection: 'column',
     alignItem: 'center',
     justifyContent: 'center',
+  },
+  box_img_preUpLoad: {
+    background: 'transparent url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648577150/Fading_lines_ozdef7.gif") center no-repeat',
+    width: '310px',
+    height: '310px',
+    marginBottom: '20px'
   },
   cardMedia: {
     marginTop: '20px',
