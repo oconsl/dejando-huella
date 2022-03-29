@@ -79,6 +79,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
       ...textData,
       filter: {
         ...optionData,
+        size: dogPet ? optionData.size : 'Common',
         specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,

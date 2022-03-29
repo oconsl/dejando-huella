@@ -78,6 +78,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
       ...textData,
       filters: {
         ...optionData,
+        size: dogPet ? optionData.size : 'Common',
         specie: dogPet ? 'Dog' : 'Cat',
       },
       latLng: latLng,

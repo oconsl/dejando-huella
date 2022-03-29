@@ -82,6 +82,7 @@ const ModifyAdoptionPet = ({ id, setOpen }) => {
       ...textData,
       filter: {
         ...optionData,
+        size: dogPet ? optionData.size : 'Common',
         ...boolData,
         specie: dogPet ? 'Dog' : 'Cat',
       },

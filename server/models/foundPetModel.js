@@ -13,7 +13,7 @@ const filterSchema = new Schema({
   age: { type: String, required: true },
   sex: { type: String, required: true },
   color: { type: String, required: true },
-  size: { type: String },
+  size: { type: String, required: true },
   fur: { type: String, required: true },
 });
 
