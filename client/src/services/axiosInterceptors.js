@@ -37,8 +37,10 @@ export const responseInterceptor = () => {
 
       return res;
     },
-    async (err) => {
-      return err;
+    (err) => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      window.location = `http://localhost:3000/login`;
     }
   );
 };

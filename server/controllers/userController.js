@@ -86,7 +86,7 @@ const usersController = (User) => {
       username: user.username,
     };
     return jwt.sign(tokenPayload, process.env.TOKEN_SECRET, {
-      expiresIn: '30m',
+      expiresIn: '60m',
     });
   };
 

@@ -196,7 +196,7 @@ const ModifyLostPet = ({ id, setOpen }) => {
                   onChange={handleTextDataChange('description')}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
