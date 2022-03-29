@@ -77,6 +77,16 @@ const LostPets = () => {
         </div>
       </Box>
       <Filter buttonFilter={handleOnFilter} page="lost-pets" />
+      <Pagination
+        page={page}
+        count={maxPage}
+        color="primary"
+        onChange={(event, value) => {
+          handleChange(value);
+          window.scrollTo(0, 0);
+        }}
+        sx={styles.pagination}
+      />
       <Container maxWidth="lg" sx={styles.container}>
         {loading ? (
           <Progress />
@@ -119,7 +129,7 @@ const LostPets = () => {
               <Fragment key={index}>
                 <CardsPet
                   key={index}
-                  tile={item.petName}
+                  title={item.petName}
                   description={item.description}
                   date={item.date}
                   button={'More Details'}
