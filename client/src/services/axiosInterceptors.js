@@ -38,16 +38,7 @@ export const responseInterceptor = () => {
       return res;
     },
     async (err) => {
-      if (err.response.status === 401) {
-        const res = await commonAxios.post(
-          `${process.env.REACT_APP_API_URL}/api/users/refresh-token`,
-          {
-            username: getLocalUsername(),
-          }
-        );
-
-        localStorage.setItem('token', JSON.stringify(res.data));
-      }
+      return err;
     }
   );
 };
