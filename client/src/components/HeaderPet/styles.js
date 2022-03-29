@@ -33,12 +33,16 @@ const styles = {
     'display': 'block',
     'height': '4rem',
     'width': '12rem',
+    'textAlign': 'center',
+    'display': 'flex',
+    'alignItems': 'center',
+    'fontWeight': '800',
     '&:hover': {
       color: '#030104',
       backgroundColor: '#FBFAF2',
       borderRadius: '0',
     },
-    '&:active': {
+    '&.active': {
       color: '#030104',
       backgroundColor: '#FBFAF2',
       borderRadius: '0',

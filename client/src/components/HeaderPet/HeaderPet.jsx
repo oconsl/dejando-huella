@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // ROUTER
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
 // MATERIAL UI
 import {
   AppBar,
@@ -129,12 +129,15 @@ const HeaderPet = () => {
           <Box sx={styles.box_pages}>
             {pages.map((page, index) => (
                 <Button
-                  className='header-button'
+                  // className={classes.button}
+                  component={NavLink}
+                  to={`/${page.toLowerCase()}-pets/1`}
+                  className={styles.button_link}
                   key={`${page}`}
                   sx={styles.button_link}
                   onClick={() => {
                     handleCloseNavMenu();
-                    navigate(`/${page.toLowerCase()}-pets/1`)
+                    // navigate(`/${page.toLowerCase()}-pets/1`)
                   }}
                 >
                   {page}

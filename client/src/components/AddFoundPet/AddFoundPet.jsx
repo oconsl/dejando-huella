@@ -118,7 +118,12 @@ const AddFoundPet = ({ setOpen }) => {
   };
 
   const handleOptionDataChange = (key) => (event) => {
-    setOptionData({ ...optionData, [key]: event.target.innerText });
+    key !== 'size'
+      ? setOptionData({ ...optionData, [key]: event.target.innerText })
+      : setOptionData({
+          ...optionData,
+          [key]: event.target.innerText.split('(')[0].trim(),
+        });
   };
 
   useEffect(() => {
