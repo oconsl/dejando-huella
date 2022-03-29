@@ -146,15 +146,17 @@ const Profile = () => {
         <Box sx={styles.box_user}>
           <Card sx={styles.card}>
             <CardContent sx={styles.cardContent}>
-              <Typography variant='h5' component='div' sx={styles.typography}>
-                PROFILE
-              </Typography>
+              <Box sx={styles.box_title}>
+                <Typography variant='h5' component='div' sx={styles.typography}>
+                  PROFILE
+                </Typography>
+              </Box>
+              <Box sx={styles.box_avatar}>
+                <Avatar sx={styles.avatar} aria-label='recipe'>
+                  {letter}
+                </Avatar>
+              </Box>
               <Box sx={styles.box_profile}>
-                <Box sx={styles.box_avatar}>
-                  <Avatar sx={styles.avatar} aria-label='recipe'>
-                    {letter}
-                  </Avatar>
-                </Box>
                 <Box sx={styles.box_grid}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -222,14 +224,14 @@ const Profile = () => {
           </Card>
         </Box>
         <Box sx={styles.box_table}>
-            <DataGrid
-              sx={{ bgcolor: 'white' }}
-              rows={data}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-              disableSelectionOnClick
-            />
+          <DataGrid
+            sx={{ bgcolor: 'white' }}
+            rows={data}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            disableSelectionOnClick
+          />
         </Box>
       </Box>
     </Box>

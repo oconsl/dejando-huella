@@ -14,6 +14,8 @@ import {
   deleteLostPetData,
   deleteMatchPetData,
 } from '../../services';
+// STYLES
+import styles from './styles';
 
 const ConfirmDialog = ({ setOpen, option, id }) => {
   const handleCancel = () => {
@@ -50,8 +52,12 @@ const ConfirmDialog = ({ setOpen, option, id }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleDelete}>Delete</Button>
+          <Button onClick={handleCancel} variant={'contained'} sx={styles.cancelButton}>
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} variant={'contained'} sx={styles.deleteButton}>
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

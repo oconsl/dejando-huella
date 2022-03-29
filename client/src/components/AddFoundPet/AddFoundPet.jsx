@@ -38,7 +38,7 @@ import {
 import formatDate from '../../utils/formatDate';
 import jsonToFormData from '../../utils/jsonToFormData';
 // STYLES
-import styles from './styles';
+import styles from '../AddAdoptionPet/styles';
 // SERVICES
 import { sendFoundPetData } from '../../services';
 
