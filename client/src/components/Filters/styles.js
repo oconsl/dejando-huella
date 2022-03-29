@@ -5,7 +5,7 @@ const styles = {
     alignItems: 'center',
     bgcolor: 'white',
     borderRadius: '0.7em',
-    border: 'solid 4px black',
+    // border: 'solid 4px black',
     mb: 2,
   },
   box: {

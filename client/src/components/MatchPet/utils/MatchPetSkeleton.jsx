@@ -2,7 +2,6 @@
 import {
   Card,
   CardContent,
-  CardMedia,
   Typography,
   Skeleton,
 } from '@mui/material';
@@ -15,7 +14,7 @@ const MatchPetSkeleton = () => {
       <CardContent sx={styles.cardContent}>
         <Skeleton
           sx={styles.skeleton_main}
-          animation='wave'
+          animation={false} 
           variant='rectangular'
         />
         <CardContent sx={styles.cardContent_text}>
@@ -23,7 +22,7 @@ const MatchPetSkeleton = () => {
             {
               <>
                 <Skeleton
-                  animation='wave'
+                  animation={false}
                   height={50}
                   width={250}
                   sx={styles.skeleton_sub}
@@ -35,24 +34,24 @@ const MatchPetSkeleton = () => {
             {
               <>
                 <Skeleton
-                  animation='wave'
+                  animation={false}
                   height={10}
                   width={380}
                   sx={styles.skeleton_sub}
                 />
                 <Skeleton
-                  animation='wave'
+                  animation={false}
                   height={10}
                   width={270}
                   sx={styles.skeleton_sub}
                 />
                 <Skeleton
-                  animation='wave'
+                  animation={false}
                   height={10}
                   width={290}
                   sx={styles.skeleton_sub}
                 />
-                <Skeleton animation='wave' height={10} width='70%' />
+                <Skeleton animation={false} height={10} width='70%' />
               </>
             }
           </Typography>
