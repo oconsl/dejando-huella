@@ -1,7 +1,6 @@
 // MATERIAL UT
-import { Box, CssBaseline, Typography } from '@mui/material';
+import { Box, CssBaseline } from '@mui/material';
 // COMPONENTS
-import Progress from '../../components/Progress/Progress';
 import HeaderLandingPage from '../../components/HeaderLandingPage/HeaderLandingPage';
 import HeaderPet from '../../components/HeaderPet/HeaderPet';
 // HOOKS
@@ -21,7 +20,7 @@ const NotFound = () => {
       {!token && <HeaderLandingPage />}
       {token && <HeaderPet />}
       <Box sx={styles.container}>
-        <Typography component='h1' variant='h2' sx={styles.title}>PAGE NOT FOUND</Typography>
+        <h1 style={styles.title}>PAGE NOT FOUND</h1>
         <img src={dog404} alt='404' style={styles.img}/>
       </Box>
     </>

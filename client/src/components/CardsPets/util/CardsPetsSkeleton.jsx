@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 // MATERIAL UI
 import { Card, CardContent, Skeleton, Box } from '@mui/material';
 // STYLES

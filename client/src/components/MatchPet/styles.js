@@ -26,7 +26,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: '1em',
-    bgcolor: 'rgba(224,224,209,0.9)',
+    bgcolor: '#afafafbd',
   },
 };
 

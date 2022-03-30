@@ -81,6 +81,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-around',
   },
+  dataGrid: {
+    bgcolor: 'white',
+    borderRadius: '1em',
+  },
 };
 
 export default styles;

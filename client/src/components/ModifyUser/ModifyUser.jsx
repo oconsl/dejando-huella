@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 // MATERIAL UI
 import {
   Box,
-  Container,
   CssBaseline,
   Typography,
   Avatar,
@@ -26,7 +25,6 @@ const ModifyUser = ({ id, setOpen }) => {
     lastName: '',
     email: '',
     username: '',
-    password: '',
   });
   const [error, setError] = useState({
     firstName: '',
@@ -35,7 +33,9 @@ const ModifyUser = ({ id, setOpen }) => {
     email: '',
     password: '',
   });
+  const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -52,8 +52,34 @@ const ModifyUser = ({ id, setOpen }) => {
     });
   };
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    
+    setLoginError(false);
+    setError({
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      password: '',
+    });
+  }
+
   const handleNewPasswordChange = (event) => {
     setNewPassword(event.target.value);
+    
+    setLoginError(false);
+    setError({
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      password: '',
+    });
+  }
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
 
     setLoginError(false);
     setError({
@@ -68,21 +94,40 @@ const ModifyUser = ({ id, setOpen }) => {
   const handleUpdate = async (event) => {
     event.preventDefault();
 
+    userData.password = password;
     const response = await loginUser({ userData, setError: setLoginError });
 
     if(!loginError){
       if(typeof response === 'string'){
-        if(newPassword !== '') userData.password = newPassword;
+        if(newPassword !== '' && confirmPassword === newPassword){
+          userData.password = newPassword;
 
-        const status = await updateUserData({ userData, setError, id });
+          const status = await updateUserData({ userData, setError, id });
         
-        if(status === 200) {
-          setSuccess(true);
+          if(status === 200) {
+            setSuccess(true);
 
-          setTimeout(() => {
-            setSuccess(false);            
-            setOpen(false);
-          }, 3000);
+            setTimeout(() => {
+              setSuccess(false);            
+              setOpen(false);
+            }, 3000);
+          }
+        } else if (newPassword === '' && confirmPassword === newPassword) {
+          const status = await updateUserData({ userData, setError, id });
+
+          if(status === 200) {
+            setSuccess(true);
+
+            setTimeout(() => {
+              setSuccess(false);            
+              setOpen(false);
+            }, 3000);
+          }
+        } else {
+          setError({
+            ...error,
+            password: 'Passwords must be the same.'
+          });        
         }
       }
     }
@@ -94,17 +139,17 @@ const ModifyUser = ({ id, setOpen }) => {
 
   return (
     <>
-      <Container component='main' maxWidth='xs'>
+      <Box component='main'>
         <CssBaseline />
         {!success && (
           <Box
-            sx={styles.box_Container}
+            sx={styles.box_container}
           >
             <Avatar sx={styles.avatar}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component='h1' variant='h5'>
-              Modify
+              Modify User
             </Typography>
             <Box
               component='form'
@@ -178,7 +223,7 @@ const ModifyUser = ({ id, setOpen }) => {
                     type='password'
                     id='password'
                     autoComplete='password'
-                    onChange={handleUserDataChange('password')}
+                    onChange={handlePasswordChange}
                     helperText={loginError ? 'Wrong password.' : null}
                   />
                 </Grid>
@@ -186,14 +231,25 @@ const ModifyUser = ({ id, setOpen }) => {
                   <TextField
                     fullWidth
                     error={error.password !== ''}
-                    label='New password'
-                    type='newPassword'
+                    type={'password'}
                     id='newPassword'
-                    autoComplete='new-password'
+                    autoComplete='new-password'                    
+                    label='New Password'
                     onChange={handleNewPasswordChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    error={error.password !== ''}
+                    type={'password'}
+                    id='confirmPassword'
+                    autoComplete='confirm-password'                    
+                    label='Confirm Password'
+                    onChange={handleConfirmPasswordChange}
                     helperText={
                       error.password === ''
-                        ? 'Only fill this field if you want a new password.'
+                        ? 'Only fill these fields if you want a new password.'
                         : error.password
                     }
                   />
@@ -222,7 +278,7 @@ const ModifyUser = ({ id, setOpen }) => {
             </Box>
           </Grow>
         )}
-      </Container>
+      </Box>
     </>
   );
 };

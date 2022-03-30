@@ -14,8 +14,9 @@ const ModalImagePets = (props) => {
         <Button
           onClick={props.closeImg}
           sx={styles.button}
-          startIcon={<CloseIcon sx={styles.closeIcon} />}
-        />
+        >
+          <CloseIcon sx={styles.closeIcon} />
+        </Button>
         <img style={styles.img} src={props.img_src} alt="" />
       </Box>
     </Modal>

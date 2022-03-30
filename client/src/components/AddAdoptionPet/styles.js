@@ -26,7 +26,7 @@ const styles = {
   avatar: { m: 1, width: '3vw' },
   box_form: { mt: 1, display: 'flex' },
   box_formLeft: { flex: 1, mr: 4 },
-  box_formRight: { flex: 1 },
+  box_formRight: { flex: 1, mt: 3 },
   grid_switch: {
     display: 'flex',
     justifyContent: 'center',
@@ -56,21 +56,18 @@ const styles = {
     },
   },
   box_image: {
-    marginTop: 4,
+    mt: 2,
     display: 'flex',
     flex: 3,
     flexDirection: 'column',
     alignItems: 'center',
   },
   textField_image: { mt: 2 },
-  card: { maxHeight: 450, margin: 'auto' },
+  card: { maxHeight: 450, margin: 'auto', mt: 2 },
   cardMedia: { backgroundColor: 'grey', objectFit: 'contain' },
   switch: {
     '& .MuiSwitch-switchBase.Mui-checked': {
       color: '#705ebb',
-    },
-    '& .MuiSwitch-track': {
-      color: 'red',
     },
   },
   img: { width: '100%' },

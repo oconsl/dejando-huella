@@ -6,6 +6,8 @@ import Information from '../../components/Information/Information';
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 // HOOKS
 import useToken from '../../hooks/useToken';
+// STYLES
+import './style.css';
 
 const LandingPage = () => {
   const { token } = useToken();

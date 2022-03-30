@@ -1,6 +1,8 @@
 const styles = {
   container: {
     height: '70.25vh',
+    width: '30vw',
+    mx: 85,
   },
   box_container: {
     display: 'flex',
@@ -27,12 +29,21 @@ const styles = {
       bgcolor: '#a5bc38',
     },
   },
+  box_signedContainer: {
+    height: '83.1vh',
+  },
   box_signed: {
-    mt: 8,
-    mb: 8,
+    position: 'absolute',
+    left: '40%',
+    top: '35%',
+    width: '25vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    bgcolor: 'white',
+    pb: 8,
+    pt: 6,
+    borderRadius: '1em',
   },
   typography: {
     fontWeight: 'bold',
@@ -40,7 +51,7 @@ const styles = {
     mb: 4,
   },
   checkCircleIcon: {
-    color: 'green',
+    color: '#9aa73a',
     transform: 'scale(3)',
   },
 };

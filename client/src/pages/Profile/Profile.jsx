@@ -225,7 +225,7 @@ const Profile = () => {
         </Box>
         <Box sx={styles.box_table}>
           <DataGrid
-            sx={{ bgcolor: 'white' }}
+            sx={styles.dataGrid}
             rows={data}
             columns={columns}
             pageSize={5}

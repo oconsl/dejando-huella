@@ -11,6 +11,8 @@ import {
 import { deleteUserData } from '../../services';
 // HOOKS
 import useToken from '../../hooks/useToken';
+// STYLES
+import styles from '../ConfirmDialog/styles';
 
 const UserDeleteDialog = ({ setOpen, id }) => {
   const { logOut } = useToken();
@@ -20,8 +22,7 @@ const UserDeleteDialog = ({ setOpen, id }) => {
   };
 
   const handleDelete = () => {
-    deleteUserData({ id });
-    logOut();
+    Promise.all([deleteUserData({ id })]).finally(() => logOut());
   };
 
   return (
@@ -34,8 +35,20 @@ const UserDeleteDialog = ({ setOpen, id }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleDelete}>Delete</Button>
+          <Button
+            onClick={handleCancel}
+            variant='contained'
+            sx={styles.cancelButton}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDelete}
+            variant='contained'
+            sx={styles.deleteButton}
+          >
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

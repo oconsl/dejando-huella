@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 // MATERIAL UI
 import {
   Box,
-  Container,
   CssBaseline,
   Typography,
   Avatar,
@@ -76,18 +75,18 @@ const SignUp = () => {
   return (
     <>
       <HeaderLandingPage />
-      <Container component="main" maxWidth="xs" sx={styles.container}>
-        <CssBaseline />
-        {!success && (
+      <CssBaseline />
+      {success && (
+        <Box component='main' sx={styles.container}>
           <Box sx={styles.box_container}>
             <Avatar sx={styles.avatar}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component='h1' variant='h5'>
               Sign up
             </Typography>
             <Box
-              component="form"
+              component='form'
               onSubmit={handleSignUp}
               sx={styles.box_child}
               required
@@ -98,10 +97,10 @@ const SignUp = () => {
                     required
                     fullWidth
                     error={error.firstName !== ''}
-                    name="firstName"
-                    label="First Name"
-                    id="firstName"
-                    autoComplete="given-name"
+                    name='firstName'
+                    label='First Name'
+                    id='firstName'
+                    autoComplete='given-name'
                     onChange={handleUserDataChange('firstName')}
                     helperText={error.firstName}
                   />
@@ -111,10 +110,10 @@ const SignUp = () => {
                     required
                     fullWidth
                     error={error.lastName !== ''}
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
+                    id='lastName'
+                    label='Last Name'
+                    name='lastName'
+                    autoComplete='family-name'
                     onChange={handleUserDataChange('lastName')}
                     inputProps={{
                       inputMode: 'text',
@@ -128,10 +127,10 @@ const SignUp = () => {
                     required
                     error={error.username !== ''}
                     fullWidth
-                    id="username"
-                    label="User Name"
-                    name="username"
-                    autoComplete="family-name"
+                    id='username'
+                    label='User Name'
+                    name='username'
+                    autoComplete='family-name'
                     onChange={handleUserDataChange('username')}
                     inputProps={{
                       inputMode: 'text',
@@ -145,10 +144,10 @@ const SignUp = () => {
                     required
                     error={error.email !== ''}
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
+                    id='email'
+                    label='Email Address'
+                    name='email'
+                    autoComplete='email'
                     onChange={handleUserDataChange('email')}
                     inputProps={{
                       inputMode: 'text',
@@ -165,28 +164,30 @@ const SignUp = () => {
                     required
                     fullWidth
                     error={error.password !== ''}
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
+                    name='password'
+                    label='Password'
+                    type='password'
+                    id='password'
+                    autoComplete='new-password'
                     onChange={handleUserDataChange('password')}
                     helperText={error.password}
                   />
                 </Grid>
               </Grid>
               <Button
-                type="submit"
+                type='submit'
                 fullWidth
-                variant="contained"
+                variant='contained'
                 sx={styles.button}
               >
                 Sign Up
               </Button>
             </Box>
           </Box>
-        )}
-        {success && (
+        </Box>
+      )}
+      {!success && (
+        <Box sx={styles.box_signedContainer}>
           <Grow in={true}>
             <Box sx={styles.box_signed}>
               <Typography sx={styles.typography}>
@@ -195,8 +196,8 @@ const SignUp = () => {
               <CheckCircleIcon sx={styles.checkCircleIcon} />
             </Box>
           </Grow>
-        )}
-      </Container>
+        </Box>
+      )}
     </>
   );
 };

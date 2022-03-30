@@ -38,6 +38,7 @@ import jsonToFormData from '../../utils/jsonToFormData';
 import { updateFoundPetData, fetchFoundPetData } from '../../services';
 // STYLES
 import styles from '../AddAdoptionPet/styles';
+import styles_found from './styles_found';
 
 const ModifyFoundPet = ({ id, setOpen }) => {
   const [newDate, setNewDate] = useState(false);
@@ -163,7 +164,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
           sx={styles.box_form}
           required
         >
-          <Box sx={styles.box_formLeft}>
+          <Box sx={styles_found.box_formLeft}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -314,9 +315,8 @@ const ModifyFoundPet = ({ id, setOpen }) => {
               </Grid>
             </Grid>
           </Box>
-          <Box sx={styles.box_formRight}>
+          <Box sx={styles_found.box_formRight}>
             <Box sx={styles.box_image}>
-              <div>Image to upload</div>
               <TextField
                 id='image'
                 fullWidth

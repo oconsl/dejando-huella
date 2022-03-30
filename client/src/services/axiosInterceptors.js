@@ -12,15 +12,10 @@ const getLocalUsername = () => {
 };
 
 export const requestInterceptor = () => {
-  axios.interceptors.request.use(
-    (config) => {
-      config.headers['Authorization'] = `Bearer ${getLocalToken()}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  axios.interceptors.request.use((config) => {
+    config.headers['Authorization'] = `Bearer ${getLocalToken()}`;
+    return config;
+  });
 };
 
 export const responseInterceptor = () => {
@@ -38,9 +33,11 @@ export const responseInterceptor = () => {
       return res;
     },
     (err) => {
-      localStorage.removeItem('token');
-      localStorage.removeItem('username');
-      window.location = `http://localhost:3000/login`;
+      if (err.response.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        window.location = `http://localhost:3000/login`;
+      }
     }
   );
 };

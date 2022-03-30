@@ -8,9 +8,9 @@ const styles = {
   },
   title: {
     color: 'white',
-    transform: 'scale(1.4)',
-    textShadow:
-      '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+    transform: 'scale(1.8)',
+    textShadow: '2px 2px 0px #000000',
+    weight: '600',
   },
   img: {
     border: '5px solid white',

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 // MATERIAL UI
 import {
   Box,
-  Container,
   Pagination,
   Typography,
   CssBaseline,
@@ -162,6 +161,7 @@ const AdoptionPets = () => {
               src='https://cdn-icons-png.flaticon.com/512/21/21656.png'
               width='250px'
               height='250px'
+              alt='No-Results'
             />
           </Box>
         )}

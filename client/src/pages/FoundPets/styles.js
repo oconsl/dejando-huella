@@ -12,8 +12,7 @@ const styles = {
   title: {
     color: 'white',
     transform: 'scale(1.8)',
-    textShadow:
-      '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+    textShadow: '2px 2px 0px #000000',
   },
   addPet: {
     position: 'absolute',
@@ -37,6 +36,8 @@ const styles = {
   typography: {
     fontWeight: '500',
     marginBottom: '50px',
+    color: 'white',
+    textShadow: '2px 2px 0px #000000',
   },
   pagination: {
     'display': 'flex',

@@ -23,6 +23,7 @@ import jsonToFormData from '../../utils/jsonToFormData';
 import { sendMatchPetData } from '../../services';
 // STYLES
 import styles from '../AddAdoptionPet/styles';
+import styles_match from './styles_match';
 
 const AddMatchPet = ({ setOpen }) => {
   // CROP
@@ -90,7 +91,7 @@ const AddMatchPet = ({ setOpen }) => {
           sx={styles.box_form}
           required
         >
-          <Box sx={styles.box_formLeft}>
+          <Box sx={styles_match.box_formLeft}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -107,7 +108,7 @@ const AddMatchPet = ({ setOpen }) => {
                   required
                   fullWidth
                   multiline
-                  rows={19}
+                  rows={20}
                   name='testimony'
                   id='testimony'
                   label='Testimony'
@@ -118,7 +119,6 @@ const AddMatchPet = ({ setOpen }) => {
           </Box>
           <Box sx={styles.box_formRight}>
             <Box sx={styles.box_image}>
-              <div>Image to upload</div>
               <TextField
                 required
                 id='image'
@@ -130,7 +130,7 @@ const AddMatchPet = ({ setOpen }) => {
                   shrink: true,
                 }}
                 onChange={handleFileChange}
-                sx={styles.textField}
+                sx={styles_match.textField_image}
               />
               {openCrop && (
                 <Dialog

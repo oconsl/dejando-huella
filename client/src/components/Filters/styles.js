@@ -5,8 +5,9 @@ const styles = {
     alignItems: 'center',
     bgcolor: 'white',
     borderRadius: '0.7em',
-    // border: 'solid 4px black',
     mb: 2,
+    width: '69%',
+    boxShadow: '0px 0px 10px 2px rgba(54,54,54,0.65)',
   },
   box: {
     display: 'flex',

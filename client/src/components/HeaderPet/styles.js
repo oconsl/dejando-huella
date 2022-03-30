@@ -30,7 +30,6 @@ const styles = {
     'mx': 4,
     'color': '#FBFAF2',
     'letterSpacing': '0.3em',
-    'display': 'block',
     'height': '4rem',
     'width': '12rem',
     'textAlign': 'center',

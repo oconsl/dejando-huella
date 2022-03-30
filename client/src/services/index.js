@@ -32,7 +32,7 @@ export const loginUser = async ({ userData, setError }) => {
 };
 
 export const sendUserData = async ({ userData, setError }) => {
-  const res = await axios
+  const res = await commonAxios
     .post(`${process.env.REACT_APP_API_URL}/api/users/signup`, userData)
     .then((res) => {
       return res.status;
@@ -127,12 +127,17 @@ export const fetchUserDataById = async ({ setUserData, id }) => {
 };
 
 export const updateUserData = async ({ userData, setError, id }) => {
-  const res = await axios
-    .put(`${process.env.REACT_APP_API_URL}/api/users/${id}`, userData)
+  const res = await commonAxios
+    .put(`${process.env.REACT_APP_API_URL}/api/users/${id}`, userData, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
+      },
+    })
     .then((res) => {
       return res.status;
     })
     .catch((err) => {
+      console.log(err.response);
       if (err.response.status === 403) {
         switch (err.response.data[0]) {
           case 'email':
@@ -193,16 +198,13 @@ export const updateUserData = async ({ userData, setError, id }) => {
   return res;
 };
 
-export const deleteUserData = async ({ id }) => {
-  const res = await axios.delete(
-    `${process.env.REACT_APP_API_URL}/api/users/${id}`
-  );
-  return res.data;
+export const deleteUserData = ({ id }) => {
+  return axios.delete(`${process.env.REACT_APP_API_URL}/api/users/${id}`);
 };
 
 // MATCH PETS SERVICES
 export const sendMatchPetData = async ({ matchPetData }) => {
-  const res = await axios({
+  await axios({
     method: 'post',
     url: `${process.env.REACT_APP_API_URL}/api/match-pets`,
     data: matchPetData,
@@ -244,7 +246,7 @@ export const deleteMatchPetData = async ({ id }) => {
 
 // LOST PET SERVICES
 export const sendLostPetData = async ({ lostPetData }) => {
-  const res = await axios({
+  await axios({
     method: 'post',
     url: `${process.env.REACT_APP_API_URL}/api/lost-pets`,
     data: lostPetData,
@@ -296,7 +298,7 @@ export const fetchLostPetByQuery = async ({ query }) => {
 
 // FOUND PET SERVICES
 export const sendFoundPetData = async ({ foundPetData }) => {
-  const res = await axios({
+  await axios({
     method: 'post',
     url: `${process.env.REACT_APP_API_URL}/api/found-pets`,
     data: foundPetData,
@@ -346,7 +348,7 @@ export const deleteFoundPetData = async ({ id }) => {
 
 // ADOPTION PET SERVICES
 export const sendAdoptionPetData = async ({ adoptionPetData }) => {
-  const res = await axios({
+  await axios({
     method: 'post',
     url: `${process.env.REACT_APP_API_URL}/api/adoption-pets`,
     data: adoptionPetData,

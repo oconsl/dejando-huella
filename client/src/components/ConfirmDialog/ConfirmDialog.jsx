@@ -52,10 +52,18 @@ const ConfirmDialog = ({ setOpen, option, id }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} variant={'contained'} sx={styles.cancelButton}>
+          <Button
+            onClick={handleCancel}
+            variant={'contained'}
+            sx={styles.cancelButton}
+          >
             Cancel
           </Button>
-          <Button onClick={handleDelete} variant={'contained'} sx={styles.deleteButton}>
+          <Button
+            onClick={handleDelete}
+            variant={'contained'}
+            sx={styles.deleteButton}
+          >
             Delete
           </Button>
         </DialogActions>

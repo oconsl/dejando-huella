@@ -312,7 +312,6 @@ const AddFoundPet = ({ setOpen }) => {
           </Box>
           <Box sx={styles.box_formRight}>
             <Box sx={styles.box_image}>
-              <div>Image to upload</div>
               <TextField
                 required
                 id='image'

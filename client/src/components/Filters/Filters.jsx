@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // MATERIAL UI
-import { Button, Container, TextField, Autocomplete, Box } from '@mui/material';
+import { Button, TextField, Autocomplete, Box } from '@mui/material';
 // MATERIAL ICONS
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 // INPUT DATA
@@ -72,7 +72,7 @@ const Filter = (props) => {
   };
 
   return (
-    <Container maxWidth="lg" sx={styles.container}>
+    <Box sx={styles.container}>
       <Box sx={styles.box}>
         <Autocomplete
           disablePortal
@@ -267,7 +267,7 @@ const Filter = (props) => {
       >
         Filter
       </Button>
-    </Container>
+    </Box>
   );
 };
 
