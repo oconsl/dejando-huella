@@ -5,6 +5,11 @@ import { CssBaseline, Box, Typography } from '@mui/material';
 import CardsPage from '../CardsPage/CardsPage';
 // STYLES
 import styles from './styles';
+// IMAGES
+import foundImg from '../../assets/foundImg.jpg';
+import lostImg from '../../assets/lostImg.jpg';
+import adoptionImg from '../../assets/adoptionImg.jpg';
+import testimonyImg from '../../assets/testimonyImg.png';
 
 const Information = () => {
   return (
@@ -29,16 +34,14 @@ const Information = () => {
               just sign up and start helping others to find their pets, and they
               will help you too! ~ Enjoy !
             </Typography>
-            <Box className='cards' sx={styles.box_cards}>
+            <Box className="cards" sx={styles.box_cards}>
               <CardsPage
                 title={'Found'}
                 description={
                   'Si perdiste una mascota, podes buscarla en nuestro registro de mascotas'
                 }
                 button={'More information'}
-                img_src={
-                  'https://www.caracteristicas.co/wp-content/uploads/2017/02/perro-3-e1561679226953.jpg'
-                }
+                img_src={foundImg}
               />
               <CardsPage
                 title={'Lost'}
@@ -46,9 +49,7 @@ const Information = () => {
                   'Si perdiste una mascota, podes publicarla en esta sección'
                 }
                 button={'More information'}
-                img_src={
-                  'https://www.fanaticosdelasmascotas.cl/wp-content/uploads/2020/09/Alexas_Fotos-pixabay.jpg'
-                }
+                img_src={lostImg}
               />
               <CardsPage
                 title={'Adoption'}
@@ -56,9 +57,7 @@ const Information = () => {
                   'Aqui puedes encontra tu proximo compañero de la vida'
                 }
                 button={'More information'}
-                img_src={
-                  'https://www.gndiario.com/sites/default/files/styles/noticia_detalle_noticia_2_1/public/noticias/alimentos-prohibidos-perros.jpg?itok=cEeYurRC'
-                }
+                img_src={adoptionImg}
               />
               <CardsPage
                 title={'Testimony'}
@@ -66,9 +65,7 @@ const Information = () => {
                   'Aqui puedes encontra tu proximo compañero de la vida'
                 }
                 button={'More information'}
-                img_src={
-                  'https://www.gndiario.com/sites/default/files/styles/noticia_detalle_noticia_2_1/public/noticias/alimentos-prohibidos-perros.jpg?itok=cEeYurRC'
-                }
+                img_src={testimonyImg}
               />
             </Box>
           </Box>

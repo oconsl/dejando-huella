@@ -1,7 +1,7 @@
 const styles = {
   page: {
     width: '100%',
-    height: '79.8vh',
+    height: '80.5vh',
   },
   editIcon: {
     color: '#2E8B57',
