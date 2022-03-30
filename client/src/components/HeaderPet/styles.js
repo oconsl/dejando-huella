@@ -5,25 +5,25 @@ const styles = {
   },
   typography_toolbar: {
     mr: 2,
-    display: { xs: 'none', md: 'flex' },
+    display: { md: 'none', lg: 'flex' },
   },
   box: {
     flexGrow: 1,
-    display: { xs: 'flex', md: 'none' },
+    display: { md: 'flex', lg: 'none' },
   },
   menu_appbar: {
-    display: { xs: 'block', md: 'none' },
+    display: { md: 'block', lg: 'none' },
   },
   typography: {
     flexGrow: 1,
-    display: { xs: 'flex', md: 'none' },
+    display: { md: 'flex', lg: 'none' },
   },
   box_pages: {
     flex: 6,
     justifyContent: 'center',
     height: '100%',
     flexGrow: 1,
-    display: { xs: 'none', md: 'flex' },
+    display: { md: 'none', lg: 'flex' },
   },
   button_link: {
     'my': 0,

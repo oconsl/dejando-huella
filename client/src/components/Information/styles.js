@@ -27,7 +27,8 @@ const styles = {
     flexDirection: 'column',
     flexWrap: 'wrap',
     alignItems: 'center',
-    bgcolor: '#96a42f',
+    // bgcolor: '#96a42f',
+    background: 'url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648650410/subtle-prism_i4hrta.svg")', 
     borderRadius: '1em',
     boxShadow: '0px 0px 20px 2px rgba(54,54,54,0.75)',
     height: '100%',
@@ -45,6 +46,9 @@ const styles = {
   box_cards: {
     display: 'flex',
     marginBottom: '20px',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 };
 
