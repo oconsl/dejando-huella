@@ -13,7 +13,7 @@ const CardsContainer = () => {
         <Box sx={styles.box_title}>
           <Box>
             <Typography variant='h4' sx={styles.typography}>
-              GitHub
+              GITHUB
             </Typography>
           </Box>
         </Box>

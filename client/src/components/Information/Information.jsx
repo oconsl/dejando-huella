@@ -14,21 +14,20 @@ const Information = () => {
         <Box sx={styles.box_title}>
           <Box>
             <Typography variant='h2' sx={styles.typography_h2}>
-              Read about our idea
+              READ ABOUT OUR IDEA
             </Typography>
           </Box>
         </Box>
         <Box sx={styles.container}>
           <Box sx={styles.box_information}>
             <Typography variant='body1' sx={styles.typography_body1}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              nemo repellendus sint deserunt totam magnam ex omnis reiciendis,
-              consequuntur quibusdam quae numquam officia adipisci excepturi,
-              molestiae tenetur, nobis maxime rerum. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Aliquid voluptatibus perferendis
-              vitae. Doloribus repellendus assumenda excepturi dolores omnis quo
-              consequuntur, rem molestias beatae quas. Neque nulla commodi ea
-              architecto odio?
+              The idea of building this page comes alive because the need of
+              have a centralized place in which we can upload our pet's
+              information. With our page all the people could search and find
+              different entries, so they could try to search, find or adopt any
+              pet published here. If you want to take part on this community,
+              just sign up and start helping others to find their pets, and they
+              will help you too! ~ Enjoy !
             </Typography>
             <Box className='cards' sx={styles.box_cards}>
               <CardsPage

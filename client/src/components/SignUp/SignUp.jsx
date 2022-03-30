@@ -76,7 +76,7 @@ const SignUp = () => {
     <>
       <HeaderLandingPage />
       <CssBaseline />
-      {success && (
+      {!success && (
         <Box component='main' sx={styles.container}>
           <Box sx={styles.box_container}>
             <Avatar sx={styles.avatar}>
@@ -186,7 +186,7 @@ const SignUp = () => {
           </Box>
         </Box>
       )}
-      {!success && (
+      {success && (
         <Box sx={styles.box_signedContainer}>
           <Grow in={true}>
             <Box sx={styles.box_signed}>
