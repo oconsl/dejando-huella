@@ -101,6 +101,7 @@ const styles = {
   },
   box_adoption: {
     display: 'flex',
+    flexWrap: 'wrap',
   },
 };
 

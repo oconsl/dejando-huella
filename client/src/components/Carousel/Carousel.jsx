@@ -5,25 +5,27 @@ import Carousel from 'react-material-ui-carousel';
 import { Paper, Typography } from '@mui/material';
 // STYLES
 import styles from './styles';
+// IMAGES
+import carousel1 from '../../assets/carousel1-2.jpg';
+import carousel2 from '../../assets/carousel2.jpg';
+import carousel3 from '../../assets/carousel3.jpg';
+
 
 const items = [
   {
     name: 'Be the person',
     description: 'your dog thinks you are',
-    img_src:
-      'https://latam.globspot.tech/wp-content/uploads/2019/08/localizador-gps-personas-mascotas-globspot-mexico-banner2.jpg',
+    img_src: carousel1,
   },
   {
     name: 'A purr',
     description: 'is worth a thousand words',
-    img_src:
-      'http://jorgerisi.com/site/wp-content/uploads/2021/06/hoja-de-vida-header.jpg',
+    img_src: carousel2,
   },
   {
     name: 'Treat animals',
     description: 'as you would like to be treated',
-    img_src:
-      'https://www.helpguau.com/wp-content/uploads/2019/06/perro-ojos-cerrado-helpguau.jpg',
+    img_src: carousel3,
   },
 ];
 
