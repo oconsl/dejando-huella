@@ -138,6 +138,7 @@ const HeaderPet = () => {
                 width={'45px'}
                 height={'45px'}
                 src="https://cdn-icons-png.flaticon.com/512/1076/1076826.png"
+                style={styles.img}
               />
             </Link>
           </Typography>

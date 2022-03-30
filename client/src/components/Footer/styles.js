@@ -9,7 +9,7 @@ const styles = {
     flex: '0 1 40px',
     position: 'relative',
     bottom: '0',
-    height: '10vh',
+    height: 'auto',//'10vh',
     color: 'white',
     py: 1,
     // px: { xs: 3, sm: 0 },

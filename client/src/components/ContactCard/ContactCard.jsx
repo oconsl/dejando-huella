@@ -39,6 +39,7 @@ const ContactCard = ({ user }) => {
           height='300'
           image={userData.avatar}
           alt={userData.user}
+          sx={styles.image}
         />
         <CardContent sx={styles.cardContent}>
           <Typography gutterBottom variant='h5' component='div'>

@@ -1,6 +1,6 @@
 import React from 'react';
 // MATERIAL UI
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Hidden } from '@mui/material';
 // MATERIAL ICONS
 import { GitHub } from '@mui/icons-material';
 // ASSETS
@@ -11,7 +11,7 @@ import styles from './styles';
 
 const Footer = () => {
   const handleClick = (event) => {
-    switch(event.target.innerText){
+    switch (event.target.innerText) {
       case 'Carlos':
         window.open('https://github.com/SpagnoloCarlos', '_blank');
         break;
@@ -28,18 +28,20 @@ const Footer = () => {
         break;
     }
     console.log(event.target.innerText);
-  }
+  };
 
   return (
     <Box sx={styles.box_container}>
-      <Container maxWidth='lg'>
+      <Container maxWidth="lg">
         <Grid container spacing={5}>
-          <Grid item xs={12} sm={2}>
-            <Box sx={styles.box_dog}>
-              <img src={dogShadow} alt='dog' style={styles.dog} />
-            </Box>
+          <Grid item md={0} lg={2}>
+            <Hidden only={['xs', 'sm', 'md']}>
+              <Box sx={styles.box_dog}>
+                <img src={dogShadow} alt="dog" style={styles.dog} />
+              </Box>
+            </Hidden>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid item md={12} sm={12} xs={12} lg={8}>
             <Box borderBottom={1} sx={styles.box_followUs}>
               Follow us
             </Box>
@@ -63,13 +65,15 @@ const Footer = () => {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <Box sx={styles.box_cat}>
-              <img src={catShadow} alt='cat' style={styles.cat} />
-            </Box>
+          <Grid item md={0} lg={2}>
+            <Hidden only={['xs', 'sm', 'md']}>
+              <Box sx={styles.box_cat}>
+                <img src={catShadow} alt="cat" style={styles.cat} />
+              </Box>
+            </Hidden>
           </Grid>
         </Grid>
-        <Box textAlign='center' sx={styles.box_copyright}>
+        <Box textAlign="center" sx={styles.box_copyright}>
           ® {new Date().getFullYear()} All rights reserved | Dejando Huella
         </Box>
       </Container>

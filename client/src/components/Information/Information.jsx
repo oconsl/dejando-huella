@@ -4,7 +4,6 @@ import { CssBaseline, Box, Typography } from '@mui/material';
 // COMPONENTS
 import CardsPage from '../CardsPage/CardsPage';
 // STYLES
-import './Information.css';
 import styles from './styles';
 
 const Information = () => {
@@ -33,7 +32,7 @@ const Information = () => {
             </Typography>
             <Box className='cards' sx={styles.box_cards}>
               <CardsPage
-                title={'Found Pets'}
+                title={'Found'}
                 description={
                   'Si perdiste una mascota, podes buscarla en nuestro registro de mascotas'
                 }
@@ -43,7 +42,7 @@ const Information = () => {
                 }
               />
               <CardsPage
-                title={'Lost Pets'}
+                title={'Lost'}
                 description={
                   'Si perdiste una mascota, podes publicarla en esta sección'
                 }
@@ -53,7 +52,7 @@ const Information = () => {
                 }
               />
               <CardsPage
-                title={'Adoption Pets'}
+                title={'Adoption'}
                 description={
                   'Aqui puedes encontra tu proximo compañero de la vida'
                 }
@@ -63,7 +62,7 @@ const Information = () => {
                 }
               />
               <CardsPage
-                title={'Adoption Pets'}
+                title={'Testimony'}
                 description={
                   'Aqui puedes encontra tu proximo compañero de la vida'
                 }
