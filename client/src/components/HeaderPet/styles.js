@@ -5,7 +5,7 @@ const styles = {
   },
   typography_toolbar: {
     mr: 2,
-    display: { md: 'none', lg: 'flex' },
+    display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' },
   },
   box: {
     flexGrow: 1,
@@ -23,7 +23,7 @@ const styles = {
     justifyContent: 'center',
     height: '100%',
     flexGrow: 1,
-    display: { md: 'none', lg: 'flex' },
+    display: { xs: 'none', sm: 'none', md: 'none', lg: 'flex' },
   },
   button_link: {
     'my': 0,

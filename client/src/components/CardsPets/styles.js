@@ -16,10 +16,11 @@ const styles = {
     justifyContent: 'center',
   },
   box_img_preUpLoad: {
-    background: 'transparent url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648577150/Fading_lines_ozdef7.gif") center no-repeat',
+    background:
+      'transparent url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648577150/Fading_lines_ozdef7.gif") center no-repeat',
     width: '310px',
     height: '310px',
-    marginBottom: '20px'
+    marginBottom: '20px',
   },
   cardMedia: {
     marginTop: '20px',

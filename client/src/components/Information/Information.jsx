@@ -4,7 +4,6 @@ import { CssBaseline, Box, Typography } from '@mui/material';
 // COMPONENTS
 import CardsPage from '../CardsPage/CardsPage';
 // STYLES
-import './Information.css';
 import styles from './styles';
 
 const Information = () => {
