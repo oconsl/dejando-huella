@@ -2,3 +2,16 @@
   background: url('https://res.cloudinary.com/dw4hak4ok/image/upload/v1648495470/Animated_Shape_2_zubnka.svg');
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial;
 }
+
+:root::-webkit-scrollbar {
+  height: 8px;
+}
+
+:root::-webkit-scrollbar-track {
+  background-color: rgb(19, 18, 17);
+}
+
+:root::-webkit-scrollbar-thumb {
+  background-color: rgb(243, 243, 243);
+  border-radius: 5px;
+}
