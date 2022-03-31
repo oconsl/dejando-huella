@@ -43,6 +43,7 @@ const ModifyMatchPet = ({ id, setOpen }) => {
     const matchPetDataBody = new FormData();
 
     const dataBody = {
+      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
     };
 

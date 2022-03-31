@@ -80,6 +80,7 @@ const ModifyAdoptionPet = ({ id, setOpen }) => {
     const adoptionPetDataBody = new FormData();
 
     const dataBody = {
+      username: JSON.parse(localStorage.getItem('username')),
       ...textData,
       filter: {
         ...optionData,
