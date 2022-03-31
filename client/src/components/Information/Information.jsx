@@ -34,11 +34,11 @@ const Information = () => {
               just sign up and start helping others to find their pets, and they
               will help you too! ~ Enjoy !
             </Typography>
-            <Box className='cards' sx={styles.box_cards}>
+            <Box className="cards" sx={styles.box_cards}>
               <CardsPage
                 title={'Found'}
                 description={
-                  "If you lost your pet ( or you found one ), try searching for it in our found pet's entries."
+                  'Si perdiste una mascota, podes buscarla en nuestro registro de mascotas'
                 }
                 button={'More information'}
                 img_src={foundImg}
@@ -46,7 +46,7 @@ const Information = () => {
               <CardsPage
                 title={'Lost'}
                 description={
-                  'If you lost your pet, you can publish it in this section and the community will help to find it.'
+                  'Si perdiste una mascota, podes publicarla en esta sección'
                 }
                 button={'More information'}
                 img_src={lostImg}
@@ -54,7 +54,7 @@ const Information = () => {
               <CardsPage
                 title={'Adoption'}
                 description={
-                  'Here you can find your next partner, give them a good family ♥.'
+                  'Aqui puedes encontra tu proximo compañero de la vida'
                 }
                 button={'More information'}
                 img_src={adoptionImg}
@@ -62,7 +62,7 @@ const Information = () => {
               <CardsPage
                 title={'Testimony'}
                 description={
-                  'Want to read about some lovely stories ? Check out some user testimonials.'
+                  'Aqui puedes encontra tu proximo compañero de la vida'
                 }
                 button={'More information'}
                 img_src={testimonyImg}
