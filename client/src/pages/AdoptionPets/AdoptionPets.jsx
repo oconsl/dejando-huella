@@ -2,12 +2,7 @@ import { useEffect, useState, Fragment } from 'react';
 // ROUTER
 import { useNavigate } from 'react-router-dom';
 // MATERIAL UI
-import {
-  Box,
-  Pagination,
-  Typography,
-  CssBaseline,
-} from '@mui/material';
+import { Box, Pagination, Typography, CssBaseline } from '@mui/material';
 // COMPONENTS
 import CardsPet from '../../components/CardsPets/CardsPets';
 import Filter from '../../components/Filters/Filters';

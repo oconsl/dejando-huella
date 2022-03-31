@@ -70,18 +70,18 @@ const LostPets = () => {
 
   return (
     <Box sx={styles.page}>
-      <CssBaseline/>
+      <CssBaseline />
       <Box sx={styles.box_title}>
         <h1 style={styles.title}>LOST</h1>
         <div style={styles.addPet}>
           <AddPet option={'*AddLost'} />
         </div>
       </Box>
-      <Filter buttonFilter={handleOnFilter} page="lost-pets" />
+      <Filter buttonFilter={handleOnFilter} page='lost-pets' />
       <Pagination
         page={page}
         count={maxPage}
-        color="secondary"
+        color='secondary'
         onChange={(event, value) => {
           handleChange(value);
         }}
@@ -111,7 +111,7 @@ const LostPets = () => {
                     addressNumber={item.addressNumber}
                     phone={item.phone}
                     position={item.latLng}
-                    page="lost-pets"
+                    page='lost-pets'
                   />
                   {skeletonCount.map((content, subIndex) => {
                     return (
@@ -139,26 +139,25 @@ const LostPets = () => {
                   addressNumber={item.addressNumber}
                   phone={item.phone}
                   position={item.latLng}
-                  page="lost-pets"
+                  page='lost-pets'
                 />
               </Fragment>
             );
           })
         ) : (
           <Box sx={styles.box_notFound}>
-            <Typography variant="h1" sx={styles.typography}>
+            <Typography variant='h1' sx={styles.typography}>
               Pets Not Found
             </Typography>
             <img
-              src="https://cdn-icons-png.flaticon.com/512/21/21656.png"
-              width="250px"
-              height="250px"
+              src='https://cdn-icons-png.flaticon.com/512/21/21656.png'
+              width='250px'
+              height='250px'
               alt='No-Results'
             />
           </Box>
         )}
       </Box>
-      
     </Box>
   );
 };

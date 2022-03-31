@@ -137,7 +137,6 @@ export const updateUserData = async ({ userData, setError, id }) => {
       return res.status;
     })
     .catch((err) => {
-      console.log(err.response);
       if (err.response.status === 403) {
         switch (err.response.data[0]) {
           case 'email':

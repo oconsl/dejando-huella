@@ -10,7 +10,6 @@ import carousel1 from '../../assets/carousel1-2.jpg';
 import carousel2 from '../../assets/carousel2.jpg';
 import carousel3 from '../../assets/carousel3.jpg';
 
-
 const items = [
   {
     name: 'Be the person',
@@ -55,26 +54,16 @@ const Item = (props) => {
   return (
     <Paper sx={styles.paper}>
       <div style={styles.div_section}>
-        <Typography
-          sx={styles.typography_name}
-          variant="h2"
-        >
+        <Typography sx={styles.typography_name} variant='h2'>
           {props.item.name}
         </Typography>
-        <Typography
-          sx={styles.typography_description}
-          variant="h5"
-        >
+        <Typography sx={styles.typography_description} variant='h5'>
           {props.item.description}
         </Typography>
       </div>
-      <img
-        style={styles.img}
-        src={props.item.img_src}
-        alt='carousel-content'
-      />
+      <img style={styles.img} src={props.item.img_src} alt='carousel-content' />
     </Paper>
   );
-}
+};
 
 export default MyCarousel;

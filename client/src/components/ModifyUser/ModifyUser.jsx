@@ -54,7 +54,7 @@ const ModifyUser = ({ id, setOpen }) => {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    
+
     setLoginError(false);
     setError({
       firstName: '',
@@ -63,11 +63,11 @@ const ModifyUser = ({ id, setOpen }) => {
       email: '',
       password: '',
     });
-  }
+  };
 
   const handleNewPasswordChange = (event) => {
     setNewPassword(event.target.value);
-    
+
     setLoginError(false);
     setError({
       firstName: '',
@@ -76,7 +76,7 @@ const ModifyUser = ({ id, setOpen }) => {
       email: '',
       password: '',
     });
-  }
+  };
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
@@ -89,7 +89,7 @@ const ModifyUser = ({ id, setOpen }) => {
       email: '',
       password: '',
     });
-  }
+  };
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -97,37 +97,37 @@ const ModifyUser = ({ id, setOpen }) => {
     userData.password = password;
     const response = await loginUser({ userData, setError: setLoginError });
 
-    if(!loginError){
-      if(typeof response === 'string'){
-        if(newPassword !== '' && confirmPassword === newPassword){
+    if (!loginError) {
+      if (typeof response === 'string') {
+        if (newPassword !== '' && confirmPassword === newPassword) {
           userData.password = newPassword;
 
           const status = await updateUserData({ userData, setError, id });
-        
-          if(status === 200) {
+
+          if (status === 200) {
             setSuccess(true);
 
             setTimeout(() => {
-              setSuccess(false);            
+              setSuccess(false);
               setOpen(false);
             }, 3000);
           }
         } else if (newPassword === '' && confirmPassword === newPassword) {
           const status = await updateUserData({ userData, setError, id });
 
-          if(status === 200) {
+          if (status === 200) {
             setSuccess(true);
 
             setTimeout(() => {
-              setSuccess(false);            
+              setSuccess(false);
               setOpen(false);
             }, 3000);
           }
         } else {
           setError({
             ...error,
-            password: 'Passwords must be the same.'
-          });        
+            password: 'Passwords must be the same.',
+          });
         }
       }
     }
@@ -142,9 +142,7 @@ const ModifyUser = ({ id, setOpen }) => {
       <Box component='main'>
         <CssBaseline />
         {!success && (
-          <Box
-            sx={styles.box_container}
-          >
+          <Box sx={styles.box_container}>
             <Avatar sx={styles.avatar}>
               <LockOutlinedIcon />
             </Avatar>
@@ -233,7 +231,7 @@ const ModifyUser = ({ id, setOpen }) => {
                     error={error.password !== ''}
                     type={'password'}
                     id='newPassword'
-                    autoComplete='new-password'                    
+                    autoComplete='new-password'
                     label='New Password'
                     onChange={handleNewPasswordChange}
                   />
@@ -244,7 +242,7 @@ const ModifyUser = ({ id, setOpen }) => {
                     error={error.password !== ''}
                     type={'password'}
                     id='confirmPassword'
-                    autoComplete='confirm-password'                    
+                    autoComplete='confirm-password'
                     label='Confirm Password'
                     onChange={handleConfirmPasswordChange}
                     helperText={
@@ -268,9 +266,7 @@ const ModifyUser = ({ id, setOpen }) => {
         )}
         {success && (
           <Grow in={true}>
-            <Box
-            sx={styles.box}
-            >
+            <Box sx={styles.box}>
               <Typography sx={styles.typography}>
                 User modified successfully!
               </Typography>

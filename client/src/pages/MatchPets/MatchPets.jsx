@@ -52,7 +52,7 @@ const MatchPets = () => {
 
   return (
     <>
-      <CssBaseline/>
+      <CssBaseline />
       <Box sx={styles.box_title}>
         <h1 style={styles.title}>TESTIMONY</h1>
         <div style={styles.addPet}>
@@ -108,7 +108,6 @@ const MatchPets = () => {
           </>
         )}
       </Box>
-      
     </>
   );
 };

@@ -17,7 +17,17 @@ export const styles_view = {
     transform: 'scale(1.5)',
   },
   button: {
-    margin: 'auto',
+    'margin': 'auto',
+    'width': '40%',
+    'bgcolor': '#705ebb',
+    'py': 1,
+    'my': 2,
+    'border': '2px solid white',
+    '&:hover': {
+      bgcolor: 'white',
+      border: '2px solid black',
+      color: '#705ebb',
+    },
   },
 };
 

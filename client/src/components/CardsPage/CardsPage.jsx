@@ -11,34 +11,33 @@ import {
   Typography,
 } from '@mui/material';
 // STYLES
-// import './CardsPage.css';
 import styles from './styles';
 
 const CardsPet = (props) => {
   const navigate = useNavigate();
 
   return (
-    <Card className="card" sx={styles.card}>
+    <Card className='card' sx={styles.card}>
       <CardMedia
-        component="img"
+        component='img'
         image={props.img_src}
-        alt="green iguana"
+        alt='green iguana'
         sx={styles.cardMedia}
       />
       <CardContent>
-        <Typography gutterBottom component="div" sx={styles.typography_title}>
+        <Typography gutterBottom component='div' sx={styles.typography_title}>
           {props.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant='body2' color='text.secondary'>
           {props.description}
         </Typography>
       </CardContent>
 
       <CardActions>
         <Button
-          size="small"
-          color="primary"
-          variant="contained"
+          size='small'
+          color='primary'
+          variant='contained'
           sx={styles.button}
           onClick={() =>
             navigate(`/${props.title.replace(' ', '-').toLowerCase()}-pets/1`)

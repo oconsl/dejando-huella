@@ -4,7 +4,8 @@ const styles = {
     minWidth: 300,
     borderRadius: '0.7em',
     m: 2,
-    background: 'url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648480057/Shiny_Overlay_xyp2iy.svg")',
+    background:
+      'url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648480057/Shiny_Overlay_xyp2iy.svg")',
   },
   image: {
     borderRadius: '0.7em',

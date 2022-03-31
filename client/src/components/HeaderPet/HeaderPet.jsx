@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'; 
+import { useEffect, useState } from 'react';
 // ROUTER
 import { Link, useNavigate, NavLink, useLocation } from 'react-router-dom';
 // MATERIAL UI
@@ -64,20 +64,20 @@ const HeaderPet = () => {
   }, []);
 
   return (
-    <AppBar position="sticky" sx={styles.appBar}>
-      <Container maxWidth="xl" sx={styles.container}>
+    <AppBar position='sticky' sx={styles.appBar}>
+      <Container maxWidth='xl' sx={styles.container}>
         <Toolbar disableGutters sx={styles.toolbar}>
           <Typography
-            variant="h6"
+            variant='h6'
             noWrap
-            component="div"
+            component='div'
             sx={styles.typography_toolbar}
           >
-            <Link to="/">
+            <Link to='/'>
               <img
                 width={'45px'}
                 height={'45px'}
-                src="https://cdn-icons-png.flaticon.com/512/1076/1076826.png"
+                src='https://cdn-icons-png.flaticon.com/512/1076/1076826.png'
                 style={styles.img}
               />
             </Link>
@@ -85,17 +85,17 @@ const HeaderPet = () => {
 
           <Box sx={styles.box}>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color='inherit'
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -113,7 +113,7 @@ const HeaderPet = () => {
               {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography
-                    textAlign="center"
+                    textAlign='center'
                     onClick={() => navigate(`/${page.toLowerCase()}-pets/1`)}
                   >
                     {page}
@@ -123,16 +123,16 @@ const HeaderPet = () => {
             </Menu>
           </Box>
           <Typography
-            variant="h6"
+            variant='h6'
             noWrap
-            component="div"
+            component='div'
             sx={styles.typography}
           >
-            <Link to="/">
+            <Link to='/'>
               <img
                 width={'45px'}
                 height={'45px'}
-                src="https://cdn-icons-png.flaticon.com/512/1076/1076826.png"
+                src='https://cdn-icons-png.flaticon.com/512/1076/1076826.png'
                 style={styles.img}
               />
             </Link>
@@ -153,14 +153,14 @@ const HeaderPet = () => {
             ))}
           </Box>
           <Box sx={styles.box_toolTip}>
-            <Tooltip title="Open settings">
+            <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar sx={styles.avatar}>{letter}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
               sx={styles.menu_user}
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -180,7 +180,7 @@ const HeaderPet = () => {
                   sx={styles.menuItem}
                   onClick={handleMenuOptionClick(setting)}
                 >
-                  <Typography key={index} textAlign="center">
+                  <Typography key={index} textAlign='center'>
                     {setting}
                   </Typography>
                 </MenuItem>

@@ -61,7 +61,6 @@ const AddMatchPet = ({ setOpen }) => {
   };
 
   const handleFileChange = (event) => {
-    console.log(event.target.files[0]);
     const url = URL.createObjectURL(event.target.files[0]);
     setFile(event.target.files[0]);
     setPhotoURL(url);

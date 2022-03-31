@@ -88,12 +88,8 @@ const ModifyMatchPet = ({ id, setOpen }) => {
   return (
     <Box component='main' sx={styles.container}>
       <CssBaseline />
-      <Box
-        sx={styles.box_container}
-      >
-        <div
-          style={styles.div}
-        >
+      <Box sx={styles.box_container}>
+        <div style={styles.div}>
           <Box sx={styles.avatar}>
             <img src={logo} alt='paw' style={styles.img} />
           </Box>
@@ -109,86 +105,83 @@ const ModifyMatchPet = ({ id, setOpen }) => {
           required
         >
           <Box sx={styles_match.box_formLeft}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name='petName'
-                id='petName'
-                label='Pet Name'
-                value={textData.petName}
-                onChange={handleTextDataChange('petName')}
-              />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name='petName'
+                  id='petName'
+                  label='Pet Name'
+                  value={textData.petName}
+                  onChange={handleTextDataChange('petName')}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  multiline
+                  rows={19}
+                  name='testimony'
+                  id='testimony'
+                  label='Testimony'
+                  value={textData.testimony}
+                  onChange={handleTextDataChange('testimony')}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                multiline
-                rows={19}
-                name='testimony'
-                id='testimony'
-                label='Testimony'
-                value={textData.testimony}
-                onChange={handleTextDataChange('testimony')}
-              />
-            </Grid>
-          </Grid>
           </Box>
           <Box sx={styles.box_formRight}>
-
-          <Box
-            sx={styles.box_image}
-            >
-            <TextField
-              id='image'
-              fullWidth
-              label='Pet Image'
-              name='image'
-              type='file'
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={handleFileChange}
-              sx={styles_match.textField_image}
+            <Box sx={styles.box_image}>
+              <TextField
+                id='image'
+                fullWidth
+                label='Pet Image'
+                name='image'
+                type='file'
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={handleFileChange}
+                sx={styles_match.textField_image}
               />
-            {openCrop && (
-              <Dialog
-              open={true}
-              onClose={handleCloseCrop}
-              fullWidth={true}
-              maxWidth={'md'}
-              >
-                <CropEasy
-                  {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
+              {openCrop && (
+                <Dialog
+                  open={true}
+                  onClose={handleCloseCrop}
+                  fullWidth={true}
+                  maxWidth={'md'}
+                >
+                  <CropEasy
+                    {...{ photoURL, setOpenCrop, setPhotoURL, setFile }}
                   />
-              </Dialog>
-            )}
-            <Card sx={styles.card}>
-              <CardActionArea>
-                <CardMedia
-                  component='img'
-                  alt='New Pet Image'
-                  image={photoURL}
-                  title='New Pet Image'
-                  height='450'
-                  onClick={handlePhotoClick}
-                  sx={styles.cardMedia}
+                </Dialog>
+              )}
+              <Card sx={styles.card}>
+                <CardActionArea>
+                  <CardMedia
+                    component='img'
+                    alt='New Pet Image'
+                    image={photoURL}
+                    title='New Pet Image'
+                    height='450'
+                    onClick={handlePhotoClick}
+                    sx={styles.cardMedia}
                   />
-              </CardActionArea>
-            </Card>
-          </Box>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            sx={styles.button}
-            >
-            Modify
-          </Button>
-        </Box>
+                </CardActionArea>
+              </Card>
             </Box>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              sx={styles.button}
+            >
+              Modify
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );

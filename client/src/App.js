@@ -1,19 +1,24 @@
+// REACT ROUTER
+import { Routes, Route } from 'react-router-dom';
+// PAGES
 import LandingPage from './pages/LandingPage/LandingPage';
 import FoundPets from './pages/FoundPets/FoundPets';
 import LostPets from './pages/LostPets/LostPets';
 import AdoptionPets from './pages/AdoptionPets/AdoptionPets';
 import MatchPets from './pages/MatchPets/MatchPets';
+import Profile from './pages/Profile/Profile';
+import NotFound from './pages/NotFound/NotFound';
+// COMPONENTS
+import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-import NotFound from './pages/NotFound/NotFound';
-import Profile from './pages/Profile/Profile';
-import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
-import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
+// HOOKS
 import useToken from './hooks/useToken';
+// MAIN STYLES
 import './App.css';
 
-function App() {
+const App = () => {
   const { token, setToken } = useToken();
 
   return (
@@ -36,6 +41,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

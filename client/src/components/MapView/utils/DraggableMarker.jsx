@@ -27,18 +27,17 @@ const DraggableMarker = ({ center, icon, saveMarkerLocation, saveAddress }) => {
 
   useEffect(() => {
     let street = '';
-    
+
     axios
       .get(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.lat}&lon=${position.lng}&zoom=16`
       )
       .then((response) => {
         street = response.data.address.road;
-        console.log(street);
         saveAddress(street);
         setStreet(street);
-      });      
-  },[position, saveAddress]);
+      });
+  }, [position, saveAddress]);
 
   return (
     <Marker

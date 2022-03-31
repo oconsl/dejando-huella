@@ -8,28 +8,28 @@ import { dogBreeds } from '../../../utils/petBreeds';
 const Breeds = ({ onChange, isADog, value }) => {
   const [options, setOptions] = useState(isADog ? dogBreeds : catBreeds);
 
-  useEffect(() => {    
+  useEffect(() => {
     isADog ? setOptions(dogBreeds) : setOptions(catBreeds);
-  }, [isADog]); 
+  }, [isADog]);
 
   return (
-      <Autocomplete
-        id="breeds-standard"
-        options={options}
-        onChange={onChange}
-        disableClearable
-        isOptionEqualToValue={(option, value) => option.id === value?.id}
-        value={value}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="outlined"
-            required
-            label={isADog ? 'Dog Breed' : 'Cat Breed'}
-            placeholder="Select pet breed"
-          />
-        )}
-      />
+    <Autocomplete
+      id='breeds-standard'
+      options={options}
+      onChange={onChange}
+      disableClearable
+      isOptionEqualToValue={(option, value) => option.id === value?.id}
+      value={value}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant='outlined'
+          required
+          label={isADog ? 'Dog Breed' : 'Cat Breed'}
+          placeholder='Select pet breed'
+        />
+      )}
+    />
   );
 };
 

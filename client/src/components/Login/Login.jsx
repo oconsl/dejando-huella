@@ -50,7 +50,7 @@ const Login = ({ setToken }) => {
     event.preventDefault();
 
     const response = await loginUser({ userData, setError });
-    
+
     if (!error && response) {
       if (typeof response === 'string') setToken(response, userData.username);
       navigate('/');

@@ -11,7 +11,7 @@ import styles from './styles';
 
 const Footer = () => {
   const handleClick = (event) => {
-    switch(event.target.innerText){
+    switch (event.target.innerText) {
       case 'Carlos':
         window.open('https://github.com/SpagnoloCarlos', '_blank');
         break;
@@ -27,8 +27,7 @@ const Footer = () => {
       default:
         break;
     }
-    console.log(event.target.innerText);
-  }
+  };
 
   return (
     <Box sx={styles.box_container}>

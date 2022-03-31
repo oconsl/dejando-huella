@@ -1,10 +1,5 @@
 // MATERIAL UI
-import {
-  Card,
-  CardContent,
-  Typography,
-  Skeleton,
-} from '@mui/material';
+import { Card, CardContent, Typography, Skeleton } from '@mui/material';
 // STYLES
 import styles from './styles';
 
@@ -14,7 +9,7 @@ const MatchPetSkeleton = () => {
       <CardContent sx={styles.cardContent}>
         <Skeleton
           sx={styles.skeleton_main}
-          animation={false} 
+          animation={false}
           variant='rectangular'
         />
         <CardContent sx={styles.cardContent_text}>

@@ -13,7 +13,8 @@ const styles = {
     alignItems: 'center',
   },
   box_img: {
-    background: 'transparent url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648577150/Fading_lines_ozdef7.gif") center no-repeat',
+    background:
+      'transparent url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648577150/Fading_lines_ozdef7.gif") center no-repeat',
     height: '350px',
   },
   cardMedia: {

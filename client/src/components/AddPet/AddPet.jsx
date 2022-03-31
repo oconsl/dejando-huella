@@ -21,14 +21,9 @@ const AddPet = ({ option }) => {
     <>
       {openDialog && <DialogFS setOpen={setOpenDialog} option={option} />}
       <Box>
-        <IconButton
-          onClick={handleClick}
-          sx={styles.box}
-        >
-          <img src={logo} style={styles.img} alt='add-paw-icon'/>
-          <AddIcon
-            sx={styles.addIcon}
-          />
+        <IconButton onClick={handleClick} sx={styles.box}>
+          <img src={logo} style={styles.img} alt='add-paw-icon' />
+          <AddIcon sx={styles.addIcon} />
         </IconButton>
       </Box>
     </>

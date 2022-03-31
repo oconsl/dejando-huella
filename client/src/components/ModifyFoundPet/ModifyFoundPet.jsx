@@ -196,7 +196,11 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <DatePick saveDate={setDate} fetchedDate={date} setNewDate={setNewDate}/>
+                <DatePick
+                  saveDate={setDate}
+                  fetchedDate={date}
+                  setNewDate={setNewDate}
+                />
               </Grid>
 
               <Grid item xs={12} sm={5}>
@@ -239,9 +243,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                     fullWidth={true}
                     maxWidth={'xs'}
                   >
-                    <MapStatic
-                      position={latLng} closeMap={handleCloseMap}
-                    />
+                    <MapStatic position={latLng} closeMap={handleCloseMap} />
                   </Dialog>
                 )}
               </Grid>

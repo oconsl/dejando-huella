@@ -16,7 +16,7 @@ const useAutoLogout = (startTime) => {
     }, 1000);
 
     const resetTimeout = () => {
-      if(token) setTimer(startTime);
+      if (token) setTimer(startTime);
     };
 
     const events = [
@@ -28,11 +28,13 @@ const useAutoLogout = (startTime) => {
       'keypress',
     ];
 
-    events.forEach(event => window.addEventListener(event,resetTimeout));
+    events.forEach((event) => window.addEventListener(event, resetTimeout));
 
     return () => {
       clearInterval(timeInterval);
-      events.forEach(event => window.removeEventListener(event,resetTimeout));
+      events.forEach((event) =>
+        window.removeEventListener(event, resetTimeout)
+      );
     };
   });
 

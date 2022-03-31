@@ -34,7 +34,7 @@ const Information = () => {
               just sign up and start helping others to find their pets, and they
               will help you too! ~ Enjoy !
             </Typography>
-            <Box className="cards" sx={styles.box_cards}>
+            <Box className='cards' sx={styles.box_cards}>
               <CardsPage
                 title={'Found'}
                 description={

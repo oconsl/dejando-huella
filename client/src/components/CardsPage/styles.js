@@ -9,7 +9,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: '0.7em',
-    background: 'url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648480057/Shiny_Overlay_xyp2iy.svg")',
+    background:
+      'url("https://res.cloudinary.com/dw4hak4ok/image/upload/v1648480057/Shiny_Overlay_xyp2iy.svg")',
   },
   cardMedia: {
     height: '100%',

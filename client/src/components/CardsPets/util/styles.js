@@ -10,15 +10,14 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   skeleton_main: {
-    marginTop: '20px', 
+    marginTop: '20px',
     width: '310px',
     height: '310px',
     borderRadius: '0.7em',
-   },
-  box_skeleton_title:{
+  },
+  box_skeleton_title: {
     width: '280px',
     display: 'flex',
     flexDirection: 'column',

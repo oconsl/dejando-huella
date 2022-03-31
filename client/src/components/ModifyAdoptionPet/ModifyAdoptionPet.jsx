@@ -269,108 +269,108 @@ const ModifyAdoptionPet = ({ id, setOpen }) => {
                   </Dialog>
                 )}
               </Grid>
-            <Grid item xs={12} sm={9}>
-              {dogPet && (
-                <Breeds
-                  onChange={handleOptionDataChange('breed')}
-                  isADog={dogPet}
-                  value={optionData.breed}
+              <Grid item xs={12} sm={9}>
+                {dogPet && (
+                  <Breeds
+                    onChange={handleOptionDataChange('breed')}
+                    isADog={dogPet}
+                    value={optionData.breed}
                   />
-                  )}
-              {!dogPet && (
-                <Breeds
-                  onChange={handleOptionDataChange('breed')}
-                  isADog={dogPet}
-                  value={optionData.breed}
+                )}
+                {!dogPet && (
+                  <Breeds
+                    onChange={handleOptionDataChange('breed')}
+                    isADog={dogPet}
+                    value={optionData.breed}
                   />
-                  )}
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <CustomForm
-                onChange={handleOptionDataChange('sex')}
-                options={sexOptions}
-                label='Sex'
-                value={optionData.sex}
-                />
-            </Grid>
-            {dogPet && (
-              <Grid item xs={12} sm={6}>
+                )}
+              </Grid>
+              <Grid item xs={12} sm={3}>
                 <CustomForm
-                  onChange={handleOptionDataChange('size')}
-                  options={sizeOptions}
-                  label='Size'
-                  value={optionData.size}
+                  onChange={handleOptionDataChange('sex')}
+                  options={sexOptions}
+                  label='Sex'
+                  value={optionData.sex}
                 />
               </Grid>
-            )}
-            <Grid item xs={12} sm={6}>
               {dogPet && (
-                <CustomForm
-                  onChange={handleOptionDataChange('age')}
-                  options={ageDogOptions}
-                  label='Age'
-                  value={optionData.age}
+                <Grid item xs={12} sm={6}>
+                  <CustomForm
+                    onChange={handleOptionDataChange('size')}
+                    options={sizeOptions}
+                    label='Size'
+                    value={optionData.size}
                   />
-                  )}
-              {!dogPet && (
-                <CustomForm
-                onChange={handleOptionDataChange('age')}
-                options={ageCatOptions}
-                label='Age'
-                value={optionData.age}
-                />
+                </Grid>
+              )}
+              <Grid item xs={12} sm={6}>
+                {dogPet && (
+                  <CustomForm
+                    onChange={handleOptionDataChange('age')}
+                    options={ageDogOptions}
+                    label='Age'
+                    value={optionData.age}
+                  />
                 )}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <CustomForm
-                onChange={handleOptionDataChange('color')}
-                options={colorOptions}
-                label='Color'
-                value={optionData.color}
-                />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <CustomForm
-                onChange={handleOptionDataChange('fur')}
-                options={furOptions}
-                label='Fur'
-                value={optionData.fur}
-                />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                  checked={boolData.vaccinated}
-                  onChange={handleBoolDataChange('vaccinated')}
-                  value={boolData.vaccinated}
+                {!dogPet && (
+                  <CustomForm
+                    onChange={handleOptionDataChange('age')}
+                    options={ageCatOptions}
+                    label='Age'
+                    value={optionData.age}
                   />
-                }
-                label='Vaccinated'
+                )}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <CustomForm
+                  onChange={handleOptionDataChange('color')}
+                  options={colorOptions}
+                  label='Color'
+                  value={optionData.color}
                 />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                  checked={boolData.sterilized}
-                  onChange={handleBoolDataChange('sterilized')}
-                  value={boolData.sterilized}
-                  />
-                }
-                label='Sterilized'
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <CustomForm
+                  onChange={handleOptionDataChange('fur')}
+                  options={furOptions}
+                  label='Fur'
+                  value={optionData.fur}
                 />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                  checked={boolData.dewormed}
-                  onChange={handleBoolDataChange('dewormed')}
-                  value={boolData.dewormed}
-                  />
-                }
-                label='Dewormed'
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={boolData.vaccinated}
+                      onChange={handleBoolDataChange('vaccinated')}
+                      value={boolData.vaccinated}
+                    />
+                  }
+                  label='Vaccinated'
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={boolData.sterilized}
+                      onChange={handleBoolDataChange('sterilized')}
+                      value={boolData.sterilized}
+                    />
+                  }
+                  label='Sterilized'
+                />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={boolData.dewormed}
+                      onChange={handleBoolDataChange('dewormed')}
+                      value={boolData.dewormed}
+                    />
+                  }
+                  label='Dewormed'
                 />
               </Grid>
             </Grid>

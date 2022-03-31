@@ -26,9 +26,7 @@ const CardsPet = (props) => {
   const handleCloseImage = () => setOpenImage(false);
 
   return (
-    <Card
-      sx={styles.card}
-    >
+    <Card sx={styles.card}>
       <ModalImagePets
         openImg={openImage}
         closeImg={handleCloseImage}
@@ -36,19 +34,33 @@ const CardsPet = (props) => {
       />
       <CardActionArea onClick={handleOpenImage} sx={styles.cardActionArea}>
         <Box sx={styles.box_img_preUpLoad}>
-          <CardMedia component="img" image={props.img_src} alt="" sx={styles.cardMedia} />
+          <CardMedia
+            component='img'
+            image={props.img_src}
+            alt=''
+            sx={styles.cardMedia}
+          />
         </Box>
-      </CardActionArea>  
-        <CardContent sx={styles.cardContent}>
-          <Typography gutterBottom variant="h5" component="div" color='black'>
-            {props.title}
-          </Typography>
-          <Typography variant="body2"  color='black' sx={styles.typography_description}>
-            {props.description}
-          </Typography>
-        </CardContent>
+      </CardActionArea>
+      <CardContent sx={styles.cardContent}>
+        <Typography gutterBottom variant='h5' component='div' color='black'>
+          {props.title}
+        </Typography>
+        <Typography
+          variant='body2'
+          color='black'
+          sx={styles.typography_description}
+        >
+          {props.description}
+        </Typography>
+      </CardContent>
       <CardActions sx={styles.cardActionArea}>
-        <Button size="medium" onClick={handleOpen} variant='contained' sx={styles.button}>
+        <Button
+          size='medium'
+          onClick={handleOpen}
+          variant='contained'
+          sx={styles.button}
+        >
           {props.button}
         </Button>
         <Modal

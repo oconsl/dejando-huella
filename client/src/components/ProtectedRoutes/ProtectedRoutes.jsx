@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 // ROUTER
-import { Outlet } from 'react-router-dom'; 
+import { Outlet } from 'react-router-dom';
 // COMPONENTS
 import Login from '../Login/Login';
 import HeaderPet from '../HeaderPet/HeaderPet';
@@ -17,7 +17,14 @@ const ProtectedRoutes = () => {
     setIsAuth(token && timer > 0);
   }, [token, timer]);
 
-  return isAuth ? <><HeaderPet/><Outlet/></> : <Login setToken={setToken}/>;
+  return isAuth ? (
+    <>
+      <HeaderPet />
+      <Outlet />
+    </>
+  ) : (
+    <Login setToken={setToken} />
+  );
 };
 
 export default ProtectedRoutes;
