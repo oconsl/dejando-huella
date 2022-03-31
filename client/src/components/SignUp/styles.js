@@ -2,7 +2,7 @@ const styles = {
   container: {
     height: '70.25vh',
     width: '30vw',
-    mx: 85,
+    margin: 'auto',
   },
   box_container: {
     display: 'flex',
@@ -31,11 +31,13 @@ const styles = {
   },
   box_signedContainer: {
     height: '83.1vh',
+    margin: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   box_signed: {
-    position: 'absolute',
-    left: '40%',
-    top: '35%',
     width: '25vw',
     display: 'flex',
     flexDirection: 'column',

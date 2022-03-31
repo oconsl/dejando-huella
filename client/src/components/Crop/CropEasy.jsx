@@ -40,7 +40,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
       setFile(new File([file], 'image', { type: 'file' }));
       setOpenCrop(false);
     } catch (error) {
-      console.log(error);
+      return error;
     }
   };
 
@@ -72,6 +72,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
               step={0.05}
               aria-labelledby='Zoom'
               onChange={(e, zoom) => setZoom(zoom)}
+              sx={styles.slider}
             />
           </Box>
           <Box>
@@ -83,11 +84,12 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
               step={1}
               aria-labelledby='Rotation'
               onChange={(e, rotation) => setRotation(rotation)}
+              sx={styles.slider}
             />
           </Box>
         </Box>
         <Box>
-          <Button onClick={cropImage} variant='contained'>
+          <Button onClick={cropImage} variant='contained' sx={styles.button}>
             Crop
           </Button>
         </Box>

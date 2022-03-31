@@ -6,7 +6,6 @@ import {
   Box,
   Avatar,
   Typography,
-  Container,
   OutlinedInput,
   FormControl,
   FormHelperText,
@@ -61,7 +60,7 @@ const Login = ({ setToken }) => {
   return (
     <>
       <HeaderLandingPage />
-      <Container component='main' maxWidth='xs' sx={styles.container}>
+      <Box component='main' sx={styles.container}>
         <CssBaseline />
         <Box
           component='form'
@@ -141,7 +140,7 @@ const Login = ({ setToken }) => {
             Log In
           </Button>
         </Box>
-      </Container>
+      </Box>
     </>
   );
 };

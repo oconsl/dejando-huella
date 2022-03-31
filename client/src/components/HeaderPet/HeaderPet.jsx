@@ -31,9 +31,6 @@ const HeaderPet = () => {
   const [letter, setLetter] = useState('');
   const navigate = useNavigate();
   const { logOut } = useToken();
-
-  //Esto es para que funcione el Header active con la paginacion
-
   const [numPage, setNumPage] = useState(1);
   const location = useLocation();
 
@@ -41,8 +38,6 @@ const HeaderPet = () => {
     const num = location.pathname.split('/')[2];
     setNumPage(num);
   }, location.pathname.split('/'));
-
-  //-----------------------------
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

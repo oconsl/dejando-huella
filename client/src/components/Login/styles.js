@@ -1,6 +1,8 @@
 const styles = {
   container: {
     height: '66vh',
+    width: '25vw',
+    margin: 'auto',
   },
   box: {
     display: 'flex',

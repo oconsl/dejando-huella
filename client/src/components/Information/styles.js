@@ -43,6 +43,8 @@ const styles = {
     fontSize: '3rem',
   },
   typography_body1: {
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    borderRadius: '0.5em',
     margin: '20px',
     fontWeight: '600',
     color: 'black',

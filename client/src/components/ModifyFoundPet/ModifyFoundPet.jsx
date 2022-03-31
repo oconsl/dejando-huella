@@ -237,7 +237,7 @@ const ModifyFoundPet = ({ id, setOpen }) => {
                     open={true}
                     onClose={handleCloseMap}
                     fullWidth={true}
-                    maxWidth={'md'}
+                    maxWidth={'xs'}
                   >
                     <MapStatic
                       position={latLng} closeMap={handleCloseMap}

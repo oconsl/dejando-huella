@@ -8,7 +8,7 @@ import SignUp from './components/SignUp/SignUp';
 import NotFound from './pages/NotFound/NotFound';
 import Profile from './pages/Profile/Profile';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import useToken from './hooks/useToken';
 import './App.css';

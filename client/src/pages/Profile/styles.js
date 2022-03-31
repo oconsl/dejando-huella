@@ -67,7 +67,7 @@ const styles = {
     transform: 'scale(2.5) translateY(10px)',
   },
   box_grid: {
-    'ml': '7em',
+    'ml': '4em',
     'mt': '2em',
     'display': 'flex',
     'flexDirection': 'column',

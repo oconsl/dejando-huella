@@ -38,7 +38,7 @@ const Information = () => {
               <CardsPage
                 title={'Found'}
                 description={
-                  'Si perdiste una mascota, podes buscarla en nuestro registro de mascotas'
+                  "If you lost your pet ( or you found one ), try searching for it in our found pet's entries."
                 }
                 button={'More information'}
                 img_src={foundImg}
@@ -46,7 +46,7 @@ const Information = () => {
               <CardsPage
                 title={'Lost'}
                 description={
-                  'Si perdiste una mascota, podes publicarla en esta sección'
+                  'If you lost your pet, you can publish it in this section and the community will help to find it.'
                 }
                 button={'More information'}
                 img_src={lostImg}
@@ -54,7 +54,7 @@ const Information = () => {
               <CardsPage
                 title={'Adoption'}
                 description={
-                  'Aqui puedes encontra tu proximo compañero de la vida'
+                  'Here you can find your next partner, give them a good family ♥.'
                 }
                 button={'More information'}
                 img_src={adoptionImg}
@@ -62,7 +62,7 @@ const Information = () => {
               <CardsPage
                 title={'Testimony'}
                 description={
-                  'Aqui puedes encontra tu proximo compañero de la vida'
+                  'Want to read about some lovely stories ? Check out some user testimonials.'
                 }
                 button={'More information'}
                 img_src={testimonyImg}
