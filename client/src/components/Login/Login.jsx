@@ -127,7 +127,7 @@ const Login = ({ setToken }) => {
             />
             {error && (
               <FormHelperText id='password-component-error-text' error>
-                Username or email invalid.
+                Username or password invalid.
               </FormHelperText>
             )}
           </FormControl>

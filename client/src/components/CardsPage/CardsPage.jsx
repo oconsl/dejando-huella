@@ -10,11 +10,14 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
+// HOOKS
+import useToken from '../../hooks/useToken';
 // STYLES
 import styles from './styles';
 
 const CardsPet = (props) => {
   const navigate = useNavigate();
+  const { token } = useToken();
 
   return (
     <Card className='card' sx={styles.card}>
@@ -40,7 +43,11 @@ const CardsPet = (props) => {
           variant='contained'
           sx={styles.button}
           onClick={() =>
-            navigate(`/${props.title.replace(' ', '-').toLowerCase()}-pets/1`)
+            token
+              ? navigate(
+                  `/${props.title.replace(' ', '-').toLowerCase()}-pets/1`
+                )
+              : navigate(`/login`)
           }
         >
           {props.button}
