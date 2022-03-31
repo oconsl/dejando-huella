@@ -11,9 +11,6 @@ import {
 } from '@mui/material';
 // STYLES
 import styles from './styles';
-// PAGE ARRAYS
-const pages = ['Found Pets', 'Lost Pets', 'Adoption'];
-const settings = ['Profile', 'Logout'];
 
 const HeaderLandingPage = () => {
   const navigate = useNavigate();

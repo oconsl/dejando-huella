@@ -19,11 +19,11 @@ const MatchPets = () => {
   const [matchPetsGroups, setMatchPetsGroups] = useState([[1]]);
   const skeletonCount = new Array(4 - (matchPets.length % 4)).fill(false);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     fetchMatchPetsData({ setMatchPets });
   }, []);
-
+  
   useEffect(() => {
     navigate(`/testimony-pets/${page}`);
   }, [page]);

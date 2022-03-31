@@ -123,6 +123,7 @@ const Profile = () => {
     fetchUserData({ setUserData, username });
     setLetter(JSON.parse(localStorage.getItem('username'))[0].toUpperCase());
     fetchAllPetDataByUsername({ setData, username });
+    console.log(data);
     window.scrollTo(0, 0);
   }, []);
 

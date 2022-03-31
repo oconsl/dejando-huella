@@ -223,15 +223,16 @@ const ModifyLostPet = ({ id, setOpen }) => {
 
               <Grid item xs={12} sm={5}>
                 <TextField
+                  disabled
                   required
                   fullWidth
                   id='addressNum'
                   label='Address Num'
                   name='addressNum'
                   inputProps={{
-                    inputMode: 'numeric',
-                    pattern: '[0-9]*',
+                    readOnly: true,
                   }}
+                  value={textData.addressNumber}
                   onChange={handleTextDataChange('addressNumber')}
                 />
               </Grid>
