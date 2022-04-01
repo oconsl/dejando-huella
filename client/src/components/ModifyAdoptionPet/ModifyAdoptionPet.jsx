@@ -96,7 +96,7 @@ const ModifyAdoptionPet = ({ id, setOpen }) => {
 
     const adoptionPetData = jsonToFormData(dataBody, adoptionPetDataBody);
 
-    updateAdoptionPetData({ adoptionPetData });
+    updateAdoptionPetData({ adoptionPetData, id });
     setOpen(false);
   };
 
