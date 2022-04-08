@@ -63,3 +63,20 @@ const styles = {
 };
 
 export default styles;
+
+
+
+for(let i = 0; i < 10; i++){
+  console.log(i);
+}
+
+
+const person = {
+  firstName: 'Santiago',
+  lastName: 'Ocón',
+  work: 'Global Learning'
+}
+
+console.log(person);
+console.log(person.lastName);
+

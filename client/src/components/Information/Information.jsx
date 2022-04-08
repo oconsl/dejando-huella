@@ -26,19 +26,19 @@ const Information = () => {
         <Box sx={styles.container}>
           <Box sx={styles.box_information}>
             <Typography variant='body1' sx={styles.typography_body1}>
-              The idea of building this page comes alive because the need of
-              have a centralized place in which we can upload our pet's
-              information. With our page all the people could search and find
-              different entries, so they could try to search, find or adopt any
-              pet published here. If you want to take part on this community,
-              just sign up and start helping others to find their pets, and they
-              will help you too! ~ Enjoy !
+              The idea of making this web page came to be because of the need to
+              have a centralized place in which everyone can upload information
+              about pets they found, or that are looking for a new owner to
+              adopt them. With our page anyone can easily search for their lost
+              pets, or adopt a new one. If you want to take part on this
+              community just sign up and start helping others find their pets ~
+              Enjoy!
             </Typography>
-            <Box className="cards" sx={styles.box_cards}>
+            <Box className='cards' sx={styles.box_cards}>
               <CardsPage
                 title={'Found'}
                 description={
-                  "If you lost your pet (or you found one), try searching for it in our found pet's entries."
+                  "If you lost your pet (or found one), try searching for it in our found pet's entries.If there's no information about them yet, you can post in this section and the community will help you find it."
                 }
                 button={'More information'}
                 img_src={foundImg}
@@ -54,7 +54,7 @@ const Information = () => {
               <CardsPage
                 title={'Adoption'}
                 description={
-                  'Here you can find your next partner, give them a good family ♥.'
+                  'Here you can find your next pet and add them to your family! ♥.'
                 }
                 button={'More information'}
                 img_src={adoptionImg}
@@ -62,7 +62,7 @@ const Information = () => {
               <CardsPage
                 title={'Testimony'}
                 description={
-                  'Want to read about some lovely stories? Check out some user testimonials.'
+                  'Want to read about our lovely stories?  Check out some user testimonies.'
                 }
                 button={'More information'}
                 img_src={testimonyImg}
