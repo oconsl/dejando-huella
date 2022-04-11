@@ -8,6 +8,8 @@ import AdoptionPets from './pages/AdoptionPets/AdoptionPets';
 import MatchPets from './pages/MatchPets/MatchPets';
 import Profile from './pages/Profile/Profile';
 import NotFound from './pages/NotFound/NotFound';
+// MATERIAL UI
+import { Box, CssBaseline } from '@mui/material';
 // COMPONENTS
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import Login from './components/Login/Login';
@@ -22,7 +24,8 @@ const App = () => {
   const { token, setToken } = useToken();
 
   return (
-    <div className='App'>
+    <Box className='App' sx={{ height: 'inherit' }}>
+      <CssBaseline />
       <Routes>
         {!token && <Route path='/' element={<LandingPage />} />}
         <Route element={<ProtectedRoutes />}>
@@ -39,7 +42,7 @@ const App = () => {
       </Routes>
 
       <Footer />
-    </div>
+    </Box>
   );
 };
 

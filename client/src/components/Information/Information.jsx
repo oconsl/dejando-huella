@@ -38,7 +38,7 @@ const Information = () => {
               <CardsPage
                 title={'Found'}
                 description={
-                  "If you lost your pet (or found one), try searching for it in our found pet's entries.If there's no information about them yet, you can post in this section and the community will help you find it."
+                  "If you lost your pet (or found one), try searching for it in our found pet's entries."
                 }
                 button={'More information'}
                 img_src={foundImg}

@@ -18,7 +18,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <Box sx={{ backgroundColor: '#a177e9' }}>
+    <Box sx={{ backgroundColor: '#a177e9'}}>
       {!token && <HeaderLandingPage />}
       <Carousel />
       <Information />

@@ -1,10 +1,11 @@
 .App {
   background: url('https://res.cloudinary.com/dw4hak4ok/image/upload/v1648495470/Animated_Shape_2_zubnka.svg');
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial;
+  margin-bottom: 0;
 }
 
 :root::-webkit-scrollbar {
-  height: 8px;
+  height: 0;
 }
 
 :root::-webkit-scrollbar-track {
