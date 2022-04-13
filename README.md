@@ -19,21 +19,21 @@ Página web en la cual los usuarios pueden centralizar publicaciones de mascotas
 [YouTube Demo](https://www.youtube.com/watch?v=8NpADDTGqeI)
 ## Screenshots
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870579/Screenshots/landing_xtmh2l.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871568/Screenshots/landing_njq3gy.png)
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870577/Screenshots/signup_bixh5y.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871567/Screenshots/signup_qi3fzw.png)
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870578/Screenshots/lost_b6nnfa.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871567/Screenshots/lost_rih3eu.png)
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870579/Screenshots/testimony_biiqvo.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871568/Screenshots/testimony_edj0xk.png)
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870577/Screenshots/form_th9khb.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871568/Screenshots/form_obq53p.png)
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870577/Screenshots/profile_pfgydr.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871567/Screenshots/profile_jaykkj.png)
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870578/Screenshots/formedit_iwrdqf.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871568/Screenshots/formedit_wvttrf.png)
 
-![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649870578/Screenshots/usermodify_pnvbvm.png)
+![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871567/Screenshots/usermodify_iiecub.png)
 
 ## Roadmap
 
