@@ -1,12 +1,13 @@
 
-# Dejando Huella
+# "Dejando Huella" Project
 
-Página web en la cual los usuarios pueden centralizar publicaciones de mascotas perdidas, con el fin de encontrarlas. La página cuenta con 4 secciones mayores:
+A web page in which users have a centralized place to put their post of lost pets. The web page have 4 mayor sections: 
 
-- **Lost**: publicaciones de mascotas perdidas.
-- **Found**: publicaciones de mascotas encontradas y retenidas.
-- **Adoption**: publicaciones de mascotas en adopcción.
-- **Testimony**: publicaciones de testimonios de casos exitosos. 
+- **Lost**: lost pet posts.
+- **Found**: found pet posts.
+- **Adoption**: adoption pet posts.
+- **Testimony**: testimonies posts.
+
 ## Tech Stack
 
 **Client:** React, React Router Dom, Material UI, React Leaftlet, React Easy Crop
@@ -17,6 +18,7 @@ Página web en la cual los usuarios pueden centralizar publicaciones de mascotas
 ## Demo
 
 [YouTube Demo](https://www.youtube.com/watch?v=8NpADDTGqeI)
+
 ## Screenshots
 
 ![App Screenshot](https://res.cloudinary.com/dw4hak4ok/image/upload/v1649871568/Screenshots/landing_njq3gy.png)
